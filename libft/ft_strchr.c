@@ -23,5 +23,7 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)&s[idx]);
 		idx++;
 	}
+	if (s[idx] == c)
+		return ((char *)&s[idx]);
 	return (0);
 }

@@ -24,7 +24,7 @@ char	**ft_split(char const *s, char c)
 	word_list = (char **)malloc(sizeof(char) * (word_cnt + 2));
 	if (word_list == 0)
 		return (0);
-	begin_of_str = &s[0]; 
+	begin_of_str = &s[0];
 	s = &s[0];
 	while (s)
 	{
