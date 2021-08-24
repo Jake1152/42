@@ -18,25 +18,23 @@ char	**ft_split(char const *s, char c)
   size_t  word_cnt;
 
   word_cnt = 0;
-  while (s++)
-    if (s == c)
+  while (ft_strchr(s, c))    
       word_cnt++;
   word_list = (char**)malloc(sizeof(char) * (word_cnt + 2));
   if (word_list == 0)
-    return (0);  
+    return (0);   
   word_cnt = s = &s[0];  
   while (s)
   {
     if (s == c)
     {
       /* *s 현재까지 순회한 위치의 단어부터 넘겨질 것인가?*/
-      *word_list = *ft_substr(*(s - word_cnt), 0, (word_cnt - s));
+      *word_list = *ft_substr(*(word_cnt), 0, (s - word_cnt));
       if (*word_list == 0)
         return (0);
-      word_list++;      
-      word_cnt = s + (sizeof(s) * 1);      
-    }    
-    word_cnt++;
+      word_list++;
+      word_cnt = &(s + (sizeof(s) * 1));
+    }
     s++;
   }
   word_list = 0;

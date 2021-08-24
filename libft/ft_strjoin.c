@@ -14,10 +14,14 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *str;
+	char	*dst;
+	size_t	dstsize;
 
-	str = (char *)malloc(sizeof(char *) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	dstsize = ft_strlen(s1) + ft_strlen(s2) + 1;
+	dst = (char *)malloc(sizeof(char *) * (dstsize));
+	if (!dst)
 		return (0);
+	dst = ft_strlcpy(dst, s1, ft_strlen(s1)+1);
+	ft_strlcat(dst, s2, dstsize);
 	return (str);
 }

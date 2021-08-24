@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 17:01:58 by jim               #+#    #+#             */
-/*   Updated: 2021/07/06 20:39:58 by jim              ###   ########.fr       */
+/*   Created: 2021/06/28 16:38:03 by jim               #+#    #+#             */
+/*   Updated: 2021/07/08 21:55:45 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+char	*ft_itoa(int n)
 {
-	unsigned char	*un_s1;
-	unsigned char	*un_s2;
-
-	un_s1 = (unsigned char *)s1;
-	un_s2 = (unsigned char *)s2;
-	while (*un_s1 && n--)
-	{
-		if ((*(unsigned char *)un_s1 != *(unsigned char *)un_s2))
-			return (*un_s1 - *un_s2);
-		un_s1++;
-		un_s2++;
-	}
+	
+	if (c >= 32 && c <= 126)
+		return (1);
 	return (0);
 }
+
+/* 1152 => "1152" */
+/* 
+array 이용
+재귀?
+길이는 어떻게 10의 몇 제곱인지
+*/
