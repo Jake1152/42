@@ -21,7 +21,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	dst = (char *)malloc(sizeof(char *) * (dstsize));
 	if (!dst)
 		return (0);
-	dst = ft_strlcpy(dst, s1, ft_strlen(s1)+1);
+	dst = ft_strlcpy(dst, s1, ft_strlen(s1) + 1);
 	ft_strlcat(dst, s2, dstsize);
 	return (str);
 }

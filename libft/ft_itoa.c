@@ -14,7 +14,6 @@
 
 char	*ft_itoa(int n)
 {
-	
 	if (c >= 32 && c <= 126)
 		return (1);
 	return (0);

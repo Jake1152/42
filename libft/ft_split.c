@@ -14,33 +14,31 @@
 
 char	**ft_split(char const *s, char c)
 {
-  char    **word_list;
-  size_t  word_cnt;
+	char		**word_list;
+	size_t	word_cnt;
 
-  word_cnt = 0;
-  while (s++)
-    if (s == c)
-      word_cnt++;
-  word_list = (char**)malloc(sizeof(char) * (word_cnt + 2));
-  if (word_list == 0)
-    return (0);  
-  word_cnt = s = &s[0];  
-  while (s)
-  {
-    if (s == c)
-    {
-      /* *s 현재까지 순회한 위치의 단어부터 넘겨질 것인가?*/
-      *word_list = *ft_substr(*(s - word_cnt), 0, (word_cnt - s));
-      if (*word_list == 0)
-        return (0);
-      word_list++;      
-      word_cnt = s + (sizeof(s) * 1);      
-    }    
-    word_cnt++;
-    s++;
-  }
-  word_list = 0;
-  return (word_list);
+	word_cnt = 0;
+	while (ft_strchr(s, c))
+			word_cnt++;
+	word_list = (char**)malloc(sizeof(char) * (word_cnt + 2));
+	if (word_list == 0)
+		return (0);
+	word_cnt = s = &s[0];
+	while (s)
+	{
+		if (s == c)
+		{
+			/* *s 현재까지 순회한 위치의 단어부터 넘겨질 것인가?*/
+			*word_list = *ft_substr(*(word_cnt), 0, (s - word_cnt));
+			if (*word_list == 0)
+				return (0);
+			word_list++;
+			word_cnt = &(s + (sizeof(s) * 1));
+		}
+		s++;
+	}
+	word_list = 0;
+	return (word_list);
 }
 
 
@@ -56,10 +54,10 @@ malloc해서 새로운 공간에 기존 공간에 있던 값을 복사해주고
 순회를 여러번하더라도 데이터 복사, 할당으로 인한 오버헤드를 줄이는게 더 효율적일거 같다.
 
 2. 구분자로 전체 나눠야할 갯수를 센다
-  만약 문자열이
-  이후에 문자배열을 할당한다.
-  다시 읽는다.
-  문자 할당
+	만약 문자열이
+	이후에 문자배열을 할당한다.
+	다시 읽는다.
+	문자 할당
 
 long long 넘는 문자열이 들어온다면?
 text파일들을 읽는 수준이라면?
@@ -75,7 +73,7 @@ index를 쓰지말고 포인터 이동하면서 문자열을 읽는다.
 5. 문자열에 구분자만 있는 경우
 6. 구분자가 \0일떄도 잘 동작하게
 7. 구분자가 읽을 수 없는 것이라면?
-   애초에 들어올 수 있는가?
-   
+	 애초에 들어올 수 있는가?
+	 
 
 */
