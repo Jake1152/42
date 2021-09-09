@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:43 by jim               #+#    #+#             */
-/*   Updated: 2021/07/05 18:53:14 by jim              ###   ########.fr       */
+/*   Updated: 2021/09/08 16:46:29 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char	*un_s1;
-	unsigned char	*un_s2;
+	unsigned char	c1;
+	unsigned char	c2;
+	size_t			i;
 
-	un_s1 = (unsigned char)s1;
-	un_s2 = (unsigned char)s2;
-	while (n--)
+	i = 0;
+	while (i++ < n)
 	{
-		if (*un_s1 != *un_s2)
-			return (*un_s1 - *un_s2);
-		if (!*un_s1)
+		c1 = *s1++;
+		c2 = *s2++;
+		if (c1 != c2)
+		{
+			if (c1 < c2)
+				return (-1);
+			else
+				return (1);
+		}
+		if (!c1)
 			break ;
-		un_s1++;
-		un_s2++;		
 	}
-	if (n != 0)
-		return (-1);
 	return (0);
 }

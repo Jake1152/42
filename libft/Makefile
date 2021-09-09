@@ -6,7 +6,7 @@
 #    By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 19:26:38 by jim               #+#    #+#              #
-#    Updated: 2021/07/08 21:48:28 by jim              ###   ########.fr        #
+#    Updated: 2021/09/09 16:17:54 by jim              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,19 @@ SRCS = ft_atoi.c		\
 	   ft_strchr.c		\
 	   ft_strdup.c		\
 	   ft_strlcat.c		\
+	   ft_strlcpy.c		\
 	   ft_strlen.c		\
 	   ft_strncmp.c		\
 	   ft_strnstr.c		\
 	   ft_strrchr.c		\
 	   ft_tolower.c		\
-	   ft_toupper.c
+	   ft_toupper.c		\
+	   ft_putchar_fd.c	\
+       ft_putendl_fd.c	\
+	   ft_putnbr_fd.c	\
+	   ft_putstr_fd.c	\
+	   ft_substr.c		\
+	   ft_strjoin.c
 
 OBJS = $(SRCS:.c=.o)
 

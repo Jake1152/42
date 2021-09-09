@@ -6,30 +6,29 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:34 by jim               #+#    #+#             */
-/*   Updated: 2021/07/08 22:08:45 by jim              ###   ########.fr       */
+/*   Updated: 2021/09/09 16:52:33 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, char *src, size_t merge_size)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	start_point;
+	size_t	i;
+	size_t	j;
+	size_t	org_dstsize;
 
-	i = 0;
+	i = ft_strlen(dst);
 	j = 0;
-	while (dst[i] != '\0')
-		i++;
-	start_point = i;
-	while (src[j] != '\0' && start_point + j + 1 < merge_size)
+	org_dstsize = i;
+	while (src[j] != '\0' && (org_dstsize + j + 1 < dstsize))
 		dst[i++] = src[j++];
-	dst[i] = '\0';
+	if (dstsize != 0)
+		dst[i] = '\0';
 	while (src[j] != '\0')
 		j++;
-	if (merge_size < start_point)
-		return (j + merge_size);
+	if (dstsize < org_dstsize)
+		return (j + dstsize);
 	else
-		return (j + start_point);
+		return (j + org_dstsize);
 }

@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:48:23 by jim               #+#    #+#             */
-/*   Updated: 2021/07/05 18:53:00 by jim              ###   ########.fr       */
+/*   Updated: 2021/07/09 15:52:45 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 
 	s1_size = ft_strlen(s1);
 	dest = (char *)malloc(sizeof(char) * (s1_size + 1));
-	if (!dest)
+	if (dest == 0)
 		return (0);
 	idx = 0;
 	while (s1[idx])

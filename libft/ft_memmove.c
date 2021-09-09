@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:02:05 by jim               #+#    #+#             */
-/*   Updated: 2021/07/06 20:27:57 by jim              ###   ########.fr       */
+/*   Updated: 2021/07/09 16:02:30 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	un_src = (unsigned char *)src;
 	if (dst == src || len == 0)
 		return (dst);
-	if (src >= dst)
+	if (src > dst)
 		while (len--)
 			*un_dst++ = *un_src++;
 	else
