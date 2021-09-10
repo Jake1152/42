@@ -21,7 +21,7 @@ size_t	get_front_idx(char const *s1, char const *set, size_t set_len)
 	{
 		if (ft_strchr(set, s1[cnt]) == 0)
 			break ;
-		cnt++;	
+		cnt++;
 		set_len--;
 	}
 	return (cnt);
@@ -38,7 +38,7 @@ size_t	get_rear_idx(char const *s1, char const *set, size_t set_len)
 	{
 		if (ft_strchr(set, s1[s_len - cnt - 1]) == 0)
 			break ;
-		cnt++;	
+		cnt++;
 		set_len--;
 	}
 	return (s_len - cnt - 1);
