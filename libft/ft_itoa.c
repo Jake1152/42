@@ -19,10 +19,7 @@ size_t	count_digits(int n)
 	expo = 0;
 	if (n < 0)
 	{
-		if (n == -2147483648)
-			n = 2147483648;
-		else
-			n *= -1;
+		n *= -1;
 		expo++;
 	}
 	while (n)
@@ -38,16 +35,15 @@ char	*ft_itoa(int n)
 	size_t	digits;
 	char	*to_be_s;
 
+	if (n == -2147483648)
+		return ("-2147483648");	
 	digits = count_digits(n);
 	to_be_s = (char *)malloc(sizeof(char) * (digits + 1));
 	if (!to_be_s)
 		return (0);
 	if (n < 0)
 	{
-		if (n == -2147483648)
-			n = 2147483648;
-		else
-			n = -n;
+		n = -n;
 		to_be_s[0] = '-';
 	}
 	to_be_s[digits] = '\0';
