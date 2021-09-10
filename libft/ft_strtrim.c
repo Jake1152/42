@@ -16,8 +16,6 @@ size_t	get_front_idx(char const *s1, char const *set, size_t set_len)
 {
 	size_t	cnt;
 
-	// s1 = "abdcd"
-	// set = "eab"
 	cnt = 0;
 	while(set_len && s1[cnt])
 	{
@@ -66,18 +64,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	ft_strlcpy(to_be, (s1 + front_idx), to_be_size);	
 	return (to_be);
 }
-//       012345
-// s1 = "ABCCBA"   set = "ABC"
-//       0123456
-// s1 = "ABCDCBA"   set = "ABCD"
-//       0123456
-// s1 = "ABC"   set = "ABCD"
-
-// s1 ""  set ""
-/*
-trim
-다 일치할 필요는 없고
-set길이만큼 앞뒤로 확인했을때 
-일치하는 동안에 앞에 있는 것들은 제거한다.
-
-*/
