@@ -30,16 +30,16 @@ size_t	count_digits(int n)
 		expo++;
 		n /= 10;
 	}
-	return expo
+	return (expo);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t			digits;
-	unsigned char	*to_be_s;
+	size_t	digits;
+	char	*to_be_s;
 
 	digits = count_digits(n);
-	to_be_s = (unsigned char *)malloc(sizeof(char) * (digits + 1));	
+	to_be_s = (char *)malloc(sizeof(char) * (digits + 1));
 	if (!to_be_s)
 		return (0);
 	if (n < 0)
@@ -54,7 +54,7 @@ char	*ft_itoa(int n)
 	digits--;
 	while (n)
 	{
-		to_be_s[digits] = n % 10;
+		to_be_s[digits] = (n % 10) + '0';
 		digits--;
 		n /= 10;
 	}

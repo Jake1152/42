@@ -12,30 +12,72 @@
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+size_t	get_front_idx(char const *s1, char const *set, size_t set_len)
 {
-	unsigned char	*to_be;	
-	size_t			set_len;
+	size_t	cnt;
 
-	set_len = ft_strlen(set);
-	while (s1)
+	// s1 = "abdcd"
+	// set = "eab"
+	cnt = 0;
+	while(set_len && s1[cnt])
 	{
-		if ((*s1 == set[0]) && !(ft_strncmp(s1, set, set_len)))
-			s1 += sizeof(char) * set_len;
-		else
-			*to_be++ = *s1++;
+		if (ft_strchr(set, s1[cnt]) == 0)
+			break;
+		cnt++;		
+		set_len--;
 	}
-	return (to_be);
+	return (cnt);
 }
 
+size_t	get_rear_idx(char const *s1, char const *set, size_t set_len)
+{
+	size_t	cnt;
+	size_t	s_len;
+
+	cnt = 0;
+	s_len = ft_strlen(s1);
+	while(set_len && s_len > cnt)
+	{
+		if (ft_strchr(set, s1[s_len - cnt - 1]) == 0)
+			break;
+		cnt++;		
+		set_len--;
+	}
+	return (s_len - cnt - 1);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*to_be;	
+	size_t	set_len;
+	size_t	front_idx;
+	size_t	rear_idx;
+	size_t	to_be_size;
+
+	set_len = ft_strlen(set);
+	front_idx = get_front_idx(s1, set, set_len);
+	rear_idx = get_rear_idx(s1, set, set_len);
+	to_be_size = 0;
+	if (rear_idx + 1 > front_idx)
+		to_be_size = (rear_idx - front_idx + 1);
+	to_be = (char *)malloc(sizeof(char) * (to_be_size + 1));
+	if (!to_be)
+		return (0);
+	ft_strlcpy(to_be, (s1 + front_idx), to_be_size);	
+	return (to_be);
+}
+//       012345
+// s1 = "ABCCBA"   set = "ABC"
+//       0123456
+// s1 = "ABCDCBA"   set = "ABCD"
+//       0123456
+// s1 = "ABC"   set = "ABCD"
+
+// s1 ""  set ""
 /*
 trim
-다듬기
-set이 있는 부분은 시킵
-그 이외에 문자들만으로 이루어진 문자열을 반환
-strnstr을 이용
-strncmp
+다 일치할 필요는 없고
+set길이만큼 앞뒤로 확인했을때 
+일치하는 동안에 앞에 있는 것들은 제거한다.
 
-hello world
-o
 */
