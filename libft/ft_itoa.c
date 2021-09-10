@@ -12,54 +12,51 @@
 
 #include "libft.h"
 
+size_t	count_digits(int n)
+{
+	size_t	expo;		
+
+	expo = 0;
+	if (n < 0)
+	{
+		if (n == -2147483648)
+			n = 2147483648;
+		else
+			n *= -1;
+		expo++;
+	}
+	while (n)
+	{
+		expo++;
+		n /= 10;
+	}
+	return expo
+}
+
 char	*ft_itoa(int n)
 {
 	size_t			digits;
 	unsigned char	*to_be_s;
-	unsigned char	*tmp_s;
-	int				tmp;
-	int				sign;
 
-	digits = 0;
-	sign = 1;
-	tmp = n;
-	if (n == 0)
-		digits += 1;
-	else if (n < 0)
-	{
-		digits += 1;
-		sign = -1;
-		tmp *= sign;	
-	}	
-	while (tmp)
-	{
-		tmp /= 10;
-		digits += 1;
-	}
-	to_be_s = (unsigned char *)malloc(sizeof(char) * (digits + 1));
+	digits = count_digits(n);
+	to_be_s = (unsigned char *)malloc(sizeof(char) * (digits + 1));	
 	if (!to_be_s)
 		return (0);
-	while (digits)
+	if (n < 0)
 	{
-		
-		digits--;
+		if (n == -2147483648)
+			n = 2147483648;
+		else
+			n = -n;
+		to_be_s[0] = '-';
 	}
-
+	to_be_s[digits] = '\0';
+	digits--;
+	while (n)
+	{
+		to_be_s[digits] = n % 10;
+		digits--;
+		n /= 10;
+	}
 	return (to_be_s);
 }
-
-/* 1152 => "1152" */
-/* 
-array 이용
-재귀?
-길이는 어떻게 10의 몇 제곱인지
-pointer 이용
-
-음수, 0 처리 
-자릿수 문제
-25줄 
-동적할당을 한번에 하지말고 그때 그떄 한다?
-
--1152 -> "-1152"
-
-*/
