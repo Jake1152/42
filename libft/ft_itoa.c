@@ -36,7 +36,9 @@ char	*ft_itoa(int n)
 	char	*to_be_s;
 
 	if (n == -2147483648)
-		return ("-2147483648");
+		return (ft_strdup("-2147483648"));
+	else if (n == 0)
+		return (ft_strdup("0"));
 	digits = count_digits(n);
 	to_be_s = (char *)malloc(sizeof(char) * (digits + 1));
 	if (!to_be_s)

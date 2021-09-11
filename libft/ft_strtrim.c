@@ -52,6 +52,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	rear_idx;
 	size_t	to_be_size;
 
+	if (!s1)
+		return (0);
+	if (!set)
+		return (ft_strdup(s1));
 	set_len = ft_strlen(set);
 	front_idx = get_front_idx(s1, set, set_len);
 	rear_idx = get_rear_idx(s1, set, set_len);
@@ -61,6 +65,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	to_be = (char *)malloc(sizeof(char) * (to_be_size + 1));
 	if (!to_be)
 		return (0);
-	ft_strlcpy(to_be, (s1 + front_idx), to_be_size);
+	ft_strlcpy(to_be, (s1 + front_idx), to_be_size + 1);
 	return (to_be);
 }
