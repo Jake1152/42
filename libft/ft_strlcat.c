@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:34 by jim               #+#    #+#             */
-/*   Updated: 2021/09/09 16:52:33 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/09/13 15:34:20 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	org_dstsize = i;
 	while (src[j] != '\0' && (org_dstsize + j + 1 < dstsize))
 		dst[i++] = src[j++];
-	dst[i] = '\0';
+	if (org_dstsize < dstsize)
+		dst[i] = '\0';
 	while (src[j] != '\0')
 		j++;
 	if (dstsize < org_dstsize)
