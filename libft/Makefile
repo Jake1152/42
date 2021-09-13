@@ -6,7 +6,7 @@
 #    By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 19:26:38 by jim               #+#    #+#              #
-#    Updated: 2021/09/13 14:42:10 by jim              ###   ########seoul.kr   #
+#    Updated: 2021/09/13 21:37:58 by jim              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS = ft_atoi.c		\
 	   ft_putstr_fd.c	\
 	   ft_substr.c		\
 	   ft_strjoin.c		\
+	   ft_split.c		\
 	   ft_itoa.c		\
 	   ft_strtrim.c		\
 	   ft_strmapi.c		\
