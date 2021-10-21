@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:51 by jim               #+#    #+#             */
-/*   Updated: 2021/09/13 15:29:38 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/10/06 11:34:53 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	rear_idx;
 	size_t	to_be_size;
 
-	if (!s1)
-		return (0);
 	if (!set)
 		return (ft_strdup(s1));
 	set_len = ft_strlen(set);
