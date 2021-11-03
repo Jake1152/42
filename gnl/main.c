@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s);
 int main()
 {
 	int		fd;
-	int		ret;
+	// int		ret;
 	// char	*str1;
 	// char	*str2;
 	char	*line;
@@ -31,8 +31,8 @@ int main()
 	line = NULL;
 	fd = open("the_document", O_RDWR, 0777);
 	printf("fd : %d\n", fd);
-	ret = read(0, line, 5);
-	printf("ret %d\n", ret);
+	//ret = read(0, line, 5);
+	//printf("ret %d\n", ret);
 	while (1)
 	{
 		line = get_next_line(fd);

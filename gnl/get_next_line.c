@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:47:35 by jim               #+#    #+#             */
-/*   Updated: 2021/10/21 17:45:27 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/11/03 12:33:35 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,33 @@ char	*get_next_line(int fd)
 	char			*joined_str;
 	int				read_str_len;
 	size_t			new_line_idx;
+	char			*new_line_posi;			
 
 	read_str_len = 0;
 	remain[fd] = NULL;
 	while (1)
 	{
 		read_str_len = read(fd, read_str, BUFFER_SIZE);
+		printf("read str len : %d\n", read_str_len);
 		if (read_str_len <= 0)
 			break ;
 		read_str[read_str_len] = '\0';
 		remain[fd] = ft_strdup("");
-		new_line_idx = ft_strchr(read_str, '\n') - read_str;
-		if (new_line_idx >= 0)
+		new_line_posi = ft_strchr(read_str, '\n');
+		if (new_line_posi != NULL)
 		{
+			new_line_idx = ft_strchr(read_str, '\n') - read_str;
 			new_line_str = (char *)malloc(sizeof(char) * new_line_idx + 1 + 1);
 			if (!new_line_str)
 				return (NULL);
 			ft_strlcpy(new_line_str, read_str, new_line_idx + 1 + 1);
-			if (*remain[fd] != '\0')
+			if (remain[fd] != (void *)0)
 			{
 				joined_str = ft_strjoin(remain[fd], new_line_str);
 				free(remain[fd]);
 				remain[fd] = ft_strdup("");
 				ft_strlcat(remain[fd], &read_str[new_line_idx + 1], (read_str_len - (new_line_idx + 1)) + 1);
+				printf("remain[fd] : %s\n", remain[fd] );
 			}			
 			else
 				joined_str = ft_strdup(new_line_str);
