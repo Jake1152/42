@@ -13,6 +13,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
+int		cmp_dup_and_str(const char *s1, const char *s2);
 
 int main()
 {
@@ -56,11 +57,8 @@ int main()
 	// 연결리스트, BST
 	// ssize_t	read(int fildes, void *buf, size_t nbyte);	
 	
-
-	
 	return (0);
 }
-
 
 /*
 
