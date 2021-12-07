@@ -6,34 +6,44 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:47:35 by jim               #+#    #+#             */
-/*   Updated: 2021/11/03 23:13:58 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/12/07 12:42:02 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-// #define BUFFER_SIZE 42
+#define BUFFER_SIZE 42
 #define FD_SIZE 256
 
 char	*get_next_line(int fd)
 {
-	static char		*remain[FD_SIZE];
+	static char		*static_save[FD_SIZE];
 	char			read_str[BUFFER_SIZE + 1];
 	char			*new_line_str;
 	char			*joined_str;
+	char			*tmp;
 	int				read_str_len;
-	size_t			new_line_idx;
-	char			*new_line_posi;			
+	size_t			new_line_size;
+	char			*new_line_posi;
 
 	read_str_len = 0;
-	remain[fd] = ft_strdup("");
+	static_save[fd] = ft_strdup("");  // 꼭 동적 할당해야하는가?
 	while (1)
 	{
+		// 읽음 그리고 저장, 읽고 남은건 return
 		read_str_len = read(fd, read_str, BUFFER_SIZE);
 		printf("read str len : %d\n", read_str_len);
-		if (read_str_len <= 0)
+		if (read_str_len <= 0 && static_save[fd] == "")
 			break ;
+		// static 마지막에 \0을 넣어줘야한다.
+		// 다음 문자열이 들어오면 이전 \0부분을 덮어쓰고
+		// 다시 맨뒤에 \0을 넣어줘야한다.
 		read_str[read_str_len] = '\0';
+		// static에 읽은 것을 다 저장한다.
+		tmp = ft_strjoin(static_save[fd], read_str);
+		free(static_save[fd]);
+		static_save[fd] = tmp;
 		// ft_alloc(read_str_len, remain);
 		/*
 			문제점
@@ -43,29 +53,26 @@ char	*get_next_line(int fd)
 				- 초기화 동작
 				- 개행 붙여주는 과정
 				- free
-
 		*/
-		new_line_posi = ft_strchr(read_str, '\n');
+		new_line_posi = ft_strchr(static_save[fd], '\n');
 		if (new_line_posi != NULL)
 		{
-			new_line_idx = new_line_posi - read_str;
-			new_line_str = (char *)malloc(sizeof(char) * (new_line_idx + 1 + 1));
-			if (!new_line_str)
-				return (NULL);
-			ft_strlcpy(new_line_str, read_str, new_line_idx + 1 + 1);
-			new_line_str[new_line_idx + 1] = '\n';
-			printf("A string untill newline : %s\n", new_line_str);
-			
-			if (ft_strncmp(remain[fd], "", 1) > 0)
-			{
-				joined_str = ft_strjoin(remain[fd], new_line_str);
-				free(remain[fd]);
-				remain[fd] = ft_strdup("");
-				ft_strlcat(remain[fd], &read_str[new_line_idx + 1], (read_str_len - (new_line_idx + 1)) + 1);
-				printf("remain[fd] : %s\n", remain[fd] );
+			new_line_size = new_line_posi - static_save[fd];
+			new_line_str = ft_alloc(new_line_size + 1);
+			ft_strlcpy(new_line_str, static_save[fd], new_line_size + 1);
+			// static에 첫번쨰 개행 이후에 데이터를 다시 저장해야한다.
+			// 첫번째 개행 이후 데이터가 없다면?
+
+			free(remain[fd]);
+			remain[fd] = ft_strdup("");
+			ft_strlcat(remain[fd], &read_str[new_line_idx + 1], (read_str_len - (new_line_idx + 1)) + 1);
+			printf("remain[fd] : %s\n", remain[fd] );
 			}
 			else
 				joined_str = ft_strdup(new_line_str);
+
+
+
 			free(new_line_str);
 			return (joined_str);
 		}
@@ -78,9 +85,26 @@ char	*get_next_line(int fd)
 			printf("no newline remain[fd] : %s\n", remain[fd]);
 		}
 	}
+	// 어떤 케이스? 마지막 케이스
 	if ((ft_strncmp(remain[fd], "", 1) > 0) && read_str_len == 0)
 		return (remain[fd]);
 	return (NULL);
+}
+
+
+char	*ft_alloc(int size)
+{
+	char	*ret_str;
+
+	ret_str = (char *)malloc(sizeof(char) * (size));
+	if (ret_str == NULL)
+		return (NULL);
+	return (ret_str);
+}
+
+char	*ft_join_realloc(char *s1, char *s2)
+{
+	
 }
 
 char	*ft_strchr(const char *s, int c)
