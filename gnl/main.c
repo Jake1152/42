@@ -7,13 +7,13 @@
 // #define BUFFER_SIZE 10
 #define FD_SIZE 256
 
-char	*get_next_line(int fd);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *s);
-int		cmp_dup_and_str(const char *s1, const char *s2);
+// char	*get_next_line(int fd);
+// char	*ft_strdup(const char *s1);
+// char	*ft_strjoin(char const *s1, char const *s2);
+// size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+// size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+// size_t	ft_strlen(const char *s);
+// int		cmp_dup_and_str(const char *s1, const char *s2);
 
 int main()
 {
@@ -42,7 +42,9 @@ int main()
 			printf("Done\n");
 			break ;
 		}
+		printf("=====================\n");
 		printf("line is :%s\n", line);
+		printf("=====================\n");
 	}
 	close(fd);
 	// 이렇게하면 get_next_line(fd)에서 동적할당한 결과를 반환해야한다.
