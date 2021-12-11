@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:47:35 by jim               #+#    #+#             */
-/*   Updated: 2021/12/09 19:30:16 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/12/11 16:05:04 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 {
 	static char		*static_save[FD_SIZE];
 	char			read_str[BUFFER_SIZE + 1];
-	char			*new_line_str;
+	char			*newline_str;
 	int				read_str_len;
 
 	if (fd < 0 || fd >= FD_SIZE || BUFFER_SIZE <= 0)
@@ -29,19 +29,47 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (TRUE)
 	{
-		new_line_str = ft_ret_newline(&(static_save[fd]));
-		if (new_line_str != NULL)
-			return (new_line_str);
+		printf("static_save[fd] in start of gnl: %s\n", static_save[fd]);
+		newline_str = ft_ret_newline(&(static_save[fd]));
+		printf("newline_str : %s\n", newline_str);
+		printf("static_save[fd] after found newline : %s\n", static_save[fd]);
+		if (static_save[fd] == NULL)
+			return (NULL);
+		if (newline_str != NULL)
+			return (newline_str);
 		read_str_len = read(fd, read_str, BUFFER_SIZE);
-		// read는 0 이하인데 static에 data가 남아 있는 경우의 처리 
-		if (read_str_len <= 0 && (static_save[fd] == "" || static_save[fd] == NULL))
+		printf("read_str_len : %d\n", read_str_len);
+		if (read_str_len <= 0)
 			break ;
 		read_str[read_str_len] = '\0';
-		// ft_save() static에 저장하는 역할 만약 실패하면 return NULL하고 종료
+		static_save[fd] = ft_save(&static_save[fd], read_str);
+		printf("static_save[fd] in middle of gnl : %s\n", static_save[fd]);
+		if (static_save[fd] == NULL)
+			return (NULL);
 	}
-	if (static_save[fd] != "" && read_str_len == 0)
+	if (ft_strlen(static_save[fd]) == 0 && read_str_len == 0)
 		return (static_save[fd]);
 	return (NULL);
+}
+
+char	*ft_save(char **save, char *read_str)
+{
+	char	*str_join;
+	size_t	read_len;
+	size_t	save_len;
+
+	save_len = ft_strlen(*save);
+	read_len = ft_strlen(read_str);
+	str_join = (char *)malloc(save_len + read_len + 1);
+	printf("save_len, read_len : %zu %zu \n", save_len, read_len);
+	if (str_join == NULL)
+		return (NULL);
+	printf("*save : %s \n", *save);
+	ft_strlcpy(str_join, *save, save_len + 1);
+	free(*save);
+	ft_strlcat(str_join, read_str, save_len + read_len + 1);
+	printf("str_join : %s\n", str_join);
+	return (str_join);
 }
 
 char	*ft_ret_newline(char **save)
@@ -58,44 +86,19 @@ char	*ft_ret_newline(char **save)
 	if (new_line_posi != NULL)
 	{
 		new_len = new_line_posi - *save + 1;
-		new_line_str = ft_alloc(new_len + 1);
+		new_line_str = (char *)malloc(new_len + 1);
+		if (new_line_str == NULL)
+			return (NULL);
 		ft_strlcpy(new_line_str, *save, new_len + 1);
-		tmp = ft_alloc(save_len - new_len + 1);
+		tmp = (char *)malloc(save_len - new_len + 1);
 		if (tmp == NULL)
 			return (NULL);
 		ft_strlcpy(tmp, (*save + new_len), save_len - new_len + 1);
-		// "hello\nworld"
 		free(*save);
 		*save = tmp;
 		free(tmp);
-		// printf("save : %s\n", save);
 	}
 	return (new_line_str);
-}
-
-char	*ft_alloc(int size)
-{
-	char	*ret_str;
-
-	ret_str = (char *)malloc(sizeof(char) * (size));
-	if (ret_str == NULL)
-		return (NULL);
-	return (ret_str);
-}
-
-int		*ft_save(char **save, char *read_str)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(save, read_str);
-	if (tmp == NULL)
-		return (NULL);
-	*save = tmp;
-	free(tmp);
-	/*
-		s1, s2를 넘겨받아서 새로운 변수에 저장한다.
-		s1은 static
-	*/
 }
 
 char	*ft_strchr(const char *s, int c)

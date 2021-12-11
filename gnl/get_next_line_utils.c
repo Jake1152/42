@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 14:47:43 by jim               #+#    #+#             */
-/*   Updated: 2021/10/21 17:27:59 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/12/11 13:16:46 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,26 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*dst;
-	size_t	dstsize;
+	unsigned char	c1;
+	unsigned char	c2;
+	size_t			i;
 
-	dstsize = ft_strlen(s1) + ft_strlen(s2) + 1;
-	dst = (char *)malloc(sizeof(char) * (dstsize));
-	if (!dst)
-		return (0);
-	ft_strlcpy(dst, s1, ft_strlen(s1) + 1);
-	ft_strlcat(dst, s2, dstsize);
-	return (dst);
+	i = 0;
+	while (i++ < n)
+	{
+		c1 = *s1++;
+		c2 = *s2++;
+		if (c1 != c2)
+		{
+			if (c1 < c2)
+				return (-1);
+			else
+				return (1);
+		}
+		if (!c1)
+			break ;
+	}
+	return (0);
 }

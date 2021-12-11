@@ -23,7 +23,6 @@ int main()
 	// char	*str2;
 	char	*line;
 	// char	*join_Sstr;
-
 	// printf("test\n");
 	// str1 = "Hello ";
 	// str2 = "World!";
@@ -58,7 +57,6 @@ int main()
 	// 그렇다면 미리 배열을 만들거나 다른 자료구조를 써야한다. 
 	// 연결리스트, BST
 	// ssize_t	read(int fildes, void *buf, size_t nbyte);	
-	
 	return (0);
 }
 
