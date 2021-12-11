@@ -5,27 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 12:19:06 by jim               #+#    #+#             */
-/*   Updated: 2021/12/07 12:37:05 by jim              ###   ########seoul.kr  */
+/*   Created: 2021/12/11 16:32:31 by jim               #+#    #+#             */
+/*   Updated: 2021/12/11 21:43:47 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# define FD_SIZE 256
+# define TRUE 1
+# define FALSE 0
 
 # include <unistd.h>
 # include <stdlib.h>
 
+/* orign */
 char	*get_next_line(int fd);
-char	*ft_strchr(const char *s, int c);
-int     ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_alloc(int size);
-// char    *ft_alloc();
+char	*get_next_line_from_save(char **save, int newline_idx);
 
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+/* util */
 size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char **s1, char const *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+int		ft_strchr(const char *s, int c);
 
 #endif

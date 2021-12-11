@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/20 14:47:43 by jim               #+#    #+#             */
-/*   Updated: 2021/12/11 13:16:46 by jim              ###   ########seoul.kr  */
+/*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
+/*   Updated: 2021/12/11 21:45:06 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,56 @@ size_t	ft_strlen(const char *s)
 	while (s[idx])
 		idx++;
 	return (idx);
+}
+
+char	*ft_strjoin(char **s1, char const *s2)
+{
+	char	*dst;
+	size_t	s1_size;
+	size_t	s2_size;
+	size_t	i;
+	size_t	k;
+
+	s1_size = ft_strlen(s1);
+	s2_size = ft_strlen(s2);
+	dst = (char *)malloc(sizeof(char) * (s1_size + s2_size + 1));
+	if (dst == NULL)
+		return (NULL);
+	i = 0;
+	while (i < s1_size)
+		dst[i] = s1[i++];
+	free(s1);
+	k = 0;
+	while (k < s2_size)
+		dst[i++] = s2[k++];
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	s_len;
+	int		diff;
+	int		i;
+
+	s_len = ft_strlen(s);
+	diff = (s + s_len) - (s + start);
+	if (diff <= 0)
+		return (ft_strdup(""));
+	if (diff < len)
+		len = (size_t)diff;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = (s + start)[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
 
 char	*ft_strdup(const char *s1)
@@ -42,67 +92,18 @@ char	*ft_strdup(const char *s1)
 	return (dest);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+int		ft_strchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	org_dstsize;
+	size_t	idx;
 
-	i = ft_strlen(dst);
-	j = 0;
-	org_dstsize = i;
-	while (src[j] != '\0' && (org_dstsize + j + 1 < dstsize))
-		dst[i++] = src[j++];
-	if (org_dstsize < dstsize)
-		dst[i] = '\0';
-	while (src[j] != '\0')
-		j++;
-	if (dstsize < org_dstsize)
-		return (j + dstsize);
-	else
-		return (j + org_dstsize);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	k;
-
-	i = 0;
-	k = 0;
-	while (src[i] != '\0')
-		i++;
-	if (dstsize == 0)
-		return (i);
-	while ((k < dstsize - 1) && src[k])
+	idx = 0;
+	while (s[idx])
 	{
-		dst[k] = src[k];
-		k++;
+		if (s[idx] == (char)c)
+			return (idx);
+		idx++;
 	}
-	dst[k] = '\0';
-	return (i);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-	size_t			i;
-
-	i = 0;
-	while (i++ < n)
-	{
-		c1 = *s1++;
-		c2 = *s2++;
-		if (c1 != c2)
-		{
-			if (c1 < c2)
-				return (-1);
-			else
-				return (1);
-		}
-		if (!c1)
-			break ;
-	}
-	return (0);
+	if (s[idx] == (char)c)
+		return (idx);
+	return (-1);
 }

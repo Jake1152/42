@@ -5,114 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/20 14:47:35 by jim               #+#    #+#             */
-/*   Updated: 2021/12/11 16:05:04 by jim              ###   ########seoul.kr  */
+/*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
+/*   Updated: 2021/12/11 21:48:08 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-
 #define BUFFER_SIZE 42
 
 char	*get_next_line(int fd)
 {
-	static char		*static_save[FD_SIZE];
-	char			read_str[BUFFER_SIZE + 1];
-	char			*newline_str;
-	int				read_str_len;
+	static char	*save[FD_SIZE];
+	char		*newline_idx;
+	char		read_str[BUFFER_SIZE + 1];
+	int			read_size;
 
-	if (fd < 0 || fd >= FD_SIZE || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_SIZE)
 		return (NULL);
-	static_save[fd] = ft_strdup("");
-	if (static_save[fd] == NULL)
-		return (NULL);
+	save[fd] = "";
 	while (TRUE)
 	{
-		printf("static_save[fd] in start of gnl: %s\n", static_save[fd]);
-		newline_str = ft_ret_newline(&(static_save[fd]));
-		printf("newline_str : %s\n", newline_str);
-		printf("static_save[fd] after found newline : %s\n", static_save[fd]);
-		if (static_save[fd] == NULL)
-			return (NULL);
-		if (newline_str != NULL)
-			return (newline_str);
-		read_str_len = read(fd, read_str, BUFFER_SIZE);
-		printf("read_str_len : %d\n", read_str_len);
-		if (read_str_len <= 0)
+		newline_idx = ft_strchr(save[fd], '\n');
+		if (newline_idx >= 0)
+			return(get_next_line_from_save(&save[fd], newline_idx));
+		read_size = read(fd, read_str, BUFFER_SIZE);
+		if (read_size <= 0)
 			break ;
-		read_str[read_str_len] = '\0';
-		static_save[fd] = ft_save(&static_save[fd], read_str);
-		printf("static_save[fd] in middle of gnl : %s\n", static_save[fd]);
-		if (static_save[fd] == NULL)
+		read_str[read_size] = '\0';
+		save[fd] = ft_strjoin(&save[fd], read_str);
+		if (save[fd] == NULL)
 			return (NULL);
 	}
-	if (ft_strlen(static_save[fd]) == 0 && read_str_len == 0)
-		return (static_save[fd]);
+	if (save[fd] && )
 	return (NULL);
 }
 
-char	*ft_save(char **save, char *read_str)
+char	*get_next_line_from_save(char **save, int newline_idx)
 {
-	char	*str_join;
-	size_t	read_len;
-	size_t	save_len;
-
-	save_len = ft_strlen(*save);
-	read_len = ft_strlen(read_str);
-	str_join = (char *)malloc(save_len + read_len + 1);
-	printf("save_len, read_len : %zu %zu \n", save_len, read_len);
-	if (str_join == NULL)
-		return (NULL);
-	printf("*save : %s \n", *save);
-	ft_strlcpy(str_join, *save, save_len + 1);
-	free(*save);
-	ft_strlcat(str_join, read_str, save_len + read_len + 1);
-	printf("str_join : %s\n", str_join);
-	return (str_join);
-}
-
-char	*ft_ret_newline(char **save)
-{
-	char	*new_line_str;
+	char	*next_line;
 	char	*tmp;
-	size_t	new_len;
-	size_t	save_len;
-	char	*new_line_posi;
 
-	new_line_posi = ft_strchr(*save, '\n');
-	save_len = ft_strlen(*save);
-	new_line_str = NULL;
-	if (new_line_posi != NULL)
-	{
-		new_len = new_line_posi - *save + 1;
-		new_line_str = (char *)malloc(new_len + 1);
-		if (new_line_str == NULL)
-			return (NULL);
-		ft_strlcpy(new_line_str, *save, new_len + 1);
-		tmp = (char *)malloc(save_len - new_len + 1);
-		if (tmp == NULL)
-			return (NULL);
-		ft_strlcpy(tmp, (*save + new_len), save_len - new_len + 1);
-		free(*save);
-		*save = tmp;
-		free(tmp);
-	}
-	return (new_line_str);
+	next_line = (char *)malloc(newline_idx + 1 + 1);
+	if (next_line == NULL)
+		return (NULL);
+	next_line = ft_substr(*save, 0, newline_idx + 1);
+	if (next_line == NULL)
+		return (NULL);
+	tmp = ft_substr(*save, newline_idx + 1, \
+						ft_strlen(*save) - (newline_idx + 1));
+	// hello\nworld
+	// 11 - 6 = 5
+	if (tmp == NULL)
+		return (NULL);
+	free(*save);
+	*save = tmp;
+	free(*tmp);
+	return (next_line);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_read_and_save(void)
 {
-	size_t	idx;
+	char	*ret;
 
-	idx = 0;
-	while (s[idx])
-	{
-		if (s[idx] == (char)c)
-			return ((char *)&s[idx]);
-		idx++;
-	}
-	if (s[idx] == (char)c)
-		return ((char *)&s[idx]);
-	return (NULL);
+	return (ret);
 }
