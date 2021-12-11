@@ -1,0 +1,72 @@
+gnl handle way 11DEC21
+
+함수형으로 푼다.
+반환값 리턴하는 방식
+동적할당 최대한 이용
+
+strjoin으로 처리
+libft에 있는 함수들 커스텀하여서 사용
+
+함수형으로 풀떄 반환값 타고타고 이용
+어떻게 짜는게 자연스러울 것인가?
+
+어떻게 해야 동적할당 실패와
+개행 못찾은 경우를 구분하는가?
+둘을 애초에 별도로 처리하게 한다?
+어떤게 형태소가 되는 동작인가?
+
+- 과제의 목적, 목표, 하는 일은 무엇인가?
+1. fd를 이용하여 파일을 읽는다.
+2. 버퍼사이즈 만큼 읽는다.
+3. 문자열을 개행까지 반환한다.
+4. read에서 error, malloc error 나는 경우 null return
+5. 문자열을 다 읽었고 남은 부분에 개행이 없다면
+   그부분들까지만 반환한다.
+
+
+버퍼사이즈만큼 읽음
+static에 저장
+개행 찾아서 반환
+
+위 과정 반복
+
+---
+# 필요한 동작들 
+
+- read
+- read size check (0 <= read_size)
+- save to static
+- find newline
+- split
+    - until newline
+    - after newline
+- free
+    - free static, tmp
+- return line
+    - 
+- return NULL
+    - malloc fail, read error, EOFfile and there are nothing
+
+
+---
+# 필요한 동작에 따른 세부 사항
+- read
+    - read size check (0 <= read_size)
+    - insert '\0' character
+- save to static
+    - strjoin
+        기존 static과 read한 문자열
+- find newline
+    - strchr or 별도의 구현 함수
+- split
+    이 부분 자체를 split 함수 없이 자연스럽게 넘길 수도 있다.
+    newline 찾는 함수와 
+    substr을 이용해서 나눠볼 수 있다.
+    - until newline
+    - after newline
+- free
+    - free static, tmp
+- return line
+    - 이부분을 함수들의 return으로 처리할 수도 있다.
+- return NULL
+    - malloc fail, read error, EOFfile and there are nothing
