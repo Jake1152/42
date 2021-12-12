@@ -27,7 +27,6 @@ char	*get_next_line(int fd)
 		if (newline_idx >= 0)
 			return (get_next_line_from_save(&save[fd], newline_idx));
 		read_size = read(fd, read_str, BUFFER_SIZE);
-		// printf("read_size : %d \n", read_size);
 		if (read_size <= 0)
 			break ;
 		read_str[read_size] = '\0';
@@ -35,9 +34,8 @@ char	*get_next_line(int fd)
 		if (save[fd] == NULL)
 			return (NULL);
 	}
-	if (ft_strlen(save[fd]) > 0 && read_size == 0)
+	if (ft_strncmp(save[fd], "", 1) > 0 && read_size == 0)
 		return (save[fd]);
-	// printf("It will be returned NULL\n");
 	return (NULL);
 }
 
@@ -48,12 +46,15 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 
 	next_line = ft_substr(*save, 0, newline_idx + 1);
 	if (next_line == NULL)
+	{
+		free(*save);
 		return (NULL);
+	}		
 	tmp = ft_substr(*save, newline_idx + 1, \
 						ft_strlen(*save) - (newline_idx + 1));
-	if (tmp == NULL)
-		return (NULL);
 	free(*save);
+	if (tmp == NULL)
+		return (NULL);	
 	*save = tmp;
 	return (next_line);
 }
@@ -76,4 +77,50 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	dst[k] = '\0';
 	return (i);
+}
+
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	c1;
+	unsigned char	c2;
+	size_t			i;
+
+	i = 0;
+	while (i++ < n)
+	{
+		c1 = *s1++;
+		c2 = *s2++;
+		if (c1 != c2)
+		{
+			if (c1 < c2)
+				return (-1);
+			else
+				return (1);
+		}
+		if (!c1)
+			break ;
+	}
+	return (0);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	j;
+	size_t	org_dstsize;
+
+	i = ft_strlen(dst);
+	j = 0;
+	org_dstsize = i;
+	while (src[j] != '\0' && (org_dstsize + j + 1 < dstsize))
+		dst[i++] = src[j++];
+	if (org_dstsize < dstsize)
+		dst[i] = '\0';
+	while (src[j] != '\0')
+		j++;
+	if (dstsize < org_dstsize)
+		return (j + dstsize);
+	else
+		return (j + org_dstsize);
 }
