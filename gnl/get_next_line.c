@@ -31,7 +31,7 @@ char	*get_next_line(int fd)
 		if (read_size <= 0)
 			break ;
 		read_str[read_size] = '\0';
-		save[fd] = ft_strjoin(save[fd], read_str);
+		save[fd] = ft_strjoin(&save[fd], read_str);
 		if (save[fd] == NULL)
 			return (NULL);
 	}
@@ -40,24 +40,24 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-char	*get_next_line_from_save(char **save, int newline_idx)
+char	*get_next_line_from_save(char *save, int newline_idx)
 {
 	char	*next_line;
 	char	*tmp;
 
-	next_line = ft_substr(*save, 0, newline_idx + 1);
+	next_line = ft_substr(save, 0, newline_idx + 1);
 	if (next_line == NULL)
 	{
-		free(*save);
-		*save = NULL;
+		free(save);
+		save = NULL;
 		return (NULL);
 	}		
-	tmp = ft_substr(*save, newline_idx + 1, \
+	tmp = ft_substr(save, newline_idx + 1, \
 						ft_strlen(*save) - (newline_idx + 1));
-	free(*save);	
+	free(save);	
 	if (tmp == NULL)
 		return (NULL);
-	*save = tmp;
+	save = tmp;
 	return (next_line);
 }
 

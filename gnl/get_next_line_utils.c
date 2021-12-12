@@ -37,7 +37,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	if (s1 == NULL)
 	{
 		s1 = ft_strdup("");
-		if (*s1 == NULL)
+		if (s1 == NULL)
 			return (NULL);
 	}	
 	dst = (char *)malloc(sizeof(char) * (s1_size + s2_size + 1));
