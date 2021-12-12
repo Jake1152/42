@@ -24,31 +24,31 @@ size_t	ft_strlen(const char *s)
 	return (idx);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char **s1, char const *s2)
 {
 	char	*dst;
 	size_t	s1_size;
 	size_t	s2_size;
 
-	s1_size = ft_strlen(s1);
+	s1_size = ft_strlen(*s1);
 	s2_size = ft_strlen(s2);
 	if (s2 == NULL)
 		return (NULL);
-	if (s1 == NULL)
+	if (*s1 == NULL)
 	{
-		s1 = ft_strdup("");
-		if (s1 == NULL)
+		*s1 = ft_strdup("");
+		if (*s1 == NULL)
 			return (NULL);
 	}	
 	dst = (char *)malloc(sizeof(char) * (s1_size + s2_size + 1));
 	if (dst == NULL)
 	{
-		free(s1);
-		s1 = NULL;
+		free(*s1);
+		*s1 = NULL;
 		return (NULL);
 	}	
-	ft_strlcpy(dst, s1, s1_size + 1);
-	free(s1);
+	ft_strlcpy(dst, *s1, s1_size + 1);
+	free(*s1);
 	ft_strlcat(dst, s2, s1_size + s2_size + 1);
 	return (dst);
 }
