@@ -24,6 +24,7 @@ char	*get_next_line(int fd)
 	save[fd] = NULL;
 	while (TRUE)
 	{
+		printf("save[fd] : %s\n", save[fd]);
 		newline_idx = ft_strchr(save[fd], '\n');
 		if (newline_idx >= 0)
 			return (get_next_line_from_save(&save[fd], newline_idx));
@@ -35,7 +36,7 @@ char	*get_next_line(int fd)
 		if (save[fd] == NULL)
 			return (NULL);
 	}
-	if (ft_strncmp(save[fd], "", 1) > 0 && read_size == 0)
+	if (ft_strncmp(save[fd], "", 1) != 0 && read_size == 0)
 		return (save[fd]);
 	return (NULL);
 }
@@ -52,8 +53,10 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		*save = NULL;
 		return (NULL);
 	}		
-	tmp = ft_substr(*save, newline_idx + 1, \
-						ft_strlen(*save) - (newline_idx + 1));
+	// tmp = ft_substr(*save, newline_idx + 1, \
+	// 					ft_strlen(*save) - (newline_idx + 1));
+	tmp = ft_strdup(*save + newline_idx + 1);
+	printf("tmp : %s\n", tmp);
 	free(*save);
 	if (tmp == NULL)
 	{
@@ -61,6 +64,7 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		return (NULL);
 	}
 	*save = tmp;
+	printf("*save : %s\n", *save);
 	return (next_line);
 }
 
