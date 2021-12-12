@@ -56,7 +56,10 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 						ft_strlen(*save) - (newline_idx + 1));
 	free(*save);
 	if (tmp == NULL)
+	{
+		free(next_line);
 		return (NULL);
+	}
 	*save = tmp;
 	return (next_line);
 }
