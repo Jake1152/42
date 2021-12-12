@@ -30,15 +30,20 @@ char	*ft_strjoin(char **s1, char const *s2)
 	size_t	i;
 	size_t	k;
 
-	s1_size = ft_strlen(s1);
+	if (*s1 == NULL)
+	{
+		*s1 = ft_strdup("");
+		if (*s1 == NULL)
+			return (NULL);
+	}
+	s1_size = ft_strlen(*s1);
 	s2_size = ft_strlen(s2);
 	dst = (char *)malloc(sizeof(char) * (s1_size + s2_size + 1));
 	if (dst == NULL)
 		return (NULL);
-	i = 0;
-	while (i < s1_size)
-		dst[i] = s1[i++];
-	free(s1);
+	ft_strlcpy(dst, *s1, s1_size + 1);
+	free(*s1);
+	i = s1_size;
 	k = 0;
 	while (k < s2_size)
 		dst[i++] = s2[k++];
@@ -51,24 +56,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*str;
 	size_t	s_len;
 	int		diff;
-	int		i;
 
 	s_len = ft_strlen(s);
 	diff = (s + s_len) - (s + start);
 	if (diff <= 0)
 		return (ft_strdup(""));
-	if (diff < len)
+	else if (diff > 0 && (size_t)diff < len)
 		len = (size_t)diff;
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
 		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		str[i] = (s + start)[i];
-		i++;
-	}
-	str[i] = '\0';
+	ft_strlcpy(str, (s + start), len + 1);
 	return (str);
 }
 

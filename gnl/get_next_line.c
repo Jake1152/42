@@ -16,13 +16,13 @@
 char	*get_next_line(int fd)
 {
 	static char	*save[FD_SIZE];
-	char		*newline_idx;
+	int			newline_idx;
 	char		read_str[BUFFER_SIZE + 1];
 	int			read_size;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_SIZE)
 		return (NULL);
-	save[fd] = "";
+	save[fd] = NULL;
 	while (TRUE)
 	{
 		newline_idx = ft_strchr(save[fd], '\n');
@@ -36,7 +36,8 @@ char	*get_next_line(int fd)
 		if (save[fd] == NULL)
 			return (NULL);
 	}
-	if (save[fd] && )
+	if (ft_strlen(save[fd]) > 0 && read_size == 0)
+		return (save[fd]);
 	return (NULL);
 }
 
@@ -53,19 +54,29 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		return (NULL);
 	tmp = ft_substr(*save, newline_idx + 1, \
 						ft_strlen(*save) - (newline_idx + 1));
-	// hello\nworld
-	// 11 - 6 = 5
 	if (tmp == NULL)
 		return (NULL);
 	free(*save);
 	*save = tmp;
-	free(*tmp);
 	return (next_line);
 }
 
-char	*ft_read_and_save(void)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char	*ret;
+	size_t	i;
+	size_t	k;
 
-	return (ret);
+	i = 0;
+	k = 0;
+	while (src[i] != '\0')
+		i++;
+	if (dstsize == 0)
+		return (i);
+	while ((k < dstsize - 1) && src[k])
+	{
+		dst[k] = src[k];
+		k++;
+	}
+	dst[k] = '\0';
+	return (i);
 }

@@ -22,6 +22,7 @@
 /* orign */
 char	*get_next_line(int fd);
 char	*get_next_line_from_save(char **save, int newline_idx);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 /* util */
 size_t	ft_strlen(const char *s);
