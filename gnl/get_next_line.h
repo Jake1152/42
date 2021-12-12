@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:32:31 by jim               #+#    #+#             */
-/*   Updated: 2021/12/11 21:43:47 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/12/12 18:22:15 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+// it must be removed
+#include <stdio.h>
 
 /* orign */
 char	*get_next_line(int fd);

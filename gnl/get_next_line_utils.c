@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
-/*   Updated: 2021/12/12 17:08:45 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/12 18:25:56 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	idx;
 
+	if (s == NULL)
+		return (0);
 	idx = 0;
 	while (s[idx])
 		idx++;
@@ -42,6 +44,7 @@ char	*ft_strjoin(char **s1, char const *s2)
 	if (dst == NULL)
 		return (NULL);
 	ft_strlcpy(dst, *s1, s1_size + 1);
+	// printf("*s1 : %s\n\n", *s1);
 	free(*s1);
 	i = s1_size;
 	k = 0;
@@ -90,7 +93,7 @@ char	*ft_strdup(const char *s1)
 	return (dest);
 }
 
-int		ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
 	size_t	idx;
 
