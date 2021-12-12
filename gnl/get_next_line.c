@@ -21,7 +21,7 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_SIZE)
 		return (NULL);
-	save[FD_SIZE] = NULL;
+	save[fd] = NULL;
 	while (TRUE)
 	{
 		newline_idx = ft_strchr(save[fd], '\n');
@@ -49,11 +49,12 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	if (next_line == NULL)
 	{
 		free(*save);
+		*save = NULL;
 		return (NULL);
 	}		
 	tmp = ft_substr(*save, newline_idx + 1, \
 						ft_strlen(*save) - (newline_idx + 1));
-	free(*save);
+	free(*save);	
 	if (tmp == NULL)
 		return (NULL);
 	*save = tmp;

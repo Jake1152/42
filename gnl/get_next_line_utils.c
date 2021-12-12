@@ -44,9 +44,10 @@ char	*ft_strjoin(char **s1, char const *s2)
 	if (dst == NULL)
 	{
 		free(*s1);
+		*s1 = NULL;
 		return (NULL);
 	}	
-	ft_strlcpy(dst, *s1, ft_strlen(*s1) + 1);
+	ft_strlcpy(dst, *s1, s1_size + 1);
 	free(*s1);
 	ft_strlcat(dst, s2, s1_size + s2_size + 1);
 	return (dst);
