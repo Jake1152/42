@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
-/*   Updated: 2021/12/12 18:44:45 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/12 19:53:03 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strjoin(char **s1, char const *s2)
 	size_t	s1_size;
 	size_t	s2_size;
 
-	s1_size = ft_strlen(s1);
+	s1_size = ft_strlen(*s1);
 	s2_size = ft_strlen(s2);
 	if (*s1 == NULL)
 	{
@@ -44,7 +44,7 @@ char	*ft_strjoin(char **s1, char const *s2)
 		free(*s1);
 		return (NULL);
 	}		
-	ft_strlcpy(dst, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(dst, *s1, ft_strlen(*s1) + 1);
 	free(*s1);
 	ft_strlcat(dst, s2, s1_size + s2_size + 1);
 	return (dst);
