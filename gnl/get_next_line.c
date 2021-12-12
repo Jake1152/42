@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/12 18:44:47 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/12 20:28:21 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_SIZE)
 		return (NULL);
+	save[FD_SIZE] = NULL;
 	while (TRUE)
 	{
 		newline_idx = ft_strchr(save[fd], '\n');
@@ -54,7 +55,7 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 						ft_strlen(*save) - (newline_idx + 1));
 	free(*save);
 	if (tmp == NULL)
-		return (NULL);	
+		return (NULL);
 	*save = tmp;
 	return (next_line);
 }
@@ -79,13 +80,14 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned char	c1;
 	unsigned char	c2;
 	size_t			i;
 
+	if (s1 == NULL || s2 == NULL)
+		return (-1);
 	i = 0;
 	while (i++ < n)
 	{
