@@ -24,9 +24,9 @@ char	*get_next_line(int fd)
 	save[fd] = NULL;
 	while (TRUE)
 	{
-		newline_idx = ft_strchr(&save[fd], '\n');
+		newline_idx = ft_strchr(save[fd], '\n');
 		if (newline_idx >= 0)
-			return (get_next_line_from_save(save[fd], newline_idx));
+			return (get_next_line_from_save(&save[fd], newline_idx));
 		read_size = read(fd, read_str, BUFFER_SIZE);
 		if (read_size <= 0)
 			break ;
