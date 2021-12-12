@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/12 18:21:46 by jim              ###   ########.fr       */
+/*   Updated: 2021/12/12 18:44:47 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	char	*next_line;
 	char	*tmp;
 
-	next_line = (char *)malloc(newline_idx + 1 + 1);
-	if (next_line == NULL)
-		return (NULL);
 	next_line = ft_substr(*save, 0, newline_idx + 1);
 	if (next_line == NULL)
 		return (NULL);
