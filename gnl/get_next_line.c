@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/11 21:48:08 by jim              ###   ########seoul.kr  */
+/*   Updated: 2021/12/12 17:11:09 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE 42
-#include <stdio.h>
-// <stdio.h> must be removed
 
 char	*get_next_line(int fd)
 {
@@ -24,20 +21,16 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_SIZE)
 		return (NULL);
-	save[fd] = NULL;
 	while (TRUE)
 	{
 		newline_idx = ft_strchr(save[fd], '\n');
-		printf("newline_idx : %d \n", newline_idx);
 		if (newline_idx >= 0)
 			return(get_next_line_from_save(&save[fd], newline_idx));
 		read_size = read(fd, read_str, BUFFER_SIZE);
-		printf("read_size : %d \n", read_size);
 		if (read_size <= 0)
 			break ;
 		read_str[read_size] = '\0';
 		save[fd] = ft_strjoin(&save[fd], read_str);
-		printf("save[fd] : %s \n", save[fd]);
 		if (save[fd] == NULL)
 			return (NULL);
 	}
