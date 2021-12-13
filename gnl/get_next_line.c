@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 10:04:27 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/13 10:29:24 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_next_line(int fd)
 		if (save[fd] == NULL)
 			return (NULL);
 	}
-	if (ft_strncmp(save[fd], "", 1) != 0 && read_size == 0)
+	if ((ft_strlen(save[fd]) > 0) && read_size == 0)
 		return (save[fd]);
 	return (NULL);
 }
@@ -52,9 +52,9 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		free(*save);
 		*save = NULL;
 		return (NULL);
-	}		
+	}
 	// tmp = ft_substr(*save, newline_idx + 1, ft_strlen(*save) - (newline_idx + 1));
-	tmp = ft_strdup(*save + newline_idx + 1);
+	tmp = ft_strdup(*save + newline_idx);
 	//printf("tmp : %s\n", tmp);
 	free(*save);
 	if (tmp == NULL)
