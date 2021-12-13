@@ -6,13 +6,13 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 13:30:21 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/13 14:29:45 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	idx;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (idx);
 }
 
-char	*ft_strjoin(char **s1, char const *s2)
+char	*ft_strjoin(char **s1, char *s2)
 {
 	char	*dst;
 	size_t	s1_size;
@@ -55,7 +55,7 @@ char	*ft_strjoin(char **s1, char const *s2)
 	return (dst);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	s_len;
@@ -74,7 +74,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*dest;
 	size_t	idx;
@@ -99,7 +99,7 @@ char	*ft_strdup(const char *s1)
 	return (dest);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr(char *s, int c)
 {
 	size_t	idx;
 

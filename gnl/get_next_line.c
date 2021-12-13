@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 13:29:28 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/13 14:33:02 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,28 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*save[FD_SIZE];
+	static char	(*save)[FD_SIZE];
 	int			newline_idx;
 	char		read_str[BUFFER_SIZE + 1];
 	int			read_size;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_SIZE)
 		return (NULL);
-	save[fd] = NULL;
 	while (TRUE)
 	{
-		//printf("save[fd] : %s\n", save[fd]);
 		newline_idx = ft_strchr(save[fd], '\n');
 		if (newline_idx >= 0)
-			return (get_next_line_from_save(&save[fd], newline_idx));
-		// ft_read_save(fd, BUFFER_SIZE);
+			return (get_next_line_from_save((*save)[fd], newline_idx));
 		read_size = read(fd, read_str, BUFFER_SIZE);
 		if (read_size <= 0)
 			break ;
 		read_str[read_size] = '\0';
-		save[fd] = ft_strjoin(&save[fd], read_str);
-		if (save[fd] == NULL)
+		(*save)[fd] = ft_strjoin((*save)[fd], read_str);
+		if ((*save)[fd] == NULL)
 			return (NULL);
 	}
-	if ((ft_strlen(save[fd]) > 0) && read_size == 0)
-		return (save[fd]);
+	if ((ft_strlen((*save)[fd]) > 0) && read_size == 0)
+		return ((*save)[fd]);		
 	return (NULL);
 }
 
@@ -47,6 +44,7 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	char	*next_line;
 	char	*tmp;
 
+	// **save lldb, leaks
 	next_line = ft_substr(*save, 0, newline_idx + 1);
 	if (next_line == NULL)
 	{
@@ -58,10 +56,12 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	// printf("*save + newline_idx + 1 : %s \n", (*save + newline_idx + 1));
 	tmp = ft_strdup(*save + newline_idx + 1);
 	//printf("tmp : %s\n", tmp);
+	//hello\nworld
 	free(*save);
 	if (tmp == NULL)
 	{
 		free(next_line);
+		*save = NULL;
 		return (NULL);
 	}
 	*save = tmp;
@@ -70,7 +70,7 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	return (next_line);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	k;
@@ -90,7 +90,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	j;
