@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 23:59:29 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:40:01 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*dst;
 	size_t	s1_size;
 	size_t	s2_size;
-
-	s1_size = ft_strlen(s1);
-	s2_size = ft_strlen(s2);
+	
 	if (s2 == NULL)
 		return (NULL);
 	if (s1 == NULL)
@@ -39,7 +37,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = ft_strdup("");
 		if (s1 == NULL)
 			return (NULL);
-	}	
+	}
+	s1_size = ft_strlen(s1);
+	s2_size = ft_strlen(s2);
 	dst = (char *)malloc(sizeof(char) * (s1_size + s2_size + 1));
 	if (dst == NULL)
 	{
@@ -111,5 +111,7 @@ int	ft_strchr(char *s, int c)
 	}
 	if (s[idx] == (char)c)
 		return (idx);
+	printf("s in strchr : %s\n", s);
+	printf("s size in strchr : %zu\n", ft_strlen(s));
 	return (-1);
 }

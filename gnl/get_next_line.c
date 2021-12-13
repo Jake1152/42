@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/14 00:00:20 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:56:17 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,26 @@ char	*get_next_line(int fd)
 			return (NULL);
 	}
 	if ((ft_strlen(save[fd]) > 0) && read_size == 0)
-		return (save[fd]);		
+	{
+		// printf("save[fd] : %s\n", save[fd]);
+		return (return_remain(&save[fd]));
+	}
+	// printf("save[fd] before return NULL : %s\n", save[fd]);
 	return (NULL);
+}
+
+char	*return_remain(char **save)
+{
+	char	*ret;
+
+	if (*save == NULL || save == NULL)
+		return (NULL);
+	ret = ft_strdup(*save);
+	if (ret == NULL)
+		return (NULL);
+	free(*save);
+	*save = NULL;
+	return (ret);
 }
 
 char	*get_next_line_from_save(char **save, int newline_idx)
