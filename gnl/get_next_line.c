@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 10:29:24 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/13 10:43:03 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		return (NULL);
 	}
 	// tmp = ft_substr(*save, newline_idx + 1, ft_strlen(*save) - (newline_idx + 1));
-	tmp = ft_strdup(*save + newline_idx);
+	printf("*save + newline_idx + 1 : %s \n", (*save + newline_idx + 1));
+	tmp = ft_strdup(*save + newline_idx + 1);
 	//printf("tmp : %s\n", tmp);
 	free(*save);
 	if (tmp == NULL)
@@ -62,9 +63,9 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		free(next_line);
 		return (NULL);
 	}
-	*save = tmp;
-	free(tmp);
-	//printf("*save : %s\n", *save);
+	save = &tmp;
+	// free(tmp);
+	printf("*save : %s\n", *save);
 	return (next_line);
 }
 
@@ -86,32 +87,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	dst[k] = '\0';
 	return (i);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-	size_t			i;
-
-	if (s1 == NULL || s2 == NULL)
-		return (-1);
-	i = 0;
-	while (i++ < n)
-	{
-		c1 = *s1++;
-		c2 = *s2++;
-		if (c1 != c2)
-		{
-			if (c1 < c2)
-				return (-1);
-			else
-				return (1);
-		}
-		if (!c1)
-			break ;
-	}
-	return (0);
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
