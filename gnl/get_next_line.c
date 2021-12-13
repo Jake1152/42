@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 10:43:03 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/13 13:29:28 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*get_next_line(int fd)
 		newline_idx = ft_strchr(save[fd], '\n');
 		if (newline_idx >= 0)
 			return (get_next_line_from_save(&save[fd], newline_idx));
+		// ft_read_save(fd, BUFFER_SIZE);
 		read_size = read(fd, read_str, BUFFER_SIZE);
 		if (read_size <= 0)
 			break ;
@@ -54,7 +55,7 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		return (NULL);
 	}
 	// tmp = ft_substr(*save, newline_idx + 1, ft_strlen(*save) - (newline_idx + 1));
-	printf("*save + newline_idx + 1 : %s \n", (*save + newline_idx + 1));
+	// printf("*save + newline_idx + 1 : %s \n", (*save + newline_idx + 1));
 	tmp = ft_strdup(*save + newline_idx + 1);
 	//printf("tmp : %s\n", tmp);
 	free(*save);
@@ -63,9 +64,9 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		free(next_line);
 		return (NULL);
 	}
-	save = &tmp;
+	*save = tmp;
 	// free(tmp);
-	printf("*save : %s\n", *save);
+	// printf("*save : %s\n", *save);
 	return (next_line);
 }
 

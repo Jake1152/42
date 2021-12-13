@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 10:53:31 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/13 13:30:21 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ char	*ft_strjoin(char **s1, char const *s2)
 	ft_strlcpy(dst, *s1, s1_size + 1);
 	free(*s1);
 	ft_strlcat(dst, s2, s1_size + s2_size + 1);
-	printf("dst : %s \n", dst);
-	printf("dst len : %zu \n", ft_strlen(dst));
+	// printf("dst : %s \n", dst);
+	// printf("dst len : %zu \n", ft_strlen(dst));
 	return (dst);
 }
 
@@ -83,8 +83,8 @@ char	*ft_strdup(const char *s1)
 	if (s1 == NULL)
 		return (NULL);
 	s1_size = ft_strlen(s1);
-	printf("s1 string in dup : %s\n", s1);
-	printf("s1 size : %zu\n", s1_size);
+	// printf("s1 string in dup : %s\n", s1);
+	// printf("s1 size : %zu\n", s1_size);
 	dest = (char *)malloc(sizeof(char) * (s1_size + 1));
 	if (dest == NULL)
 		return (NULL);
@@ -95,6 +95,7 @@ char	*ft_strdup(const char *s1)
 		idx++;
 	}
 	dest[idx] = 0;
+	// printf("s1 string in dup : %s\n", s1);
 	return (dest);
 }
 
