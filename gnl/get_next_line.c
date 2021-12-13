@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/13 14:33:02 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:00:20 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,33 @@
 
 char	*get_next_line(int fd)
 {
-	static char	(*save)[FD_SIZE];
+	static char	*save[OPEN_MAX];
 	int			newline_idx;
 	char		read_str[BUFFER_SIZE + 1];
 	int			read_size;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || fd >= FD_SIZE)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	while (TRUE)
 	{
+		//printf("save[fd] : %s\n", save[fd]);
+		// &(save[0]) = "asdfsdafd"
+		// save[1] = "123234235235"
 		newline_idx = ft_strchr(save[fd], '\n');
 		if (newline_idx >= 0)
-			return (get_next_line_from_save((*save)[fd], newline_idx));
+			return (get_next_line_from_save(&save[fd], newline_idx));
+			// &(save[0])
+		// ft_read_save(fd, BUFFER_SIZE);
 		read_size = read(fd, read_str, BUFFER_SIZE);
 		if (read_size <= 0)
 			break ;
 		read_str[read_size] = '\0';
-		(*save)[fd] = ft_strjoin((*save)[fd], read_str);
-		if ((*save)[fd] == NULL)
+		save[fd] = ft_strjoin(save[fd], read_str);
+		if (save[fd] == NULL)
 			return (NULL);
 	}
-	if ((ft_strlen((*save)[fd]) > 0) && read_size == 0)
-		return ((*save)[fd]);		
+	if ((ft_strlen(save[fd]) > 0) && read_size == 0)
+		return (save[fd]);		
 	return (NULL);
 }
 
@@ -61,7 +66,6 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	if (tmp == NULL)
 	{
 		free(next_line);
-		*save = NULL;
 		return (NULL);
 	}
 	*save = tmp;
