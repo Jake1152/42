@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:32:31 by jim               #+#    #+#             */
-/*   Updated: 2021/12/14 00:54:45 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/14 01:09:07 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd);
 char	*get_next_line_from_save(char **save, int newline_idx);
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
-char	*return_remain(char **save);
+char	*return_remain(char **save, int read_siz);
 /* util */
 size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);

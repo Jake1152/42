@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/14 01:04:04 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/14 01:12:01 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,30 @@ char	*get_next_line(int fd)
 		save[fd] = ft_strjoin(save[fd], read_str);
 		if (save[fd] == NULL)
 			return (NULL);
-	}
-	if ((ft_strlen(save[fd]) > 0) && read_size == 0)
-		return (return_remain(&save[fd]));
-	return (NULL);
+	}	
+	return (return_remain(&save[fd], read_size));
 }
 
-char	*return_remain(char **save)
+char	*return_remain(char **save, int read_size)
 {
 	char	*ret;
 
 	if (*save == NULL || save == NULL)
 		return (NULL);
-	ret = ft_strdup(*save);
-	if (ret == NULL)
+	ret = NULL;
+	if ((ft_strlen(*save) > 0) && read_size == 0)
 	{
-		free(*save);
-		*save = NULL;
-		return (NULL);
+		ret = ft_strdup(*save);
+		if (ret == NULL)
+		{
+			free(*save);
+			*save = NULL;
+			return (NULL);
+		}
 	}
 	free(*save);
 	*save = NULL;
-	return (ret);
+	return (ret);	
 }
 
 char	*get_next_line_from_save(char **save, int newline_idx)
@@ -74,6 +76,7 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	if (tmp == NULL)
 	{
 		free(next_line);
+		*save = NULL;
 		return (NULL);
 	}
 	*save = tmp;
