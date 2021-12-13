@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/14 00:56:17 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/14 01:04:04 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,9 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (TRUE)
 	{
-		//printf("save[fd] : %s\n", save[fd]);
-		// &(save[0]) = "asdfsdafd"
-		// save[1] = "123234235235"
 		newline_idx = ft_strchr(save[fd], '\n');
 		if (newline_idx >= 0)
 			return (get_next_line_from_save(&save[fd], newline_idx));
-			// &(save[0])
-		// ft_read_save(fd, BUFFER_SIZE);
 		read_size = read(fd, read_str, BUFFER_SIZE);
 		if (read_size <= 0)
 			break ;
@@ -40,11 +35,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 	}
 	if ((ft_strlen(save[fd]) > 0) && read_size == 0)
-	{
-		// printf("save[fd] : %s\n", save[fd]);
 		return (return_remain(&save[fd]));
-	}
-	// printf("save[fd] before return NULL : %s\n", save[fd]);
 	return (NULL);
 }
 
@@ -56,7 +47,11 @@ char	*return_remain(char **save)
 		return (NULL);
 	ret = ft_strdup(*save);
 	if (ret == NULL)
+	{
+		free(*save);
+		*save = NULL;
 		return (NULL);
+	}
 	free(*save);
 	*save = NULL;
 	return (ret);
@@ -67,7 +62,6 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	char	*next_line;
 	char	*tmp;
 
-	// **save lldb, leaks
 	next_line = ft_substr(*save, 0, newline_idx + 1);
 	if (next_line == NULL)
 	{
@@ -75,11 +69,7 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		*save = NULL;
 		return (NULL);
 	}
-	// tmp = ft_substr(*save, newline_idx + 1, ft_strlen(*save) - (newline_idx + 1));
-	// printf("*save + newline_idx + 1 : %s \n", (*save + newline_idx + 1));
 	tmp = ft_strdup(*save + newline_idx + 1);
-	//printf("tmp : %s\n", tmp);
-	//hello\nworld
 	free(*save);
 	if (tmp == NULL)
 	{
@@ -87,8 +77,6 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 		return (NULL);
 	}
 	*save = tmp;
-	// free(tmp);
-	// printf("*save : %s\n", *save);
 	return (next_line);
 }
 

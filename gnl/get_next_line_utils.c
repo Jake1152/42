@@ -6,7 +6,7 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
-/*   Updated: 2021/12/14 00:40:01 by jake             ###   ########.fr       */
+/*   Updated: 2021/12/14 01:04:14 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ char	*ft_strdup(char *s1)
 	if (s1 == NULL)
 		return (NULL);
 	s1_size = ft_strlen(s1);
-	// printf("s1 string in dup : %s\n", s1);
-	// printf("s1 size : %zu\n", s1_size);
 	dest = (char *)malloc(sizeof(char) * (s1_size + 1));
 	if (dest == NULL)
 		return (NULL);
@@ -92,7 +90,6 @@ char	*ft_strdup(char *s1)
 		idx++;
 	}
 	dest[idx] = 0;
-	// printf("s1 string in dup : %s\n", s1);
 	return (dest);
 }
 
@@ -111,7 +108,5 @@ int	ft_strchr(char *s, int c)
 	}
 	if (s[idx] == (char)c)
 		return (idx);
-	printf("s in strchr : %s\n", s);
-	printf("s size in strchr : %zu\n", ft_strlen(s));
 	return (-1);
 }
