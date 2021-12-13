@@ -6,11 +6,11 @@
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/14 01:30:22 by jim              ###   ########.fr       */
+/*   Updated: 2021/12/14 01:29:42 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
