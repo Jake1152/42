@@ -1,10 +1,6 @@
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
-{
-	int		return_size;
-	va_list	ap;
-	/*
+/*
 		0. specifier or just string 
 		   printf("hello \nwolrd, %s hi?, nice to meet you? \n\n Hi my name is %s I'm in %d\n\n", name1, name2, num);
 		1.  just string
@@ -18,10 +14,18 @@ int	ft_printf(const char *format, ...)
 		ap는 어떻게 처리하는가?
 		printf("%d %d %d", num1, num2, num3);
 		즉 arguments들을 va_ function들을 사용하여 처리하여야하는데 어떻게 하는가?
-	*/
+*/
+
+int	ft_printf(const char *format, ...)
+{
+	int		return_size;
+	va_list	ap;
+
+	va_start(ap, format);
 	while (*format != '\0')
 	{
-		format = ;
+		
+		format++;
 	}
 	return (return_size);
 }
