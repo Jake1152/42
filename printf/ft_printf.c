@@ -15,17 +15,39 @@
 		printf("%d %d %d", num1, num2, num3);
 		즉 arguments들을 va_ function들을 사용하여 처리하여야하는데 어떻게 하는가?
 */
+int main()
+{
+	ft_printf("test\nsentence\n");
+	ft_printf("%c %c", 'a', 'b');
+	return (0);
+}
 
 int	ft_printf(const char *format, ...)
 {
 	int		return_size;
 	va_list	ap;
 
+	return_size = 0;
 	va_start(ap, format);
 	while (*format != '\0')
 	{
+		if (format == '%')
+		{
+			format++;
+			if (format == 'c')
+			{
+				ap
+			}
+			// va_arg(ap, int);
+		}
+		else
+		{
+			write(1, format, 1);
+			return_size++;
+		}
 		
 		format++;
 	}
+	va_end(ap);
 	return (return_size);
 }
