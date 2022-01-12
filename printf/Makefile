@@ -17,7 +17,15 @@ RM = rm -f
 AR = ar
 ARFLAGS = crs
 INCLUDES= ./printf.h
-SRCS = ft_printf.c
+SRCS = ft_printf.c		\
+		ft_print_utills.c
+		ft_print_c.c		\
+		ft_print_s.c		\
+		ft_print_d.c		\
+		ft_print_u.c		\
+		ft_print_x.c		\
+		ft_print_p.c		\
+		ft_print_u.c
 
 OBJS = $(SRCS:.c=.o)
 
