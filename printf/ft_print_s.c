@@ -10,19 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdarg.h>
+#include "ft_printf.h"
 
-int	ft_putstr(va_list ap)
+int	ft_print_str(va_list ap)
 {
 	char	*s;
-	int		print_size;
+
+	s = va_arg(ap, char *);
+	return (ft_putstr_fd(s, 1));
+}
+
+int	ft_putstr_fd(char *s, int fd)
+{
+	int	print_size;
 
 	print_size = 0;
-	s = va_arg(ap, char *);
 	while (*s)
 	{
-		write(1, s++, 1);
+		ft_putchar_fd(*s++, fd);
 		print_size++;
 	}
 	return (print_size);

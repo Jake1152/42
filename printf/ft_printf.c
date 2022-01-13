@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+#include <stdio.h> // should be removed
 
 /*
 		0. specifier or just string 
@@ -63,26 +63,29 @@ int	ft_printf(const char *format, ...)
 	return (return_size);
 }
 
-int	print_specific(va_list ap, char *format)
+int	print_specific(va_list ap, const char *format)
 {
 	int	char_size;
 
 	format++;
 	if (*format == 'c')
-		char_size = ft_putchar(ap);
+		char_size = ft_print_char(ap);
 	else if (*format == 's')
-		;
+		char_size = ft_print_str(ap);
 	else if (*format == 'd' || *format == 'i')
-		;
+		char_size = ft_print_decimal(ap);
 	else if (*format == 'u')
-		;
+		char_size = ft_print_unsigned_decimal(ap);
 	else if (*format == 'p')
-		;
+		char_size = ft_print_address(ap);
 	else if (*format == 'x')
-		;
+		char_size = ft_print_hex_lower(ap);
 	else if (*format == 'X')
-		;
+		char_size = ft_print_hex_upper(ap);
 	else if (*format == '%')
-		write(1, '%', 1); // *str이었던거 같은데 '%'가 가능한가?
+	{
+		write(1, '%', 1);
+		char_size++;
+	}
 	return (char_size);
 }

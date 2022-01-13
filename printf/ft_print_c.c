@@ -10,14 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdarg.h>
+#include "ft_printf.h"
 
-int	ft_putchar(va_list ap)
+int	ft_print_char(va_list ap)
 {
-	char	c;
+	char	ch;
 
-	c = va_arg(ap, int);
-	write(1, &c, 1);
+	ch = va_arg(ap, int);
+	ft_putchar_fd(ch, 1);
 	return (1);
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
 }
