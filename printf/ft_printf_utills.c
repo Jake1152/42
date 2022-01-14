@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_utills.c                                  :+:      :+:    :+:   */
+/*   ft_printf_utills.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:45:09 by jim               #+#    #+#             */
-/*   Updated: 2022/01/12 16:45:09 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/01/14 16:37:01 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_toupper(int c)
 	return (c);
 }
 
-static size_t   count_digits(int n, int base)
+static size_t   count_digits(long long n, int base)
 {
 	size_t	expo;		
 
@@ -61,9 +61,9 @@ int	ft_itoa_base(long long num, int base_num)
 	base = "0123456789abcdef";
 	if (num == 0)
 		return (ft_putstr_fd("0", 1));
-	digits = count_digits(num, base_num);
 	if (base_num != 10 && num < 0)
-		nb = ULLONG_MAX;
+		num = (unsigned int)num;
+	digits = count_digits(num, base_num);
 	if (num < 0)
 	{
 		num = -num;
