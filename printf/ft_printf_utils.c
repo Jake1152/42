@@ -47,7 +47,7 @@ static size_t	count_digits(long long n, int base)
 int	ft_itoa_base(long long num, int base_num, char *base)
 {
 	size_t			digits;
-	char			to_be_s[20];
+	char			to_be_s[21];
 
 	if (num == 0)
 		return (ft_putstr_fd("0", 1));
@@ -73,7 +73,7 @@ int	ft_itoa_base(long long num, int base_num, char *base)
 int	ft_itoa_base_unsigned(unsigned int num, int base_num, char *base)
 {
 	size_t			digits;
-	char			to_be_s[20];
+	char			to_be_s[21];
 
 	if (num == 0)
 		return (ft_putstr_fd("0", 1));

@@ -22,5 +22,6 @@ int	ft_print_address(va_list ap)
 	num = va_arg(ap, int);
 	base = "0123456789abcdef";
 	print_size += ft_putstr_fd("0x", 1);
-	return (ft_itoa_base_unsigned(num, 16, base));
+	print_size += ft_itoa_base_unsigned(num, 16, base);
+	return (print_size);
 }
