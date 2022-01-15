@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <limits.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -69,7 +68,7 @@ int	ft_itoa_base(long long num, int base_num, char *base, char format)
 
 	if (num == 0)
 		return (ft_putstr_fd("0", 1));
-	if (format == 'u' || format == 'x' || format == 'X')
+	if (format == 'x' || format == 'X')
 		num = (unsigned int)num;
 	else if (format == 'p')
 		num = (unsigned long)num;
@@ -90,16 +89,16 @@ int	ft_itoa_base(long long num, int base_num, char *base, char format)
 	return (ft_putstr_fd(to_be_s, 1));
 }
 
-int	ft_itoa_base_un(unsigned long num, int base_num, char *base, char format)
+int	ft_itoa_base_u(unsigned long num, int base_num, char *base, char form)
 {
 	size_t			digits;
 	char			to_be_s[21];
 
 	if (num == 0)
 		return (ft_putstr_fd("0", 1));
-	if (format == 'u')
+	if (form == 'u')
 		num = (unsigned int)num;
-	else if (format == 'p')
+	else if (form == 'p')
 		num = (unsigned long)num;
 	digits = count_digits_un(num, base_num);
 	to_be_s[digits] = '\0';

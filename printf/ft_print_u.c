@@ -19,5 +19,5 @@ int	ft_print_unsigned_decimal(va_list ap)
 
 	num = va_arg(ap, int);
 	base = "0123456789";
-	return (ft_itoa_base(num, 10, base, 'u'));
+	return (ft_itoa_base_u(num, 10, base, 'u'));
 }

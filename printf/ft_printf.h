@@ -21,8 +21,7 @@ int		print_specific(va_list ap, const char *format);
 /* utils */
 size_t	ft_strlen(const char *str);
 int		ft_itoa_base(long long num, int base_num, char *base, char format);
-int		ft_itoa_base_un(unsigned long num, int base_num, char *base, char format);
-// itoa_base, dec, hex, pointer에 쓰일 예정, util에 넣는게 맞는가?
+int		ft_itoa_base_u(unsigned long num, int base_num, char *base, char form);
 /* specifier */
 /* char */
 int		ft_print_char(va_list ap);
