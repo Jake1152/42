@@ -6,7 +6,7 @@
 #    By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 19:26:38 by jim               #+#    #+#              #
-#    Updated: 2021/09/13 21:37:58 by jim              ###   ########seoul.kr   #
+#    Updated: 2022/01/04 18:32:21 by jim              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,10 @@ fclean : clean
 	$(RM) $(NAME)
 
 re : fclean all
+
+bonuse : 
+
+$(CC) $(CFLAG) -c $< -o $@
 
 $(NAME) : $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
