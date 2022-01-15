@@ -58,7 +58,7 @@ int	print_specific(va_list ap, const char *format)
 		char_size = ft_print_hex_upper(ap);
 	else if (*format == '%')
 	{
-		write(1, &"%", 1);
+		ft_putstr_fd("%", 1);
 		char_size++;
 	}
 	return (char_size);
