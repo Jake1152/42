@@ -44,6 +44,24 @@ static size_t	count_digits(long long n, int base)
 	return (expo);
 }
 
+static size_t	count_digits_in(unsigned long n, int base)
+{
+	size_t	expo;		
+
+	expo = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		expo++;
+	}
+	while (n)
+	{
+		expo++;
+		n /= base;
+	}
+	return (expo);
+}
+
 int	ft_itoa_base(long long num, int base_num, char *base, char format)
 {
 	size_t			digits;
