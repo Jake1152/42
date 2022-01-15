@@ -14,9 +14,9 @@
 
 int	ft_print_address(va_list ap)
 {
-	int		num;
-	char	*base;
-	int		print_size;
+	unsigned long	num;
+	char			*base;
+	int				print_size;
 
 	print_size = 0;
 	num = va_arg(ap, int);
