@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <limits.h>
+
+static size_t   count_digits(long long n, int base);
+int	ft_itoa_base(long long num, int base_num);
+int	ft_putstr_fd(char *s, int fd);
+
+int main()
+{
+    long long a = 9223372036854775807LL;
+	// int a = -42;
+	// int a = -42;
+    int base_num = 16;
+
+    // printf("%%d: %d\n%%p: %p\n%%x: %x\n", a, &a, a);
+    // printf("\n\n");
+    // printf("%%d: %d\n%%p: %x\n%%llx: %d\n", a, &a, a);
+
+    printf("o : %llo\n", a);
+    printf("x : %llx\nX : %llX\n", a, a);	
+	printf("p : %p\n", a);
+	printf("p, real: %p\n", &a);
+    printf("d : %lld\n", a);
+	printf("u : %llu\n", a);
+	ft_itoa_base(a, 8);
+	printf("\n");
+    ft_itoa_base(a, base_num);
+	printf("\n");
+    return (0);
+}
+
+static size_t	count_digits(long long n, int base)
+{
+	size_t	expo;		
+
+	expo = 0;
+	if (n < 0)
+	{
+		n *= -1;
+		expo++;
+	}
+	while (n)
+	{
+		expo++;
+		n /= base;
+	}
+	return (expo);
+}
+
+int	ft_itoa_base(long long num, int base_num)
+{
+	size_t			digits;
+	char			*base;
+	char			to_be_s[20];
+	unsigned long	nb;
+
+	base = "0123456789abcdef";
+	if (num == 0)
+		return (ft_putstr_fd("0", 1));
+	if (base_num != 10 && num < 0)
+		num = (unsigned int)num;
+	digits = count_digits(num, base_num);
+	if (num < 0)
+	{
+		num = -num;
+		to_be_s[0] = '-';
+	}
+	to_be_s[digits] = '\0';
+	digits--;
+	while (num)
+	{
+		to_be_s[digits] = base[num % base_num];
+		digits--;
+		num /= base_num;
+	}
+	return (ft_putstr_fd(to_be_s, 1));
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+int	ft_putstr_fd(char *s, int fd)
+{
+	int	print_size;
+
+	print_size = 0;
+	while (*s)
+	{
+		ft_putchar_fd(*s++, fd);
+		print_size++;
+	}
+	return (print_size);
+}
+

@@ -18,7 +18,7 @@ AR = ar
 ARFLAGS = crs
 INCLUDES= ./printf.h
 SRCS = ft_printf.c		\
-		ft_print_utills.c
+		ft_printf_utils.c	\
 		ft_print_c.c		\
 		ft_print_s.c		\
 		ft_print_d.c		\
@@ -42,9 +42,7 @@ fclean : clean
 
 re : fclean all
 
-bonuse : 
-
-$(CC) $(CFLAG) -c $< -o $@
-
 $(NAME) : $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
+
+.phony: all clean fclean re
