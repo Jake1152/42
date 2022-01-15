@@ -28,7 +28,7 @@ size_t	ft_strlen(const char *str)
 
 static size_t	count_digits(long long n, int base)
 {
-	size_t	expo;		
+	size_t	expo;
 
 	expo = 0;
 	if (n < 0)
@@ -44,9 +44,9 @@ static size_t	count_digits(long long n, int base)
 	return (expo);
 }
 
-static size_t	count_digits_in(unsigned long n, int base)
+static size_t	count_digits_un(unsigned long n, int base)
 {
-	size_t	expo;		
+	size_t	expo;
 
 	expo = 0;
 	if (n < 0)
@@ -101,7 +101,7 @@ int	ft_itoa_base_un(unsigned long num, int base_num, char *base, char format)
 		num = (unsigned int)num;
 	else if (format == 'p')
 		num = (unsigned long)num;
-	digits = count_digits(num, base_num);
+	digits = count_digits_un(num, base_num);
 	to_be_s[digits] = '\0';
 	digits--;
 	while (num)
