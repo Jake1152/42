@@ -20,8 +20,7 @@ int		ft_printf(const char *format, ...);
 int		print_specific(va_list ap, const char *format);
 /* utils */
 size_t	ft_strlen(const char *str);
-int		ft_itoa_base(long long num, int base_num, char *base);
-int		ft_itoa_base_unsigned(unsigned int num, int base_num, char *base);
+int		ft_itoa_base(long long num, int base_num, char *base, char format);
 // itoa_base, dec, hex, pointer에 쓰일 예정, util에 넣는게 맞는가?
 /* specifier */
 /* char */

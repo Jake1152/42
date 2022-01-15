@@ -19,7 +19,7 @@ int	ft_print_hex_upper(va_list ap)
 
 	num = va_arg(ap, int);
 	base = "0123456789ABCDEF";
-	return (ft_itoa_base(num, 16, base));
+	return (ft_itoa_base(num, 16, base, 'X'));
 }
 
 int	ft_print_hex_lower(va_list ap)
@@ -29,5 +29,5 @@ int	ft_print_hex_lower(va_list ap)
 
 	num = va_arg(ap, int);
 	base = "0123456789abcdef";
-	return (ft_itoa_base(num, 16, base));
+	return (ft_itoa_base(num, 16, base, 'x'));
 }

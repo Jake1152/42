@@ -44,40 +44,23 @@ static size_t	count_digits(long long n, int base)
 	return (expo);
 }
 
-int	ft_itoa_base(long long num, int base_num, char *base)
+int	ft_itoa_base(long long num, int base_num, char *base, char format)
 {
 	size_t			digits;
 	char			to_be_s[21];
 
 	if (num == 0)
 		return (ft_putstr_fd("0", 1));
-	if (base_num != 10 && num < 0)
+	if (format == 'u' || format == 'x' || format == 'X')
 		num = (unsigned int)num;
+	else if (format == 'p')
+		num = (unsigned long)num;
 	digits = count_digits(num, base_num);
 	if (num < 0)
 	{
 		num = -num;
 		to_be_s[0] = '-';
 	}
-	to_be_s[digits] = '\0';
-	digits--;
-	while (num)
-	{
-		to_be_s[digits] = base[num % base_num];
-		digits--;
-		num /= base_num;
-	}
-	return (ft_putstr_fd(to_be_s, 1));
-}
-
-int	ft_itoa_base_unsigned(unsigned int num, int base_num, char *base)
-{
-	size_t			digits;
-	char			to_be_s[21];
-
-	if (num == 0)
-		return (ft_putstr_fd("0", 1));
-	digits = count_digits(num, base_num);
 	to_be_s[digits] = '\0';
 	digits--;
 	while (num)

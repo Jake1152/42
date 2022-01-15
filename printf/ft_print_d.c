@@ -21,5 +21,5 @@ int	ft_print_decimal(va_list ap)
 	base = "0123456789";
 	if (num == -2147483648)
 		return (ft_putstr_fd("-2147483648", 1));
-	return (ft_itoa_base(num, 10, base));
+	return (ft_itoa_base(num, 10, base, 'd'));
 }
