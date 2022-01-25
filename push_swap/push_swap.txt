@@ -1,0 +1,38 @@
+push swap 과정
+
+stack a에 랜덤하게 값이 있다(정렬되어 있을 수도 있다.)
+stack b는 비어져 있다.
+
+input 받을때 ' '을 기준으로 파싱한다.
+파싱한 결과는 (int *)로 return 한다.
+해당 int * 배열은 double linked list로 만든다.
+
+즉, stack a는 입력값을 double linked list로 만드며
+stack b는 빈 double linked list로 만든다.
+
+- linked stack이랑 섞을 필요가 있는가?
+  - double linked list에 12개 정의된 동작만 가져가면 되는가?
+
+double linked list에 필요한 동작 및  struct member
+- double linked list struct
+    - currentcount
+    - top
+    - 
+- create
+- push
+- pop
+- isempty
+
+
+- 12개 동작 정의
+    - swap a
+    - swap b
+    - swap both
+    - push a
+    - push b
+    - rotate a
+    - rotate b
+    - rotate both
+    - reverse rotate a
+    - reverse rotate b
+    - reverse rotate both
