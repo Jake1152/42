@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:56 by jim               #+#    #+#             */
-/*   Updated: 2022/01/25 13:54:58 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/01/27 16:41:10 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 int		push_swap(char *num_str);
-int	    *parse_str_to_int_list();
+int		*parse_str_to_int_list(char *num_str);
 
 void	swap_a(int *a_stack, int *b_stack);
 void	swap_b(int *a_stack, int *b_stack);

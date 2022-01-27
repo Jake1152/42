@@ -1,11 +1,19 @@
 push swap 과정 since 25JAN22 Tue
 
-stack a에 랜덤하게 값이 있다(정렬되어 있을 수도 있다.)
-stack b는 비어져 있다.
+- stack a에 랜덤하게 값이 있다(정렬되어 있을 수도 있다.)
+-stack b는 비어져 있다.
 
 input 받을때 ' '을 기준으로 파싱한다.
 파싱한 결과는 (int *)로 return 한다.
 해당 int * 배열은 double linked list로 만든다.
+bash
+zsh
+1 2 3 " 5 4"
+
+
+
+
+
 
 즉, stack a는 입력값을 double linked list로 만드며
 stack b는 빈 double linked list로 만든다.
@@ -19,16 +27,15 @@ linked를 Circular double linked list로 사용하면 rotate연산할때 top만 
 
 double linked list에 필요한 동작 및  struct member
 - double linked list struct
-    - currentcount
+    - current count
     - top
-    - 
+
 - create
 - push
 - pop
 - isempty
 
-
-- 12개 동작 정의
+- 11개 동작 정의
     - swap a
     - swap b
     - swap both
