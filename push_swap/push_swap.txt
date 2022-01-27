@@ -1,4 +1,4 @@
-push swap 과정
+push swap 과정 since 25JAN22 Tue
 
 stack a에 랜덤하게 값이 있다(정렬되어 있을 수도 있다.)
 stack b는 비어져 있다.
@@ -12,6 +12,10 @@ stack b는 빈 double linked list로 만든다.
 
 - linked stack이랑 섞을 필요가 있는가?
   - double linked list에 12개 정의된 동작만 가져가면 되는가?
+
+rotate를 편하게 할려면 Circular double linked list가 낫다
+linked stack으로 구현하되,
+linked를 Circular double linked list로 사용하면 rotate연산할때 top만 바꾸어주면 된다.
 
 double linked list에 필요한 동작 및  struct member
 - double linked list struct
@@ -36,3 +40,27 @@ double linked list에 필요한 동작 및  struct member
     - reverse rotate a
     - reverse rotate b
     - reverse rotate both
+--------------
+대략적으로 적어보는 전체 프로그램 흐름(입력부터 정렬까지)
+
+
+- "1 6 3 2 124" 같은 형태로 입력 받는다.
+- 입력 받은 값을 int * array 형태로 변환한다.
+- stack은 circular double linked list로 생성한다.
+- 입력 받은 값은 stack a에 넣어준다.
+- stack b는 빈 값으로 만든다.
+
+- 정렬을 확인하는 함수가 있다
+    - 오름차순인지 확인
+    - stack b일때는 DESC이므로 그와 같이 확인한다.
+    - 부분의 정렬의 합이 전체의 정렬일 수 있는가?
+        - 다시한번 생각해보는 push_swap의 목적
+            - 무엇일까?
+            - 가설1. stack룰은 그져 여러 정렬알고리즘을 체험해보기 위해 있는 제한 조건이다.
+                    그렇다면 미리 기존 알고리즘으로 정렬시키고서 그 값을 pivot을 쓰거나 참고용으로 쓴다.
+            - 가설2. stack으로 한번에 정렬시키는 것까지를 목표로한다.
+                    미리 정렬시키지는 않는다.
+                    하지만 다른 정렬 알고리즘(일부 알고리즘)처럼 중간중간 현재 남아 있는 값들이 정렬되어 있는지 확인이 필요하다.
+    - 
+
+
