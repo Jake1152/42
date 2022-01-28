@@ -1,5 +1,18 @@
-#ifndef _LINKED_STACK_
-#define _LINKED_STACK_
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linkedstack.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/28 14:03:40 by jim               #+#    #+#             */
+/*   Updated: 2022/01/28 14:03:40 by jim              ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LINKEDSTACK_H
+# define LINKEDSTACK_H
+# include "doublylist.h"
 
 typedef struct StackNodeType
 {
