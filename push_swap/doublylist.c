@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/01/25 13:33:00 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/01/29 19:49:44 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include <stdlib.h>
 
 #include "doublylist.h"
-static DoublyListNode	*createDoublyListNode(int data);
-static DoublyList		*reverseLinkedList(DoublyList* pList);
+static t_DoublyListNode	*createDoublyListNode(int data);
+static t_DoublyList		*reverseLinkedList(t_DoublyList* pList);
 
 int main()
 {
-	DoublyList		*testDoublyList;
-	DoublyListNode	*addedDoublyListNode;
+	t_DoublyList		*testDoublyList;
+	t_DoublyListNode	*addedDoublyListNode;
 
 	for (int i =0; i < 5; i++)
 	{
@@ -35,9 +35,9 @@ int main()
 	return (0);
 }
 
-static DoublyListNode	*createDoublyListNode(int data)
+static t_DoublyListNode	*createDoublyListNode(int data)
 {
-	DoublyListNode *newDoublyListNode;
+	t_DoublyListNode *newDoublyListNode;
 
 	newDoublyListNode = malloc(sizeof(newDoublyListNode));
 	if (newDoublyListNode == NULL)
@@ -49,15 +49,15 @@ static DoublyListNode	*createDoublyListNode(int data)
 	return (newDoublyListNode);
 }
 
-DoublyList* createDoublyList()
+t_DoublyList* createDoublyList()
 {
 	/*
 		lLink
 		rLink
 		data초기화는?x
 	*/
-	DoublyList		*newDoublyList;
-	DoublyListNode	*newDoublyListNode;
+	t_DoublyList		*newDoublyList;
+	t_DoublyListNode	*newDoublyListNode;
 	// newDoublyListNode *가 안붙어도 되는가?
 
 	newDoublyList = malloc(sizeof(newDoublyList));
@@ -65,7 +65,7 @@ DoublyList* createDoublyList()
 	if (newDoublyList == NULL)
 		return (NULL);
 	// newDoublyList = createDoublyListNode;
-	newDoublyListNode = malloc(sizeof(DoublyListNode));
+	newDoublyListNode = malloc(sizeof(t_DoublyListNode));
 	if (newDoublyList == NULL)
 		return (NULL);
 	newDoublyListNode->pLLink = NULL;
@@ -77,9 +77,9 @@ DoublyList* createDoublyList()
 	return (newDoublyList);
 }
 
-void displayDoublyList(DoublyList* pList)
+void displayDoublyList(t_DoublyList* pList)
 {
-	DoublyListNode	*curDoublyListNode;
+	t_DoublyListNode	*curDoublyListNode;
 	// DoublyListNode	curDoublyListNode;
 	// curDoublyListNode.pLLink = &pLLink;
 
@@ -94,14 +94,14 @@ void displayDoublyList(DoublyList* pList)
 	printf("\n");
 }
 
-int getDoublyListLength(DoublyList* pList)
+int getDoublyListLength(t_DoublyList* pList)
 {
 	if (pList == NULL)
 		return (FALSE);
 	return (pList->currentElementCount);
 }
 
-DoublyListNode* getDLElement(DoublyList* pList, int position)
+t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 {
 	/*
 		양방향으로 연결 되어있으니까 어디로 접근하는게 빠를지 생각해보는것도 좋을거 같다.
@@ -112,7 +112,7 @@ DoublyListNode* getDLElement(DoublyList* pList, int position)
 	
 		position위치가 중간인지 여부를 파악해서 뒤에서부터 접근할것인지 앞에서부터 할 것인지 정한다.
 	*/
-	DoublyListNode	*curDoublyListNode;
+	t_DoublyListNode	*curDoublyListNode;
 
 	printf("in getDLElement\n\n");
 	// printf("pList->currentElementCount %d\n", pList->currentElementCount);
@@ -154,14 +154,14 @@ DoublyListNode* getDLElement(DoublyList* pList, int position)
 	return (curDoublyListNode);
 }
 
-int addDLElement(DoublyList* pList, int position, DoublyListNode element)
+int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode element)
 {
 	/*
 		position이 0이거나 마지막번째일때를 별도로 처리해줘야하는가?
 		header노드가 가리키는 곳을 바꿔야하므로 필요할 것으로 생각
 	*/
-	DoublyListNode	*prevDoublyListNode;
-	DoublyListNode	*newDoublyListNode;
+	t_DoublyListNode	*prevDoublyListNode;
+	t_DoublyListNode	*newDoublyListNode;
 
 	if (pList == NULL)
 		return (FALSE);
@@ -199,11 +199,11 @@ int addDLElement(DoublyList* pList, int position, DoublyListNode element)
 	return (pList->currentElementCount);
 }
 
-int removeDLElement(DoublyList* pList, int position)
+int removeDLElement(t_DoublyList* pList, int position)
 {
-	DoublyListNode	*prevDoublyListNode;
-	DoublyListNode	*curDoublyListNode;
-	DoublyListNode	*nextDoublyListNode;
+	t_DoublyListNode	*prevDoublyListNode;
+	t_DoublyListNode	*curDoublyListNode;
+	t_DoublyListNode	*nextDoublyListNode;
 
 	if (pList == NULL)
 		return (FALSE);
@@ -229,7 +229,7 @@ int removeDLElement(DoublyList* pList, int position)
 	return (pList->currentElementCount);
 }
 
-void deleteDoublyList(DoublyList* pList)
+void deleteDoublyList(t_DoublyList* pList)
 {
 	/*
 		- 노드하나씩 free
@@ -241,7 +241,7 @@ void deleteDoublyList(DoublyList* pList)
 	free(pList);
 }
 
-void clearDoublyList(DoublyList* pList)
+void clearDoublyList(t_DoublyList* pList)
 {
 	if (pList == NULL)
 		return (NULL);
@@ -249,7 +249,7 @@ void clearDoublyList(DoublyList* pList)
 		removeDLElement(pList, 0);
 }
 
-static DoublyList		*reverseLinkedList(DoublyList* pList)
+static t_DoublyList		*reverseLinkedList(t_DoublyList* pList)
 {
 	/*
 		- 역순으로 만든다.
@@ -258,8 +258,8 @@ static DoublyList		*reverseLinkedList(DoublyList* pList)
 			- 마지막인지 기준은 가리키는 곳이 NULL이면 마지막 노드
 		- 첫번째 노드는 NULL을 가리키게 한다.
 	*/
-	DoublyList		*reversedDoublyList;
-	DoublyListNode	*curDoublyListNode;
+	t_DoublyList		*reversedDoublyList;
+	t_DoublyListNode	*curDoublyListNode;
 
 	if (pList == NULL)
 		return (NULL);

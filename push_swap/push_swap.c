@@ -6,12 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/01/28 16:02:09 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/01/29 18:15:19 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "doublylist.h"
+#include "linkedstack.h"
 
 int	push_swap(char *num_str)
 {
@@ -27,6 +27,7 @@ int	push_swap(char *num_str)
 
 	cmd_cnt = 0;
 	a_stack = parse_str_to_int_list(num_str);
+	// int * array return 
 	if (a_stack == NULL)
 	{
 		print_error();
@@ -68,7 +69,28 @@ int	*parse_str_to_int_list(char *num_str)
 		number와 ', "까지는 인정해주며 그외에는 error 호출
 		정상적이라면 int list로 분리한다.
 	*/
-	num_str
+	int	sign;
+
+	sign = 1;
+	while (*num_str != NULL)
+	{
+		while (*num_str == '\'' || *num_str == '\"' || *num_str == ' ')
+			num_str++;
+		if (*num_str == '-' || *num_str == '+')
+		{
+			if (*num_str == '-')
+				sign = -1;
+			num_str++;
+		}
+		while ('0' <= num_str && num_str <= '9')
+			;
+		else // error case
+		{
+			/* code */
+		}
+		
+		num_str++;
+	}
 	return (1);
 }
 
@@ -94,8 +116,21 @@ int	main(int argc, char *argv[])
 		그런데 defence가 될것인가? 그게 당연한가?
 		모르겠다.
 		zsh기준이 나을 것이라 생각
+
+		1. argc 갯수를 통해 error 체크
+		2. argv로 넘어오는 값들 parsing
+		3. 여러개가 넘어오면 arguments가 여러개이다. 이런 경우 int * array의 size를 어떻게 처리할 것인가?
+		   
 	*/
 	if (argc == 0)
 		print_error();
+	/*
+		int *로 만들때 어떻게 할 것인지
+		몇개가 될지 모른다.
+		최종적으로 linked stack으로 만들 것인데 중간에 int *과정을 거쳐야하는가?
+		처음부터 init()으로 stack a,b를 만든다.(linked list type)
+		이후에 파싱하면서 파싱 된 애들은 바로 node로 추가한다.
+		중간에 파싱 error  나면 이전에 할당한것 모두 free하고서 Error\n출력하고서 exit() 한다.
+	*/
 	return (0);
 }
