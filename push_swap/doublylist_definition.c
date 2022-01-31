@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doublylist.c                                       :+:      :+:    :+:   */
+/*   doublylist_definition.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/01/29 19:49:44 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/01/31 17:55:59 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> // should be removed
 #include "doublylist.h"
 
+
 int main()
 {
 	t_DoublyList		*testDoublyList;
 	t_DoublyListNode	*addedDoublyListNode;
 
+	testDoublyList = createDoublyList();
 	for (int i =0; i < 5; i++)
 	{
 		addedDoublyListNode = createDoublyListNode(i);
-		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, *addedDoublyListNode));
+		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
 		displayDoublyList(testDoublyList);
 	}
 	
@@ -31,7 +33,7 @@ int main()
 	return (0);
 }
 
-static t_DoublyListNode	*createDoublyListNode(int data)
+t_DoublyListNode	*createDoublyListNode(int data)
 {
 	t_DoublyListNode *newDoublyListNode;
 
@@ -72,7 +74,7 @@ void deleteDoublyList(t_DoublyList* pList)
 void clearDoublyList(t_DoublyList* pList)
 {
 	if (pList == NULL)
-		return (NULL);
+		return ;
 	while (pList->currentElementCount != 0)
 		removeDLElement(pList, 0);
 }

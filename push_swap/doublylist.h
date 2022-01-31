@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:05 by jim               #+#    #+#             */
-/*   Updated: 2022/01/29 19:45:45 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/01/31 17:48:52 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 // file name 구분 definition, manipulation
 typedef struct s_DoublyListNodeType
 {
-	int						data;
-	t_DoublyListNode		*pLLink;
-	t_DoublyListNode		*pRLink;
+	int				data;
+	struct s_DoublyListNodeType	*pLLink;
+	struct s_DoublyListNodeType	*pRLink;
 }				t_DoublyListNode;
 
 typedef struct s_DoublyListType
 {
-	int						currentElementCount;
+	int				currentElementCount;
 	t_DoublyListNode		*headerNode;
 }				t_DoublyList;
 

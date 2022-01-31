@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doublylist.c                                       :+:      :+:    :+:   */
+/*   doublylist_manipulation.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/01/29 19:49:44 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/01/31 18:21:49 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void displayDoublyList(t_DoublyList* pList)
 	// curDoublyListNode.pLLink = &pLLink;
 	if (pList == NULL)
 		exit(EXIT_FAILURE);
-	curDoublyListNode = &(pList->headerNode);
+	curDoublyListNode = pList->headerNode;
 	while (curDoublyListNode)
 	{
-		printf("%d ", curDoublyListNode->data);
+		printf("current data is : %d", curDoublyListNode->data);
 		curDoublyListNode = curDoublyListNode->pRLink;
 	}
 	printf("\n");
@@ -63,7 +63,7 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 	}
 	printf("pList->currentElementCount %d\n", pList->currentElementCount);
 	// headerNode의 주소값을 가지고 있게해도 되는가?
-	curDoublyListNode = &(pList->headerNode);
+	curDoublyListNode = pList->headerNode;
 	// 왼쪽에서 오른쪽으로 순회  start to mid
 	if (position < (pList->currentElementCount-1)/2)
 	{
@@ -116,6 +116,7 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 	else
 		prevDoublyListNode = getDLElement(pList, position - 1);
 	printf("after assign prevNode\n");
+	printf("prevNode data is : %d\n", prevDoublyListNode->data);
 	newNode->pLLink = prevDoublyListNode;
 	printf("after assign pLLink\n");
 	newNode->pRLink = prevDoublyListNode->pRLink;
@@ -155,3 +156,4 @@ int removeDLElement(t_DoublyList* pList, int position)
 	pList->currentElementCount--;
 	return (pList->currentElementCount);
 }
+
