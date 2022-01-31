@@ -16,14 +16,14 @@
 
 typedef struct StackNodeType
 {
-	char data;
-	struct StackNodeType* pLink;
+	char 					data;
+	struct StackNodeType	*pLink;
 } StackNode;
 
 typedef struct LinkedStackType
 {
-	int currentElementCount;	// ���� ������ ����
-	StackNode* pTopElement;		// Top ����� ������
+	int 				currentElementCount;
+	struct StackNode	*pTopElement;
 } LinkedStack;
 
 LinkedStack* createLinkedStack();

@@ -14,30 +14,31 @@
 # define DOUBLYLIST_H
 # include <stdlib.h>
 
-// file name 구분 define, manipulation
-
+// file name 구분 definition, manipulation
 typedef struct s_DoublyListNodeType
 {
-	int							data;
-	struct t_DoublyListNode		*pLLink;
-	struct t_DoublyListNode		*pRLink;
+	int						data;
+	t_DoublyListNode		*pLLink;
+	t_DoublyListNode		*pRLink;
 }				t_DoublyListNode;
 
 typedef struct s_DoublyListType
 {
 	int						currentElementCount;
-	t_DoublyListNode		headerNode;
+	t_DoublyListNode		*headerNode;
 }				t_DoublyList;
 
 t_DoublyList		*createDoublyList(void);
+t_DoublyListNode	*createDoublyListNode(int data);
 void				deleteDoublyList(t_DoublyList *pList);
-int					addDLElement(t_DoublyList *pList, int position, \
-					t_DoublyList element);
-int 				removeDLElement(t_DoublyList* pList, int position);
 void 				clearDoublyList(t_DoublyList* pList);
+
+int					addDLElement(t_DoublyList* pList, int position, \
+								t_DoublyListNode *newNode);
+int					removeDLElement(t_DoublyList* pList, int position);
 int					getDoublyListLength(t_DoublyList* pList);
 t_DoublyListNode	*getDLElement(t_DoublyList* pList, int position);
-void 				displayDoublyList(t_DoublyList* pList);
+void				displayDoublyList(t_DoublyList* pList);
 
 #endif
 

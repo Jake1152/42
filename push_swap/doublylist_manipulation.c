@@ -11,78 +11,13 @@
 /* ************************************************************************** */
 
 #include <stdio.h> // should be removed
-#include <stdlib.h>
-
 #include "doublylist.h"
-static t_DoublyListNode	*createDoublyListNode(int data);
-static t_DoublyList		*reverseLinkedList(t_DoublyList* pList);
-
-int main()
-{
-	t_DoublyList		*testDoublyList;
-	t_DoublyListNode	*addedDoublyListNode;
-
-	for (int i =0; i < 5; i++)
-	{
-		addedDoublyListNode = createDoublyListNode(i);
-		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, *addedDoublyListNode));
-		displayDoublyList(testDoublyList);
-	}
-	
-	printf("\n\ntestDoublyList->headerNode.data %d\n", testDoublyList->headerNode.data);
-	displayDoublyList(testDoublyList);
-
-	return (0);
-}
-
-static t_DoublyListNode	*createDoublyListNode(int data)
-{
-	t_DoublyListNode *newDoublyListNode;
-
-	newDoublyListNode = malloc(sizeof(newDoublyListNode));
-	if (newDoublyListNode == NULL)
-		return (NULL);
-	newDoublyListNode->pRLink = NULL;
-	newDoublyListNode->pLLink = NULL;
-	newDoublyListNode->data = data;
-
-	return (newDoublyListNode);
-}
-
-t_DoublyList* createDoublyList()
-{
-	/*
-		lLink
-		rLink
-		data초기화는?x
-	*/
-	t_DoublyList		*newDoublyList;
-	t_DoublyListNode	*newDoublyListNode;
-	// newDoublyListNode *가 안붙어도 되는가?
-
-	newDoublyList = malloc(sizeof(newDoublyList));
-	// newDoublyList = (DoublyList *)malloc(sizeof(newDoublyList));
-	if (newDoublyList == NULL)
-		return (NULL);
-	// newDoublyList = createDoublyListNode;
-	newDoublyListNode = malloc(sizeof(t_DoublyListNode));
-	if (newDoublyList == NULL)
-		return (NULL);
-	newDoublyListNode->pLLink = NULL;
-	newDoublyListNode->pRLink = NULL;
-	//  동적할당을 해주어야하는가?
-	newDoublyList->headerNode = *newDoublyListNode;
-	newDoublyList->currentElementCount = 0;
-
-	return (newDoublyList);
-}
 
 void displayDoublyList(t_DoublyList* pList)
 {
 	t_DoublyListNode	*curDoublyListNode;
 	// DoublyListNode	curDoublyListNode;
 	// curDoublyListNode.pLLink = &pLLink;
-
 	if (pList == NULL)
 		exit(EXIT_FAILURE);
 	curDoublyListNode = &(pList->headerNode);
@@ -154,48 +89,43 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 	return (curDoublyListNode);
 }
 
-int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode element)
+int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 {
 	/*
 		position이 0이거나 마지막번째일때를 별도로 처리해줘야하는가?
 		header노드가 가리키는 곳을 바꿔야하므로 필요할 것으로 생각
 	*/
 	t_DoublyListNode	*prevDoublyListNode;
-	t_DoublyListNode	*newDoublyListNode;
 
 	if (pList == NULL)
 		return (FALSE);
 	if (position < 0 || position > pList->currentElementCount)
-		return (NULL);
-	// getElement사용
-	// DoublyListNode* getDLElement(DoublyList* pList, int position)
-	newDoublyListNode = createDoublyListNode(element.data);
+		return (FALSE);
 	if (pList->currentElementCount == 0)
 	{
-		pList->headerNode = *newDoublyListNode;
-		pList->currentElementCount += 1;
+		pList->headerNode = newNode;
+		pList->currentElementCount++;
 		return (pList->currentElementCount);
 	}
 	printf("\nbefore assign prevNode\n\n");
 	if (position == 0)
 	{
 		prevDoublyListNode = getDLElement(pList, pList->currentElementCount - 1);
-		pList->headerNode = *newDoublyListNode;
+		pList->headerNode = newNode;
 	}
 	else
 		prevDoublyListNode = getDLElement(pList, position - 1);
 	printf("after assign prevNode\n");
-	newDoublyListNode->pLLink = prevDoublyListNode;
+	newNode->pLLink = prevDoublyListNode;
 	printf("after assign pLLink\n");
-	newDoublyListNode->pRLink = prevDoublyListNode->pRLink;
+	newNode->pRLink = prevDoublyListNode->pRLink;
 	printf("after assign pRLink\n");	
-	prevDoublyListNode->pRLink->pLLink = newDoublyListNode;
+	prevDoublyListNode->pRLink->pLLink = newNode;
 	printf("after assign prevDoublyListNode->pRLink->pLLink\n");
 	// 별도로 element를 *가 있는 DoublyListNode로 만든다음에 할당해야하는가?
-	prevDoublyListNode->pRLink = newDoublyListNode;
+	prevDoublyListNode->pRLink = newNode;
 	printf("after assign element address \n");
-	pList->currentElementCount += 1;
-
+	pList->currentElementCount++;
 	return (pList->currentElementCount);
 }
 
@@ -207,72 +137,21 @@ int removeDLElement(t_DoublyList* pList, int position)
 
 	if (pList == NULL)
 		return (FALSE);
-	if (pList->currentElementCount >= position)
+	if (position < 0 || pList->currentElementCount >= position)
 		return (FALSE);
-	// position == 0;
-	// headerNode가 가리키는 것을 바꾸어주어야한다.
-	/*
-
-	*/
-	if (position == 0)
-		curDoublyListNode->pRLink;
 	curDoublyListNode = getDLElement(pList, position);
 	prevDoublyListNode = curDoublyListNode->pLLink;
 	nextDoublyListNode = curDoublyListNode->pRLink;
-
-	prevDoublyListNode->pRLink = curDoublyListNode->pRLink;
-	nextDoublyListNode->pLLink = curDoublyListNode->pLLink;
-	free(curDoublyListNode);
-
-	pList->currentElementCount -= 1;
-
-	return (pList->currentElementCount);
-}
-
-void deleteDoublyList(t_DoublyList* pList)
-{
-	/*
-		- 노드하나씩 free
-		- 마지막으로 pList free
-	*/
-	if (pList == NULL)
-		exit(EXIT_FAILURE);
-	clearDoublyList(pList);	
-	free(pList);
-}
-
-void clearDoublyList(t_DoublyList* pList)
-{
-	if (pList == NULL)
-		return (NULL);
-	while (pList->currentElementCount != 0)
-		removeDLElement(pList, 0);
-}
-
-static t_DoublyList		*reverseLinkedList(t_DoublyList* pList)
-{
-	/*
-		- 역순으로 만든다.
-		- header노드의 위치를 가지고 있어야한다.(이미 가지고 있다.)
-			- header노드가 마지막에 있던 노드를 가장 먼저 가리켜야한다.
-			- 마지막인지 기준은 가리키는 곳이 NULL이면 마지막 노드
-		- 첫번째 노드는 NULL을 가리키게 한다.
-	*/
-	t_DoublyList		*reversedDoublyList;
-	t_DoublyListNode	*curDoublyListNode;
-
-	if (pList == NULL)
-		return (NULL);
-	if (pList->currentElementCount == 0)
-		return (createDoublyListNode(NULL));	
-
-	curDoublyListNode = &(pList->headerNode);
-	while (curDoublyListNode != NULL)
+	if (position == 0)
+		pList->headerNode = nextDoublyListNode;
+	/* 1개이면 왼쪽, 오른쪽 노드가 이미 NULL이므로 그 자체만 free, NULL(dangling pointer 처리) 하면된다.*/
+	if (pList->currentElementCount != 1)
 	{
-		curDoublyListNode->pLLink;
+		prevDoublyListNode->pRLink = curDoublyListNode->pRLink;
+		nextDoublyListNode->pLLink = curDoublyListNode->pLLink;
 	}
-	/*
-		python sorted느낌으로 할려면? 추가작업 필요
-	*/
-	return (reversedDoublyList);
+	free(curDoublyListNode);
+	curDoublyListNode =  NULL;
+	pList->currentElementCount--;
+	return (pList->currentElementCount);
 }

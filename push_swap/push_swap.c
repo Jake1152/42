@@ -69,12 +69,13 @@ int	*parse_str_to_int_list(char *num_str)
 		number와 ', "까지는 인정해주며 그외에는 error 호출
 		정상적이라면 int list로 분리한다.
 	*/
-	int	sign;
+	int			sign;
+	LinkedStack	stack_a;
 
 	sign = 1;
 	while (*num_str != NULL)
 	{
-		while (*num_str == '\'' || *num_str == '\"' || *num_str == ' ')
+		while (' ')
 			num_str++;
 		if (*num_str == '-' || *num_str == '+')
 		{
@@ -84,11 +85,10 @@ int	*parse_str_to_int_list(char *num_str)
 		}
 		while ('0' <= num_str && num_str <= '9')
 			;
-		else // error case
+		if ('0' > num_str || num_str > '9') // error case
 		{
 			/* code */
 		}
-		
 		num_str++;
 	}
 	return (1);
