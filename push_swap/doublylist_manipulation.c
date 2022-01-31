@@ -16,17 +16,27 @@
 void displayDoublyList(t_DoublyList* pList)
 {
 	t_DoublyListNode	*curDoublyListNode;
+	int					cnt;
 	// DoublyListNode	curDoublyListNode;
 	// curDoublyListNode.pLLink = &pLLink;
 	if (pList == NULL)
 		exit(EXIT_FAILURE);
 	curDoublyListNode = pList->headerNode;
-	while (curDoublyListNode)
+	printf("=====================\n");
+	printf("displayDoublyList\n");
+	printf("=====================\n");
+	printf("current element count : %d\n", pList->currentElementCount);
+	cnt = 1;
+	while (pList->currentElementCount > cnt)
 	{
-		printf("current data is : %d", curDoublyListNode->data);
+		printf("curDoublyListNode->pRLink address : %p\n", &(curDoublyListNode->pRLink));
+		printf("%d->", curDoublyListNode->data);
 		curDoublyListNode = curDoublyListNode->pRLink;
+		cnt++;
 	}
+	printf("%d", curDoublyListNode->data);
 	printf("\n");
+	printf("end of display\n");
 }
 
 int getDoublyListLength(t_DoublyList* pList)
@@ -49,7 +59,7 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 	*/
 	t_DoublyListNode	*curDoublyListNode;
 
-	printf("in getDLElement\n\n");
+	printf("- in getDLElement\n");
 	// printf("pList->currentElementCount %d\n", pList->currentElementCount);
 	if (pList == NULL)
 	{
@@ -61,31 +71,34 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 		printf("position is under 0 or over currentElementCount\n");
 		return (NULL);
 	}
-	printf("pList->currentElementCount %d\n", pList->currentElementCount);
+	printf("pList->currentElementCount : %d\n", pList->currentElementCount);
 	// headerNode의 주소값을 가지고 있게해도 되는가?
 	curDoublyListNode = pList->headerNode;
+	printf("curDoublyListNode data is : %d\n", curDoublyListNode->data);
 	// 왼쪽에서 오른쪽으로 순회  start to mid
 	if (position < (pList->currentElementCount-1)/2)
 	{
 		while (position > 0)
 		{
+			printf("right bound\n");
 			curDoublyListNode = curDoublyListNode->pRLink;
 			position--;
 		}
 	}
 	// 오른쪽에서 왼쪽으로 순회
 	// end -> mid
-	else
+	else if (position > (pList->currentElementCount-1)/2)
 	{
 		while (pList->currentElementCount - position > 0)
 		{
+			printf("left bound\n");
 			curDoublyListNode = curDoublyListNode->pLLink;
 			position++;
 			// 길이 7 찾는 위치 인덱스 6 (7번째)
 			// 7 6 5 4
 		}
 	}
-	printf("End of getDLElement\n");
+	printf("End of getDLElement\n\n");
 	return (curDoublyListNode);
 }
 
@@ -97,36 +110,47 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 	*/
 	t_DoublyListNode	*prevDoublyListNode;
 
+	printf("- in addDLElement\n");
 	if (pList == NULL)
 		return (FALSE);
 	if (position < 0 || position > pList->currentElementCount)
 		return (FALSE);
 	if (pList->currentElementCount == 0)
 	{
+		newNode->pLLink = newNode;
+		newNode->pRLink = newNode;
 		pList->headerNode = newNode;
 		pList->currentElementCount++;
 		return (pList->currentElementCount);
 	}
-	printf("\nbefore assign prevNode\n\n");
+	printf("before assign prevNode\n");
+	printf("position is : %d\n", position);
 	if (position == 0)
-	{
+	{	
 		prevDoublyListNode = getDLElement(pList, pList->currentElementCount - 1);
+		if (prevDoublyListNode == NULL)
+			printf("prevDoublyListNode is NULL\n");
 		pList->headerNode = newNode;
 	}
 	else
 		prevDoublyListNode = getDLElement(pList, position - 1);
 	printf("after assign prevNode\n");
+	printf("prevNode data address is : %p\n", prevDoublyListNode);
 	printf("prevNode data is : %d\n", prevDoublyListNode->data);
 	newNode->pLLink = prevDoublyListNode;
 	printf("after assign pLLink\n");
 	newNode->pRLink = prevDoublyListNode->pRLink;
-	printf("after assign pRLink\n");	
-	prevDoublyListNode->pRLink->pLLink = newNode;
-	printf("after assign prevDoublyListNode->pRLink->pLLink\n");
+	printf("after assign pRLink\n");
+	if (pList->currentElementCount > 1)
+	{
+		prevDoublyListNode->pRLink->pLLink = newNode;
+		printf("after assign prevDoublyListNode->pRLink->pLLink\n");
+	}
 	// 별도로 element를 *가 있는 DoublyListNode로 만든다음에 할당해야하는가?
 	prevDoublyListNode->pRLink = newNode;
 	printf("after assign element address \n");
 	pList->currentElementCount++;
+	printf("End of addDLE\n");
 	return (pList->currentElementCount);
 }
 

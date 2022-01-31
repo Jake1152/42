@@ -22,12 +22,12 @@ int main()
 	testDoublyList = createDoublyList();
 	for (int i =0; i < 5; i++)
 	{
+		printf("main for loop : %d\n", i);
 		addedDoublyListNode = createDoublyListNode(i);
 		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
 		displayDoublyList(testDoublyList);
 	}
-	
-	printf("\n\ntestDoublyList->headerNode.data %d\n", testDoublyList->headerNode->data);
+	printf("\n\ntestDoublyList->headerNode->data %d\n", testDoublyList->headerNode->data);
 	displayDoublyList(testDoublyList);
 
 	return (0);
