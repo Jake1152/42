@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/01/31 18:21:49 by jim              ###   ########.fr       */
+/*   Updated: 2022/02/01 11:09:51 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ void displayDoublyList(t_DoublyList* pList)
 	printf("=====================\n");
 	printf("displayDoublyList\n");
 	printf("=====================\n");
-	printf("current element count : %d\n", pList->currentElementCount);
 	cnt = 1;
 	while (pList->currentElementCount > cnt)
 	{
-		printf("curDoublyListNode->pRLink address : %p\n", &(curDoublyListNode->pRLink));
+		printf("display right bound\n");
 		printf("%d->", curDoublyListNode->data);
 		curDoublyListNode = curDoublyListNode->pRLink;
 		cnt++;
@@ -72,6 +71,7 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 		return (NULL);
 	}
 	printf("pList->currentElementCount : %d\n", pList->currentElementCount);
+	printf("position : %d\n", position);
 	// headerNode의 주소값을 가지고 있게해도 되는가?
 	curDoublyListNode = pList->headerNode;
 	printf("curDoublyListNode data is : %d\n", curDoublyListNode->data);
@@ -87,7 +87,8 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 	}
 	// 오른쪽에서 왼쪽으로 순회
 	// end -> mid
-	else if (position > (pList->currentElementCount-1)/2)
+	//else if (position >= (pList->currentElementCount-1)/2)
+	else
 	{
 		while (pList->currentElementCount - position > 0)
 		{
@@ -123,24 +124,19 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 		pList->currentElementCount++;
 		return (pList->currentElementCount);
 	}
-	printf("before assign prevNode\n");
-	printf("position is : %d\n", position);
 	if (position == 0)
 	{	
 		prevDoublyListNode = getDLElement(pList, pList->currentElementCount - 1);
-		if (prevDoublyListNode == NULL)
-			printf("prevDoublyListNode is NULL\n");
 		pList->headerNode = newNode;
 	}
 	else
 		prevDoublyListNode = getDLElement(pList, position - 1);
-	printf("after assign prevNode\n");
-	printf("prevNode data address is : %p\n", prevDoublyListNode);
-	printf("prevNode data is : %d\n", prevDoublyListNode->data);
+	// 그동안 할당한거 다 free하고 return, delete function 사용
+	if (prevDoublyListNode == NULL)
+		return (FALSE);
+	//return free_heap();
 	newNode->pLLink = prevDoublyListNode;
-	printf("after assign pLLink\n");
 	newNode->pRLink = prevDoublyListNode->pRLink;
-	printf("after assign pRLink\n");
 	if (pList->currentElementCount > 1)
 	{
 		prevDoublyListNode->pRLink->pLLink = newNode;
@@ -148,7 +144,6 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 	}
 	// 별도로 element를 *가 있는 DoublyListNode로 만든다음에 할당해야하는가?
 	prevDoublyListNode->pRLink = newNode;
-	printf("after assign element address \n");
 	pList->currentElementCount++;
 	printf("End of addDLE\n");
 	return (pList->currentElementCount);
