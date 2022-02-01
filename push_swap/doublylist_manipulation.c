@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/01 11:41:26 by jim              ###   ########.fr       */
+/*   Updated: 2022/02/01 13:08:36 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void displayDoublyList(t_DoublyList* pList)
 	curDoublyListNode = pList->headerNode;
 	cnt = 1;
 	printf("display left bound\n");
-	while (pList->currentElementCount < cnt)
+	while (pList->currentElementCount > cnt)
 	{
 		printf("%d->", curDoublyListNode->data);
 		curDoublyListNode = curDoublyListNode->pLLink;
@@ -174,11 +174,17 @@ int removeDLElement(t_DoublyList* pList, int position)
 
 	if (pList == NULL)
 		return (FALSE);
-	if (position < 0 || pList->currentElementCount >= position)
+	if (position < 0 || pList->currentElementCount <= position)
+	{
+		printf("pList->currentElementCount in remove : %d \n", pList->currentElementCount);
 		return (FALSE);
+	}
 	curDoublyListNode = getDLElement(pList, position);
 	if (curDoublyListNode == NULL)
+	{
+		printf("curDoublyListNode is NULL, pList->currentElementCount in remove : %d \n", pList->currentElementCount);
 		return (FALSE);
+	}
 	prevDoublyListNode = curDoublyListNode->pLLink;
 	nextDoublyListNode = curDoublyListNode->pRLink;
 	if (position == 0)
