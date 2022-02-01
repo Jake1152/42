@@ -68,6 +68,7 @@ int main()
 	displayDoublyList(testDoublyList);
 
 	testDoublyList = createDoublyList();
+
 	if (testDoublyList == NULL)
 		printf("\n====testDoublyList is NULL===\n");
 	for (int i =5; i < 10; i++)
