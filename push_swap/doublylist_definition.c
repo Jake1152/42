@@ -51,7 +51,7 @@ int main()
 	printf("position : %d\n", position);
 	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
 	printf("\n");
-	printf("current count is 0\n");
+	printf("current count is %d\n", testDoublyList->currentElementCount);
 	displayDoublyList(testDoublyList);
 
 	printf("\n\n===============================\n");
@@ -68,9 +68,10 @@ int main()
 	displayDoublyList(testDoublyList);
 
 	testDoublyList = createDoublyList();
-
 	if (testDoublyList == NULL)
 		printf("\n====testDoublyList is NULL===\n");
+	else
+		printf("new doublylist current count is : %d\n", testDoublyList->currentElementCount);
 	for (int i =5; i < 10; i++)
 	{
 		printf("main for loop : %d\n", i);
@@ -91,6 +92,10 @@ int main()
 	printf("\n");
 	displayDoublyList(testDoublyList);
 	testDoublyList = createDoublyList();
+	if (testDoublyList == NULL)
+		printf("\n====testDoublyList is NULL===\n");
+	else
+		printf("new doublylist current count is : %d\n", testDoublyList->currentElementCount);
 	for (int i =10; i < 15; i++)
 	{
 		printf("main for loop : %d\n", i);
