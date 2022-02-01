@@ -12,17 +12,15 @@
 
 #include "push_swap.h"
 
-void	reverse_rotate_a(int *a_stack, int *b_stack)
+void	reverse_rotate(t_DoublyList *stack)
 {
-
+    if (stack == NULL || stack->currentElementCount <= 1)
+        return (print_error());
+    stack->headerNode = stack->headerNode->pLLink;
 }
 
-void	reverse_rotate_b(int *a_stack, int *b_stack)
+void	reverse_rotate_both(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
-
-}
-
-void	reverse_rotate_both(int *a_stack, int *b_stack)
-{
-
+    reverse_rotate(a_stack);
+    reverse_rotate(b_stack);
 }

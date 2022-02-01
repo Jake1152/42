@@ -16,10 +16,10 @@
 void	print_error(void)
 {
 	ft_putstr("Error\n");
-	exit(0);
+	exit(EXIT_FAILURE);
 }
 
-int		check_duplicate_value(int	*num_list)
+int		check_duplicate_value(t_DoublyList	*num_list)
 {
-	return (1);
+	return (EXIT_FAILURE);
 }
