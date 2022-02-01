@@ -56,7 +56,7 @@ int main()
 
 	printf("\n\n===============================\n");
 	printf("test delete\n");
-	deleteDoublyList(testDoublyList);
+	deleteDoublyList(&testDoublyList);
 	if (testDoublyList == NULL)
 		printf("after delete, plist be NULL assigned.\n");
 	printf("\n");
@@ -72,7 +72,7 @@ int main()
 	displayDoublyList(testDoublyList);
 	printf("\n");
 	printf("test delete\n");
-	deleteDoublyList(testDoublyList);
+	deleteDoublyList(&testDoublyList);
 	printf("\n");
 	displayDoublyList(testDoublyList);
 
@@ -126,7 +126,7 @@ t_DoublyList*	createDoublyList(void)
 	return (newDoublyList);
 }
 
-void deleteDoublyList(t_DoublyList* pList)
+void deleteDoublyList(t_DoublyList **pList)
 {
 	/*
 		- 노드하나씩 free
@@ -134,12 +134,12 @@ void deleteDoublyList(t_DoublyList* pList)
 	*/
 	if (pList == NULL)
 		return ;
-	clearDoublyList(pList);	
-	free(pList);
-	pList = NULL;
+	clearDoublyList(*pList);
+	free(*pList);
+	*pList = NULL;
 }
 
-void clearDoublyList(t_DoublyList* pList)
+void clearDoublyList(t_DoublyList *pList)
 {
 	if (pList == NULL)
 		return ;

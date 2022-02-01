@@ -30,8 +30,8 @@ typedef struct s_DoublyListType
 
 t_DoublyList		*createDoublyList(void);
 t_DoublyListNode	*createDoublyListNode(int data);
-void				deleteDoublyList(t_DoublyList *pList);
-void 				clearDoublyList(t_DoublyList* pList);
+void				deleteDoublyList(t_DoublyList **pList);
+void 				clearDoublyList(t_DoublyList *pList);
 
 int					addDLElement(t_DoublyList* pList, int position, \
 								t_DoublyListNode *newNode);
