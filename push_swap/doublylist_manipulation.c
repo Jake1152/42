@@ -81,17 +81,16 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 		printf("position is under 0 or over currentElementCount\n");
 		return (NULL);
 	}
-	printf("pList->currentElementCount : %d\n", pList->currentElementCount);
-	printf("position : %d\n", position);
+	// printf("pList->currentElementCount : %d\n", pList->currentElementCount);
+	// printf("position : %d\n", position);
 	// headerNode의 주소값을 가지고 있게해도 되는가?
 	curDoublyListNode = pList->headerNode;
-	printf("curDoublyListNode data is : %d\n", curDoublyListNode->data);
+	// printf("curDoublyListNode data is : %d\n", curDoublyListNode->data);
 	// 왼쪽에서 오른쪽으로 순회  start to mid
 	if (position < (pList->currentElementCount-1)/2)
 	{
 		while (position > 0)
 		{
-			printf("right bound\n");
 			curDoublyListNode = curDoublyListNode->pRLink;
 			position--;
 		}
@@ -103,7 +102,6 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 	{
 		while (pList->currentElementCount - position > 0)
 		{
-			printf("left bound\n");
 			curDoublyListNode = curDoublyListNode->pLLink;
 			position++;
 			// 길이 7 찾는 위치 인덱스 6 (7번째)
@@ -148,16 +146,16 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 		printf("\n\nprevNode is NULL\n\n");
 		return (FALSE);
 	}
-	printf("prevNode data : %d\n", prevNode->data);
+	// printf("prevNode data : %d\n", prevNode->data);
 	//return free_heap();
-	printf("newNode data : %d\n", newNode->data);
+	// printf("newNode data : %d\n", newNode->data);
 	newNode->pLLink = prevNode;
-	printf("newNode->pLLink->data : %d\n", newNode->pLLink->data);
+	// printf("newNode->pLLink->data : %d\n", newNode->pLLink->data);
 	newNode->pRLink = prevNode->pRLink;
 	if (pList->currentElementCount >= 1)
 	{
 		prevNode->pRLink->pLLink = newNode;
-		printf("after assign prevNode->pRLink->pLLink\n");
+		// printf("after assign prevNode->pRLink->pLLink\n");
 	}
 	// 별도로 element를 *가 있는 DoublyListNode로 만든다음에 할당해야하는가?
 	prevNode->pRLink = newNode;

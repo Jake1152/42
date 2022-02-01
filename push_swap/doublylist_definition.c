@@ -51,11 +51,14 @@ int main()
 	printf("position : %d\n", position);
 	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
 	printf("\n");
+	printf("current count is 0\n");
 	displayDoublyList(testDoublyList);
 
 	printf("\n\n===============================\n");
 	printf("test delete\n");
 	deleteDoublyList(testDoublyList);
+	if (testDoublyList == NULL)
+		printf("after delete, plist be NULL assigned.\n");
 	printf("\n");
 	displayDoublyList(testDoublyList);
 
