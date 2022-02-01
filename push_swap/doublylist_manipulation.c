@@ -33,6 +33,15 @@ void displayDoublyList(t_DoublyList* pList)
 		curDoublyListNode = curDoublyListNode->pRLink;
 		cnt++;
 	}
+	printf("\n");
+	cnt = 1;
+	while (pList->currentElementCount < cnt)
+	{
+		printf("display left bound\n");
+		printf("%d->", curDoublyListNode->data);
+		curDoublyListNode = curDoublyListNode->pLLink;
+		cnt++;
+	}
 	printf("%d", curDoublyListNode->data);
 	printf("\n");
 	printf("end of display\n");
@@ -109,7 +118,7 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 		position이 0이거나 마지막번째일때를 별도로 처리해줘야하는가?
 		header노드가 가리키는 곳을 바꿔야하므로 필요할 것으로 생각
 	*/
-	t_DoublyListNode	*prevDoublyListNode;
+	t_DoublyListNode	*prevNode;
 
 	printf("- in addDLElement\n");
 	if (pList == NULL)
@@ -126,24 +135,24 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 	}
 	if (position == 0)
 	{	
-		prevDoublyListNode = getDLElement(pList, pList->currentElementCount - 1);
+		prevNode = getDLElement(pList, pList->currentElementCount - 1);
 		pList->headerNode = newNode;
 	}
 	else
-		prevDoublyListNode = getDLElement(pList, position - 1);
+		prevNode = getDLElement(pList, position - 1);
 	// 그동안 할당한거 다 free하고 return, delete function 사용
-	if (prevDoublyListNode == NULL)
+	if (prevNode == NULL)
 		return (FALSE);
 	//return free_heap();
-	newNode->pLLink = prevDoublyListNode;
-	newNode->pRLink = prevDoublyListNode->pRLink;
+	newNode->pLLink = prevNode;
+	newNode->pRLink = prevNode->pRLink;
 	if (pList->currentElementCount > 1)
 	{
-		prevDoublyListNode->pRLink->pLLink = newNode;
-		printf("after assign prevDoublyListNode->pRLink->pLLink\n");
+		prevNode->pRLink->pLLink = newNode;
+		printf("after assign prevNode->pRLink->pLLink\n");
 	}
 	// 별도로 element를 *가 있는 DoublyListNode로 만든다음에 할당해야하는가?
-	prevDoublyListNode->pRLink = newNode;
+	prevNode->pRLink = newNode;
 	pList->currentElementCount++;
 	printf("End of addDLE\n");
 	return (pList->currentElementCount);
