@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/01 11:09:51 by jim              ###   ########.fr       */
+/*   Updated: 2022/02/01 11:41:26 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,20 @@ void displayDoublyList(t_DoublyList* pList)
 	printf("displayDoublyList\n");
 	printf("=====================\n");
 	cnt = 1;
+	printf("display right bound\n");
 	while (pList->currentElementCount > cnt)
 	{
-		printf("display right bound\n");
 		printf("%d->", curDoublyListNode->data);
 		curDoublyListNode = curDoublyListNode->pRLink;
 		cnt++;
 	}
+	printf("%d", curDoublyListNode->data);
 	printf("\n");
+	curDoublyListNode = pList->headerNode;
 	cnt = 1;
+	printf("display left bound\n");
 	while (pList->currentElementCount < cnt)
 	{
-		printf("display left bound\n");
 		printf("%d->", curDoublyListNode->data);
 		curDoublyListNode = curDoublyListNode->pLLink;
 		cnt++;
@@ -142,11 +144,16 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 		prevNode = getDLElement(pList, position - 1);
 	// 그동안 할당한거 다 free하고 return, delete function 사용
 	if (prevNode == NULL)
+	{
+		printf("\n\nprevNode is NULL\n\n");
 		return (FALSE);
+	}
+	printf("prevNode data : %d\n", prevNode->data);
 	//return free_heap();
 	newNode->pLLink = prevNode;
+	printf("newNode->pLLink->data : %d\n", newNode->pLLink->data);
 	newNode->pRLink = prevNode->pRLink;
-	if (pList->currentElementCount > 1)
+	if (pList->currentElementCount >= 1)
 	{
 		prevNode->pRLink->pLLink = newNode;
 		printf("after assign prevNode->pRLink->pLLink\n");
@@ -154,7 +161,7 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 	// 별도로 element를 *가 있는 DoublyListNode로 만든다음에 할당해야하는가?
 	prevNode->pRLink = newNode;
 	pList->currentElementCount++;
-	printf("End of addDLE\n");
+	printf("- End of addDLE\n");
 	return (pList->currentElementCount);
 }
 

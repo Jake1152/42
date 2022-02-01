@@ -6,13 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/01/31 17:55:59 by jim              ###   ########.fr       */
+/*   Updated: 2022/02/01 11:46:31 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> // should be removed
 #include "doublylist.h"
-
 
 int main()
 {
@@ -25,10 +24,12 @@ int main()
 		printf("main for loop : %d\n", i);
 		addedDoublyListNode = createDoublyListNode(i);
 		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
-		displayDoublyList(testDoublyList);
 	}
 	printf("\n\ntestDoublyList->headerNode->data %d\n", testDoublyList->headerNode->data);
 	displayDoublyList(testDoublyList);
+
+	printf("test remove\n");
+
 
 	return (0);
 }
