@@ -66,6 +66,8 @@ int main()
 		addedDoublyListNode = createDoublyListNode(i);
 		printf("addDLElement(testD oublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
 	}
+	deleteDoublyList(testDoublyList);
+	printf("\n");
 	printf("test delete\n");
 	deleteDoublyList(testDoublyList);
 	printf("\n");
@@ -90,7 +92,7 @@ int main()
 	displayDoublyList(testDoublyList);
 
 	printf("\n\n===============================\n");
-	printf("test clear\n");
+	printf("finally test clear\n");
 
 	return (0);
 }
