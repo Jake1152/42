@@ -174,7 +174,7 @@ int removeDLElement(t_DoublyList* pList, int position)
 		return (FALSE);
 	if (position < 0 || pList->currentElementCount <= position)
 	{
-		printf("pList->currentElementCount in remove : %d \n", pList->currentElementCount);
+		printf("I can not remove the element currentElementCount, postion  : %d\t%d \n", pList->currentElementCount, position);
 		return (FALSE);
 	}
 	curDoublyListNode = getDLElement(pList, position);
@@ -187,15 +187,10 @@ int removeDLElement(t_DoublyList* pList, int position)
 	nextDoublyListNode = curDoublyListNode->pRLink;
 	if (position == 0)
 		pList->headerNode = nextDoublyListNode;
-	/* 1개이면 왼쪽, 오른쪽 노드가 이미 NULL이므로 그 자체만 free, NULL(dangling pointer 처리) 하면된다.*/
-	// -n ㅁ p-
-	// ㅁ  ㅁ  ㅁ
-	// 1개만 있을떄 지운경우 마지막에 Left, Right 모두 NULL을 가리키는지 확인 필요
-	if (pList->currentElementCount != 1)
-	{
-		prevDoublyListNode->pRLink = curDoublyListNode->pRLink;
-		nextDoublyListNode->pLLink = curDoublyListNode->pLLink;
-	}
+	if (pList->currentElementCount == 1)
+		pList->headerNode = NULL;
+	prevDoublyListNode->pRLink = curDoublyListNode->pRLink;
+	nextDoublyListNode->pLLink = curDoublyListNode->pLLink;
 	free(curDoublyListNode);
 	curDoublyListNode =  NULL;
 	pList->currentElementCount--;
