@@ -17,6 +17,7 @@ int main()
 {
 	t_DoublyList		*testDoublyList;
 	t_DoublyListNode	*addedDoublyListNode;
+	int					position;
 
 	testDoublyList = createDoublyList();
 	for (int i =0; i < 5; i++)
@@ -28,8 +29,64 @@ int main()
 	printf("\n\ntestDoublyList->headerNode->data %d\n", testDoublyList->headerNode->data);
 	displayDoublyList(testDoublyList);
 
+	printf("\n\n===============================\n");
 	printf("test remove\n");
+	position = 3;
+	printf("position : %d\n", position);
+	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
+	position = 0;
+	printf("position : %d\n", position);
+	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
+	position = 1;
+	printf("position : %d\n", position);
+	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
+	position = 1;
+	printf("position : %d\n", position);
+	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
+	position = 0;
+	printf("position : %d\n", position);
+	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
+	printf("\n");
+	displayDoublyList(testDoublyList);
 
+	printf("\n\n===============================\n");
+	printf("test delete\n");
+	deleteDoublyList(testDoublyList);
+	printf("\n");
+	displayDoublyList(testDoublyList);
+
+	testDoublyList = createDoublyList();
+	for (int i =5; i < 10; i++)
+	{
+		printf("main for loop : %d\n", i);
+		addedDoublyListNode = createDoublyListNode(i);
+		printf("addDLElement(testD oublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+	}
+	printf("test delete\n");
+	deleteDoublyList(testDoublyList);
+	printf("\n");
+	displayDoublyList(testDoublyList);
+
+	printf("\n\n===============================\n");
+	printf("test clear\n");
+	clearDoublyList(testDoublyList);
+	printf("\n");
+	displayDoublyList(testDoublyList);
+	testDoublyList = createDoublyList();
+	for (int i =10; i < 15; i++)
+	{
+		printf("main for loop : %d\n", i);
+		addedDoublyListNode = createDoublyListNode(i);
+		printf("addDLElement(testD oublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+	}
+	displayDoublyList(testDoublyList);
+	printf("\n");
+	clearDoublyList(testDoublyList);
+	printf("\n");
+	displayDoublyList(testDoublyList);
+
+	printf("\n\n===============================\n");
+	printf("test clear\n");
 
 	return (0);
 }
@@ -70,13 +127,14 @@ void deleteDoublyList(t_DoublyList* pList)
 		exit(EXIT_FAILURE);
 	clearDoublyList(pList);	
 	free(pList);
+	pList = NULL;
 }
 
 void clearDoublyList(t_DoublyList* pList)
 {
 	if (pList == NULL)
 		return ;
-	while (pList->currentElementCount != 0)
+	while (pList->currentElementCount > 0)
 		removeDLElement(pList, 0);
 }
 

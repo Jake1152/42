@@ -150,6 +150,7 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 	}
 	printf("prevNode data : %d\n", prevNode->data);
 	//return free_heap();
+	printf("newNode data : %d\n", newNode->data);
 	newNode->pLLink = prevNode;
 	printf("newNode->pLLink->data : %d\n", newNode->pLLink->data);
 	newNode->pRLink = prevNode->pRLink;
@@ -176,11 +177,16 @@ int removeDLElement(t_DoublyList* pList, int position)
 	if (position < 0 || pList->currentElementCount >= position)
 		return (FALSE);
 	curDoublyListNode = getDLElement(pList, position);
+	if (curDoublyListNode == NULL)
+		return (FALSE);
 	prevDoublyListNode = curDoublyListNode->pLLink;
 	nextDoublyListNode = curDoublyListNode->pRLink;
 	if (position == 0)
 		pList->headerNode = nextDoublyListNode;
 	/* 1개이면 왼쪽, 오른쪽 노드가 이미 NULL이므로 그 자체만 free, NULL(dangling pointer 처리) 하면된다.*/
+	// -n ㅁ p-
+	// ㅁ  ㅁ  ㅁ
+	// 1개만 있을떄 지운경우 마지막에 Left, Right 모두 NULL을 가리키는지 확인 필요
 	if (pList->currentElementCount != 1)
 	{
 		prevDoublyListNode->pRLink = curDoublyListNode->pRLink;
