@@ -18,6 +18,7 @@ int main()
 	t_DoublyList		*testDoublyList;
 	t_DoublyListNode	*addedDoublyListNode;
 	int					position;
+	int					start_num;
 
 	testDoublyList = createDoublyList();
 	for (int i =0; i < 5; i++)
@@ -72,11 +73,12 @@ int main()
 		printf("\n====testDoublyList is NULL===\n");
 	else
 		printf("new doublylist current count is : %d\n", testDoublyList->currentElementCount);
-	for (int i =5; i < 10; i++)
+	start_num = 5;
+	for (int i =start_num; i < 10; i++)
 	{
 		printf("main for loop : %d\n", i);
 		addedDoublyListNode = createDoublyListNode(i);
-		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i - start_num, addedDoublyListNode));
 		displayDoublyList(testDoublyList);
 	}
 	displayDoublyList(testDoublyList);
@@ -96,11 +98,12 @@ int main()
 		printf("\n====testDoublyList is NULL===\n");
 	else
 		printf("new doublylist current count is : %d\n", testDoublyList->currentElementCount);
-	for (int i =10; i < 15; i++)
+	start_num = 10;
+	for (int i = start_num; i < 15; i++)
 	{
 		printf("main for loop : %d\n", i);
 		addedDoublyListNode = createDoublyListNode(i);
-		printf("addDLElement(testD oublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+		printf("addDLElement(testD oublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i - start_num, addedDoublyListNode));
 		displayDoublyList(testDoublyList);
 	}
 	displayDoublyList(testDoublyList);
