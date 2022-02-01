@@ -72,7 +72,7 @@ int main()
 	{
 		printf("main for loop : %d\n", i);
 		addedDoublyListNode = createDoublyListNode(i);
-		printf("addDLElement(testD oublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
 	}
 	displayDoublyList(testDoublyList);
 	printf("\n");
