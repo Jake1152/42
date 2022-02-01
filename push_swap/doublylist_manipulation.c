@@ -20,7 +20,12 @@ void displayDoublyList(t_DoublyList* pList)
 	// DoublyListNode	curDoublyListNode;
 	// curDoublyListNode.pLLink = &pLLink;
 	if (pList == NULL || pList->currentElementCount <= 0)
+	{
+		printf("pList is NULL or\n");
+		printf("pList->currentElementCount : %d\n", pList->currentElementCount);
 		return ;
+	}
+		
 	curDoublyListNode = pList->headerNode;
 	printf("=====================\n");
 	printf("displayDoublyList\n");
