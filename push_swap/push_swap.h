@@ -14,27 +14,27 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
-# include "linkedstack.h"
+# include "doublylist.h"
 
 /* main */
 int		push_swap(char *num_str);
 int		*parse_str_to_int_list(char *num_str);
 
-/* 11 actions */
-void	swap_a(int *a_stack, int *b_stack);
-void	swap_b(int *a_stack, int *b_stack);
-void	swap_both(int *a_stack, int *b_stack);
+/* stack of pdf actions */
+void	swap_top(t_DoublyList *stack);
+void	swap_both(t_DoublyList *a_stack, t_DoublyList *b_stack);
 
-void	push_a(int *a_stack, int *b_stack);
-void	push_b(int *a_stack, int *b_stack);
+void	push_a(t_DoublyList *a_stack, t_DoublyList *b_stack);
+void	push_b(t_DoublyList *a_stack, t_DoublyList *b_stack);
 
-void	rotate_a(int *a_stack, int *b_stack);
-void	rotate_b(int *a_stack, int *b_stack);
-void	rotate_both(int *a_stack, int *b_stack);
+void	rotate(t_DoublyList *stack);
+void	rotate_both(t_DoublyList *a_stack, t_DoublyList *b_stack);
 
-void	reverse_rotate_a(int *a_stack, int *b_stack);
-void	reverse_rotate_b(int *a_stack, int *b_stack);
-void	reverse_rotate_both(int *a_stack, int *b_stack);
+void	reverse_rotate(t_DoublyList *stack);
+void	reverse_rotate_both(t_DoublyList *a_stack, t_DoublyList *b_stack);
+
+/* other stack action */
+t_DoublyListNode    *pop(t_DoublyList *stack);
 
 /* util */
 void	ft_putchar(char ch);
@@ -43,6 +43,6 @@ size_t	ft_strlen(const char *s);
 
 /* error handler */
 void	print_error(void);
-int		check_duplicate_value(int	*num_list);
+int		check_duplicate_value(t_DoublyList	*num_list);
 
 #endif
