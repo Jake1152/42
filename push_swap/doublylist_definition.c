@@ -66,7 +66,7 @@ int main()
 		addedDoublyListNode = createDoublyListNode(i);
 		printf("addDLElement(testD oublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
 	}
-	deleteDoublyList(testDoublyList);
+	displayDoublyList(testDoublyList);
 	printf("\n");
 	printf("test delete\n");
 	deleteDoublyList(testDoublyList);
@@ -130,7 +130,7 @@ void deleteDoublyList(t_DoublyList* pList)
 		- 마지막으로 pList free
 	*/
 	if (pList == NULL)
-		exit(EXIT_FAILURE);
+		return ;
 	clearDoublyList(pList);	
 	free(pList);
 	pList = NULL;
