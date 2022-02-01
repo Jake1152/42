@@ -60,6 +60,11 @@ int main()
 	if (testDoublyList == NULL)
 		printf("after delete, plist be NULL assigned.\n");
 	printf("\n");
+	printf("test delete\n");
+	deleteDoublyList(&testDoublyList);
+	if (testDoublyList == NULL)
+		printf("after delete, plist be NULL assigned.\n");
+	printf("\n");
 	displayDoublyList(testDoublyList);
 
 	testDoublyList = createDoublyList();
