@@ -76,6 +76,7 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 	t_DoublyListNode	*curDoublyListNode;
 
 	printf("- in getDLElement\n");
+	printf("pList->currentElementCount : %d\n", pList->currentElementCount);	
 	// printf("pList->currentElementCount %d\n", pList->currentElementCount);
 	if (pList == NULL)
 	{
@@ -176,8 +177,13 @@ int removeDLElement(t_DoublyList* pList, int position)
 	t_DoublyListNode	*curDoublyListNode;
 	t_DoublyListNode	*nextDoublyListNode;
 
+	printf("- in removeDLElement\n");
+	printf("pList->currentElementCount : %d\n", pList->currentElementCount);
 	if (pList == NULL)
+	{
+		printf("pList is NULL\n");
 		return (FALSE);
+	}	
 	if (position < 0 || pList->currentElementCount <= position)
 	{
 		printf("I can not remove the element currentElementCount, postion  : %d\t%d \n", pList->currentElementCount, position);

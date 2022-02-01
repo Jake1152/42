@@ -108,6 +108,7 @@ int main()
 	}
 	displayDoublyList(testDoublyList);
 	printf("\n");
+	printf("test clear\n");
 	clearDoublyList(testDoublyList);
 	printf("\n");
 	displayDoublyList(testDoublyList);
