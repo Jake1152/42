@@ -22,7 +22,8 @@ void displayDoublyList(t_DoublyList* pList)
 	if (pList == NULL || pList->currentElementCount <= 0)
 	{
 		printf("pList is NULL or\n");
-		printf("pList->currentElementCount : %d\n", pList->currentElementCount);
+		if (pList != NULL)
+			printf("pList->currentElementCount : %d\n", pList->currentElementCount);
 		return ;
 	}
 		
