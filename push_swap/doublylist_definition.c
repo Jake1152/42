@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/01 11:46:31 by jim              ###   ########.fr       */
+/*   Updated: 2022/02/03 19:39:58 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main()
 	{
 		printf("main for loop : %d\n", i);
 		addedDoublyListNode = createDoublyListNode(i);
+		// printf("after create addedDoublyListNode\n");
 		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
 	}
 	printf("\n\ntestDoublyList->headerNode->data %d\n", testDoublyList->headerNode->data);
@@ -121,7 +122,7 @@ int main()
 
 t_DoublyListNode	*createDoublyListNode(int data)
 {
-	t_DoublyListNode *newDoublyListNode;
+	t_DoublyListNode	*newDoublyListNode;
 
 	newDoublyListNode = (t_DoublyListNode *)malloc(sizeof(newDoublyListNode));
 	if (newDoublyListNode == NULL)
@@ -132,11 +133,11 @@ t_DoublyListNode	*createDoublyListNode(int data)
 	return (newDoublyListNode);
 }
 
-t_DoublyList*	createDoublyList(void)
+t_DoublyList	*createDoublyList(void)
 {
 	t_DoublyList		*newDoublyList;
 
-	newDoublyList = (t_DoublyList *)malloc(sizeof(newDoublyList));;
+	newDoublyList = (t_DoublyList *)malloc(sizeof(newDoublyList));
 	if (newDoublyList == NULL)
 		return (NULL);
 	newDoublyList->headerNode = NULL;
@@ -144,12 +145,8 @@ t_DoublyList*	createDoublyList(void)
 	return (newDoublyList);
 }
 
-void deleteDoublyList(t_DoublyList **pList)
+void	deleteDoublyList(t_DoublyList **pList)
 {
-	/*
-		- 노드하나씩 free
-		- 마지막으로 pList free
-	*/
 	if (pList == NULL)
 		return ;
 	clearDoublyList(*pList);
@@ -157,11 +154,10 @@ void deleteDoublyList(t_DoublyList **pList)
 	*pList = NULL;
 }
 
-void clearDoublyList(t_DoublyList *pList)
+void	clearDoublyList(t_DoublyList *pList)
 {
 	if (pList == NULL)
 		return ;
 	while (pList->currentElementCount > 0)
 		removeDLElement(pList, 0);
 }
-

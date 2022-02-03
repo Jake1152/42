@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:05 by jim               #+#    #+#             */
-/*   Updated: 2022/01/31 17:48:52 by jim              ###   ########.fr       */
+/*   Updated: 2022/02/03 19:39:31 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_DoublyListNode	*createDoublyListNode(int data);
 void				deleteDoublyList(t_DoublyList **pList);
 void 				clearDoublyList(t_DoublyList *pList);
 
-int					addDLElement(t_DoublyList* pList, int position, \
+int					addDLElement(t_DoublyList *pList, int position, \
 								t_DoublyListNode *newNode);
 int					removeDLElement(t_DoublyList* pList, int position);
 int					getDoublyListLength(t_DoublyList* pList);

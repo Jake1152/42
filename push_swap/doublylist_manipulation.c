@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/01 13:08:36 by jim              ###   ########.fr       */
+/*   Updated: 2022/02/03 19:39:27 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void displayDoublyList(t_DoublyList* pList)
 			printf("pList->currentElementCount : %d\n", pList->currentElementCount);
 		return ;
 	}
-		
 	curDoublyListNode = pList->headerNode;
 	printf("=====================\n");
 	printf("displayDoublyList\n");
@@ -55,23 +54,24 @@ void displayDoublyList(t_DoublyList* pList)
 	printf("end of display\n");
 }
 
-int getDoublyListLength(t_DoublyList* pList)
+int	getDoublyListLength(t_DoublyList *pList)
 {
 	if (pList == NULL)
 		return (FALSE);
 	return (pList->currentElementCount);
 }
 
-t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
+t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
 {
 	t_DoublyListNode	*curDoublyListNode;
 
+	printf("- Start of getDLElement\n");
 	if (pList == NULL)
 		return (NULL);
 	if (position < 0 || position > pList->currentElementCount)
 		return (NULL);
 	curDoublyListNode = pList->headerNode;
-	if (position < (pList->currentElementCount-1)/2)
+	if (position < (pList->currentElementCount - 1) / 2)
 	{
 		while (position > 0)
 		{
@@ -87,13 +87,15 @@ t_DoublyListNode* getDLElement(t_DoublyList* pList, int position)
 			position++;
 		}
 	}
+	printf("- End of getDLElement\n");
 	return (curDoublyListNode);
 }
 
-int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
+int	addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 {
 	t_DoublyListNode	*prevNode;
 
+	printf("- Start of addDLElement\n");
 	if (pList == NULL || position < 0 || position > pList->currentElementCount)
 		return (FALSE);
 	if (pList->currentElementCount == 0)
@@ -101,10 +103,12 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 		newNode->pLLink = newNode;
 		newNode->pRLink = newNode;
 		pList->headerNode = newNode;
+		printf("newNode->pLLink->data : %d\n", newNode->pLLink->data);
+		printf("newNode->pRLink->data : %d\n", newNode->pRLink->data);
 		return (pList->currentElementCount++);
 	}
 	if (position == 0)
-	{	
+	{
 		prevNode = getDLElement(pList, pList->currentElementCount - 1);
 		pList->headerNode = newNode;
 	}
@@ -112,15 +116,21 @@ int addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 		prevNode = getDLElement(pList, position - 1);
 	if (prevNode == NULL)
 		return (FALSE);
+	printf("success getDLElement\n");
+	printf("prevNode->data : %d\n", prevNode->data);
+	printf("prevNode->pRLink : %p\n", prevNode->pRLink);
+	printf("prevNode->pRLink->data : %d\n", prevNode->pRLink->data);
 	newNode->pLLink = prevNode;
 	newNode->pRLink = prevNode->pRLink;
+	printf("newNode->pRLink->data : %d\n", newNode->pRLink->data);
 	if (pList->currentElementCount >= 1)
 		prevNode->pRLink->pLLink = newNode;
 	prevNode->pRLink = newNode;
+	printf("- End of addDLElement\n");
 	return (pList->currentElementCount++);
 }
 
-int removeDLElement(t_DoublyList* pList, int position)
+int	removeDLElement(t_DoublyList *pList, int position)
 {
 	t_DoublyListNode	*prevDoublyListNode;
 	t_DoublyListNode	*curDoublyListNode;
@@ -142,8 +152,7 @@ int removeDLElement(t_DoublyList* pList, int position)
 	prevDoublyListNode->pRLink = curDoublyListNode->pRLink;
 	nextDoublyListNode->pLLink = curDoublyListNode->pLLink;
 	free(curDoublyListNode);
-	curDoublyListNode =  NULL;
+	curDoublyListNode = NULL;
 	pList->currentElementCount--;
 	return (pList->currentElementCount);
 }
-
