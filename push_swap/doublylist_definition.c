@@ -17,19 +17,35 @@ int main()
 {
 	t_DoublyList		*testDoublyList;
 	t_DoublyListNode	*addedDoublyListNode;
+	t_DoublyListNode	*prevListNode;
+	t_DoublyListNode	*curListNode;
 	int					position;
 	int					start_num;
 
 	testDoublyList = createDoublyList();
-	for (int i =0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
+		displayDoublyList(testDoublyList);
 		printf("main for loop : %d\n", i);
+		printf("== before addedDoublyListNode\n");
 		addedDoublyListNode = createDoublyListNode(i);
-		if (i>0)
-			printf("=== prev getDLElement(pList, i) : %p\n", getDLElement(testDoublyList, i-1));
+		printf("== after addedDoublyListNode\n");
+		if (i > 0)
+		{
+			printf("=== in Main prevListNode\n");
+			prevListNode = getDLElement(testDoublyList, i-1);
+			printf("=== in Main prevListNode : %p\n", prevListNode);
+			printf("=== in Main prevListNode->pLLink : %p\n", prevListNode->pLLink);
+			printf("=== in Main prevListNode->pRLink : %p\n", prevListNode->pRLink);
+		}
+			
 		// printf("after create addedDoublyListNode\n");
 		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
-		printf("=== getDLElement(pList, i) : %p\n", getDLElement(testDoublyList, i));
+		curListNode =  getDLElement(testDoublyList, i);
+		printf("=== getDLElement(pList, i) : %p\n", curListNode);
+		printf("=== curListNode->data : %d\n", curListNode->data);
+		printf("=== curListNode->pLLink : %p\n", curListNode->pLLink);
+		printf("=== curListNode->pRLink : %p\n", curListNode->pRLink);
 	}
 	printf("\n\ntestDoublyList->headerNode->data %d\n", testDoublyList->headerNode->data);
 	displayDoublyList(testDoublyList);
@@ -127,12 +143,18 @@ t_DoublyListNode	*createDoublyListNode(int data)
 {
 	t_DoublyListNode	*newDoublyListNode;
 
+	printf("- start of createDoublyListNode\n");
 	newDoublyListNode = (t_DoublyListNode *)malloc(sizeof(newDoublyListNode));
 	if (newDoublyListNode == NULL)
+	{
+		printf("Failed allocation\n");
 		return (NULL);
-	newDoublyListNode->pRLink = NULL;
-	newDoublyListNode->pLLink = NULL;
+	}
+	printf("after alloc in createDoublyListNode\n");
+	newDoublyListNode->pRLink = (t_DoublyListNode *)NULL;
+	newDoublyListNode->pLLink = (t_DoublyListNode *)NULL;
 	newDoublyListNode->data = data;
+	printf("- end of createDoublyListNode\n");
 	return (newDoublyListNode);
 }
 
@@ -143,7 +165,7 @@ t_DoublyList	*createDoublyList(void)
 	newDoublyList = (t_DoublyList *)malloc(sizeof(newDoublyList));
 	if (newDoublyList == NULL)
 		return (NULL);
-	newDoublyList->headerNode = NULL;
+	newDoublyList->headerNode = (t_DoublyListNode *)NULL;
 	newDoublyList->currentElementCount = 0;
 	return (newDoublyList);
 }
