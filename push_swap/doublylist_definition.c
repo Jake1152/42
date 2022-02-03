@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/03 19:39:58 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/03 19:48:46 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ int main()
 	{
 		printf("main for loop : %d\n", i);
 		addedDoublyListNode = createDoublyListNode(i);
+		if (i>0)
+			printf("=== prev getDLElement(pList, i) : %p\n", getDLElement(testDoublyList, i-1));
 		// printf("after create addedDoublyListNode\n");
 		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+		printf("=== getDLElement(pList, i) : %p\n", getDLElement(testDoublyList, i));
 	}
 	printf("\n\ntestDoublyList->headerNode->data %d\n", testDoublyList->headerNode->data);
 	displayDoublyList(testDoublyList);

@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/03 19:39:27 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/03 19:51:31 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,17 @@ int	addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 		return (FALSE);
 	if (pList->currentElementCount == 0)
 	{
+		printf("newNode address is : %p\n", newNode);
 		newNode->pLLink = newNode;
 		newNode->pRLink = newNode;
+		printf("newNode->pLLink address : %p\n", newNode->pLLink);
+		printf("newNode->pRLink address : %p\n", newNode->pRLink);
 		pList->headerNode = newNode;
 		printf("newNode->pLLink->data : %d\n", newNode->pLLink->data);
 		printf("newNode->pRLink->data : %d\n", newNode->pRLink->data);
+		printf("after pointed Header node to newNode\n");
+		printf("newNode->pLLink address : %p\n", newNode->pLLink);
+		printf("newNode->pRLink address : %p\n", newNode->pRLink);
 		return (pList->currentElementCount++);
 	}
 	if (position == 0)
@@ -117,7 +123,9 @@ int	addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 	if (prevNode == NULL)
 		return (FALSE);
 	printf("success getDLElement\n");
+	printf("prevNode address is : %p\n", prevNode);
 	printf("prevNode->data : %d\n", prevNode->data);
+	printf("prevNode->pLLink : %p\n", prevNode->pLLink);
 	printf("prevNode->pRLink : %p\n", prevNode->pRLink);
 	printf("prevNode->pRLink->data : %d\n", prevNode->pRLink->data);
 	newNode->pLLink = prevNode;
