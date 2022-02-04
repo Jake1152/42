@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/01/29 18:15:19 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/04 18:27:05 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "linkedstack.h"
+#include "doublylist.h"
 
+// push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 int	push_swap(char *num_str)
 {
 	/*
-		" "기준으로 split
-		a stack 추가
-		11개 명령어 이외에 다른 동작을 해도 되는가?
-		다른 동작도 complexity
+		정렬하는 용도로만 사용한다.
+		main에서 parsing,
+		init 담당
 	*/
 	int		*a_stack;
 	int		*b_stack;
@@ -41,36 +41,32 @@ int	push_swap(char *num_str)
 int	*parse_str_to_int_list(char *num_str)
 {
 	/*
-		', "  두개 문자는 문자열을 감싸는 것으로 치고서 넘어간다.
-		그외에 숫자가 아닌 문자가 들어오면 Error 호출하고 끝난다.
-		Error호출을 분리할것인가?
-		아니면 발생한 곳에서 처리할 것인가?
-		분리한다면 Error발생여부를 넘겨줘서 한 곳에서 처리한다.
-		불편할 것 같다.
-		Error처리를 분리하면 어떤 특징이 있고 장단점이 있는가?
-		- 분리할려면 return값에 넘겨주거나
-		  structure member변수를 쓸 수도 있다.
-		  - 무언가 종속성이 더 심해질 수 있을것 같다는 생각이 든다.
-		- 개별로 나누면
-		  함수별 코드가 길어질 수도 있을 것 같으며 
-		  Error 발생하면 종료해야하는데
-		  그정보를 결국 main에서 알아야한다.
-		  즉 main에서 check하거나 그 자리에서 종료 가능한가?
-		  "Error\n"를 출력하고서 exit한다?
-		  exit을 해도 되는가?
-		  어떻게 처리하는지에 따라 달라진다.
-		  exit보다는 전체 리턴값으로 분류할 수 있으면 어디서 어떻게 문제가 생겼는지 관리하기 좋을 것이라 생각든다.
-		  그러면 타고타고 들어가서 결과 값을 main에서 처리할 수 있게 해야한다.
-		  error code 값을 어딘가 저장해야 의미 있어진다.
-		  error code값 관리에 대한 리소스도 발생한다.
-		  error 구분을 잘 해주어야한다.
+		문자열을 넘겨받는다.
+		넘겨받은 문자열에서 숫자가 나오면 
+		숫자가 나올동안에는 atoi를 적용한다.
+		이후에 공백이 나오면 다음문자
+		123 45 
+		"123 45"
+		를 어떻게 구분할것인가?
+		구분해야하는 이유는?
+		atoi호출 횟수가 달라지기 때문
+		그리고
+		"123 45 a"
+		는 또 다르다.
+		error처리해야한다.
+
+		atoi는 어쨌든 공백 스킵하고 부호 1개만 읽고 숫자를 변환해주므로
+		"   -5  334 5" 같은 케이스가 있는 경우
+		-5까지 읽고 끝난다.
+		그런데 나는 이후도 읽어야한다.
+		어디까지 읽었는지 정보를 알고 있으면 문제가 없긴하다.
 	*/
 	/*
 		number와 ', "까지는 인정해주며 그외에는 error 호출
 		정상적이라면 int list로 분리한다.
 	*/
-	int			sign;
-	LinkedStack	stack_a;
+	int				sign;
+	t_DoublyList	stack_a;
 
 	sign = 1;
 	while (*num_str != NULL)
@@ -122,6 +118,8 @@ int	main(int argc, char *argv[])
 		3. 여러개가 넘어오면 arguments가 여러개이다. 이런 경우 int * array의 size를 어떻게 처리할 것인가?
 		   
 	*/
+	int	idx;
+
 	if (argc == 0)
 		print_error();
 	/*
@@ -131,6 +129,12 @@ int	main(int argc, char *argv[])
 		처음부터 init()으로 stack a,b를 만든다.(linked list type)
 		이후에 파싱하면서 파싱 된 애들은 바로 node로 추가한다.
 		중간에 파싱 error  나면 이전에 할당한것 모두 free하고서 Error\n출력하고서 exit() 한다.
+	*/
+	idx = 1;
+	while (idx < argc)
+		parse_str_to_int_list(argv[idx]);
+	/*
+		- 
 	*/
 	return (0);
 }
