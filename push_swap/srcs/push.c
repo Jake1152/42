@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:36 by jim               #+#    #+#             */
-/*   Updated: 2022/01/25 13:32:41 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/05 19:46:27 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	push_b(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
 	t_DoublyListNode *pop_node;
 
-	
 	if (a_stack == NULL || b_stack == NULL)
 		return (print_error());
 	pop_node = pop(a_stack);

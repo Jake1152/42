@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 14:25:22 by jim               #+#    #+#             */
-/*   Updated: 2022/01/29 17:32:03 by jim              ###   ########seoul.kr  */
+/*   Created: 2021/10/13 13:54:55 by jim               #+#    #+#             */
+/*   Updated: 2021/10/14 14:04:26 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#include "push_swap.h"
-
-void	print_error(void)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	ft_putstr("Error\n");
-	exit(EXIT_FAILURE);
-}
+	t_list	*cur_node;
 
-int		check_duplicate_value(t_DoublyList	*num_list)
-{
-	return (EXIT_FAILURE);
+	cur_node = lst;
+	while (cur_node)
+	{
+		f(cur_node->context);
+		cur_node = cur_node->next;
+	}
 }

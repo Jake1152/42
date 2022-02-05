@@ -6,22 +6,23 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/03 19:51:31 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/05 17:29:02 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> // should be removed
 #include "doublylist.h"
 
-void displayDoublyList(t_DoublyList* pList)
+void displayDoublyList(t_DoublyList *pList)
 {
 	t_DoublyListNode	*curDoublyListNode;
 	int					cnt;
 	// DoublyListNode	curDoublyListNode;
 	// curDoublyListNode.pLLink = &pLLink;
+	printf("== in displayDoublyList\n");
 	if (pList == NULL || pList->currentElementCount <= 0)
 	{
-		printf("pList is NULL or\n");
+		printf("pList is NULL\n");
 		if (pList != NULL)
 			printf("pList->currentElementCount : %d\n", pList->currentElementCount);
 		return ;
@@ -68,10 +69,11 @@ t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
 	printf("- Start of getDLElement\n\n\n");
 
 	displayDoublyList(pList);
-	if (pList == NULL)
+	if (pList == NULL || position < 0 || position > pList->currentElementCount)
+	{
+		printf("== pList is NULL or position is less than 0\n");
 		return (NULL);
-	if (position < 0 || position > pList->currentElementCount)
-		return (NULL);
+	}
 	curDoublyListNode = pList->headerNode;
 	//  0 1 2 3 4 5
 	if (position < pList->currentElementCount / 2)
@@ -105,7 +107,10 @@ int	addDLElement(t_DoublyList* pList, int position, t_DoublyListNode *newNode)
 
 	printf("- Start of addDLElement positon is %d\n", position);
 	if (pList == NULL || position < 0 || position > pList->currentElementCount)
+	{
+		printf("== pList is NULL in addDLElement\n");
 		return (FALSE);
+	}
 	if (pList->currentElementCount == 0)
 	{
 		printf("newNode address is : %p\n", newNode);
