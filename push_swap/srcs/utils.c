@@ -6,11 +6,11 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:10:59 by jim               #+#    #+#             */
-/*   Updated: 2022/01/28 14:24:03 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 19:49:40 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	ft_putchar(char ch)
 {

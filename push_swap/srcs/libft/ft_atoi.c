@@ -6,12 +6,11 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 16:37:45 by jim               #+#    #+#             */
-/*   Updated: 2022/02/05 20:48:51 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 19:46:26 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	ft_atoi(const char *str)
 {
@@ -38,15 +37,15 @@ int	ft_atoi(const char *str)
 	return ((int)result * sign);
 }
 
-int	main(int argc, char *argv[])
-{
-	int	idx;
+// int	main(int argc, char *argv[])
+// {
+// 	int	idx;
 
-	idx = 1;
-	while (argc >= idx)
-	{
-		printf("argv str is %s\n", argv[idx]);
-		printf("argv int is %d\n", ft_atoi(argv[idx]));
-		idx++;
-	}
-}
+// 	idx = 1;
+// 	while (argc >= idx)
+// 	{
+// 		printf("argv str is %s\n", argv[idx]);
+// 		printf("argv int is %d\n", ft_atoi(argv[idx]));
+// 		idx++;
+// 	}
+// }

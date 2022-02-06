@@ -6,11 +6,11 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:25:22 by jim               #+#    #+#             */
-/*   Updated: 2022/02/05 21:35:44 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 20:41:49 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	print_error(void)
 {
@@ -18,9 +18,9 @@ void	print_error(void)
 	exit(EXIT_FAILURE);
 }
 
-void	delete_and_print_error(t_DoublyList pList)
+void	delete_and_print_error(t_DoublyList *pList)
 {
-	deleteDoublyList(&pList);
+	// deleteDoublyList(&pList);
 	print_error();
 }
 
@@ -31,6 +31,8 @@ int	check_duplicate_value(t_DoublyList *pList)
 	t_DoublyListNode	*i_node;
 	t_DoublyListNode	*j_node;
 
+	if (pList == NULL)
+		print_error();
 	i = 1;
 	i_node = pList->headerNode;
 	while (i < pList->currentElementCount)

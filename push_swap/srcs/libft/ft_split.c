@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:51 by jim               #+#    #+#             */
-/*   Updated: 2022/02/06 18:25:38 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 20:28:10 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ char	**ft_split(char const *s, char c)
 	return (word_list);
 }
 
-/**/
+/*
 #include <stdio.h>
-
 int	main(int argc, char *argv[])
 {
 	char	**word_list;
@@ -117,3 +116,4 @@ int	main(int argc, char *argv[])
 	}
 	return (0);
 }
+*/

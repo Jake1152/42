@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:56 by jim               #+#    #+#             */
-/*   Updated: 2022/02/05 21:43:45 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 19:39:50 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include "doublylist.h"
+# include "../srcs/libft/libft.h"
 
 /* main */
 int					push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack);
@@ -46,5 +47,6 @@ size_t				ft_strlen(const char *s);
 /* error handler */
 void				print_error(void);
 int					check_duplicate_value(t_DoublyList *pList);
+void				delete_and_print_error(t_DoublyList *pList);
 
 #endif
