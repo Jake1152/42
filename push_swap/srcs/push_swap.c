@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/02/05 22:00:11 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 18:18:50 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ int	main(int argc, char *argv[])
 	while (idx < argc)
 	{
 		part_of_input_list = ft_split(argv[idx], ' ');
+		if (part_of_input_list == NULL)
+			delete_and_print_error(a_stack);
 		parse_str_to_doublylist(a_stack, part_of_input_list);
 		idx++;
-		// idx++를 잘보이게 하면서 어떻게 26줄로 줄일 것인가?
 	}
 	duplicate_flag = check_duplicate_value(a_stack);
 	if (duplicate_flag == FALSE)
