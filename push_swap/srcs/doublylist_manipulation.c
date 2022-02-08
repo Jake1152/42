@@ -62,11 +62,14 @@ t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
 {
 	t_DoublyListNode	*curDoublyListNode;
 
-	if (pList == NULL || position < 0 || position > pList->currentElementCount)
+	if (pList == NULL || position > pList->currentElementCount)
 		return (NULL);
+	if (position < 0)
+		position = pList->currentElementCount \
+		+ (position % pList->currentElementCount);
+	curDoublyListNode = pList->headerNode;
 	if (position < pList->currentElementCount / 2)
 	{
-		curDoublyListNode = pList->headerNode;
 		while (position > 0)
 		{
 			curDoublyListNode = curDoublyListNode->pRLink;
@@ -75,8 +78,7 @@ t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
 	}
 	else
 	{
-		curDoublyListNode = pList->tailerNode;
-		while (pList->currentElementCount - position > 1)
+		while (pList->currentElementCount - position > 0)
 		{
 			curDoublyListNode = curDoublyListNode->pLLink;
 			position++;
@@ -87,6 +89,8 @@ t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
 
 int	addDLElement_at_first_time(t_DoublyList *pList, t_DoublyListNode *newNode)
 {
+	if (pList == NULL || newNode == NULL)
+		return (FALSE);
 	newNode->pLLink = newNode;
 	newNode->pRLink = newNode;
 	pList->headerNode = newNode;
@@ -99,27 +103,21 @@ int	addDLElement(t_DoublyList *pList, int position, t_DoublyListNode *newNode)
 {
 	t_DoublyListNode	*prevNode;
 
-	if (pList == NULL || position < 0 || position > pList->currentElementCount)
+	if (pList == NULL || position < 0 || position > pList->currentElementCount \
+		|| newNode == NULL)
 		return (FALSE);
 	if (pList->currentElementCount == 0)
 		return (addDLElement_at_first_time(pList, newNode));
-	if (position == 0)
-	{
-		prevNode = getDLElement(pList, 0);
-		if (prevNode == NULL)
-			return (FALSE);
-		pList->headerNode = newNode;
-	}
-	else
-		prevNode = getDLElement(pList, position - 1);
+	prevNode = getDLElement(pList, position - 1);
 	if (prevNode == NULL)
 		return (FALSE);
+	if (position == 0)
+		pList->headerNode = newNode;
 	if (position == pList->currentElementCount)
 		pList->tailerNode = newNode;
 	newNode->pLLink = prevNode;
 	newNode->pRLink = prevNode->pRLink;
-	if (pList->currentElementCount >= 1)
-		prevNode->pRLink->pLLink = newNode;
+	prevNode->pRLink->pLLink = newNode;
 	prevNode->pRLink = newNode;
 	return (pList->currentElementCount++);
 }

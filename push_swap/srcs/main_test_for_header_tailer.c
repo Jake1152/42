@@ -16,34 +16,35 @@ int main()
 		addedDoublyListNode = NULL;
 		printf("\n=========== main for loop : %d\n", i);
 		displayDoublyList(testDoublyList);
-		if (i > 0)
-		{
-			printf("=== in Main prevListNode\n");
-			prevListNode = getDLElement(testDoublyList, i-1);
-			printf("=== in Main prevListNode : %p\n", prevListNode);
-			printf("=== in Main prevListNode->pLLink : %p\n", prevListNode->pLLink);
-			printf("=== in Main prevListNode->pRLink : %p\n", prevListNode->pRLink);
-			if (i > 1)
-				;
-				// while (42);
-		}
-		printf("== before createDoublyListNode\n");
+		// if (i > 0)
+		// {
+		// 	printf("=== in Main prevListNode\n");
+		// 	prevListNode = getDLElement(testDoublyList, i-1);
+		// 	printf("=== in Main prevListNode : %p\n", prevListNode);
+		// 	printf("=== in Main prevListNode->pLLink : %p\n", prevListNode->pLLink);
+		// 	printf("=== in Main prevListNode->pRLink : %p\n", prevListNode->pRLink);
+		// 	if (i > 1)
+		// 		;
+		// 		// while (42);
+		// }
+		// printf("== before createDoublyListNode\n");
 		addedDoublyListNode = createDoublyListNode(i);
-		printf("== after createDoublyListNode\n");
+		// printf("== after createDoublyListNode\n");
 
-		if (i > 0)
-		{
-			printf("### in Main prevListNode\n");
-			prevListNode = getDLElement(testDoublyList, i-1);
-			printf("### in Main prevListNode : %p\n", prevListNode);
-			printf("### in Main prevListNode->pLLink : %p\n", prevListNode->pLLink);
-			printf("### in Main prevListNode->pRLink : %p\n", prevListNode->pRLink);
-			// if (i > 1)
-				// while (42);
-		}
+		// if (i > 0)
+		// {
+		// 	printf("### in Main prevListNode\n");
+		// 	prevListNode = getDLElement(testDoublyList, i-1);
+		// 	printf("### in Main prevListNode : %p\n", prevListNode);
+		// 	printf("### in Main prevListNode->pLLink : %p\n", prevListNode->pLLink);
+		// 	printf("### in Main prevListNode->pRLink : %p\n", prevListNode->pRLink);
+		// 	// if (i > 1)
+		// 		// while (42);
+		// }
 
 		// printf("after create addedDoublyListNode\n");
-		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+		// printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
+		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, 0, addedDoublyListNode));
 		printf("###### testDoublyList->tailerNode->data : %d\n", testDoublyList->tailerNode->data);
 		addedDoublyListNode = NULL;
 		curListNode =  getDLElement(testDoublyList, i);
@@ -54,6 +55,17 @@ int main()
 	}
 	printf("\n\ntestDoublyList->headerNode->data %d\n", testDoublyList->headerNode->data);
 	displayDoublyList(testDoublyList);
+
+	printf(" ======================================================== \n");
+	printf(" ===== negative indexing test ===== \n");
+	printf(" ======================================================== \n");
+	for (int i = -1; i > -10; i--)
+	{	
+		printf("i : %d\n", i);
+		curListNode = getDLElement(testDoublyList, i);
+		printf("curListNode->data : %d\n", curListNode->data);
+	}
+	printf("\n");
 
 	printf("\n\n===============================\n");
 	printf("test remove\n");

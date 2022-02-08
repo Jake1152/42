@@ -114,7 +114,14 @@ int main()
 	clearDoublyList(testDoublyList);
 	printf("\n");
 	displayDoublyList(testDoublyList);
-    
+    if (testDoublyList)
+		printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
+	if (testDoublyList->headerNode == NULL)
+		printf("headerNode is NULL\n");
+	if (testDoublyList->tailerNode == NULL)
+		printf("tailerNode is NULL\n");
+	if (testDoublyList)
+		printf("testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	printf("\n\n===============================\n");
 	printf("finally test clear\n");
 

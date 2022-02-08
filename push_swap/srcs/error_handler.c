@@ -20,7 +20,9 @@ void	print_error(void)
 
 void	delete_and_print_error(t_DoublyList *pList)
 {
-	// deleteDoublyList(&pList);
+	deleteDoublyList(&pList);
+	if (pList == NULL)
+		ft_putstr("pList is NULL\n");
 	print_error();
 }
 
