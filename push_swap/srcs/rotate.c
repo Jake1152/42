@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	rotate(t_DoublyList *stack)
 {
 	if (stack == NULL || stack->currentElementCount <= 1)
 		return (print_error());
-	stack->headerNode = stack->headerNode->pRLink;
+	stack->tailerNode = stack->tailerNode->pLLink;
 	ft_putstr("rr\n");
 	// 명렁어 별로 쪼개야함
 	// 파라미터를 받거나 함수를 아예 별도로 빼는 방식으로 구현 가능.

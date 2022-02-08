@@ -37,8 +37,6 @@ void				clearDoublyList(t_DoublyList *pList);
 
 int					addDLElement(t_DoublyList *pList, int position, \
 								t_DoublyListNode *newNode);
-int					addDLElement_at_first_time(t_DoublyList *pList, \
-								t_DoublyListNode *newNode);
 int					removeDLElement(t_DoublyList *pList, int position);
 t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position);
 void				displayDoublyList(t_DoublyList *pList);

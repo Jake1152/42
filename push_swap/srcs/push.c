@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	push_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
 	t_DoublyListNode	*pop_node;
 
 	if (a_stack == NULL || b_stack == NULL)
-		return (print_error());
+		return ;
 	pop_node = pop(b_stack);
 	if (pop_node == NULL)
-		return (print_error());
+		return ;
 	addDLElement(a_stack, a_stack->currentElementCount, pop_node);
 }
 
@@ -29,9 +29,9 @@ void	push_b(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	t_DoublyListNode	*pop_node;
 
 	if (a_stack == NULL || b_stack == NULL)
-		return (print_error());
+		return ;
 	pop_node = pop(a_stack);
 	if (pop_node == NULL)
-		return (print_error());
+		return ;
 	addDLElement(b_stack, b_stack->currentElementCount, pop_node);
 }

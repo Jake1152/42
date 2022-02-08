@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	reverse_rotate(t_DoublyList *stack)
 {
     if (stack == NULL || stack->currentElementCount <= 1)
         return (print_error());
-    stack->headerNode = stack->headerNode->pLLink;
+    stack->tailerNode = stack->tailerNode->pLLink;
 }
 
 void	reverse_rotate_both(t_DoublyList *a_stack, t_DoublyList *b_stack)

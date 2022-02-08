@@ -87,18 +87,6 @@ t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
 	return (curDoublyListNode);
 }
 
-int	addDLElement_at_first_time(t_DoublyList *pList, t_DoublyListNode *newNode)
-{
-	if (pList == NULL || newNode == NULL)
-		return (FALSE);
-	newNode->pLLink = newNode;
-	newNode->pRLink = newNode;
-	pList->headerNode = newNode;
-	pList->tailerNode = newNode;
-	pList->currentElementCount++;
-	return (pList->currentElementCount);
-}
-
 int	addDLElement(t_DoublyList *pList, int position, t_DoublyListNode *newNode)
 {
 	t_DoublyListNode	*prevNode;
@@ -107,7 +95,13 @@ int	addDLElement(t_DoublyList *pList, int position, t_DoublyListNode *newNode)
 		|| newNode == NULL)
 		return (FALSE);
 	if (pList->currentElementCount == 0)
-		return (addDLElement_at_first_time(pList, newNode));
+	{
+		newNode->pLLink = newNode;
+		newNode->pRLink = newNode;
+		pList->headerNode = newNode;
+		pList->tailerNode = newNode;
+		return (pList->currentElementCount++);
+	}
 	prevNode = getDLElement(pList, position - 1);
 	if (prevNode == NULL)
 		return (FALSE);

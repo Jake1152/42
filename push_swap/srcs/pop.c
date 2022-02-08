@@ -10,29 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
-t_DoublyListNode	*pop(t_DoublyList *stack)
+t_DoublyListNode	*pop(t_DoublyList *pStack)
 {
-	t_DoublyListNode	*tmp_node;
 	t_DoublyListNode	*pop_node;
-	int					remove_return_value;
+	t_DoublyListNode	*prev_node;
+	t_DoublyListNode	*next_node;
 
-	if (stack == NULL || stack->currentElementCount == 0)
+	/*
+		pop할떄 재할당 필요 없음, 연결만 해제시킨다.
+	*/
+	if (pStack == NULL || pStack->currentElementCount == 0)
 		return (NULL);
-	tmp_node = getDLElement(stack, stack->currentElementCount);
-	if (tmp_node == NULL)
-		return (NULL);
-	pop_node = createDoublyListNode(tmp_node->data);
-	if (tmp_node == NULL)
-		return (NULL);
-	remove_return_value = removeDLElement(stack, \
-											stack->currentElementCount - 1);
-	if (remove_return_value == FALSE)
+	pop_node = getDLElement(pStack, pStack->currentElementCount - 1);
+	prev_node = pop_node->pLLink;
+	next_node = pop_node->pRLink;
+	pStack->tailerNode = prev_node;
+	if (pStack->currentElementCount == 1)
 	{
-		free(pop_node);
-		pop_node = NULL;
-		return (NULL);
+		pStack->headerNode = NULL;
+		pStack->tailerNode = NULL;
 	}
+	prev_node->pRLink = pop_node->pRLink;
+	next_node->pLLink = pop_node->pLLink;
+	pop_node->pLLink = NULL;
+	pop_node->pRLink = NULL;
+	pStack->currentElementCount--;	
 	return (pop_node);
 }
