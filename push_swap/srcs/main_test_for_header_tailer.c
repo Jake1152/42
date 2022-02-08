@@ -16,7 +16,32 @@ int main()
 		addedDoublyListNode = NULL;
 		printf("\n=========== main for loop : %d\n", i);
 		displayDoublyList(testDoublyList);
+		if (i > 0)
+		{
+			printf("=== in Main prevListNode\n");
+			prevListNode = getDLElement(testDoublyList, i-1);
+			printf("=== in Main prevListNode : %p\n", prevListNode);
+			printf("=== in Main prevListNode->pLLink : %p\n", prevListNode->pLLink);
+			printf("=== in Main prevListNode->pRLink : %p\n", prevListNode->pRLink);
+			if (i > 1)
+				;
+				// while (42);
+		}
+		printf("== before createDoublyListNode\n");
 		addedDoublyListNode = createDoublyListNode(i);
+		printf("== after createDoublyListNode\n");
+
+		if (i > 0)
+		{
+			printf("### in Main prevListNode\n");
+			prevListNode = getDLElement(testDoublyList, i-1);
+			printf("### in Main prevListNode : %p\n", prevListNode);
+			printf("### in Main prevListNode->pLLink : %p\n", prevListNode->pLLink);
+			printf("### in Main prevListNode->pRLink : %p\n", prevListNode->pRLink);
+			// if (i > 1)
+				// while (42);
+		}
+
 		// printf("after create addedDoublyListNode\n");
 		printf("addDLElement(testDoublyList, i, addedDoublyListNode) : %d\n", addDLElement(testDoublyList, i, addedDoublyListNode));
 		printf("###### testDoublyList->tailerNode->data : %d\n", testDoublyList->tailerNode->data);
@@ -32,29 +57,34 @@ int main()
 
 	printf("\n\n===============================\n");
 	printf("test remove\n");
+	position = 4;
+	printf("position : %d\n", position);
+	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
+	displayDoublyList(testDoublyList);
+	printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	position = 3;
 	printf("position : %d\n", position);
 	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
 	displayDoublyList(testDoublyList);
-	position = 0;
+	printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
+	position = 2;
 	printf("position : %d\n", position);
 	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
 	displayDoublyList(testDoublyList);
+	printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	position = 1;
 	printf("position : %d\n", position);
 	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
 	displayDoublyList(testDoublyList);
-	position = 1;
-	printf("position : %d\n", position);
-	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
-	displayDoublyList(testDoublyList);
+	printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	position = 0;
 	printf("position : %d\n", position);
 	printf("removeDLElement(testDoublyList, position) : %d\n", removeDLElement(testDoublyList, position));
 	printf("\n");
 	printf("current count is %d\n", testDoublyList->currentElementCount);
 	displayDoublyList(testDoublyList);
-
+	if (testDoublyList)
+		printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	printf("\n\n===============================\n");
 	printf("test delete\n");
 	deleteDoublyList(&testDoublyList);
@@ -63,11 +93,12 @@ int main()
 	printf("\n");
 	printf("test delete\n");
 	deleteDoublyList(&testDoublyList);
+	if (testDoublyList)
+		printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	if (testDoublyList == NULL)
 		printf("after delete, plist be NULL assigned.\n");
 	printf("\n");
 	displayDoublyList(testDoublyList);
-
 	testDoublyList = createDoublyList();
 	if (testDoublyList == NULL)
 		printf("\n====testDoublyList is NULL===\n");
@@ -94,6 +125,8 @@ int main()
 	clearDoublyList(testDoublyList);
 	printf("\n");
 	displayDoublyList(testDoublyList);
+	if (testDoublyList)
+		printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	testDoublyList = createDoublyList();
 	if (testDoublyList == NULL)
 		printf("\n====testDoublyList is NULL===\n");
@@ -108,13 +141,22 @@ int main()
 		addedDoublyListNode = NULL;
 		displayDoublyList(testDoublyList);
 	}
+	if (testDoublyList)
+		printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	displayDoublyList(testDoublyList);
 	printf("\n");
 	printf("test clear\n");
 	clearDoublyList(testDoublyList);
 	printf("\n");
 	displayDoublyList(testDoublyList);
-    
+	if (testDoublyList)
+		printf("#### testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
+	if (testDoublyList->headerNode == NULL)
+		printf("headerNode is NULL\n");
+	if (testDoublyList->tailerNode == NULL)
+		printf("tailerNode is NULL\n");
+	if (testDoublyList)
+		printf("testDoublyList->currentElementCount : %d\n", testDoublyList->currentElementCount);
 	printf("\n\n===============================\n");
 	printf("finally test clear\n");
 
