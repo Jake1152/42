@@ -45,7 +45,7 @@ void	swap_both(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
 	// 아무것도 안하면 카운팅하지 말아야한다. 즉 한개라도 동작하지 않으면 명령어 출력하지 않는다.
 	// void로 해놓았지만 구현할 정렬알고리즘 방식에 따라서 다르게 가야한다.
-	// 아무동작도 안한 경우를 return 받아서 쓸일이 있는지 생각해보아야한다.
+	// 아무동작도 안한 경우를 return 받아서 쓸일이 있는지
 	swap(a_stack);
 	swap(b_stack);
 }
