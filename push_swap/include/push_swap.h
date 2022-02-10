@@ -24,7 +24,7 @@ int					parse_str_to_doublylist(t_DoublyList *pList, \
 
 /* stack of pdf actions */
 void				swap_a(t_DoublyList *stack, int print_flag);
-void				swap_top(t_DoublyList *stack, int print_flag);
+void				swap_b(t_DoublyList *stack, int print_flag);
 void				swap_both(t_DoublyList *a_stack, t_DoublyList *b_stack);
 void				swap_command_printer(char *command, int print_flag);
 

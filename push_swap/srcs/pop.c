@@ -32,10 +32,11 @@ t_DoublyListNode	*pop(t_DoublyList *pStack)
 		pStack->headerNode = NULL;
 		pStack->tailerNode = NULL;
 	}
-	prev_node->pRLink = pop_node->pRLink;
-	next_node->pLLink = pop_node->pLLink;
+	prev_node->pRLink = next_node;
+	next_node->pLLink = prev_node;
 	pop_node->pLLink = NULL;
 	pop_node->pRLink = NULL;
+	pStack->tailerNode = prev_node;
 	pStack->currentElementCount--;
 	return (pop_node);
 }

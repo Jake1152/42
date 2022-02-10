@@ -103,6 +103,7 @@ int	addDLElement(t_DoublyList *pList, int position, t_DoublyListNode *newNode)
 		return (pList->currentElementCount++);
 	}
 	prevNode = getDLElement(pList, position - 1);
+	printf("=== prevNode->data : %d\n", prevNode->data);
 	if (prevNode == NULL)
 		return (FALSE);
 	if (position == 0)
