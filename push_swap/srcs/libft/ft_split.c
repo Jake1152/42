@@ -6,11 +6,27 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:51 by jim               #+#    #+#             */
-/*   Updated: 2022/02/06 20:28:10 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/10 20:12:24 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	free_list(char ***word_list, int len_of_alloc)
+{
+	int	idx;
+
+	idx = 0;
+	while (idx < len_of_alloc)
+	{
+		free((*word_list)[idx]);
+		(*word_list)[idx] = NULL;
+		idx++;
+	}
+	free(*word_list);
+	*word_list = NULL;
+	return (-1);
+}
 
 static size_t	ft_word_cnt(char const *s, char c)
 {
@@ -31,21 +47,6 @@ static size_t	ft_word_cnt(char const *s, char c)
 		}
 	}
 	return (word_cnt);
-}
-
-static int	free_list(char ***word_list, int len_of_alloc)
-{
-	int	idx;
-
-	idx = 0;
-	while (idx < len_of_alloc)
-	{
-		free((*word_list)[idx]);
-		(*word_list)[idx] = NULL;
-		idx++;
-	}
-	word_list = NULL;
-	return (-1);
 }
 
 static int	ft_alloc_word(char const *s, char c, char **word_list)
@@ -93,27 +94,35 @@ char	**ft_split(char const *s, char c)
 }
 
 /*
+진짜로 free 및  NULL할당 되었는지 확인 필요
+
 #include <stdio.h>
 int	main(int argc, char *argv[])
 {
 	char	**word_list;
+	int		word_cnt;
 	int		idx;
 
-	idx = 1;
 	if (argc < 1)
 		return (0);
+	idx = 1;
 	while (idx < argc)
 	{
 		word_list = ft_split(argv[idx], ' ');
 		if (word_list == NULL)
 			return (0);
-		while (*word_list)
+		word_cnt = 0;
+		while (word_list[word_cnt])
 		{
-			printf("*word_list : %s\n", *word_list);
-			word_list++;
+			printf("*word_list : %s\n", word_list[word_cnt]);
+			word_cnt++;
 		}
+		free_list(&word_list, word_cnt);
+		if (word_list == NULL)
+			printf("word_list pointer also prevented dangling\n");
 		idx++;
 	}
+	while (42) ;
 	return (0);
 }
 */

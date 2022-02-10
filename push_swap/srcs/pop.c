@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:11:45 by jim               #+#    #+#             */
-/*   Updated: 2022/02/05 21:12:16 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/10 16:50:33 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ t_DoublyListNode	*pop(t_DoublyList *pStack)
 	next_node->pLLink = pop_node->pLLink;
 	pop_node->pLLink = NULL;
 	pop_node->pRLink = NULL;
-	pStack->currentElementCount--;	
+	pStack->currentElementCount--;
 	return (pop_node);
 }

@@ -1,0 +1,6 @@
+gcc -o stack_action_test.out ./stack_action_test_main.c \
+                        ./push_swap.c ./utils.c ./error_handler.c \
+                        ./libft/ft_split.c ./libft/ft_substr.c ./libft/ft_strdup.c ./libft/ft_strlcpy.c ./libft/ft_atoi.c ./libft/ft_strncmp.c \
+                        ./doublylist_definition.c ./doublylist_manipulation.c \
+                        ./pop.c ./push.c ./reverse_rotate.c ./rotate.c ./swap.c \
+                        ./check_sort.c

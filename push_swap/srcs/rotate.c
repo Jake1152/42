@@ -6,24 +6,43 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:19 by jim               #+#    #+#             */
-/*   Updated: 2022/02/08 20:32:15 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/10 20:48:37 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	rotate(t_DoublyList *stack)
+void	rotate_a(t_DoublyList *stack, int print_flag)
 {
+	t_DoublyListNode	*prevOfHeaderNode;
+
 	if (stack == NULL || stack->currentElementCount <= 1)
 		return (print_error());
-	stack->tailerNode = stack->tailerNode->pLLink;
-	ft_putstr("rr\n");
-	// 명렁어 별로 쪼개야함
-	// 파라미터를 받거나 함수를 아예 별도로 빼는 방식으로 구현 가능.
+	prevOfHeaderNode = stack->headerNode->pLLink;
+	stack->tailerNode = stack->headerNode;
+	stack->headerNode = prevOfHeaderNode;
+	if (print_flag == TRUE)
+		ft_putstr("ra\n");
+}
+
+void	rotate_b(t_DoublyList *stack, int print_flag)
+{
+	t_DoublyListNode	*prevOfHeaderNode;
+
+	if (stack == NULL || stack->currentElementCount <= 1)
+		return (print_error());
+	prevOfHeaderNode = stack->headerNode->pLLink;
+	stack->tailerNode = stack->headerNode;
+	stack->headerNode = prevOfHeaderNode;
+	if (print_flag == TRUE)
+		ft_putstr("rb\n");
 }
 
 void	rotate_both(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
-	rotate(a_stack);
-	rotate(b_stack);
+	if (a_stack == NULL || b_stack == NULL)
+		return ;
+	rotate(a_stack, FALSE);
+	rotate(b_stack, FALSE);
+	ft_putstr("rr\n");
 }
