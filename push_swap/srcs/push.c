@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include <stdio.h>
 
 void	push_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
@@ -22,8 +21,6 @@ void	push_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	pop_node = pop(b_stack);
 	if (pop_node == NULL)
 		return ;
-	printf("a_stack->currentElementCount : %d\n", a_stack->currentElementCount);
-	displayDoublyList(a_stack);
 	addDLElement(a_stack, a_stack->currentElementCount, pop_node);
 	ft_putstr("pa\n");
 }

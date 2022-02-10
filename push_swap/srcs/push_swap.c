@@ -61,10 +61,14 @@ int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	printf("== displayDoublyList(b_stack)\n");
 	displayDoublyList(b_stack);
 
-	printf("\n\n===== swap_a test\n");
-	swap_a(a_stack, TRUE);
-	printf("== displayDoublyList(a_stack)\n");
 	displayDoublyList(a_stack);
+	for (int i=1; i<=1; i++)
+	{
+		printf("\n\n== swap_a %dth test\n", i);
+		swap_a(a_stack, TRUE);
+		printf("== displayDoublyList(a_stack)\n");
+		displayDoublyList(a_stack);
+	}
 
 	printf("\n\n====== swap_b test\n");
 	swap_b(b_stack, TRUE);
@@ -83,16 +87,24 @@ int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 
 	printf("\n=====================================================\n");
 	printf("\n\n====== push_b test\n");
-	push_b(a_stack, b_stack);
-	printf("== displayDoublyList(a_stack)\n");
-	displayDoublyList(a_stack);
-	printf("== displayDoublyList(b_stack)\n");
-	displayDoublyList(b_stack);
+	for (int i=1; i<=3; i++)
+	{
+		printf("\n\n====== push_b %dth test\n", i);
+		push_b(a_stack, b_stack);
+		printf("\n== displayDoublyList(a_stack)\n");
+		displayDoublyList(a_stack);
+		printf("\n== displayDoublyList(b_stack)\n");
+		displayDoublyList(b_stack);
+	}
+	
 	printf("\n=====================================================\n");
 
 	printf("\n\n== displayDoublyList(a_stack)\n");
 	displayDoublyList(a_stack);
+	printf("\n\n== displayDoublyList(b_stack)\n");
+	displayDoublyList(b_stack);
 
+	printf("\n\n### Finally done\n");
 
 	// size_t	cmd_cnt;
 	return (0);
