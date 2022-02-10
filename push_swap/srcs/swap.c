@@ -64,7 +64,7 @@ void	swap_b(t_DoublyList *stack, int print_flag)
 	nextNode->pLLink = prevNode;
 	midNode->pLLink = nextNode;
 	midNode->pRLink = nextNode->pRLink;
-	nextNode->pRLink = midNode;
+	nextNode->pRLink = midNode; 
 	stack->tailerNode = midNode;
 	stack->headerNode->pLLink = midNode;
 	swap_command_printer("sb", print_flag);
