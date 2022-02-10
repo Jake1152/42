@@ -104,6 +104,20 @@ int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	printf("\n\n== displayDoublyList(b_stack)\n");
 	displayDoublyList(b_stack);
 
+
+	for (int i=1; i<=3; i++)
+	{
+		printf("\n\n== swap_b %dth test\n", i);
+		swap_b(b_stack, TRUE);
+		printf("== displayDoublyList(b_stack)\n");
+		displayDoublyList(b_stack);
+	}
+
+	printf("\n\n== displayDoublyList(a_stack)\n");
+	displayDoublyList(a_stack);
+	printf("\n\n== displayDoublyList(b_stack)\n");
+	displayDoublyList(b_stack);
+
 	printf("\n\n### Finally done\n");
 
 	// size_t	cmd_cnt;
