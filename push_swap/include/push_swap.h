@@ -40,6 +40,9 @@ void				reverse_rotate_b(t_DoublyList *stack, int print_flag);
 void				reverse_rotate_both(t_DoublyList *a_stack, \
 										t_DoublyList *b_stack);
 
+/* sort algorithms */
+
+
 /* other stack action */
 t_DoublyListNode	*pop(t_DoublyList *stack);
 int					check_sort_DESC(t_DoublyList *stack);
