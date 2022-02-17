@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:25:22 by jim               #+#    #+#             */
-/*   Updated: 2022/02/06 20:41:49 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/17 21:04:25 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(void)
 {
-	ft_putstr("Error\n");
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
@@ -22,7 +22,7 @@ void	delete_and_print_error(t_DoublyList *pList)
 {
 	deleteDoublyList(&pList);
 	if (pList == NULL)
-		ft_putstr("pList is NULL\n");
+		ft_putstr("pList is NULL\n"); // shoudl be removed
 	print_error();
 }
 

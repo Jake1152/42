@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/02/10 20:15:38 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/17 21:02:54 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int	main(int argc, char *argv[])
 	t_DoublyList		*b_stack;
 
 	if (argc == 1)
-		print_error();
+		return (0);
 	a_stack = createDoublyList();
 	if (a_stack == NULL)
 		print_error();
@@ -183,6 +183,7 @@ int	main(int argc, char *argv[])
 		if (part_of_input_list == NULL)
 			delete_and_print_error(a_stack);
 		parse_str_to_doublylist(a_stack, part_of_input_list);
+		// parse_str_to_doublylist() 함수의 return 값을 받아서 return (0); 처리해야함.
 		idx++;
 	}
 	if (check_duplicate_value(a_stack) == FALSE)

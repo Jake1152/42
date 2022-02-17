@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 16:37:45 by jim               #+#    #+#             */
-/*   Updated: 2022/02/06 19:46:26 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/17 21:04:59 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
+	if (*str)
+		return (0);
 	return ((int)result * sign);
 }
 
