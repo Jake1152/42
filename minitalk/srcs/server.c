@@ -6,12 +6,15 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:39:33 by jim               #+#    #+#             */
-/*   Updated: 2022/02/18 17:52:54 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/19 21:30:36 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "process_communication.h"
+
 int	main(void)
 {
+	long long	received_sig;
 	/*
 		TODO
 		- server는 ctrl+c가 있기 전까지는 계속 떠있어야한다.
@@ -28,5 +31,10 @@ int	main(void)
 		- write함수에서 알수 있는 방법이 있는가?
 		
 	*/
+	
+	
+	
+	// SIGUSR1
+	// while (42)
 	return (0);
 }

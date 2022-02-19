@@ -7,3 +7,9 @@ int main()
     // 결국 unsigned int 
     return (0);
 }
+
+
+/*
+- 64 + 16
+- 
+*/
