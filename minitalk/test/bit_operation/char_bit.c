@@ -27,9 +27,13 @@ int main(int argc, char *argv[])
         {
             printf("str[idx] & flag : %d\n", str[idx] & flag);
             if (str[idx] & flag)
-                kill(pid)
+                kill(server_pid, SIGUSR1);
+            else
+                kill(server_pid, SIGUSR2);
             flag >>= 1;
         }
+        whukle
+        flag 
         printf("char : %du\n", flag);
         idx++;
     }
