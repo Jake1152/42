@@ -6,18 +6,21 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:10:59 by jim               #+#    #+#             */
-/*   Updated: 2022/02/19 21:39:26 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/23 12:48:35 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process_communication.h"
 
-void	ft_putstr(char *s)
+void	ft_putendl(char *s, int fd)
 {
-	size_t	str_len;
-
-	str_len = ft_strlen(s);
-	write(1, s, str_len);
+	if (s == NULL)
+	{
+		ft_putendl("There are no string.", 2);
+		return ;
+	}
+	write(fd, s, ft_strlen(s));
+	write(fd, '\n', 1);
 }
 
 size_t	ft_strlen(const char *s)

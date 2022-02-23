@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:39:30 by jim               #+#    #+#             */
-/*   Updated: 2022/02/19 21:40:17 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/23 11:55:35 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char *argv[])
 	kill(pid, SIGUSR1);
 	argv[2];
 }
-
 
 int main(int argc, char *argv[])
 {
