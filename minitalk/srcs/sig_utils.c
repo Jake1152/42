@@ -1,11 +1,7 @@
 #include "process_communication.h"
 
-void	sigaction_init(void (*handler))
+void	sigaction_init(t_sigaction sa)
 {
-	t_sigaction sa;
-
-	sa.sa_sigaction = handler;
-	sa.sa_flags = SA_SIGINFO;
 	if (sigemptyset(&sa.sa_mask) == -1);
 		error_handler("sigemptyset setting Error\n");
 	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1);

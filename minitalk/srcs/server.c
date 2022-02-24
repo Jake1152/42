@@ -54,16 +54,18 @@ void	sa_server_handler(siginfo_t *sig_info, void *ucontext)
 // int	main(int argc, char *argv[])
 int	main()
 {
-	struct sigaction	sa;
-	long long			received_sig;
-	pid_t				server_pid;
+	t_sigaction	sa;
+	long long	received_sig;
+	pid_t		server_pid;
 
 	// (int)argc;
 	// (char *)argv[0];
 	server_pid = getpid();
 	if (pid_valider(server_pid) == -1)
 		error_handler("Server pid is wrong.");
-	sigaction_init(&sa_server_handler);
+	sa.sa_sigaction = &sa_server_handler;
+	sa.sa_flags = SA_SIGINFO;
+	sigaction_init(sa);
 	printf("Server launched, pid is %d\n", server_pid); // ft_printf로 변환할것!
 	while (42)
 		pause();

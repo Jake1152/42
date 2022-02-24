@@ -72,9 +72,9 @@ void	sa_client_handler(siginfo_t *sig_info, void *ucontext)
 
 int main(int argc, char *argv[])
 {
-	struct sigaction	sa;
-	pid_t				server_pid;
-	pid_t				client_pid;
+	t_sigaction	sa;
+	pid_t		server_pid;
+	pid_t		client_pid;
 
 	if (argc != 2)
 		error_handler("non invalid argument.");
@@ -88,7 +88,9 @@ int main(int argc, char *argv[])
 	if (pid_valider(client_pid) == -1)
 		error_handler("Client pid is wrong.");
 	printf("Client pid is %d\n", client_pid); // ft_printf로 변환할것!
-	sigaction_init(&sa_client_handler);
+	sa.sa_sigaction = &sa_client_handler;
+	sa.sa_flags = SA_SIGINFO;
+	sigaction_init(sa);
 	string_sender(server_pid, argv[2]);
 	return (0);
 }
