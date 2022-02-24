@@ -51,7 +51,14 @@ void	server_bit_receiver(siginfo_t *sig_info)
 }
 void	sa_server_handler(int signo, siginfo_t *sig_info, void *ucontext)
 {
+	static pid_t	pid_flag = 0;
+
 	(void)ucontext;
+	if (sig_info->si_pid != pid_flag)
+	{
+		printf("Client Pid %d : ", sig_info->si_pid);
+		pid_flag = sig_info->si_pid;
+	}
 	// signal catch했을때와 보내야할때를 구분해야한다.
 	// 다시 생각해보니 구분할 수 없다.
 	// 지금 받는 신호가 몇번쨰인지 어떻게 알것인가?
