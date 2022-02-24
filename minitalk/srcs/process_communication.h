@@ -38,7 +38,7 @@ void	sa_client_handler(siginfo_t *sig_info, void *ucontext);
 void	client_bit_receiver(siginfo_t *sig_info);
 int 	string_sender(pid_t server_pid, char *str);
 /* sigaction utils */
-void	sigaction_init(void (*handler));
+void	sigaction_init(t_sigaction sa);
 /* utils */
 void	ft_putendl(char *s, int fd);
 size_t	ft_strlen(const char *s);
