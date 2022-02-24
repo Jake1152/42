@@ -54,11 +54,33 @@ void	server_bit_receiver(siginfo_t *sig_info)
 void	sa_server_handler(int signo, siginfo_t *sig_info, void *ucontext)
 {
 	(void)ucontext;
-	// signal catch했을때와 보내야할때를 구분해야한다.
-	// 다시 생각해보니 구분할 수 없다.
-	// 지금 받는 신호가 몇번쨰인지 어떻게 알것인가?
-	// pid를 이용
-	server_bit_receiver(sig_info);
+	static unsigned char	bit_receiver = 0;
+	static unsigned char	bit_flag = 1 << 7;
+
+	// printf("current bit flag is : %d\n", bit_flag);
+	// printf("sig_info->si_signo is : %d\n", sig_info->si_signo);
+	if (sig_info->si_signo == SIGUSR1)
+	{
+		//printf("receive USR1\n");
+		bit_receiver |=  bit_flag;
+	}
+	//else if (sig_info->si_signo == SIGUSR2)
+	//{
+		//printf("receive USR2\n");
+	//	;
+	//}
+	// printf("current bit_receiver is : %d\n", bit_receiver);
+	bit_flag >>= 1;
+	/* ACK send */
+	if (server_bit_sender(sig_info->si_pid, 1) == -1)
+		error_handler("server side bit_sender Error.");
+	if (bit_flag == 0)
+	{
+		write(1, &bit_receiver, 1);
+		bit_receiver = 0;
+		bit_flag = 1 << 7;
+	}
+	// server_bit_receiver(sig_info);
 }
 
 // int	main(int argc, char *argv[])

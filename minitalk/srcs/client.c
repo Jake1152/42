@@ -16,14 +16,7 @@ t_signal_status	g_signal_status;
 
 void	client_bit_receiver(siginfo_t *sig_info)
 {
-	// signal을 이전에 보냈는지 정보도 알아야한다.
-	/* ACK Received*/
-	if (g_signal_status.sig_send_status == ON && \
-		sig_info->si_signo == SIGUSR1)
-	{
-		g_signal_status.sig_receive_status = ON;
-		g_signal_status.sig_send_status = OFF;
-	}
+	;
 }
 
 int string_sender(pid_t server_pid, char *str)
@@ -74,7 +67,14 @@ int string_sender(pid_t server_pid, char *str)
 void	sa_client_handler(int signo, siginfo_t *sig_info, void *ucontext)
 {
 	(void)ucontext;
-	client_bit_receiver(sig_info);
+	// signal을 이전에 보냈는지 정보도 알아야한다.
+	/* ACK Received*/
+	if (g_signal_status.sig_send_status == ON && \
+		sig_info->si_signo == SIGUSR1)
+	{
+		g_signal_status.sig_receive_status = ON;
+		g_signal_status.sig_send_status = OFF;
+	}
 }
 
 int main(int argc, char *argv[])

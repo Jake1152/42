@@ -5,7 +5,7 @@ void	sigaction_init(void (*handler))
 	t_sigaction	sa;
 
 	sa.sa_flags = SA_SIGINFO;
-        sa.sa_sigaction = (void (*)(int, siginfo_t *, void *))handler;
+	sa.sa_sigaction = (void (*)(int, siginfo_t *, void *))handler;
 	if (sigemptyset(&sa.sa_mask) == -1)
 		error_handler("sigemptyset setting Error\n");
 	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1)
