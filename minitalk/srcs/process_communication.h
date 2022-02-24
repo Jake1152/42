@@ -45,6 +45,7 @@ void	ft_putstr(char *s);
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		pid_valider(pid_t pid);
 /* error handler */
 void	error_handler(char *error_sentence);
 
