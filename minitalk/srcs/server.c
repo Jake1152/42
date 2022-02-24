@@ -34,11 +34,11 @@ void	server_bit_receiver(siginfo_t *sig_info)
 		//printf("receive USR1\n");
 		bit_receiver |=  bit_flag;
 	}
-	else if (sig_info->si_signo == SIGUSR2)
-	{
+	//else if (sig_info->si_signo == SIGUSR2)
+	//{
 		//printf("receive USR2\n");
-		;
-	}
+	//	;
+	//}
 	// printf("current bit_receiver is : %d\n", bit_receiver);
 	bit_flag >>= 1;
 	/* ACK send */

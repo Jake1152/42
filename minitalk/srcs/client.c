@@ -52,7 +52,7 @@ int string_sender(pid_t server_pid, char *str)
 			}
 			g_signal_status.sig_send_status = ON;
 			pause(); // ACK받기 위함, NULL에 대한 ACK도 받아야.
-			usleep(10000);
+			usleep(1000);
 			// ACK를 어떻게 인지할것인가?
 			// inturrupt온게 SIGUSR1이라는걸 알아야한다.
 			// sa_sigaction에 할당한 함수에서 알아채서 그 다음에
