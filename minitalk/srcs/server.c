@@ -32,7 +32,7 @@ void	server_bit_receiver(siginfo_t *sig_info)
 		;
 	bit_flag >>= 1;
 	/* ACK send */
-	if (server_bit_sender(sig_info->pid, 1) == -1)
+	if (server_bit_sender(sig_info->si_pid, 1) == -1)
 		error_handler("bit_sender Error.");
 	if (bit_flag == 0)
 	{
@@ -47,6 +47,7 @@ void	sa_server_handler(siginfo_t *sig_info, void *ucontext)
 	// signal catch했을때와 보내야할때를 구분해야한다.
 	// 다시 생각해보니 구분할 수 없다.
 	// 지금 받는 신호가 몇번쨰인지 어떻게 알것인가?
+	// pid를 이용
 	server_bit_receiver(sig_info);
 }
 

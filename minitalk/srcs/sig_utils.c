@@ -12,8 +12,8 @@ void	sigaction_init(void (*handler))
 		error_handler("sa_mask SIGUSR1 setting Error\n");
 	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1);
 		error_handler("sa_mask SIGUSR2 setting Error\n");
-	if (sigaciton(SIGUSR1, &sa, NULL) < 0)
+	if (sigaction(SIGUSR1, &sa, NULL) < 0)
 		error_handler("sigaciton SIGUSR1 setting Error\n");
-	if (sigaciton(SIGUSR2, &sa, NULL) < 0)
+	if (sigaction(SIGUSR2, &sa, NULL) < 0)
 		error_handler("sigaciton SIGUSR2 setting Error\n");
 }
