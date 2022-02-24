@@ -59,3 +59,34 @@ int	ft_atoi(const char *str)
 		return (0);
 	return ((int)result * sign);
 }
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	c1;
+	unsigned char	c2;
+	size_t			i;
+
+	i = 0;
+	while (i++ < n)
+	{
+		c1 = *s1++;
+		c2 = *s2++;
+		if (c1 != c2)
+		{
+			if (c1 < c2)
+				return (-1);
+			else
+				return (1);
+		}
+		if (!c1)
+			break ;
+	}
+	return (0);
+}
+
+int	pid_valider(pid_t pid)
+{
+	if (pid < 11 || pid > 99998)
+		return (-1);
+	return (1);
+}

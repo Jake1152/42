@@ -1,10 +1,10 @@
 #include "process_communication.h"
 
-void	sigaction_init()
+void	sigaction_init(void (*handler))
 {
 	t_sigaction sa;
 
-	sa.sa_sigaction = &sa_client_handler;
+	sa.sa_sigaction = handler;
 	sa.sa_flags = SA_SIGINFO;
 	if (sigemptyset(&sa.sa_mask) == -1);
 		error_handler("sigemptyset setting Error\n");

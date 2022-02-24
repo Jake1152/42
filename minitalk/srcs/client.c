@@ -15,15 +15,14 @@ t_signal_status	g_signal_status;
 
 void    client_bit_receiver(siginfo_t *sig_info)
 {
-	unsigned char	bit_flag;
 	// signal을 이전에 보냈는지 정보도 알아야한다.
 	/* ACK Received*/
-	if (sig_info->si_signo == SIGUSR1)
+	if (g_signal_status.sig_send_status == ON && \
+		sig_info->si_signo == SIGUSR1)
 	{
 		if (client_bit_sender(sig_info) == -1)
-			error_handler("bit_sender Error.");
-		g_signal_status.sig_receive_status = ON;
-		ft_putendl("ACK", 1);
+			error_handler("client side bit_sender Error.");
+		g_signal_status.sig_send_status = OFF;
 	}
 }
 
@@ -45,6 +44,7 @@ int string_sender(pid_t server_pid, char *str)
 				kill(server_pid, SIGUSR1);
 			else//SIGUSR2 받을때 0이라서 처리를 안하니까 안보낸다? 그래도 가독성과 명시성을 위해 적는게 나을까?
 				kill(server_pid, SIGUSR2);
+			g_signal_status.sig_send_status = ON;
 			pause(); // ACK받기 위함, NULL에 대한 ACK도 받아야.
 			// ACK를 어떻게 인지할것인가?
 			// inturrupt온게 SIGUSR1이라는걸 알아야한다.
@@ -60,19 +60,14 @@ int string_sender(pid_t server_pid, char *str)
 				error_handler("have not received ACK.");
 			flag >>= 1;
 		}
-		while
-		printf("char : %du\n", flag);
 		idx++;
 	}
 }
 
-void	sa_client_handler(siginfo_t *sing_info, void *ucontext)
+void	sa_client_handler(siginfo_t *sig_info, void *ucontext)
 {
-	
 	(void)ucontext;
-	// signal catch했을때를 구분한다.
-	if (sig_info->)
-		server_bit_receiver(sig_info);
+	client_bit_receiver(sig_info);
 }
 
 int main(int argc, char *argv[])
@@ -83,16 +78,17 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 		error_handler("non invalid argument.");
-	// atoi변환 여부 체크 필요
-	// string send part
 	server_pid = atoi(argv[1]);
+	if (ft_strncmp(argv[1], "0", 1) != 0 \
+			 && server_pid == 0)
+		error_handler("non invalid argument.");
 	if (pid_valider(server_pid) == -1)
 		error_handler("Server pid is wrong.");
 	client_pid = getpid();
 	if (pid_valider(client_pid) == -1)
 		error_handler("Client pid is wrong.");
 	printf("Client pid is %d\n", client_pid); // ft_printf로 변환할것!
-	sigaction_init();
+	sigaction_init(&sa_client_handler);
 	string_sender(server_pid, argv[2]);
 	return (0);
 }

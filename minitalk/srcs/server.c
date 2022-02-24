@@ -14,10 +14,8 @@
 
 int	server_bit_sender(pid_t client_pid, int send_flag)
 {
-	int				null_cnt;
-	
-	if (client_pid < 10 || client_pid > 99998)
-		error_handler("Wrong Pid number");
+	if (pid_valider(client_pid))
+		error_handler("Wrong client pid number.");
 	/* ACK */
 	if (send_flag == 1)
 		return (kill(client_pid, SIGUSR1));
@@ -47,9 +45,9 @@ void	sa_server_handler(siginfo_t *sig_info, void *ucontext)
 {
 	(void)ucontext;
 	// signal catch했을때와 보내야할때를 구분해야한다.
+	// 다시 생각해보니 구분할 수 없다.
 	// 지금 받는 신호가 몇번쨰인지 어떻게 알것인가?
-	if (sig_info->si_signo > 0)
-		server_bit_receiver(sig_info);
+	server_bit_receiver(sig_info);
 }
 
 // int	main(int argc, char *argv[])
@@ -64,9 +62,7 @@ int	main()
 	server_pid = getpid();
 	if (pid_valider(server_pid) == -1)
 		error_handler("Server pid is wrong.");
-	sa.sa_sigaction = &sa_server_handler;
-	sa.sa_flags = SA_SIGINFO;
-	sigaction_init();
+	sigaction_init(&sa_server_handler);
 	printf("Server launched, pid is %d\n", server_pid); // ft_printf로 변환할것!
 	while (42)
 		pause();
