@@ -12,34 +12,44 @@
 
 #include "process_communication.h"
 
-void	bit_receiver()
+int	server_bit_sender(pid_t client_pid, int send_flag)
 {
-	
-}
-void	sa_server_handler(int signo, siginfo_t *sig_info, void *ucontext)
-{
-	char			*sig_char;
-	unsigned char	bit_flag;
 	int				null_cnt;
+	
+	if (client_pid < 10 || client_pid > 99998)
+		error_handler("Wrong Pid number");
+	/* ACK */
+	if (send_flag == 1)
+		return (kill(client_pid, SIGUSR1));
+}
 
-	(void)ucontext;
-	bit_flag = 1 << 7;
-	while (bit_flag)
-	{
-		if (sig_info->si_signo == SIGUSR1)
-			;
-		else if (sig_info->si_signo == SIGUSR2)
-			;
-		bit_flag >>= 1;
-	}
-	if (bit_flag != 0)
-		error_handler("server side's bit_flag is something wrong.");
-	null_cnt = 8;
-	while (null_cnt)
-	{
+void	server_bit_receiver(siginfo_t *sig_info)
+{
+	static unsigned char	bit_receiver = 0;
+	static unsigned char	bit_flag = 1 << 7;
+
+	if (sig_info->si_signo == SIGUSR1)
+		bit_receiver |=  bit_flag;
+	else if (sig_info->si_signo == SIGUSR2)
 		;
-		null_cnt--;
+	bit_flag >>= 1;
+	/* ACK send */
+	if (server_bit_sender(sig_info->pid, 1) == -1)
+		error_handler("bit_sender Error.");
+	if (bit_flag == 0)
+	{
+		write(1, bit_receiver, 1);
+		bit_receiver = 0;
+		bit_flag = 1 << 7;
 	}
+}
+void	sa_server_handler(siginfo_t *sig_info, void *ucontext)
+{
+	(void)ucontext;
+	// signal catch했을때와 보내야할때를 구분해야한다.
+	// 지금 받는 신호가 몇번쨰인지 어떻게 알것인가?
+	if (sig_info->si_signo > 0)
+		server_bit_receiver(sig_info);
 }
 
 // int	main(int argc, char *argv[])
@@ -52,22 +62,11 @@ int	main()
 	// (int)argc;
 	// (char *)argv[0];
 	server_pid = getpid();
+	if (pid_valider(server_pid) == -1)
+		error_handler("Server pid is wrong.");
 	sa.sa_sigaction = &sa_server_handler;
 	sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
-	// Interrupt도 설정해줘야하는가?
-	// 전역변수는 언제 써줘야하는가?
-	// error 처리 필수!!!!!!!!!!!
-	// return 값에 대한 처리 필요
-	// log를 남기는게 낫지만 그럴 수 없다.
-	// 다른 에러라는걸 어떻게 표현할것인가?
-	// error에 문구를 찍고서 exit한다.
-	if sigaddset(&sa.sa_mask, SIGUSR1);
-	sigaddset(&sa.sa_mask, SIGUSR2);
-	if (sigaciton(SIGUSR1, &sa, NULL) < 0)
-		error_handler("sigaciton SIGUSR1 setting Error\n");
-	if (sigaciton(SIGUSR2, &sa, NULL) < 0)
-		error_handler("sigaciton SIGUSR2 setting Error\n");
+	sigaction_init();
 	printf("Server launched, pid is %d\n", server_pid); // ft_printf로 변환할것!
 	while (42)
 		pause();

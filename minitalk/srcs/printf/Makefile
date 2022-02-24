@@ -10,18 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-SERER_NAME = server
-Client_NAME = client
+NAME = libftprintf.a
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
 RM = rm -f
 AR = ar
 ARFLAGS = crs
-INCLUDES= ./process_communication.h
-SRCS = server.c		\
-		clinet.c	\
-		sig_utils.c		\
-		utils.c
+INCLUDES= ./ft_printf.h
+SRCS = ft_printf.c		\
+		ft_printf_utils.c	\
+		ft_print_c.c		\
+		ft_print_s.c		\
+		ft_print_d.c		\
+		ft_print_u.c		\
+		ft_print_x.c		\
+		ft_print_p.c		\
+		ft_print_u.c
 
 OBJS = $(SRCS:.c=.o)
 

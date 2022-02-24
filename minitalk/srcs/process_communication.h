@@ -16,15 +16,37 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <stdio.h> // shouldbe removed
+
+// flag define
+// # define ON 1
+# define OFF 0
+# define SEND 1
+# define RECV 2
+# define ACK 1
+
+typedef struct sigaction t_sigaction;
+typedef struct  s_signal_status
+{
+	int	sig_receive_status;
+	int	sig_send_status;
+}				t_signal_status;
 
 /* server */
-
+void	sa_server_handler(siginfo_t *sig_info, void *ucontext);
+void	server_bit_receiver(siginfo_t *sig_info);
+int		server_bit_sender(pid_t client_pid, int send_flag);
+void	sa_client_handler(siginfo_t *sig_info, void *ucontext);
 /* client */
-
-/* etc */
-void	print_error(void);
+void	sa_client_handler(siginfo_t *sig_info, void *ucontext);
+void	client_bit_receiver(siginfo_t *sig_info);
+int 	string_sender(pid_t server_pid, char *str);
+/* sigaction utils */
+void	sigaction_init();
+/* utils */
 void	ft_putstr(char *s);
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
+void	error_handler(char *error_sentence);
 
 #endif
