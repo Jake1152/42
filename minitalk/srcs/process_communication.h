@@ -40,7 +40,7 @@ int 	string_sender(pid_t server_pid, char *str);
 /* sigaction utils */
 void	sigaction_init(void (*handler));
 /* utils */
-void	ft_putstr(char *s);
+void	ft_putendl(char *s, int fd);
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
