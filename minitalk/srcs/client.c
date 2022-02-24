@@ -20,8 +20,10 @@ void	client_bit_receiver(siginfo_t *sig_info)
 	/* ACK Received*/
 	if (g_signal_status.sig_send_status == ON && \
 		sig_info->si_signo == SIGUSR1)
+	{
 		g_signal_status.sig_receive_status = ON;
 		g_signal_status.sig_send_status = OFF;
+	}
 }
 
 int string_sender(pid_t server_pid, char *str)
@@ -32,12 +34,12 @@ int string_sender(pid_t server_pid, char *str)
 	idx = 0;
 	while (str[idx])
 	{
-		printf("char : %c\n", str[idx]);
-		printf("char in dec : %d\n", str[idx]);
+		// printf("char : %c\n", str[idx]);
+		// printf("char in dec : %d\n", str[idx]);
 		flag = 1 << 7;
 		while (flag)
 		{
-			printf("str[idx] & flag : %d\n", str[idx] & flag);
+			// printf("str[idx] & flag : %d\n", str[idx] & flag);
 			if (str[idx] & flag)
 			{
 				// printf("USR1\n");
@@ -77,7 +79,6 @@ void	sa_client_handler(int signo, siginfo_t *sig_info, void *ucontext)
 
 int main(int argc, char *argv[])
 {
-	struct sigaction	sa;
 	pid_t		server_pid;
 	pid_t		client_pid;
 
@@ -87,28 +88,14 @@ int main(int argc, char *argv[])
 	if (ft_strncmp(argv[1], "0", 1) != 0 \
 			 && server_pid == 0)
 		error_handler("non invalid argument.");
-	printf("Server pid : %d\n", server_pid);
+	// printf("Server pid : %d\n", server_pid);
 	if (pid_valider(server_pid) == -1)
-	{
 		error_handler("Server pid is wrong.");
-	}
 	client_pid = getpid();
 	if (pid_valider(client_pid) == -1)
 		error_handler("Client pid is wrong.");
-	printf("Client pid is %d\n", client_pid); // ft_printf로 변환할것!
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = (void (*)(int, siginfo_t *, void *))sa_client_handler;
-	// sigaction_init(sa);
-	if (sigemptyset(&sa.sa_mask) == -1)
-		error_handler("sigemptyset setting Error\n");
-	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1)
-		error_handler("sa_mask SIGUSR1 setting Error\n");
-	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1)
-		error_handler("sa_mask SIGUSR2 setting Error\n");
-	if (sigaction(SIGUSR1, &sa, NULL) < 0)
-		error_handler("sigaciton SIGUSR1 setting Error\n");
-	if (sigaction(SIGUSR2, &sa, NULL) < 0)
-		error_handler("sigaciton SIGUSR2 setting Error\n");
+	// printf("Client pid is %d\n", client_pid); // ft_printf로 변환할것!
+	sigaction_init(&sa_client_handler);
 	string_sender(server_pid, argv[2]);
 	exit(0);
 	return (0);
