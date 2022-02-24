@@ -20,7 +20,7 @@ void	ft_putendl(char *s, int fd)
 		return ;
 	}
 	write(fd, s, ft_strlen(s));
-	write(fd, (char)'\n', 1);
+	write(fd, &"\n", 1);
 }
 
 size_t	ft_strlen(const char *s)

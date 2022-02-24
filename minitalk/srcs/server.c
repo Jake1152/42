@@ -36,7 +36,7 @@ void	server_bit_receiver(siginfo_t *sig_info)
 		error_handler("bit_sender Error.");
 	if (bit_flag == 0)
 	{
-		write(1, bit_receiver, 1);
+		write(1, &bit_receiver, 1);
 		bit_receiver = 0;
 		bit_flag = 1 << 7;
 	}
