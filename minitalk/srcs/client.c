@@ -72,7 +72,7 @@ void	sa_client_handler(siginfo_t *sig_info, void *ucontext)
 
 int main(int argc, char *argv[])
 {
-	t_sigaction	sa;
+	struct sigaction	sa;
 	pid_t		server_pid;
 	pid_t		client_pid;
 
@@ -88,9 +88,19 @@ int main(int argc, char *argv[])
 	if (pid_valider(client_pid) == -1)
 		error_handler("Client pid is wrong.");
 	printf("Client pid is %d\n", client_pid); // ft_printf로 변환할것!
-	sa.sa_sigaction = &sa_client_handler;
 	sa.sa_flags = SA_SIGINFO;
-	sigaction_init(sa);
+	sa.sa_sigaction = (void (*)(int, siginfo_t *, void *))sa_client_handler;
+	// sigaction_init(sa);
+	if (sigemptyset(&sa.sa_mask) == -1);
+		error_handler("sigemptyset setting Error\n");
+	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1);
+		error_handler("sa_mask SIGUSR1 setting Error\n");
+	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1);
+		error_handler("sa_mask SIGUSR2 setting Error\n");
+	if (sigaction(SIGUSR1, &sa, NULL) < 0)
+		error_handler("sigaciton SIGUSR1 setting Error\n");
+	if (sigaction(SIGUSR2, &sa, NULL) < 0)
+		error_handler("sigaciton SIGUSR2 setting Error\n");
 	string_sender(server_pid, argv[2]);
 	return (0);
 }

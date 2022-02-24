@@ -54,7 +54,7 @@ void	sa_server_handler(siginfo_t *sig_info, void *ucontext)
 // int	main(int argc, char *argv[])
 int	main()
 {
-	t_sigaction	sa;
+	struct sigaction	sa;
 	long long	received_sig;
 	pid_t		server_pid;
 
@@ -63,9 +63,19 @@ int	main()
 	server_pid = getpid();
 	if (pid_valider(server_pid) == -1)
 		error_handler("Server pid is wrong.");
-	sa.sa_sigaction = &sa_server_handler;
 	sa.sa_flags = SA_SIGINFO;
-	sigaction_init(sa);
+	sa.sa_sigaction = (void (*)(int, siginfo_t *, void *))sa_server_handler;
+	if (sigemptyset(&sa.sa_mask) == -1);
+		error_handler("sigemptyset setting Error\n");
+	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1);
+		error_handler("sa_mask SIGUSR1 setting Error\n");
+	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1);
+		error_handler("sa_mask SIGUSR2 setting Error\n");
+	if (sigaction(SIGUSR1, &sa, NULL) < 0)
+		error_handler("sigaciton SIGUSR1 setting Error\n");
+	if (sigaction(SIGUSR2, &sa, NULL) < 0)
+		error_handler("sigaciton SIGUSR2 setting Error\n");
+	//sigaction_init(sa);
 	printf("Server launched, pid is %d\n", server_pid); // ft_printf로 변환할것!
 	while (42)
 		pause();
