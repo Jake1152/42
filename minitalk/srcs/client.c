@@ -13,7 +13,7 @@
 #include "process_communication.h"
 t_signal_status	g_signal_status;
 
-void    client_bit_receiver(siginfo_t *sig_info)
+void	client_bit_receiver(siginfo_t *sig_info)
 {
 	// signal을 이전에 보냈는지 정보도 알아야한다.
 	/* ACK Received*/

@@ -33,7 +33,6 @@ typedef struct  s_signal_status
 void	sa_server_handler(siginfo_t *sig_info, void *ucontext);
 void	server_bit_receiver(siginfo_t *sig_info);
 int		server_bit_sender(pid_t client_pid, int send_flag);
-void	sa_client_handler(siginfo_t *sig_info, void *ucontext);
 /* client */
 void	sa_client_handler(siginfo_t *sig_info, void *ucontext);
 void	client_bit_receiver(siginfo_t *sig_info);
