@@ -30,11 +30,11 @@ typedef struct  s_signal_status
 }				t_signal_status;
 
 /* server */
-void	sa_server_handler(siginfo_t *sig_info, void *ucontext);
+void	sa_server_handler(int signo, siginfo_t *sig_info, void *ucontext);
 void	server_bit_receiver(siginfo_t *sig_info);
 int		server_bit_sender(pid_t client_pid, int send_flag);
 /* client */
-void	sa_client_handler(siginfo_t *sig_info, void *ucontext);
+void	sa_client_handler(int signo, siginfo_t *sig_info, void *ucontext);
 void	client_bit_receiver(siginfo_t *sig_info);
 int 	string_sender(pid_t server_pid, char *str);
 /* sigaction utils */

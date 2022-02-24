@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "process_communication.h"
+
 t_signal_status	g_signal_status;
 
 void	client_bit_receiver(siginfo_t *sig_info)
@@ -19,11 +20,8 @@ void	client_bit_receiver(siginfo_t *sig_info)
 	/* ACK Received*/
 	if (g_signal_status.sig_send_status == ON && \
 		sig_info->si_signo == SIGUSR1)
-	{
-		if (client_bit_sender(sig_info) == -1)
-			error_handler("client side bit_sender Error.");
+		g_signal_status.sig_receive_status = ON;
 		g_signal_status.sig_send_status = OFF;
-	}
 }
 
 int string_sender(pid_t server_pid, char *str)
@@ -41,11 +39,18 @@ int string_sender(pid_t server_pid, char *str)
 		{
 			printf("str[idx] & flag : %d\n", str[idx] & flag);
 			if (str[idx] & flag)
+			{
+				// printf("USR1\n");
 				kill(server_pid, SIGUSR1);
+			}
 			else//SIGUSR2 받을때 0이라서 처리를 안하니까 안보낸다? 그래도 가독성과 명시성을 위해 적는게 나을까?
+			{
+				// printf("USR2\n");
 				kill(server_pid, SIGUSR2);
+			}
 			g_signal_status.sig_send_status = ON;
 			pause(); // ACK받기 위함, NULL에 대한 ACK도 받아야.
+			usleep(10000);
 			// ACK를 어떻게 인지할것인가?
 			// inturrupt온게 SIGUSR1이라는걸 알아야한다.
 			// sa_sigaction에 할당한 함수에서 알아채서 그 다음에
@@ -64,7 +69,7 @@ int string_sender(pid_t server_pid, char *str)
 	}
 }
 
-void	sa_client_handler(siginfo_t *sig_info, void *ucontext)
+void	sa_client_handler(int signo, siginfo_t *sig_info, void *ucontext)
 {
 	(void)ucontext;
 	client_bit_receiver(sig_info);
@@ -76,14 +81,17 @@ int main(int argc, char *argv[])
 	pid_t		server_pid;
 	pid_t		client_pid;
 
-	if (argc != 2)
+	if (argc != 3)
 		error_handler("non invalid argument.");
 	server_pid = atoi(argv[1]);
 	if (ft_strncmp(argv[1], "0", 1) != 0 \
 			 && server_pid == 0)
 		error_handler("non invalid argument.");
+	printf("Server pid : %d\n", server_pid);
 	if (pid_valider(server_pid) == -1)
+	{
 		error_handler("Server pid is wrong.");
+	}
 	client_pid = getpid();
 	if (pid_valider(client_pid) == -1)
 		error_handler("Client pid is wrong.");
@@ -91,16 +99,17 @@ int main(int argc, char *argv[])
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = (void (*)(int, siginfo_t *, void *))sa_client_handler;
 	// sigaction_init(sa);
-	if (sigemptyset(&sa.sa_mask) == -1);
+	if (sigemptyset(&sa.sa_mask) == -1)
 		error_handler("sigemptyset setting Error\n");
-	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1);
+	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1)
 		error_handler("sa_mask SIGUSR1 setting Error\n");
-	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1);
+	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1)
 		error_handler("sa_mask SIGUSR2 setting Error\n");
 	if (sigaction(SIGUSR1, &sa, NULL) < 0)
 		error_handler("sigaciton SIGUSR1 setting Error\n");
 	if (sigaction(SIGUSR2, &sa, NULL) < 0)
 		error_handler("sigaciton SIGUSR2 setting Error\n");
 	string_sender(server_pid, argv[2]);
+	exit(0);
 	return (0);
 }

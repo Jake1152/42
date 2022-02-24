@@ -55,8 +55,12 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
+	printf("*str is %c\n", *str);
 	if (*str)
+	{
+		printf("In if statement *str is %c\n", *str);
 		return (0);
+	}
 	return ((int)result * sign);
 }
 

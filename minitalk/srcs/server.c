@@ -14,8 +14,9 @@
 
 int	server_bit_sender(pid_t client_pid, int send_flag)
 {
-	if (pid_valider(client_pid))
+	if (pid_valider(client_pid) == -1)
 		error_handler("Wrong client pid number.");
+	// printf("client pid : %d\n", client_pid);
 	/* ACK */
 	if (send_flag == 1)
 		return (kill(client_pid, SIGUSR1));
@@ -26,10 +27,19 @@ void	server_bit_receiver(siginfo_t *sig_info)
 	static unsigned char	bit_receiver = 0;
 	static unsigned char	bit_flag = 1 << 7;
 
+	// printf("current bit flag is : %d\n", bit_flag);
+	// printf("sig_info->si_signo is : %d\n", sig_info->si_signo);
 	if (sig_info->si_signo == SIGUSR1)
+	{
+		//printf("receive USR1\n");
 		bit_receiver |=  bit_flag;
+	}
 	else if (sig_info->si_signo == SIGUSR2)
+	{
+		//printf("receive USR2\n");
 		;
+	}
+	// printf("current bit_receiver is : %d\n", bit_receiver);
 	bit_flag >>= 1;
 	/* ACK send */
 	if (server_bit_sender(sig_info->si_pid, 1) == -1)
@@ -41,7 +51,7 @@ void	server_bit_receiver(siginfo_t *sig_info)
 		bit_flag = 1 << 7;
 	}
 }
-void	sa_server_handler(siginfo_t *sig_info, void *ucontext)
+void	sa_server_handler(int signo, siginfo_t *sig_info, void *ucontext)
 {
 	(void)ucontext;
 	// signal catch했을때와 보내야할때를 구분해야한다.
@@ -65,11 +75,11 @@ int	main()
 		error_handler("Server pid is wrong.");
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = (void (*)(int, siginfo_t *, void *))sa_server_handler;
-	if (sigemptyset(&sa.sa_mask) == -1);
+	if (sigemptyset(&sa.sa_mask) == -1)
 		error_handler("sigemptyset setting Error\n");
-	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1);
+	if (sigaddset(&sa.sa_mask, SIGUSR1) == -1)
 		error_handler("sa_mask SIGUSR1 setting Error\n");
-	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1);
+	if (sigaddset(&sa.sa_mask, SIGUSR2) == -1)
 		error_handler("sa_mask SIGUSR2 setting Error\n");
 	if (sigaction(SIGUSR1, &sa, NULL) < 0)
 		error_handler("sigaciton SIGUSR1 setting Error\n");
@@ -78,7 +88,7 @@ int	main()
 	//sigaction_init(sa);
 	printf("Server launched, pid is %d\n", server_pid); // ft_printf로 변환할것!
 	while (42)
-		pause();
+		;
 	return (0);
 }
 
