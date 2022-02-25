@@ -42,14 +42,29 @@ SRC_CLIENT_BONUS = client_bonus.c	\
 		utils_bonus.c				\
 		ft_putnbr_fd_bonus.c
 
-%.o : %.c
-	$(CC) $(CFLAG) -c $< -o $@
-
 SERV_OBJS = $(SRC_SERV:.c=.o) 
 CLIENT_OBJS = $(SRC_CLIENT:.c=.o)
 
 SERV_OBJS_BONUS = $(SRC_SERV:.c=.o) 
 CLIENT_OBJS_BONUS = $(SRC_CLIENT:.c=.o)
+
+
+%.o : %.c
+	$(CC) $(CFLAG) -c $< -o $@
+
+all : $(SERVER) $(CLIENT)
+
+clean :
+	$(RM) $(OBJS)
+
+fclean : clean
+	$(RM) $(NAME)
+
+re : fclean all
+
+bonus : $(SERVER_BONUS) $(CLIENT_BONUS)
+
+$(CC) $(CFLAG) -c $< -o $@
 
 $(SERVER) = $(SERV_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
@@ -62,17 +77,5 @@ $(SERVER_BONUS) = $(SERV_OBJS_BONUS)
 
 $(CLIENT_BONUS) = $(CLIENT_OBJS_BONUS)
 	$(AR) $(ARFLAGS) $@ $^
-
-all : $(SERVER) $(CLIENT)
-
-bonus : $(SERVER_BONUS) $(CLIENT_BONUS)
-
-clean :
-	$(RM) $(OBJS)
-
-fclean : clean
-	$(RM) $(NAME)
-
-re : fclean all
 
 .phony: all clean fclean re
