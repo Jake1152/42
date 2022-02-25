@@ -62,14 +62,8 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	ft_putstr_fd("*str is : ", 1);
-	ft_putstr_fd((char *)str, 1);
 	if (*str)
-	{
-		ft_putstr_fd("*str is : ", 1);
-		ft_putstr_fd((char *)str, 1);
 		return (0);
-	}
 	return ((int)result * sign);
 }
 
