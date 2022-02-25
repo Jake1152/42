@@ -3,24 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:10:59 by jim               #+#    #+#             */
-/*   Updated: 2022/02/23 12:48:35 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/25 18:08:18 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process_communication.h"
 
-void	ft_putendl(char *s, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	str_len;
+
 	if (s == NULL)
 	{
-		ft_putendl("There are no string.", 2);
+		ft_putstr_fd("There are no string.\n", 2);
 		return ;
 	}
-	write(fd, s, ft_strlen(s));
-	write(fd, &"\n", 1);
+	str_len = ft_strlen(s);
+	write(fd, s, str_len);
 }
 
 size_t	ft_strlen(const char *s)
@@ -55,10 +62,12 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	printf("*str is %c\n", *str);
+	ft_putstr_fd("*str is : ", 1);
+	ft_putstr_fd((char *)str, 1);
 	if (*str)
 	{
-		printf("In if statement *str is %c\n", *str);
+		ft_putstr_fd("*str is : ", 1);
+		ft_putstr_fd((char *)str, 1);
 		return (0);
 	}
 	return ((int)result * sign);
@@ -88,9 +97,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	pid_valider(pid_t pid)
-{
-	if (pid < 11 || pid > 99998)
-		return (-1);
-	return (1);
-}

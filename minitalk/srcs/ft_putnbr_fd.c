@@ -1,19 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 21:16:18 by jim               #+#    #+#             */
-/*   Updated: 2022/02/25 17:55:50 by jake             ###   ########.fr       */
+/*   Created: 2021/09/08 15:36:24 by jim               #+#    #+#             */
+/*   Updated: 2022/02/25 18:06:41 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "process_communication.h"
 
-void	error_handler(char *error_sentence)
+static void	ft_loop(int n, int fd)
 {
-	ft_putstr_fd(error_sentence, 2);
-	exit(EXIT_FAILURE);
+	char	ch[11];
+	int		index;
+
+	index = 0;
+	while (n >= 10)
+	{
+		ch[index] = n % 10;
+		n /= 10;
+		index++;
+	}
+	ft_putchar_fd(n + '0', fd);
+	while (index > 0)
+	{
+		ft_putchar_fd(ch[index - 1] + '0', fd);
+		index--;
+	}
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n *= -1;
+	}
+	ft_loop(n, fd);
 }

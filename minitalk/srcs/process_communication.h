@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_communication.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:37:03 by jim               #+#    #+#             */
-/*   Updated: 2022/02/19 21:39:35 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/02/25 19:11:57 by jake             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
-# include <stdio.h> // shouldbe removed
 
-// flag define
 # define ON 1
 # define OFF 0
 
@@ -37,14 +35,17 @@ int		server_bit_sender(pid_t client_pid, int send_flag);
 void	sa_client_handler(int signo, siginfo_t *sig_info, void *ucontext);
 void	client_bit_receiver(siginfo_t *sig_info);
 int 	string_sender(pid_t server_pid, char *str);
-/* sigaction utils */
+/* process utils */
 void	sigaction_init(void (*handler));
+int		pid_valider(pid_t pid);
 /* utils */
-void	ft_putendl(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		pid_valider(pid_t pid);
+
+void	ft_putnbr_fd(int n, int fd);
 /* error handler */
 void	error_handler(char *error_sentence);
 
