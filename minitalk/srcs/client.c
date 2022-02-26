@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client_bonus.c                                     :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:39:30 by jim               #+#    #+#             */
-/*   Updated: 2022/02/25 19:11:50 by jake             ###   ########.fr       */
+/*   Updated: 2022/02/26 20:07:58 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	client_bit_receiver(siginfo_t *sig_info)
 {
 	if (pid_valider(sig_info->si_pid) == -1)
 		error_handler("client pid is wrong.\n");
-	/* ACK Received*/
 	if (g_signal_status.sig_send_status == ON && \
 		sig_info->si_signo == SIGUSR1)
 	{
@@ -27,7 +26,7 @@ void	client_bit_receiver(siginfo_t *sig_info)
 	}
 }
 
-int string_sender(pid_t server_pid, char *str)
+void	string_sender(pid_t server_pid, char *str)
 {
 	unsigned int	flag;
 	size_t			idx;
@@ -49,6 +48,7 @@ int string_sender(pid_t server_pid, char *str)
 			else
 				error_handler("have not received ACK.\n");
 			flag >>= 1;
+			usleep(50);
 		}
 		idx++;
 	}
@@ -60,7 +60,7 @@ void	sa_client_handler(int signo, siginfo_t *sig_info, void *ucontext)
 		client_bit_receiver(sig_info);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	pid_t		server_pid;
 	pid_t		client_pid;

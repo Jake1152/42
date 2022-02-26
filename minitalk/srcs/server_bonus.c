@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jake <jake@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:39:33 by jim               #+#    #+#             */
-/*   Updated: 2022/02/25 19:23:48 by jake             ###   ########.fr       */
+/*   Updated: 2022/02/26 20:07:54 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process_communication.h"
+#include "process_communication_bonus.h"
 
 int	server_bit_sender(pid_t client_pid, int send_flag)
 {
-	/* ACK send */
 	if (send_flag == 1)
 		return (kill(client_pid, SIGUSR1));
+	return (0);
 }
 
 void	server_bit_receiver(siginfo_t *sig_info)
@@ -26,12 +26,11 @@ void	server_bit_receiver(siginfo_t *sig_info)
 	static pid_t			pid_flag = 0;
 
 	if (sig_info->si_signo == SIGUSR1)
-		bit_receiver |=  bit_flag;
+		bit_receiver |= bit_flag;
 	else if (sig_info->si_signo == SIGUSR2)
 		;
 	bit_flag >>= 1;
-	//usleep(160);
-	/* ACK send */
+	usleep(50);
 	if (server_bit_sender(sig_info->si_pid, 1) == -1)
 		error_handler("bit_sender Error.\n");
 	if (bit_flag == 0)
@@ -48,7 +47,7 @@ void	sa_server_handler(int signo, siginfo_t *sig_info, void *ucontext)
 		server_bit_receiver(sig_info);
 }
 
-int	main()
+int	main(void)
 {
 	pid_t		server_pid;
 

@@ -15,9 +15,6 @@ CLIENT = client
 CC = gcc
 CFLAG = -Wall -Wextra -Werror
 RM = rm -f
-AR = ar
-ARFLAGS = crs
-INCLUDES= ./process_communication.h
 SRC_SERV = server.c			\
 			process_utils.c	\
 			error_handler.c	\
@@ -45,37 +42,31 @@ SRC_CLIENT_BONUS = client_bonus.c	\
 SERV_OBJS = $(SRC_SERV:.c=.o) 
 CLIENT_OBJS = $(SRC_CLIENT:.c=.o)
 
-SERV_OBJS_BONUS = $(SRC_SERV:.c=.o) 
-CLIENT_OBJS_BONUS = $(SRC_CLIENT:.c=.o)
+SERV_OBJS_BONUS = $(SRC_SERV_BONUS:.c=.o) 
+CLIENT_OBJS_BONUS = $(SRC_CLIENT_BONUS:.c=.o)
 
-
-%.o : %.c
-	$(CC) $(CFLAG) -c $< -o $@
+ifdef BONUS
+    SERV_OBJS = $(SERV_OBJS_BONUS)
+    CLIENT_OBJS = $(CLIENT_OBJS_BONUS)
+endif
 
 all : $(SERVER) $(CLIENT)
 
 clean :
-	$(RM) $(OBJS)
+	$(RM) $(SERV_OBJS) $(CLIENT_OBJS) $(SERV_OBJS_BONUS) $(CLIENT_OBJS_BONUS)
 
 fclean : clean
-	$(RM) $(NAME)
+	$(RM) $(SERVER) $(CLIENT)
 
 re : fclean all
 
-bonus : $(SERVER_BONUS) $(CLIENT_BONUS)
+bonus :
+	make BONUS=1 all
 
-$(CC) $(CFLAG) -c $< -o $@
+$(SERVER) : $(SERV_OBJS)
+	$(CC) $(CFLAG) -o $@ $^
 
-$(SERVER) = $(SERV_OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+$(CLIENT) : $(CLIENT_OBJS)
+	$(CC) $(CFLAG) -o $@ $^
 
-$(CLIENT) = $(CLIENT_OBJS)
-	$(AR) $(ARFLAGS) $@ $^
-
-$(SERVER_BONUS) = $(SERV_OBJS_BONUS)
-	$(AR) $(ARFLAGS) $@ $^
-
-$(CLIENT_BONUS) = $(CLIENT_OBJS_BONUS)
-	$(AR) $(ARFLAGS) $@ $^
-
-.phony: all clean fclean re
+.PHONY: all clean fclean re bonus
