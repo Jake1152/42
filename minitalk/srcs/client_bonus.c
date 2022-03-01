@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:39:30 by jim               #+#    #+#             */
-/*   Updated: 2022/02/26 20:08:02 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/01 16:29:53 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	string_sender(pid_t server_pid, char *str)
 
 void	sa_client_handler(int signo, siginfo_t *sig_info, void *ucontext)
 {
+	(void)signo;
+	(void)ucontext;
 	if (sig_info->si_signo == SIGUSR1)
 		client_bit_receiver(sig_info);
 }

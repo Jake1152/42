@@ -6,11 +6,11 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:39:33 by jim               #+#    #+#             */
-/*   Updated: 2022/02/26 20:07:57 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/01 16:31:14 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "process_communication.h"
+#include "process_communication_bonus.h"
 
 int	server_bit_sender(pid_t client_pid, int send_flag)
 {
@@ -23,7 +23,6 @@ void	server_bit_receiver(siginfo_t *sig_info)
 {
 	static unsigned char	bit_receiver = 0;
 	static unsigned char	bit_flag = 1 << 7;
-	static pid_t			pid_flag = 0;
 
 	if (sig_info->si_signo == SIGUSR1)
 		bit_receiver |= bit_flag;
@@ -43,6 +42,8 @@ void	server_bit_receiver(siginfo_t *sig_info)
 
 void	sa_server_handler(int signo, siginfo_t *sig_info, void *ucontext)
 {
+	(void)signo;
+	(void)ucontext;
 	if (sig_info->si_signo == SIGUSR1 || sig_info->si_signo == SIGUSR2)
 		server_bit_receiver(sig_info);
 }

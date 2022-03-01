@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:03:25 by jim               #+#    #+#             */
-/*   Updated: 2022/02/26 19:59:58 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/01 16:30:27 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	sigaction_init(void (*handler))
 
 int	pid_valider(pid_t pid)
 {
-	if (pid < 11 || pid > 99998)
+	if (pid < 101 || pid > 99999)
 		return (-1);
 	return (1);
 }
