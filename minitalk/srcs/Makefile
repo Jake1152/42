@@ -38,8 +38,9 @@ SRC_CLIENT_BONUS = client_bonus.c	\
 		error_handler_bonus.c		\
 		utils_bonus.c				\
 		ft_putnbr_fd_bonus.c
+
 %.o : %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CC) $(CFLAG) -c $^ -o $@
 
 SERV_OBJS = $(SRC_SERV:.c=.o) 
 CLIENT_OBJS = $(SRC_CLIENT:.c=.o)
