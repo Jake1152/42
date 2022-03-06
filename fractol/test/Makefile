@@ -1,6 +1,6 @@
-NAME = mlx_intra_example
-SRCS = mlx_intra_example.c
-OBJS = mlx_intra_example.o
+NAME = mlx_color_01
+SRCS = mlx_color_01.c
+OBJS = mlx_color_01.o
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm
