@@ -1,6 +1,6 @@
-NAME = mlx_color_01
-SRCS = mlx_color_01.c
-OBJS = mlx_color_01.o
+NAME = mlx_image_02
+SRCS = mlx_image_02.c
+OBJS = mlx_image_02.o
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm
