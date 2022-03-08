@@ -1,6 +1,6 @@
-NAME = mlx_image_02
-SRCS = mlx_image_02.c
-OBJS = mlx_image_02.o
+NAME = mlx_hook_01
+SRCS = mlx_hook_01.c
+OBJS = mlx_hook_01.o
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm

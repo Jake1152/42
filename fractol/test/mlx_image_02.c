@@ -31,22 +31,22 @@ int	main(void)
 	// square
 	for (int i = 5; i<100; i++)
 		for (int j=5; j<100; j++)
-			my_mlx_pixel_put(&img, i, j, 0x00FF0000);
+			my_mlx_pixel_put(&img, i, j, i*j << 16);
 	// triangle left side
 	for (int i=300; i<600; i++)
 		for (int j=600; j>600-(i-300); j--)
-			my_mlx_pixel_put(&img, i, j, 0x0000FF00);
+			my_mlx_pixel_put(&img, i, j, i << 12);
 	// triangle right side
 	for (int i=300; i<600; i++)
 		for (int j=600; j<600+(i-300); j++)
-			my_mlx_pixel_put(&img, i, j, 0x0000FF00);
+			my_mlx_pixel_put(&img, i, j,  i << 12);
 	// circle
 	// 750, 750 지점을 원점으로 잡는다.
 	// square 시작점과 origin을 잡고서 한다?
 	for (int i=600; i<900; i++)
 		for (int j=600; j<900; j++)
 			if (pow(abs(750 - i), 2) + pow(abs(750 - j), 2) <= pow(100, 2) * 2)
-				my_mlx_pixel_put(&img, i, j, 0x000000FF);
+				my_mlx_pixel_put(&img, i, j, i*j);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 	return (0);
