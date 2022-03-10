@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:06:35 by jim               #+#    #+#             */
-/*   Updated: 2022/03/03 17:42:55 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/10 19:40:14 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,28 @@ size_t	ft_strlen(const char *s)
 	while (s[idx])
 		idx++;
 	return (idx);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	c1;
+	unsigned char	c2;
+	size_t			i;
+
+	i = 0;
+	while (i++ < n)
+	{
+		c1 = *s1++;
+		c2 = *s2++;
+		if (c1 != c2)
+		{
+			if (c1 < c2)
+				return (-1);
+			else
+				return (1);
+		}
+		if (!c1)
+			break ;
+	}
+	return (0);
 }
