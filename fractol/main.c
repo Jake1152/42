@@ -6,12 +6,19 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:45:16 by jim               #+#    #+#             */
-/*   Updated: 2022/03/10 20:01:56 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/16 19:28:11 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx_struct.h"
+
+void	window_init(void	*mlx)
+{
+	mlx = mlx_init();
+	if (mlx == NULL)
+		error_handler("mlx_init error.\n");
+}
 
 void	handle_input_value(int argc, char *argv[], t_mlx mlx)
 {

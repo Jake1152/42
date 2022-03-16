@@ -31,6 +31,21 @@ int main(void)
 	return (0);
 }
 
+void	init_mlx()
+{
+	;
+}
+
+void	draw_window()
+{
+	;
+}
+
+void	draw_image()
+{
+	;
+}
+
 int	fib(int num)
 {
 	if (num <= 0)
@@ -39,4 +54,4 @@ int	fib(int num)
 		return 1;
 	return fib(num - 1) + fib(num - 2);
 }
-// fib(3)
+// fib(3)SDF
