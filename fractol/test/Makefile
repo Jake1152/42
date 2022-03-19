@@ -1,6 +1,6 @@
-NAME = mlx_hook_01
-SRCS = mlx_hook_01.c
-OBJS = mlx_hook_01.o
+NAME = draw_mandelbrotset_paste
+SRCS = draw_mandelbrotset_paste.c
+OBJS = draw_mandelbrotset_paste.o
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm

@@ -1,18 +1,19 @@
 NAME = fractol
-SRCS = fractol.c
-OBJS = fractol.o
+SRCS = main.c
+OBJS = main.o
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -o
 RM = rm
 RMFLAGS = -rf
 
 %o : %c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
-all : $(NAME)
-
 $(NAME) : $(OBJS)
-	$(CC) $(OBJS) -Lminilibx_mms_20200219 -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) $(NAME)
+
+all : $(NAME)
 
 clean :
 	$(RM) $(RMFLAGS) $(OBJS)

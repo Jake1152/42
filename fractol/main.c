@@ -5,46 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 17:45:16 by jim               #+#    #+#             */
-/*   Updated: 2022/03/16 19:28:11 by jim              ###   ########seoul.kr  */
+/*   Created: 2022/03/19 15:25:57 by jim               #+#    #+#             */
+/*   Updated: 2022/03/19 22:49:59 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "mlx_struct.h"
+#include "fractol_struct.h"
+#include "mlx.h"
+#include <unistd.h>
+#include <stdlib.h>
 
-void	window_init(void	*mlx)
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	mlx = mlx_init();
-	if (mlx == NULL)
-		error_handler("mlx_init error.\n");
+	char	*dst;
+
+	dst = img->addr + (y * img-> line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-void	handle_input_value(int argc, char *argv[], t_mlx mlx)
+int	main(void)
 {
-	if (ft_strncmp(argv[1], "mandelbrot", ft_strlen("mandelbrot")) == 0)
-		mandelbrot(&mlx);
-	else if (ft_strncmp(argv[1], "julia", ft_strlen("julia")) == 0)
-		julia(&mlx);
-	else if (ft_strncmp(argv[1], "triangle", ft_strlen("triangle")) == 0)
-		triangle(&mlx);
-	else
-		error_handler("please input correct fractal type.\n");
-}
+	void	*mlx_ptr;
+	t_img	img;
+	void	*win_ptr;
+	size_t	fractol_index;
 
-int	main(int argc, char *argv[])
-{
-	t_mlx	mlx;
-
-	if (argc != 2)
-		error_handler("please input fractal type.\n");
-	if (window_init(&mlx) == NULL)
-		error_handler("Window does not be launched.\n");
-	handle_input_value(argc, argv, &mlx.img);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win, mlx.img.img_ptr, 0, 0);
-	// mlx_hook(mlx.win, event_key_press, 0, key_press, 0);
-	// mlx_hook(mlx.win, event_key_press, 0, key_press, 0);
-	// mlx_loop(mlx.mlx_ptr);
-	// key_press(keycode);
+	/* mlx, window, img init */
+	mlx_ptr = mlx_init();
+	img.img_ptr = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
+	img.addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, \
+								&img.line_length, &img.endian);
+	win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "my precious");
+	/*  Fractol 그릴 파트, 어떤 argument인지에 따라서 분리한다. */
+	draw_mandelbrot();
+	// draw_julia();
+	// for (int i = 0; i < 50; i++)
+		// my_mlx_pixel_put(&img, i, i, 0x0000FF00);
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img.img_ptr, 42, 42);
+	mlx_loop(mlx_ptr);
 	return (0);
 }

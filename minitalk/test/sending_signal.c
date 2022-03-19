@@ -18,10 +18,5 @@ int	main(void)
 	printf("Before SIGQUIT Signal to me.\n");
 	kill(getpid(), SIGQUIT);
 	printf("After SIGQUIT Signal.\n");
-	/*
-		other signal sending function
-		- raise(int sig)
-		- abort(void)
-	*/
 	return (0);
 }
