@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 15:25:57 by jim               #+#    #+#             */
-/*   Updated: 2022/03/19 22:49:59 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/21 21:11:29 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ int	main(void)
 	size_t	fractol_index;
 
 	/* mlx, window, img init */
+	// init_graphic(), init_value() 필요
 	mlx_ptr = mlx_init();
 	img.img_ptr = mlx_new_image(mlx_ptr, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img_ptr, &img.bits_per_pixel, \
 								&img.line_length, &img.endian);
 	win_ptr = mlx_new_window(mlx_ptr, WIDTH, HEIGHT, "my precious");
 	/*  Fractol 그릴 파트, 어떤 argument인지에 따라서 분리한다. */
-	draw_mandelbrot();
+	draw_fractol();
+
 	// draw_julia();
 	// for (int i = 0; i < 50; i++)
 		// my_mlx_pixel_put(&img, i, i, 0x0000FF00);
