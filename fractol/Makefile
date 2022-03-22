@@ -1,6 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/22 20:43:19 by jim               #+#    #+#              #
+#    Updated: 2022/03/22 22:32:23 by jim              ###   ########seoul.kr   #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fractol
-SRCS = main.c
-OBJS = main.o
+SRCS = main.c fractol.c init.c draw.c event.c print.c utils.c error_handler.c
+OBJS = main.o fractol.o init.o draw.o event.o print.o utils.o error_handler.o
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -o
