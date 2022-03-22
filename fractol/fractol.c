@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 17:24:52 by jim               #+#    #+#             */
-/*   Updated: 2022/03/22 22:47:12 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/22 22:55:25 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ size_t	julia(t_coordinates *coordinates)
 	size_t	iter;
 
 	to_complex_plane_coordinate(coordinates);
-	coordinates->init_re = 0.285;//-0.7269;//0.285;
-	coordinates->init_im = 0.01;//0.1889;//0.01;
+	// coordinates->init_re = 0.285;//-0.7269;//0.285;
+	// coordinates->init_im = 0.01;//0.1889;//0.01;
 	x = coordinates->c_re;
 	y = coordinates->c_im;
 	iter = 1;
