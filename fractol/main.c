@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 15:25:57 by jim               #+#    #+#             */
-/*   Updated: 2022/03/22 22:36:54 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/23 20:58:32 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,27 @@
 int	main(int argc, char *argv[])
 {
 	t_mlx			mlx;
-	t_img			img;
 	t_coordinates	coordinates;
 
-	if (argc != 4)
+	if (argc < 5)
 	{
 		print_right_input_example();
 		return (0);
 	}
-	if (init_graphic(&mlx, &img) == 0)
+	if (init_graphic(&mlx, &mlx.img) == 0)
 	{
-		destory(mlx, img);
+		destory(&mlx);
 		return (0);
 	}
-	init_value(&coordinates, ft_atof(argv[2]), ft_atof(argv[3]));
-	draw_fractol(&img, &coordinates, argv[1]);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img_ptr, 0, 0);
+	coordinates.fractal_type = argv[1];
+	coordinates.img = mlx.img;
+	init_value(&coordinates, argv);
+	// loop_hook(void *param);
+	draw_fractol(&mlx.img, &coordinates, argv[1]);
+	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img.img_ptr, 0, 0);
 	mlx_key_hook(mlx.win_ptr, key_hook, &mlx);
+	mlx_mouse_hook(mlx.win_ptr, mouse_hook, &coordinates);
+
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

@@ -6,19 +6,23 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:57:16 by jim               #+#    #+#             */
-/*   Updated: 2022/03/22 22:28:19 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/23 20:59:00 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_struct.h"
+#include "fractol.h"
 #include "mlx.h"
+#include <stdio.h> 	// remove
 
-void	init_value(t_coordinates *coordinates, double init_re, double init_im)
+void	init_value(t_coordinates *coordinates, char **argv)
 {
-	coordinates->init_re = init_re;
-	coordinates->init_im = init_im;
+	coordinates->max_iter = (size_t)ft_atoi(argv[4]);
+	coordinates->init_re = ft_atof(argv[2]);
+	coordinates->init_im = ft_atof(argv[3]);
 	coordinates->complex_im_len = 2.0;
 	coordinates->complex_re_len = 3.0;
+	coordinates->magnification = 1.0;
 }
 
 int	init_graphic(t_mlx *mlx, t_img *img)

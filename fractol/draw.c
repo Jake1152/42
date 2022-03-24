@@ -6,12 +6,13 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 20:57:05 by jim               #+#    #+#             */
-/*   Updated: 2022/03/22 22:40:49 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/23 20:58:57 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol_struct.h"
 #include "fractol.h"
+#include <stdio.h>
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -23,9 +24,9 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	draw_fractol(t_img *img, t_coordinates *coordinates, char *fractal_type)
 {
-	int	iter;
-	int	width_coordinate;
-	int	height_coordinate;
+	size_t	iter;
+	int		width_coordinate;
+	int		height_coordinate;
 
 	width_coordinate = 0;
 	while (width_coordinate <= WIDTH)
@@ -43,9 +44,10 @@ void	draw_fractol(t_img *img, t_coordinates *coordinates, char *fractal_type)
 				iter = julia(coordinates);
 			else
 				print_error("not a valid fractal type.\n");
-			if (iter >= MAX_ITER)
+			if (iter < coordinates->max_iter)
 				my_mlx_pixel_put(img, width_coordinate, \
-				height_coordinate, 0x0000FF00);
+				height_coordinate, iter << 21 | iter << 12 | iter << 4);
+			// printf("iter : %zu\n", iter);
 			height_coordinate++;
 		}
 		width_coordinate++;

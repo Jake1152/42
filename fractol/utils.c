@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:06:35 by jim               #+#    #+#             */
-/*   Updated: 2022/03/22 22:43:31 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/23 14:46:37 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,29 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 			break ;
 	}
 	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	int			sign;
+	long long	result;
+
+	sign = 1;
+	while (*str == '\t' || *str == '\n' || \
+	*str == '\v' || *str == '\f' || \
+	*str == '\r' || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	result = 0;
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return ((int)result * sign);
 }
