@@ -6,11 +6,10 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:06:35 by jim               #+#    #+#             */
-/*   Updated: 2022/03/23 14:46:37 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/25 15:26:30 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
 #include <unistd.h>
 
 double	ft_atof(const char *str)
