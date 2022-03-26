@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/02/17 21:02:54 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/26 21:03:56 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 		// printf("\n== displayDoublyList(b_stack)\n");
 		// displayDoublyList(b_stack);
 	}
-	
+
 	printf("\n=====================================================\n");
 
 	printf("\n\n== displayDoublyList(a_stack)\n");
@@ -148,6 +148,7 @@ int	parse_str_to_doublylist(t_DoublyList *pList, char **part_of_input_list)
 	while (part_of_input_list[word_cnt])
 	{
 		result_num = ft_atoi(part_of_input_list[word_cnt]);
+		printf("result : %d \n", result_num);
 		if (ft_strncmp(part_of_input_list[word_cnt], "0", 1) != 0 \
 			 && result_num == 0)
 			delete_and_print_error(pList);
