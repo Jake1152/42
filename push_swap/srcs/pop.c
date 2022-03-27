@@ -6,11 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:11:45 by jim               #+#    #+#             */
-/*   Updated: 2022/02/10 16:50:33 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 12:38:23 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include "../include/doublylist.h"
 
 t_DoublyListNode	*pop(t_DoublyList *pStack)
 {
@@ -23,10 +24,10 @@ t_DoublyListNode	*pop(t_DoublyList *pStack)
 	*/
 	if (pStack == NULL || pStack->currentElementCount == 0)
 		return (NULL);
-	pop_node = getDLElement(pStack, pStack->currentElementCount - 1);
+	pop_node = getDLElement(pStack, 0);
 	prev_node = pop_node->pLLink;
 	next_node = pop_node->pRLink;
-	pStack->tailerNode = prev_node;
+	pStack->headerNode = next_node;
 	if (pStack->currentElementCount == 1)
 	{
 		pStack->headerNode = NULL;

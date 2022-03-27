@@ -6,11 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:25:22 by jim               #+#    #+#             */
-/*   Updated: 2022/02/17 21:04:25 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 19:35:52 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include "../include/doublylist.h"
 
 void	print_error(void)
 {
@@ -21,8 +22,6 @@ void	print_error(void)
 void	delete_and_print_error(t_DoublyList *pList)
 {
 	deleteDoublyList(&pList);
-	if (pList == NULL)
-		ft_putstr("pList is NULL\n"); // shoudl be removed
 	print_error();
 }
 

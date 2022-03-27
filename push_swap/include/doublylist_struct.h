@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doublylist.h                                       :+:      :+:    :+:   */
+/*   doublylist_struct.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:05 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 15:04:37 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 15:03:25 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOUBLYLIST_H
-# define DOUBLYLIST_H
-# include "doublylist_struct.h"
+#ifndef DOUBLYLIST_STRUCT_H
+# define DOUBLYLIST_STRUCT_H
 
-t_DoublyList		*createDoublyList(void);
-t_DoublyListNode	*createDoublyListNode(int data);
-void				deleteDoublyList(t_DoublyList **pList);
-void				clearDoublyList(t_DoublyList *pList);
+typedef enum e_flag
+{
+	TRUE = 1,
+	FALSE = -1,
+}				t_e_flag;
 
-int					addDLElement(t_DoublyList *pList, int position, \
-								t_DoublyListNode *newNode);
-int					removeDLElement(t_DoublyList *pList, int position);
-t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position);
-void				displayDoublyList(t_DoublyList *pList);
+typedef struct s_DoublyListNodeType
+{
+	int							data;
+	struct s_DoublyListNodeType	*pLLink;
+	struct s_DoublyListNodeType	*pRLink;
+}				t_DoublyListNode;
+
+typedef struct s_DoublyListType
+{
+	int					currentElementCount;
+	t_DoublyListNode	*headerNode;
+	t_DoublyListNode	*tailerNode;
+}				t_DoublyList;
 
 #endif

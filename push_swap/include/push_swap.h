@@ -6,15 +6,14 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:56 by jim               #+#    #+#             */
-/*   Updated: 2022/02/10 21:27:21 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 15:33:59 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <unistd.h>
-# include "doublylist.h"
+# include "doublylist_struct.h"
 # include "../srcs/libft/libft.h"
 
 /* main */
@@ -31,10 +30,12 @@ void				swap_command_printer(char *command, int print_flag);
 void				push_a(t_DoublyList *a_stack, t_DoublyList *b_stack);
 void				push_b(t_DoublyList *a_stack, t_DoublyList *b_stack);
 
+void				rotate(t_DoublyList *stack, int print_flag);
 void				rotate_a(t_DoublyList *stack, int print_flag);
 void				rotate_b(t_DoublyList *stack, int print_flag);
 void				rotate_both(t_DoublyList *a_stack, t_DoublyList *b_stack);
 
+void				reverse_rotate(t_DoublyList *stack, int print_flag);
 void				reverse_rotate_a(t_DoublyList *stack, int print_flag);
 void				reverse_rotate_b(t_DoublyList *stack, int print_flag);
 void				reverse_rotate_both(t_DoublyList *a_stack, \

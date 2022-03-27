@@ -6,13 +6,14 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:25 by jim               #+#    #+#             */
-/*   Updated: 2022/02/10 21:05:34 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 14:04:13 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include "../include/doublylist.h"
 
-void	swap_a(t_DoublyList *stack, int print_flag)
+void	swap(t_DoublyList *stack, int print_flag, char *swap_flag)
 {
 	t_DoublyListNode	*midNode;
 	t_DoublyListNode	*prevNode;
@@ -20,54 +21,35 @@ void	swap_a(t_DoublyList *stack, int print_flag)
 
 	if (stack == NULL || stack->currentElementCount < 2)
 		return ;
-	midNode = getDLElement(stack, stack->currentElementCount - 2);
+	midNode = getDLElement(stack, 1);
 	if (midNode == NULL)
 		return ;
 	if (stack->currentElementCount == 2)
 	{
-		stack->headerNode = stack->tailerNode;
-		stack->tailerNode = midNode;
-		return (swap_command_printer("sa", print_flag));
+		stack->headerNode = midNode;
+		stack->tailerNode = stack->headerNode;
+		return (swap_command_printer(swap_flag, print_flag));
 	}
 	prevNode = midNode->pLLink;
 	nextNode = midNode->pRLink;
 	prevNode->pRLink = nextNode;
 	nextNode->pLLink = prevNode;
-	midNode->pLLink = nextNode;
-	midNode->pRLink = nextNode->pRLink;
-	nextNode->pRLink = midNode;
-	stack->tailerNode = midNode;
-	stack->headerNode->pLLink = midNode;
-	swap_command_printer("sa", print_flag);
+	midNode->pRLink = prevNode;
+	midNode->pLLink = stack->tailerNode;
+	prevNode->pLLink = midNode;
+	stack->tailerNode->pRLink = midNode;
+	stack->headerNode = midNode;
+	swap_command_printer(swap_flag, print_flag);
+}
+
+void	swap_a(t_DoublyList *stack, int print_flag)
+{
+	swap(stack, print_flag, "sa");
 }
 
 void	swap_b(t_DoublyList *stack, int print_flag)
 {
-	t_DoublyListNode	*midNode;
-	t_DoublyListNode	*prevNode;
-	t_DoublyListNode	*nextNode;
-
-	if (stack == NULL || stack->currentElementCount < 2)
-		return ;
-	midNode = getDLElement(stack, stack->currentElementCount - 2);
-	if (midNode == NULL)
-		return ;
-	if (stack->currentElementCount == 2)
-	{
-		stack->headerNode = stack->tailerNode;
-		stack->tailerNode = midNode;
-		return (swap_command_printer("sb", print_flag));
-	}
-	prevNode = midNode->pLLink;
-	nextNode = midNode->pRLink;
-	prevNode->pRLink = nextNode;
-	nextNode->pLLink = prevNode;
-	midNode->pLLink = nextNode;
-	midNode->pRLink = nextNode->pRLink;
-	nextNode->pRLink = midNode; 
-	stack->tailerNode = midNode;
-	stack->headerNode->pLLink = midNode;
-	swap_command_printer("sb", print_flag);
+	swap(stack, print_flag, "sb");
 }
 
 void	swap_both(t_DoublyList *a_stack, t_DoublyList *b_stack)

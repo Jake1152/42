@@ -6,10 +6,11 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/02/08 19:55:27 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 15:27:06 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "../include/doublylist.h"
 
 t_DoublyList	*createDoublyList(void)

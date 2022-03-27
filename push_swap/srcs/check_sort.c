@@ -6,11 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 21:11:24 by jim               #+#    #+#             */
-/*   Updated: 2022/02/10 21:30:18 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 16:17:42 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include "../include/doublylist.h"
 
 int	check_sort_DESC(t_DoublyList *stack)
 {
@@ -21,17 +22,17 @@ int	check_sort_DESC(t_DoublyList *stack)
 	t_DoublyListNode	*currentNode;
 	int					prevData;
 
-	if (stack == NULL)
+	if (stack == NULL || stack->currentElementCount <= 0)
 		return (FALSE);
-	currentNode = stack->tailerNode;
+	currentNode = stack->headerNode;
 	prevData = currentNode->data;
-	currentNode = currentNode->pLLink;
+	currentNode = currentNode->pRLink;
 	while (currentNode != stack->headerNode)
 	{
 		if (prevData < currentNode->data)
 			return (FALSE);
 		prevData = currentNode->data;
-		currentNode = currentNode->pLLink;
+		currentNode = currentNode->pRLink;
 	}
 	return (TRUE);
 }
@@ -45,17 +46,17 @@ int	check_sort_ASC(t_DoublyList *stack)
 	t_DoublyListNode	*currentNode;
 	int					prevData;
 
-	if (stack == NULL)
+	if (stack == NULL || stack->currentElementCount <= 0)
 		return (FALSE);
-	currentNode = stack->tailerNode;
+	currentNode = stack->headerNode;
 	prevData = currentNode->data;
-	currentNode = currentNode->pLLink;
+	currentNode = currentNode->pRLink;
 	while (currentNode != stack->headerNode)
 	{
 		if (prevData > currentNode->data)
 			return (FALSE);
 		prevData = currentNode->data;
-		currentNode = currentNode->pLLink;
+		currentNode = currentNode->pRLink;
 	}
 	return (TRUE);
 }

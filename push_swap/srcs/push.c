@@ -6,11 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:36 by jim               #+#    #+#             */
-/*   Updated: 2022/02/10 20:20:04 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/27 12:30:08 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include "../include/doublylist.h"
 
 void	push_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
@@ -21,7 +22,7 @@ void	push_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	pop_node = pop(b_stack);
 	if (pop_node == NULL)
 		return ;
-	addDLElement(a_stack, a_stack->currentElementCount, pop_node);
+	addDLElement(a_stack, 0, pop_node);
 	ft_putstr("pa\n");
 }
 
@@ -34,6 +35,6 @@ void	push_b(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	pop_node = pop(a_stack);
 	if (pop_node == NULL)
 		return ;
-	addDLElement(b_stack, b_stack->currentElementCount, pop_node);
+	addDLElement(b_stack, 0, pop_node);
 	ft_putstr("pb\n");
 }
