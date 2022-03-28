@@ -6,13 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:56 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 13:03:51 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 21:53:31 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
 # include "doublylist_struct.h"
 
 /* main */

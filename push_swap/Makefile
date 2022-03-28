@@ -3,7 +3,6 @@ CC = gcc
 FLAGS = -Wall -Werror -Wextra
 RM = rm -f
 SRCS =	./push_swap.c \
-		./error_handler.c \
 		./doublylist_definition.c \
 		./doublylist_manipulation.c \
 		./pop.c \
@@ -11,8 +10,11 @@ SRCS =	./push_swap.c \
 		./reverse_rotate.c \
 		./rotate.c \
 		./swap.c \
+		./sort_greedy.c \
+		./sort_utils.c \
 		./check_sort.c \
 		./utils.c \
+		./error_handler.c \
 		./ft_split.c \
 		./ft_substr.c \
 		./ft_strdup.c \

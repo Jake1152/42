@@ -6,11 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:44:47 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 22:42:25 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "sort.h"
 #include "utils.h"
 #include "doublylist.h"
 //debug
@@ -18,20 +19,27 @@
 
 int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
+	t_pivot_info	*pivot_info;
+
 	/*
 		정렬하는 용도로만 사용한다.
 	*/
-	// t_DoublyListNode	*tmpNode;
-	// size_t	cmd_cnt;
-	// displayDoublyList(a_stack);
-	if (check_sort_DESC(a_stack) == TRUE)
-		printf("'A' stack is DESC sorted.\n");
-	if (check_sort_ASC(a_stack) == TRUE)
-		printf("'A' stack is ASC sorted.\n");
-	if (check_sort_DESC(b_stack) == TRUE)
-		printf("'B' stack is DESC sorted.\n");
-	if (check_sort_ASC(b_stack) == TRUE)
-		printf("'B' stack is ASC sorted.\n");
+	/*
+		displayDoublyList(a_stack);
+		if (check_sort_DESC(a_stack) == TRUE)
+			printf("'A' stack is DESC sorted.\n");
+		if (check_sort_ASC(a_stack) == TRUE)
+			printf("'A' stack is ASC sorted.\n");
+		if (check_sort_DESC(b_stack) == TRUE)
+			printf("'B' stack is DESC sorted.\n");
+		if (check_sort_ASC(b_stack) == TRUE)
+			printf("'B' stack is ASC sorted.\n");
+	*/
+	// check sort를 할 필요가 있는가?
+	// void	sorting_util_init(t_pivot_info	pivot_info)
+	init_pivot(pivot_info);
+	a_to_b(a_stack, b_stack, *pivot_info);
+	b_to_a(a_stack, b_stack);
 	return (0);
 }
 
