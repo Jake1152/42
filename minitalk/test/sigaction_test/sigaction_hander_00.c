@@ -7,12 +7,12 @@ struct sigaction act_old;
 
 void sigUSR1_handler(int signo)
 {
-	printf("Test SIGUSR1\n");
+	printf("Test SIGUSR1 signo : %d\n", signo);
 }
 
 void sigUSR2_handler(int signo)
 {
-	printf("Test SIGUSR2\n");
+	printf("Test SIGUSR2 signo : %d\n", signo);
 }
 
 int main(void)
