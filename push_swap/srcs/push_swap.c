@@ -19,7 +19,7 @@
 
 int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
-	t_pivot_info	*pivot_info;
+	t_pivot_info	pivot_info;
 
 	/*
 		정렬하는 용도로만 사용한다.
@@ -37,8 +37,8 @@ int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	*/
 	// check sort를 할 필요가 있는가?
 	// void	sorting_util_init(t_pivot_info	pivot_info)
-	init_pivot(*a_stack, pivot_info);
-	a_to_b(a_stack, b_stack, *pivot_info);
+	init_pivot(*a_stack, &pivot_info);
+	a_to_b(a_stack, b_stack, pivot_info);
 	b_to_a(a_stack, b_stack);
 	return (0);
 }

@@ -28,31 +28,33 @@ void	a_to_b(t_DoublyList *a_stack, t_DoublyList *b_stack, \
 			pivot_info.pivot++;
 		}
 		else if (top_node->data > pivot_info.pivot && \
-				top_node->data >= pivot_info.pivot + pivot_info.chunk)
+				top_node->data <= pivot_info.pivot + pivot_info.chunk)
 		{
 			push_b(a_stack, b_stack);
 			rotate_b(b_stack, TRUE);
 			pivot_info.pivot++;
 		}
 		else if (top_node->data > pivot_info.pivot + pivot_info.chunk)
+		{
 			rotate_a(a_stack, TRUE);
+			pivot_info.pivot++;
+
+		}
 	}
 }
 
 void	b_to_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
-	t_DoublyListNode	*top_node;
 	t_max_data_info		max_data_info;
 
 	while (b_stack->currentElementCount)
 	{
-		top_node = b_stack->headerNode;
 		max_data_info = find_max_data_info(b_stack);
 		if (max_data_info.bound == UPPER_BOUND)
-			while (max_data_info.data != top_node->data)
+			while (max_data_info.data != b_stack->headerNode->data)
 				rotate_b(b_stack, TRUE);
 		else
-			while (max_data_info.data != top_node->data)
+			while (max_data_info.data != b_stack->headerNode->data)
 				reverse_rotate_b(b_stack, TRUE);
 		push_a(a_stack, b_stack);
 	}

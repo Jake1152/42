@@ -38,22 +38,28 @@ void	init_pivot(t_DoublyList stack, t_pivot_info *pivot_info)
 	pivot_info->pivot = 0;
 }
 
-t_max_data_info	find_max_data_info(t_DoublyList *b_stack)
+t_max_data_info	find_max_data_info(t_DoublyList *stack)
 {
 	t_max_data_info		max_data_info;
 	t_DoublyListNode	*cur_node;
-	int					node_positon;
+	int					idx;
+	int					node_position;
 
-	cur_node = b_stack->headerNode;
+	cur_node = stack->headerNode;
 	max_data_info.data = cur_node->data;
 	max_data_info.bound = UPPER_BOUND;
-	node_positon = 0;
-	while (cur_node != b_stack->tailerNode)
+	idx = 0;
+	while (cur_node != stack->tailerNode)
 	{
-		if (TRUE)
-			;
-		node_positon++;
+		if (max_data_info.data < cur_node->data)
+		{
+			max_data_info.data = cur_node->data;
+			node_position = idx;
+		}
+		idx++;
 		cur_node = cur_node->pRLink;
 	}
+	if (node_position > stack->currentElementCount/2)
+		max_data_info.bound = LOWER_BOUND;
 	return (max_data_info);
 }
