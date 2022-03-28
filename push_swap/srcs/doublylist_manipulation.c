@@ -6,13 +6,13 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 15:04:07 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 12:44:34 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> // should be removed
 # include <stdlib.h>
-#include "../include/doublylist.h"
+#include "doublylist.h"
 
 void displayDoublyList(t_DoublyList *pList)
 {

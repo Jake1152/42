@@ -6,12 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:11:45 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 12:38:23 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 12:53:17 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-#include "../include/doublylist.h"
+#include <stddef.h>
+#include "doublylist.h"
 
 t_DoublyListNode	*pop(t_DoublyList *pStack)
 {

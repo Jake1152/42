@@ -6,12 +6,13 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:25 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 14:04:13 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 13:00:35 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-#include "../include/doublylist.h"
+#include "utils.h"
+#include "push_swap.h"
+#include "doublylist.h"
 
 void	swap(t_DoublyList *stack, int print_flag, char *swap_flag)
 {

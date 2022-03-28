@@ -6,12 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 21:11:24 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 16:17:42 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 12:57:17 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-#include "../include/doublylist.h"
+#include <stddef.h>
+#include "doublylist_struct.h"
 
 int	check_sort_DESC(t_DoublyList *stack)
 {

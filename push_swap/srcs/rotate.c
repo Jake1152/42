@@ -6,13 +6,14 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:19 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 20:36:35 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 12:44:34 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "utils.h"
+#include "push_swap.h"
 
-void	rotate(t_DoublyList *stack, int print_flag)
+void	rotate(t_DoublyList *stack)
 {
 	t_DoublyListNode	*prevOfHeaderNode;
 
@@ -25,14 +26,14 @@ void	rotate(t_DoublyList *stack, int print_flag)
 
 void	rotate_a(t_DoublyList *stack, int print_flag)
 {
-	rotate(stack, print_flag);
+	rotate(stack);
 	if (print_flag == TRUE)
 		ft_putstr("ra\n");
 }
 
 void	rotate_b(t_DoublyList *stack, int print_flag)
 {
-	rotate(stack, print_flag);
+	rotate(stack);
 	if (print_flag == TRUE)
 		ft_putstr("rb\n");
 }

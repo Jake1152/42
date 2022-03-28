@@ -6,12 +6,13 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:25:22 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 19:35:52 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 12:53:43 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-#include "../include/doublylist.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include "doublylist.h"
 
 void	print_error(void)
 {

@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:56 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 15:33:59 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 12:15:28 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "doublylist_struct.h"
-# include "../srcs/libft/libft.h"
 
 /* main */
 int					push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack);
@@ -30,12 +29,12 @@ void				swap_command_printer(char *command, int print_flag);
 void				push_a(t_DoublyList *a_stack, t_DoublyList *b_stack);
 void				push_b(t_DoublyList *a_stack, t_DoublyList *b_stack);
 
-void				rotate(t_DoublyList *stack, int print_flag);
+void				rotate(t_DoublyList *stack);
 void				rotate_a(t_DoublyList *stack, int print_flag);
 void				rotate_b(t_DoublyList *stack, int print_flag);
 void				rotate_both(t_DoublyList *a_stack, t_DoublyList *b_stack);
 
-void				reverse_rotate(t_DoublyList *stack, int print_flag);
+void				reverse_rotate(t_DoublyList *stack);
 void				reverse_rotate_a(t_DoublyList *stack, int print_flag);
 void				reverse_rotate_b(t_DoublyList *stack, int print_flag);
 void				reverse_rotate_both(t_DoublyList *a_stack, \
@@ -43,16 +42,10 @@ void				reverse_rotate_both(t_DoublyList *a_stack, \
 
 /* sort algorithms */
 
-
 /* other stack action */
 t_DoublyListNode	*pop(t_DoublyList *stack);
 int					check_sort_DESC(t_DoublyList *stack);
 int					check_sort_ASC(t_DoublyList *stack);
-
-/* util */
-void				ft_putchar(char ch);
-void				ft_putstr(char *s);
-size_t				ft_strlen(const char *s);
 
 /* error handler */
 void				print_error(void);

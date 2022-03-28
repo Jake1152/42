@@ -6,13 +6,13 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/03/27 18:27:20 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 12:44:47 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-#include "./libft/libft.h"
-#include "../include/doublylist.h"
+#include "push_swap.h"
+#include "utils.h"
+#include "doublylist.h"
 //debug
 #include <stdio.h>
 
