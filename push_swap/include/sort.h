@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 21:36:20 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 22:50:22 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/29 14:03:08 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ t_max_data_info	find_max_data_info(t_DoublyList *b_stack);
 
 void			init_pivot(t_DoublyList stack, t_pivot_info *pivot_info);
 
+/* indexing */
+int				indexing(t_DoublyList *stack);
+
+/* utils */
+void			print_doubly_list(t_DoublyList *doubly_list);
 #endif

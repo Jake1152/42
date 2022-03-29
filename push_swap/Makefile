@@ -11,6 +11,7 @@ SRCS =	./push_swap.c \
 		./rotate.c \
 		./swap.c \
 		./sort_greedy.c \
+		./sort_for_indexing.c \
 		./sort_utils.c \
 		./check_sort.c \
 		./utils.c \
@@ -21,10 +22,11 @@ SRCS =	./push_swap.c \
 		./ft_strlcpy.c \
 		./ft_strncmp.c
 
+
 OBJS = $(SRCS:.c=.o)
 
 %.o : ./srcs/%.c
-	$(CC) $(FLAGS) -I ./include/ -c $^ -o $@
+	$(CC) $(FLAGS) -I ./include/ -c $^ -o $@ -O2
 
 $(NAME) : $(OBJS)
 	$(CC) $(FLAGS) $^ -o $@

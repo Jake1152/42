@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 21:16:49 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 22:32:51 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/29 14:00:23 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_max_data_info
 {
 	int	bound;
 	int	data;
+	int	idx;
 }				t_max_data_info;
 
 typedef enum e_data_bound
