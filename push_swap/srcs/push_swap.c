@@ -17,13 +17,6 @@
 //debug
 #include <stdio.h>
 
-static int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
 int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
 	t_pivot_info	pivot_info;
