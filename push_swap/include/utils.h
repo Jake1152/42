@@ -17,7 +17,7 @@
 void	ft_putchar(char ch);
 void	ft_putstr(char *s);
 size_t	ft_strlen(const char *s);
-int		ft_atoi(const char *str);
+int	    ft_atoi(const char *str,int	*atoi_flag);
 
 int		free_list(char ***word_list, int len_of_alloc);
 char	**ft_split(char const *s, char c);

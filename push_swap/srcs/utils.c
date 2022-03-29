@@ -36,7 +36,7 @@ size_t	ft_strlen(const char *s)
 	return (idx);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str,int	*atoi_flag)
 {
 	int			sign;
 	long long	result;
@@ -58,6 +58,9 @@ int	ft_atoi(const char *str)
 	}
 	result = result * sign;
 	if (*str || result > 2147483647 || result < -2147483648)
+	{
+		*atoi_flag = -1;
 		return (0);
+	}
 	return ((int)result);
 }

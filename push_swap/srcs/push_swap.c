@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/03/29 16:55:22 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/28 22:42:25 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,36 @@
 //debug
 #include <stdio.h>
 
+static int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
 int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
 	t_pivot_info	pivot_info;
 
-	if (check_sort_ASC(a_stack) == TRUE)
-		return (0);
-	if (a_stack->currentElementCount <= 5)
-	{
-		sort_brute_force(a_stack, b_stack);
-	}
-	else
-	{
-		init_pivot(*a_stack, &pivot_info);
-		indexing(a_stack);
-		a_to_b(a_stack, b_stack, pivot_info);
-		b_to_a(a_stack, b_stack);
-	}
-	// (void)b_stack;
-	// print_doubly_list(a_stack);
-	// displayDoublyList(a_stack);
-	// (void)pivot_info;
+	/*
+		정렬하는 용도로만 사용한다.
+	*/
+	/*
+		displayDoublyList(a_stack);
+		if (check_sort_DESC(a_stack) == TRUE)
+			printf("'A' stack is DESC sorted.\n");
+		if (check_sort_ASC(a_stack) == TRUE)
+			printf("'A' stack is ASC sorted.\n");
+		if (check_sort_DESC(b_stack) == TRUE)
+			printf("'B' stack is DESC sorted.\n");
+		if (check_sort_ASC(b_stack) == TRUE)
+			printf("'B' stack is ASC sorted.\n");
+	*/
+	// check sort를 할 필요가 있는가?
+	// void	sorting_util_init(t_pivot_info	pivot_info)
+	init_pivot(*a_stack, &pivot_info);
+	a_to_b(a_stack, b_stack, pivot_info);
+	b_to_a(a_stack, b_stack);
 	return (0);
 }
 
@@ -47,15 +56,15 @@ int	parse_str_to_doublylist(t_DoublyList *pList, char **part_of_input_list)
 	int					result_num;
 	int					add_flag;
 	int					word_cnt;
+	int					atoi_flag;
 
 	if (pList == NULL || part_of_input_list == NULL)
 		return (FALSE);
 	word_cnt = 0;
 	while (part_of_input_list[word_cnt])
 	{
-		result_num = ft_atoi(part_of_input_list[word_cnt]);
-		if (ft_strncmp(part_of_input_list[word_cnt], "0", 1) != 0 \
-			 && result_num == 0)
+		result_num = ft_atoi(part_of_input_list[word_cnt], &atoi_flag);
+		if (atoi_flag == FALSE)
 			delete_and_print_error(pList);
 		addDLElementNode = createDoublyListNode(result_num);
 		if (addDLElementNode == NULL)
