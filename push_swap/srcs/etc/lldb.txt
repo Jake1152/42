@@ -1,0 +1,8 @@
+b main.c:17
+target stop-hook add --one-liner "p testDoublyList->currentElementCount"
+target stop-hook add --one-liner "p testDoublyList->headerNode"
+target stop-hook add --one-liner "p *(testDoublyList->headerNode)"
+target stop-hook add --one-liner "p testDoublyList->headerNode->pRLink"
+target stop-hook add --one-liner "p *(testDoublyList->headerNode->pRLink)"
+target stop-hook add --one-liner "p testDoublyList->headerNode->pRLink->pRLink"
+target stop-hook add --one-liner "p *(testDoublyList->headerNode->pRLink->pRLink)"

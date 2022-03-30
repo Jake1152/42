@@ -1,0 +1,3 @@
+gcc -o parse_output.out -fsanitize=address ./push_swap.c ./utils.c \
+                        ./libft/ft_split.c ./libft/ft_substr.c ./libft/ft_strdup.c ./libft/ft_strlcpy.c ./libft/ft_atoi.c ./libft/ft_strncmp.c ./error_handler.c \
+                        ./doublylist_definition.c ./doublylist_manipulation.c 

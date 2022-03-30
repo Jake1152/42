@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 22:42:25 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 17:20:36 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,28 @@
 #include "sort.h"
 #include "utils.h"
 #include "doublylist.h"
-//debug
-#include <stdio.h>
 
 int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
 	t_pivot_info	pivot_info;
 
-	/*
-		정렬하는 용도로만 사용한다.
-	*/
-	/*
-		displayDoublyList(a_stack);
-		if (check_sort_DESC(a_stack) == TRUE)
-			printf("'A' stack is DESC sorted.\n");
-		if (check_sort_ASC(a_stack) == TRUE)
-			printf("'A' stack is ASC sorted.\n");
-		if (check_sort_DESC(b_stack) == TRUE)
-			printf("'B' stack is DESC sorted.\n");
-		if (check_sort_ASC(b_stack) == TRUE)
-			printf("'B' stack is ASC sorted.\n");
-	*/
-	// check sort를 할 필요가 있는가?
-	// void	sorting_util_init(t_pivot_info	pivot_info)
-	init_pivot(*a_stack, &pivot_info);
-	a_to_b(a_stack, b_stack, pivot_info);
-	b_to_a(a_stack, b_stack);
+	if (check_sort_ASC(a_stack) == TRUE)
+		return (0);
+	if (a_stack->currentElementCount <= 3)
+	{
+		sort_brute_force(a_stack, b_stack);
+	}
+	else
+	{
+		init_pivot(*a_stack, &pivot_info);
+		indexing(a_stack);
+		a_to_b(a_stack, b_stack, pivot_info);
+		b_to_a(a_stack, b_stack);
+ 	}
+	// (void)b_stack;
+	// print_doubly_list(a_stack);
+	// displayDoublyList(a_stack);
+	// (void)pivot_info;
 	return (0);
 }
 

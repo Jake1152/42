@@ -12,6 +12,7 @@ SRCS =	./push_swap.c \
 		./swap.c \
 		./sort_greedy.c \
 		./sort_for_indexing.c \
+		./sort_brute_force.c \
 		./sort_utils.c \
 		./check_sort.c \
 		./utils.c \
@@ -21,8 +22,6 @@ SRCS =	./push_swap.c \
 		./ft_strdup.c \
 		./ft_strlcpy.c \
 		./ft_strncmp.c
-		
-
 
 OBJS = $(SRCS:.c=.o)
 

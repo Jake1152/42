@@ -1,33 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   relative_sort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 17:37:38 by jim               #+#    #+#             */
-/*   Updated: 2022/03/22 22:59:39 by jim              ###   ########seoul.kr  */
+/*   Created: 2022/03/28 19:10:50 by jim               #+#    #+#             */
+/*   Updated: 2022/03/28 19:10:51 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	k;
-
-	i = 0;
-	k = 0;
-	while (src[i] != '\0')
-		i++;
-	if (dstsize == 0)
-		return (i);
-	while ((k < dstsize - 1) && src[k])
-	{
-		dst[k] = src[k];
-		k++;
-	}
-	dst[k] = '\0';
-	return (i);
-}

@@ -6,12 +6,11 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:43 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:13:18 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 09:19:15 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

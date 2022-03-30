@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 21:14:46 by jim               #+#    #+#             */
-/*   Updated: 2022/03/29 16:54:35 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 16:32:24 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,26 @@ static long long	calculate_chunk_size(long long element_count)
 	x = element_count;
 	to_be_chunk_size = 0.000000053 * x * x + 0.03 * x + 14.5;
 	return ((long long)to_be_chunk_size);
+}
+
+int	find_mid_value_when_3things(t_DoublyList *stack)
+{
+	t_DoublyListNode	*top_node;
+	int					top;
+	int					mid;
+	int					bottom;
+
+	top_node = stack->headerNode;
+	top = top_node->data;
+	mid = top_node->pRLink->data;
+	bottom = top_node->pRLink->pRLink->data;
+	if ((top > mid || top > bottom) && (top < mid || top < bottom))
+		return (top);
+	else if ((mid > top || mid > bottom) && (mid < top || mid < bottom))
+		return (mid);
+	else if ((bottom > mid || bottom > top) && (bottom < mid || bottom < top))
+		return (bottom);
+	return (FALSE);
 }
 
 void	init_pivot(t_DoublyList stack, t_pivot_info *pivot_info)

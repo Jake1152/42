@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   sort_4case.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 17:37:38 by jim               #+#    #+#             */
-/*   Updated: 2022/03/22 22:59:39 by jim              ###   ########seoul.kr  */
+/*   Created: 2022/03/27 15:33:28 by jim               #+#    #+#             */
+/*   Updated: 2022/03/27 16:18:55 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "doublylist_struct.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+
+void	sort_2case_ASC(t_DoublyList *stack)
 {
-	size_t	i;
-	size_t	k;
 
-	i = 0;
-	k = 0;
-	while (src[i] != '\0')
-		i++;
-	if (dstsize == 0)
-		return (i);
-	while ((k < dstsize - 1) && src[k])
-	{
-		dst[k] = src[k];
-		k++;
-	}
-	dst[k] = '\0';
-	return (i);
+}
+
+void	sort_2case_DESC(t_DoublyList *stack)
+{
+
 }

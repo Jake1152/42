@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:51 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:43:48 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 12:18:53 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	free_list(char ***word_list, int len_of_alloc)
 	*word_list = NULL;
 	return (-1);
 }
-
 
 char	**ft_split(char const *s, char c)
 {

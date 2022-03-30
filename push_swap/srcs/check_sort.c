@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 21:11:24 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:57:17 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 12:18:13 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 int	check_sort_DESC(t_DoublyList *stack)
 {
-	/*
-		top에서 bottom을 보았을때 기준으로 생각한다.
-		밑으로 갈수록 숫자가 작아져야한다.
-	*/
 	t_DoublyListNode	*currentNode;
 	int					prevData;
 
@@ -39,10 +35,6 @@ int	check_sort_DESC(t_DoublyList *stack)
 
 int	check_sort_ASC(t_DoublyList *stack)
 {
-	/*
-		top에서 bottom을 보았을때 기준으로 생각한다.
-		밑으로 갈수록 숫자가 커져야한다.
-	*/
 	t_DoublyListNode	*currentNode;
 	int					prevData;
 

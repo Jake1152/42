@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:13:40 by jim               #+#    #+#             */
-/*   Updated: 2022/03/29 16:45:41 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 17:23:18 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,17 @@ void	print_doubly_list(t_DoublyList *doubly_list)
 static void	data_copy(t_DoublyList *DoublyList, int *arr)
 {
 	t_DoublyListNode	*cur_node;
+	int					k;
 
 	if (DoublyList == NULL || arr == NULL)
 		return ;
 	cur_node = DoublyList->headerNode;
-	for (int k=0; k<DoublyList->currentElementCount; k++)
+	k = 0;
+	while (k < DoublyList->currentElementCount)
 	{
 		arr[k] = cur_node->data;
 		cur_node = cur_node->pRLink;
+		k++;
 	}
 }
 
@@ -69,9 +72,11 @@ static void	bubble_sort(int *arr_for_indexing, int n)
 
 	if (arr_for_indexing == NULL)
 		return ;
-	for (i=n-1; i>0; i--)
+	i = n - 1;
+	while (i > 0)
 	{
-		for (j=0; j<i; j++)
+		j = 0;
+		while (j < i)
 		{
 			if (arr_for_indexing[j] > arr_for_indexing[j + 1])
 			{
@@ -79,7 +84,9 @@ static void	bubble_sort(int *arr_for_indexing, int n)
 				arr_for_indexing[j] = arr_for_indexing[j + 1];
 				arr_for_indexing[j + 1] = tmp;
 			}
+			j++;
 		}
+		i--;
 	}
 }
 

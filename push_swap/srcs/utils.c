@@ -6,11 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:10:59 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:43:48 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 17:08:26 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stddef.h>
 #include "utils.h"
 
 void	ft_putchar(char ch)
@@ -36,7 +37,7 @@ size_t	ft_strlen(const char *s)
 	return (idx);
 }
 
-int	ft_atoi(const char *str,int	*atoi_flag)
+int	ft_atoi(const char *str, int *atoi_flag)
 {
 	int			sign;
 	long long	result;
@@ -50,6 +51,8 @@ int	ft_atoi(const char *str,int	*atoi_flag)
 			sign = -1;
 		str++;
 	}
+	if (!(*str))
+		*atoi_flag = -1;
 	result = 0;
 	while (*str >= '0' && *str <= '9')
 	{
@@ -58,9 +61,6 @@ int	ft_atoi(const char *str,int	*atoi_flag)
 	}
 	result = result * sign;
 	if (*str || result > 2147483647 || result < -2147483648)
-	{
 		*atoi_flag = -1;
-		return (0);
-	}
 	return ((int)result);
 }

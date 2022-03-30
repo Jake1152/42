@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 21:16:49 by jim               #+#    #+#             */
-/*   Updated: 2022/03/29 17:19:47 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 13:06:58 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef enum e_stack_type
 {
 	A_STACK=1,
 	B_STACK,
+	BOTH_STACK,
 }			t_stack_type;
 
 typedef enum e_data_bound

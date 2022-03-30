@@ -6,36 +6,29 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:36 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:57:38 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 12:51:11 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "push_swap.h"
+#include "sort.h"
 #include "doublylist.h"
 
-void	push_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
+void	push(t_DoublyList *from_stack, t_DoublyList *to_stack, \
+			t_stack_type to_stack_type)
 {
 	t_DoublyListNode	*pop_node;
 
-	if (a_stack == NULL || b_stack == NULL)
+	if (from_stack == NULL || to_stack == NULL)
 		return ;
-	pop_node = pop(b_stack);
+	pop_node = pop(from_stack);
 	if (pop_node == NULL)
 		return ;
-	addDLElement(a_stack, 0, pop_node);
-	ft_putstr("pa\n");
+	addDLElement(to_stack, 0, pop_node);
+	if (to_stack_type == A_STACK)
+		ft_putstr("pa\n");
+	else if (to_stack_type == B_STACK)
+		ft_putstr("pb\n");
 }
 
-void	push_b(t_DoublyList *a_stack, t_DoublyList *b_stack)
-{
-	t_DoublyListNode	*pop_node;
-
-	if (a_stack == NULL || b_stack == NULL)
-		return ;
-	pop_node = pop(a_stack);
-	if (pop_node == NULL)
-		return ;
-	addDLElement(b_stack, 0, pop_node);
-	ft_putstr("pb\n");
-}
