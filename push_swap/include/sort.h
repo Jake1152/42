@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 21:36:20 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 16:57:36 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/30 17:34:30 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int				indexing(t_DoublyList *stack);
 
 /* brute force */
 void			sort_brute_force(t_DoublyList *a_stack, t_DoublyList *b_stack);
-void			sort_2things(t_DoublyList *stack, t_stack_type stack_type);
 void			sort_3things(t_DoublyList *stack, t_stack_type stack_type);
 void			sort_3things_other_part(t_DoublyList *stack, \
 										t_stack_type stack_type, \
