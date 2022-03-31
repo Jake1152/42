@@ -6,12 +6,10 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 16:37:45 by jim               #+#    #+#             */
-/*   Updated: 2022/02/05 20:53:35 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 11:34:37 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 int	ft_atoi(const char *str)
