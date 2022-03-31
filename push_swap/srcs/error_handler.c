@@ -6,13 +6,14 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:25:22 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:53:43 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 18:26:52 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "doublylist.h"
+#include "error_handle.h"
 
 void	print_error(void)
 {

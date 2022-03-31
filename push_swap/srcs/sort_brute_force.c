@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:52:35 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 10:31:32 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 18:27:11 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "doublylist_struct.h"
 #include "push_swap.h"
 #include "utils.h"
+#include "error_handle.h"
 
 static void	find_min_max_value(t_DoublyList *stack, \
 								t_min_max_info *min_max_info)

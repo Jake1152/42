@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 11:02:56 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 18:27:29 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "sort.h"
 #include "utils.h"
 #include "doublylist.h"
+#include "error_handle.h"
 
 int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
@@ -27,9 +28,7 @@ int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	if (check_sort_ASC(a_stack) == TRUE)
 		return (0);
 	if (a_stack->currentElementCount <= 5)
-	{
 		sort_brute_force(a_stack, b_stack);
-	}
 	else
 	{
 		init_pivot(*a_stack, &pivot_info);
