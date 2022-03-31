@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:36 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 12:51:11 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 10:50:58 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ void	push(t_DoublyList *from_stack, t_DoublyList *to_stack, \
 	else if (to_stack_type == B_STACK)
 		ft_putstr("pb\n");
 }
-

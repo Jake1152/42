@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:44:34 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 09:44:51 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,21 @@ t_DoublyListNode	*createDoublyListNode(int data)
 	return (newDoublyListNode);
 }
 
-void	clearDoublyList(t_DoublyList *pList)
+int	clearDoublyList(t_DoublyList *pList)
 {
 	if (pList == NULL)
-		return ;
+		return (FALSE);
 	while (pList->currentElementCount > 0)
 		removeDLElement(pList, 0);
+	return (TRUE);
 }
 
 void	deleteDoublyList(t_DoublyList **pList)
 {
 	if (pList == NULL)
 		return ;
-	clearDoublyList(*pList);
+	if (clearDoublyList(*pList) == FALSE)
+		return ;
 	free(*pList);
 	*pList = NULL;
 }

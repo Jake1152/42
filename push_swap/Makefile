@@ -20,8 +20,7 @@ SRCS =	./push_swap.c \
 		./ft_split.c \
 		./ft_substr.c \
 		./ft_strdup.c \
-		./ft_strlcpy.c \
-		./ft_strncmp.c
+		./ft_strlcpy.c
 
 OBJS = $(SRCS:.c=.o)
 

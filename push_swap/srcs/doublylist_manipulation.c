@@ -6,58 +6,12 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/03/28 12:44:34 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 10:50:03 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> // should be removed
-# include <stdlib.h>
+#include <stdlib.h>
 #include "doublylist.h"
-
-void displayDoublyList(t_DoublyList *pList)
-{
-	t_DoublyListNode	*rightBoundDoublyListNode;
-	t_DoublyListNode	*leftBoundDoublyListNode;
-	int					cnt;
-	// DoublyListNode	curDoublyListNode;
-	// curDoublyListNode.pLLink = &pLLink;
-	printf("== in displayDoublyList\n");
-	if (pList == NULL || pList->currentElementCount <= 0)
-	{
-		printf("pList is NULL\n");
-		if (pList != NULL)
-			printf("pList->currentElementCount : %d\n", pList->currentElementCount);
-		return ;
-	}
-	rightBoundDoublyListNode = pList->headerNode;
-	printf("##### headerNode is %d\n", rightBoundDoublyListNode->data);
-	printf("=====================\n");
-	printf("displayDoublyList\n");
-	printf("=====================\n");
-	cnt = 1;
-	printf("display right bound\n");
-	while (pList->currentElementCount > cnt)
-	{
-		printf("%d->", rightBoundDoublyListNode->data);
-		rightBoundDoublyListNode = rightBoundDoublyListNode->pRLink;
-		cnt++;
-	}
-	printf("%d", rightBoundDoublyListNode->data);
-	printf("\n");
-	leftBoundDoublyListNode = pList->tailerNode;
-	printf("##### tailerNode is %d\n", leftBoundDoublyListNode->data);
-	cnt = 1;
-	printf("display left bound\n");
-	while (pList->currentElementCount > cnt)
-	{
-		printf("%d->", leftBoundDoublyListNode->data);
-		leftBoundDoublyListNode = leftBoundDoublyListNode->pLLink;
-		cnt++;
-	}
-	printf("%d", leftBoundDoublyListNode->data);
-	printf("\n");
-	printf("end of display\n");
-}
 
 t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
 {

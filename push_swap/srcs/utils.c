@@ -6,18 +6,13 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:10:59 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 17:08:26 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 11:53:39 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stddef.h>
 #include "utils.h"
-
-void	ft_putchar(char ch)
-{
-	write(1, &ch, 1);
-}
 
 void	ft_putstr(char *s)
 {

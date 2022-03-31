@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:52:35 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 17:34:50 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 10:31:32 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,35 @@
 #include "push_swap.h"
 #include "utils.h"
 
+static void	find_min_max_value(t_DoublyList *stack, \
+								t_min_max_info *min_max_info)
+{
+	t_DoublyListNode	*cur_node;
+	int					cnt;
+
+	cur_node = stack->headerNode;
+	min_max_info->max = cur_node->data;
+	min_max_info->min = cur_node->data;
+	cur_node = cur_node->pRLink;
+	cnt = 1;
+	while (cnt < stack->currentElementCount)
+	{
+		if (min_max_info->max < cur_node->data)
+			min_max_info->max = cur_node->data;
+		if (min_max_info->min > cur_node->data)
+			min_max_info->min = cur_node->data;
+		cur_node = cur_node->pRLink;
+		cnt++;
+	}
+}
+
 void	sort_brute_force(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
+	if (a_stack == NULL || b_stack == NULL)
+	{
+		delete_and_print_error(a_stack);
+		delete_and_print_error(b_stack);
+	}
 	if (a_stack->currentElementCount == 2)
 		swap(a_stack, A_STACK, TRUE);
 	else if (a_stack->currentElementCount == 3)
@@ -48,11 +75,6 @@ void	sort_3things_other_part(t_DoublyList *stack, t_stack_type stack_type, \
 	else if ((mid_value == bottom_position_data) && \
 			(mid_value > mid_position_data))
 		rotate(stack, stack_type, TRUE);
-	else
-	{
-		ft_putstr("There are unexpected case in sort 3things.\n");
-		print_error();
-	}
 }
 
 void	sort_3things(t_DoublyList *stack, t_stack_type stack_type)
@@ -83,15 +105,25 @@ void	sort_3things(t_DoublyList *stack, t_stack_type stack_type)
 		sort_3things_other_part(stack, stack_type, mid_value);
 }
 
-// 4,5개는 한번에 할 수 있는지 고려 필요.
 int	sort_4_5_things(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
-	;
-}
+	t_min_max_info		min_max_info;
 
-/*
-	- find min, max using struct
-	- min and max pb()
-	- 3 things in A stack sorted
-	- 2thing pa be right position
-*/
+	find_min_max_value(a_stack, &min_max_info);
+	while (a_stack->currentElementCount > 3)
+	{
+		if (a_stack->headerNode->data == min_max_info.max || \
+			a_stack->headerNode->data == min_max_info.min)
+			push(a_stack, b_stack, B_STACK);
+		else
+			rotate(a_stack, A_STACK, TRUE);
+	}
+	sort_3things(a_stack, A_STACK);
+	while (b_stack->currentElementCount > 0)
+	{
+		push(b_stack, a_stack, A_STACK);
+		if (a_stack->headerNode->data == min_max_info.max)
+			rotate(a_stack, A_STACK, TRUE);
+	}
+	return (TRUE);
+}

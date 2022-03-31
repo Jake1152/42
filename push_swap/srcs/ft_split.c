@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:51 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 12:18:53 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 11:34:24 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,37 +95,3 @@ char	**ft_split(char const *s, char c)
 		return ((char **) NULL);
 	return (word_list);
 }
-
-/*
-진짜로 free 및  NULL할당 되었는지 확인 필요
-
-#include <stdio.h>
-int	main(int argc, char *argv[])
-{
-	char	**word_list;
-	int		word_cnt;
-	int		idx;
-
-	if (argc < 1)
-		return (0);
-	idx = 1;
-	while (idx < argc)
-	{
-		word_list = ft_split(argv[idx], ' ');
-		if (word_list == NULL)
-			return (0);
-		word_cnt = 0;
-		while (word_list[word_cnt])
-		{
-			printf("*word_list : %s\n", word_list[word_cnt]);
-			word_cnt++;
-		}
-		free_list(&word_list, word_cnt);
-		if (word_list == NULL)
-			printf("word_list pointer also prevented dangling\n");
-		idx++;
-	}
-	while (42) ;
-	return (0);
-}
-*/
