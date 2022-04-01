@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/29 20:48:23 by jim               #+#    #+#             */
-/*   Updated: 2022/04/01 10:48:07 by jim              ###   ########seoul.kr  */
+/*   Created: 2021/06/25 17:37:43 by jim               #+#    #+#             */
+/*   Updated: 2022/04/01 10:40:58 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include <stdlib.h>
+#include <stddef.h>
 
-char	*ft_strdup(const char *s1)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*dest;
-	size_t	idx;
-	size_t	s1_size;
+	unsigned char	c1;
+	unsigned char	c2;
+	size_t			i;
 
-	if (s1 == NULL)
-		return (NULL);
-	s1_size = ft_strlen(s1);
-	dest = (char *)malloc(sizeof(char) * (s1_size + 1));
-	if (dest == NULL)
-		return (NULL);
-	idx = 0;
-	while (s1[idx])
+	i = 0;
+	while (i++ < n)
 	{
-		dest[idx] = s1[idx];
-		idx++;
+		c1 = *s1++;
+		c2 = *s2++;
+		if (c1 != c2)
+		{
+			if (c1 < c2)
+				return (-1);
+			else
+				return (1);
+		}
+		if (!c1)
+			break ;
 	}
-	dest[idx] = 0;
-	return (dest);
+	return (0);
 }

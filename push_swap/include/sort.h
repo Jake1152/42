@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 21:36:20 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 11:51:27 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/03/31 18:14:36 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "doublylist_struct.h"
 # include "sort_struct.h"
 
+int				check_sort_ASC(t_DoublyList *stack);
 void			a_to_b(t_DoublyList *a_stack, t_DoublyList *b_stack, \
 						t_pivot_info pivot_info);
 void			b_to_a(t_DoublyList *a_stack, t_DoublyList *b_stack);

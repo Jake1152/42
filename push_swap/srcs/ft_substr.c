@@ -6,14 +6,14 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 17:37:51 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 18:07:07 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 10:45:11 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include <stdlib.h>
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	s_len;

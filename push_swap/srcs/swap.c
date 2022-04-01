@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:25 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 16:55:47 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 15:03:26 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	swap(t_DoublyList *stack, t_stack_type stack_type, int print_flag)
 	swap_command_printer(stack_type, print_flag);
 }
 
-void	swap_both(t_DoublyList *a_stack, t_DoublyList *b_stack)
+void	swap_both(t_DoublyList *a_stack, t_DoublyList *b_stack, int print_flag)
 {
 	swap(a_stack, FALSE, A_STACK);
 	swap(b_stack, FALSE, B_STACK);
-	swap_command_printer(BOTH_STACK, TRUE);
+	swap_command_printer(BOTH_STACK, print_flag);
 }
 
 void	swap_command_printer(t_stack_type stack_type, int print_flag)

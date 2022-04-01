@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:52:35 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 18:27:11 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 15:08:53 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ static void	find_min_max_value(t_DoublyList *stack, \
 void	sort_brute_force(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
 	if (a_stack == NULL || b_stack == NULL)
-	{
-		delete_and_print_error(a_stack);
-		delete_and_print_error(b_stack);
-	}
+		delete_both_stack(a_stack, b_stack);
 	if (a_stack->currentElementCount == 2)
 		swap(a_stack, A_STACK, TRUE);
 	else if (a_stack->currentElementCount == 3)
@@ -115,14 +112,14 @@ int	sort_4_5_things(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	{
 		if (a_stack->headerNode->data == min_max_info.max || \
 			a_stack->headerNode->data == min_max_info.min)
-			push(a_stack, b_stack, B_STACK);
+			push(a_stack, b_stack, B_STACK, TRUE);
 		else
 			rotate(a_stack, A_STACK, TRUE);
 	}
 	sort_3things(a_stack, A_STACK);
 	while (b_stack->currentElementCount > 0)
 	{
-		push(b_stack, a_stack, A_STACK);
+		push(b_stack, a_stack, A_STACK, TRUE);
 		if (a_stack->headerNode->data == min_max_info.max)
 			rotate(a_stack, A_STACK, TRUE);
 	}

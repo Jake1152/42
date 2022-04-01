@@ -1,43 +1,88 @@
-NAME = push_swap
-CC = gcc
-FLAGS = -Wall -Werror -Wextra
-RM = rm -f
-SRCS =	./push_swap.c \
-		./doublylist_definition.c \
-		./doublylist_manipulation.c \
-		./pop.c \
-		./push.c \
-		./reverse_rotate.c \
-		./rotate.c \
-		./swap.c \
-		./sort_greedy.c \
-		./sort_for_indexing.c \
-		./sort_brute_force.c \
-		./sort_utils.c \
-		./check_sort.c \
-		./utils.c \
-		./error_handler.c \
-		./ft_split.c \
-		./ft_substr.c \
-		./ft_strdup.c \
-		./ft_strlcpy.c
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/01 16:38:36 by jim               #+#    #+#              #
+#    Updated: 2022/04/01 16:48:34 by jim              ###   ########seoul.kr   #
+#                                                                              #
+# **************************************************************************** #
 
-OBJS = $(SRCS:.c=.o)
+PUSH_SWAP = push_swap
+CHECKER = checker
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -f
+PUSH_SWAP_SRCS = ./push_swap_main.c \
+					./push_swap.c \
+					./doublylist_definition.c \
+					./doublylist_manipulation.c \
+					./pop.c \
+					./push.c \
+					./reverse_rotate.c \
+					./rotate.c \
+					./swap.c \
+					./sort_greedy.c \
+					./sort_for_indexing.c \
+					./sort_brute_force.c \
+					./sort_utils.c \
+					./check_sort.c \
+					./utils.c \
+					./error_handler.c \
+					./ft_split.c \
+					./ft_strncmp.c \
+					./ft_substr.c \
+					./ft_strlcpy.c \
+					./ft_strdup.c
+
+CHECKER_SRCS = ./checker.c \
+				./get_next_line.c \
+				./get_next_line_utils.c \
+				./push_swap.c \
+				./doublylist_definition.c \
+				./doublylist_manipulation.c \
+				./pop.c \
+				./push.c \
+				./reverse_rotate.c \
+				./rotate.c \
+				./swap.c \
+				./sort_greedy.c \
+				./sort_for_indexing.c \
+				./sort_brute_force.c \
+				./sort_utils.c \
+				./check_sort.c \
+				./utils.c \
+				./error_handler.c \
+				./ft_split.c \
+				./ft_strncmp.c \
+				./ft_substr.c \
+				./ft_strlcpy.c \
+				./ft_strdup.c
+
+PUSH_SWAP_OBJS = $(PUSH_SWAP_SRCS:.c=.o)
+CHEKCER_OBJS = $(CHECKER_SRCS:.c=.o)
 
 %.o : ./srcs/%.c
-	$(CC) $(FLAGS) -I ./include/ -c $^ -o $@
+	$(CC) $(CFLAGS) -I ./include/ -c $^ -o $@
 
-$(NAME) : $(OBJS)
-	$(CC) $(FLAGS) $^ -o $@
+$(PUSH_SWAP) : $(PUSH_SWAP_OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-all : $(NAME)
+$(CHECKER) : $(CHEKCER_OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
+
+all : $(PUSH_SWAP)
 
 clean :
-	$(RM) $(OBJS)
+	$(RM) $(PUSH_SWAP_OBJS) $(CHEKCER_OBJS)
 
 fclean:  clean
-	$(RM) $(NAME)
+	$(RM) $(PUSH_SWAP) $(CHECKER)
 
 re : fclean all
 
-.PHONY : all clean fclean re
+bonus : $(CHECKER)
+
+.PHONY : all clean fclean re bonus

@@ -6,14 +6,15 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:09:31 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 22:10:09 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 16:47:31 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include <stdlib.h>
 #include "sort.h"
 #include "utils.h"
 #include "doublylist.h"
+#include "push_swap.h"
 #include "get_next_line.h"
 #include "error_handle.h"
 
@@ -28,8 +29,30 @@ static void	handle_result(t_DoublyList *stack)
 static void	handle_command(t_DoublyList *a_stack, t_DoublyList *b_stack,
 							char *command)
 {
-	if (ft_strncmp("ra",command ,2) == 0)
-		;
+	if (ft_strncmp("pa\n", command, 3) == 0)
+		push(b_stack, a_stack, A_STACK, FALSE);
+	else if (ft_strncmp("ra\n", command, 3) == 0)
+		rotate(a_stack, A_STACK, FALSE);
+	else if (ft_strncmp("rra\n", command, 4) == 0)
+		reverse_rotate(a_stack, A_STACK, FALSE);
+	else if (ft_strncmp("sa\n", command, 3) == 0)
+		swap(a_stack, A_STACK, FALSE);
+	else if (ft_strncmp("pb\n", command, 3) == 0)
+		push(a_stack, b_stack, B_STACK, FALSE);
+	else if (ft_strncmp("rb\n", command, 3) == 0)
+		rotate(b_stack, B_STACK, FALSE);
+	else if (ft_strncmp("rrb\n", command, 4) == 0)
+		reverse_rotate(b_stack, B_STACK, FALSE);
+	else if (ft_strncmp("sb\n", command, 3) == 0)
+		swap(b_stack, B_STACK, FALSE);
+	else if (ft_strncmp("rr\n", command, 3) == 0)
+		rotate_both(a_stack, b_stack, FALSE);
+	else if (ft_strncmp("rrr\n", command, 4) == 0)
+		reverse_rotate_both(a_stack, b_stack, FALSE);
+	else if (ft_strncmp("ss\n", command, 3) == 0)
+		swap_both(a_stack, b_stack, FALSE);
+	else
+		delete_both_stack(a_stack, b_stack);
 }
 
 static int	push_swap_checker(t_DoublyList *a_stack, t_DoublyList *b_stack)
@@ -37,16 +60,17 @@ static int	push_swap_checker(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	char	*gnl_str;
 
 	if (a_stack == NULL || b_stack == NULL)
-	{
-		deleteDoublyList(a_stack);
-		delete_and_print_error(a_stack);
-	}
+		delete_both_stack(a_stack, b_stack);
 	while (TRUE)
 	{
 		gnl_str = get_next_line(0);
 		if (gnl_str == NULL)
 			break ;
+		if (ft_strlen(gnl_str) > 4)
+			delete_both_stack(a_stack, b_stack);
 		handle_command(a_stack, b_stack, gnl_str);
+		free(gnl_str);
+		gnl_str = NULL;
 	}
 	handle_result(a_stack);
 	return (0);

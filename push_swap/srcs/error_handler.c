@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 14:25:22 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 18:26:52 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 11:31:56 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	print_error(void)
 {
 	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
+}
+
+void	delete_both_stack(t_DoublyList *a_stack, t_DoublyList *b_stack)
+{
+	deleteDoublyList(&a_stack);
+	deleteDoublyList(&b_stack);
+	print_error();
 }
 
 void	delete_and_print_error(t_DoublyList *pList)

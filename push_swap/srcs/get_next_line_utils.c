@@ -6,10 +6,11 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:38 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 18:08:36 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 10:51:50 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "get_next_line.h"
 #include "utils.h"
 

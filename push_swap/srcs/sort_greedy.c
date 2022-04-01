@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:03:32 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 13:01:27 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 15:09:10 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	a_to_b(t_DoublyList *a_stack, t_DoublyList *b_stack, \
 		top_node = a_stack->headerNode;
 		if (top_node->sorted_idx <= pivot_info.pivot)
 		{
-			push(a_stack, b_stack, B_STACK);
+			push(a_stack, b_stack, B_STACK, TRUE);
 			pivot_info.pivot++;
 		}
 		else if (top_node->sorted_idx > pivot_info.pivot && \
 				top_node->sorted_idx <= pivot_info.pivot + pivot_info.chunk)
 		{
-			push(a_stack, b_stack, B_STACK);
+			push(a_stack, b_stack, B_STACK, TRUE);
 			rotate(b_stack, B_STACK, TRUE);
 			pivot_info.pivot++;
 		}
@@ -52,6 +52,6 @@ void	b_to_a(t_DoublyList *a_stack, t_DoublyList *b_stack)
 		else
 			while (max_data_info.idx != b_stack->headerNode->sorted_idx)
 				reverse_rotate(b_stack, B_STACK, TRUE);
-		push(b_stack, a_stack, A_STACK);
+		push(b_stack, a_stack, A_STACK, TRUE);
 	}
 }

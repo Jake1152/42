@@ -6,11 +6,14 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:31:11 by jim               #+#    #+#             */
-/*   Updated: 2021/12/15 14:36:54 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/01 12:19:25 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "utils.h"
+#include <unistd.h>
+#include <stdlib.h>
 
 char	*get_next_line(int fd)
 {
@@ -33,7 +36,7 @@ char	*get_next_line(int fd)
 		save[fd] = ft_strjoin(save[fd], read_str);
 		if (save[fd] == NULL)
 			return (NULL);
-	}	
+	}
 	return (return_remain(&save[fd], read_size));
 }
 
@@ -81,26 +84,6 @@ char	*get_next_line_from_save(char **save, int newline_idx)
 	}
 	*save = tmp;
 	return (next_line);
-}
-
-size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	k;
-
-	i = 0;
-	k = 0;
-	while (src[i] != '\0')
-		i++;
-	if (dstsize == 0)
-		return (i);
-	while ((k < dstsize - 1) && src[k])
-	{
-		dst[k] = src[k];
-		k++;
-	}
-	dst[k] = '\0';
-	return (i);
 }
 
 size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
