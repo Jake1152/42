@@ -55,13 +55,9 @@ void	sort_brute_force(t_DoublyList *a_stack, t_DoublyList *b_stack)
 void	sort_3things_other_part(t_DoublyList *stack, t_stack_type stack_type, \
 							int mid_value)
 {
-	t_DoublyListNode	*top_node;
-	int					top_position_data;
 	int					mid_position_data;
 	int					bottom_position_data;
 
-	top_node = stack->headerNode;
-	top_position_data = stack->headerNode->data;
 	mid_position_data = stack->headerNode->pRLink->data;
 	bottom_position_data = stack->headerNode->pRLink->pRLink->data;
 	if ((mid_value == mid_position_data) && \
@@ -77,13 +73,11 @@ void	sort_3things_other_part(t_DoublyList *stack, t_stack_type stack_type, \
 
 void	sort_3things(t_DoublyList *stack, t_stack_type stack_type)
 {
-	t_DoublyListNode	*top_node;
 	int					top_position_data;
 	int					mid_position_data;
 	int					bottom_position_data;
 	int					mid_value;
 
-	top_node = stack->headerNode;
 	top_position_data = stack->headerNode->data;
 	mid_position_data = stack->headerNode->pRLink->data;
 	bottom_position_data = stack->headerNode->pRLink->pRLink->data;
