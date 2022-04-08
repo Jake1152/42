@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
+/*   Updated: 2022/04/05 20:06:15 by jim              ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*
+• Your(s) program(s) should take the following arguments:
+	number_of_philosophers
+	time_to_die
+	time_to_eat
+	time_to_sleep
+	[number_of_times_each_philosopher_must_eat]
+◦ number_of_philosophers: The number of philosophers and also the number of forks.
+◦ time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the sim- ulation, they die.
+◦ time_to_eat (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
+◦ time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
+◦ number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
+• Each philosopher has a number ranging from 1 to number_of_philosophers.
+• Philosopher number 1 sits next to philosopher number number_of_philosophers. Any other philosopher number N sits between philosopher number N - 1 and philoso- pher number N + 1.
+*/
+
+#ifndef PHILO_H
+# define PHILO_H
+
+typedef struct s_philo
+{
+	int		number_of_philosophers;
+	double	time_to_die;
+	double	time_to_eat;
+	double	time_to_sleep;
+	int		number_of_times_each_philosopher_must_eat;
+}				t_philo;
+
+/*
+	double이어야하는 이유?
+	ms라 그렇게 하기는 했는데 int로 해야하는가?
+
+*/
+
+
+#endif
