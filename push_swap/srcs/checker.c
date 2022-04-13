@@ -18,11 +18,11 @@
 #include "get_next_line.h"
 #include "error_handle.h"
 
-static void	handle_result(t_DoublyList *stack)
+static void	handle_result(t_DoublyList *a_stack, t_DoublyList *b_stack)
 {
-	if (check_sort_ASC(stack) == TRUE)
+	if (b_stack->currentElementCount == 0 && check_sort_ASC(a_stack) == TRUE)
 		ft_putstr("OK\n");
-	else if (check_sort_ASC(stack) == FALSE)
+	else if (b_stack->currentElementCount != 0 || check_sort_ASC(a_stack) == FALSE)
 		ft_putstr("KO\n");
 }
 
@@ -72,7 +72,7 @@ static int	push_swap_checker(t_DoublyList *a_stack, t_DoublyList *b_stack)
 		free(gnl_str);
 		gnl_str = NULL;
 	}
-	handle_result(a_stack);
+	handle_result(a_stack, b_stack);
 	return (0);
 }
 
