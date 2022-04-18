@@ -1,4 +1,4 @@
-˚˚/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/04/13 19:29:11 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/18 17:58:31 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,8 @@
 • Each philosopher has a number ranging from 1 to number_of_philosophers.
 • Philosopher number 1 sits next to philosopher number number_of_philosophers. Any other philosopher number N sits between philosopher number N - 1 and philoso- pher number N + 1.
 */
-
 #ifndef PHILO_H
 # define PHILO_H
 
-typedef struct s_philo
-{
-	int		number_of_philosophers;
-	double	time_to_die;
-	double	time_to_eat;
-	double	time_to_sleep;
-	int		number_of_times_each_philosopher_must_eat;
-}				t_philo;
-
-/*
-	double이어야하는 이유?
-	ms라 그렇게 하기는 했는데 int로 해야하는가?
-*/
 
 #endif
