@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/04/18 17:58:31 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/20 16:59:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+int	ft_atoi(const char *str);
 
 #endif

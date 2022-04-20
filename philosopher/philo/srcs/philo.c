@@ -3,32 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:28:39 by jim               #+#    #+#             */
-/*   Updated: 2022/04/19 19:35:02 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/20 18:44:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_struct.h"
+#include "philo.h"
 #include <stdio.h>
-#include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-void	philo_eat()
-{
-	;
-}
-
-void	philo_action(t_philo *philo_info)
+void	*philo_action(void *philo_info_ptr)
 {
 	/*
 	- eat()
 	- sleep()
 	- think()
 	*/
-	printf(philo_info->number_of_philosophers);
+	t_philo	*philo_info;
+	
+	philo_info = (t_philo *)philo_info_ptr;
+	printf("philo_info->number_of_philosophers : %d\n", philo_info->number_of_philosophers);
+	return (philo_info);
 }
 
 int	input_value_parsing(int argc, char *argv[], t_philo *philo_info)
@@ -46,6 +45,7 @@ int	input_value_parsing(int argc, char *argv[], t_philo *philo_info)
 										sizeof(pthread_mutex_t) * philo_cnt);
 	if (philo_info->forks == NULL)
 		return (FALSE);
+	return (TRUE);
 }
 
 int	main(int argc, char *argv[])
@@ -77,7 +77,8 @@ int	main(int argc, char *argv[])
 		// philo_info구조체도 철학자별로 나눠야하는가?
 		// 그러면 옆에 포크가 쓰는중인지 모른다.
 		// 구조를 그리고서 다시 진행한다.
-		if (pthread_create(&philosphers[idx], NULL, philo_action, &philo_info) \
+		ret = NULL;
+		if (pthread_create(&(philosphers[idx]), NULL, philo_action, (void *)&philo_info) \
 			!= SUCCESS)
 			return (0);
 		// ret의 역할, 구조체 멤버변수로 써야할 필요는 있는지 확인 필요!!

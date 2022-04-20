@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/04/19 19:31:23 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/20 18:12:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_STRUCT_H
 # define PHILO_STRUCT_H
+# include <pthread.h>
 
 typedef struct s_philo
 {
@@ -34,7 +35,5 @@ typedef enum e_common_flag
 	FALSE,
 	TRUE,
 }			t_common_flag;
-
-
 
 #endif
