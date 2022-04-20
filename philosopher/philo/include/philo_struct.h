@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/04/20 18:12:18 by marvin           ###   ########.fr       */
+/*   Updated: 2022/04/20 21:06:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 typedef struct s_philo
 {
 	int				number_of_philosophers;
-	int				philo_back_number;
+	int				*philo_back_number;
 	double			time_to_die;
 	double			time_to_eat;
 	double			time_to_sleep;

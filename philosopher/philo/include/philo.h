@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/04/20 16:59:28 by marvin           ###   ########.fr       */
+/*   Updated: 2022/04/20 20:32:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-int	ft_atoi(const char *str);
+void	print_notice(void);
+int		ft_atoi(const char *str);
+
 
 #endif

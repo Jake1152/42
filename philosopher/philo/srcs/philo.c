@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:28:39 by jim               #+#    #+#             */
-/*   Updated: 2022/04/20 18:44:40 by marvin           ###   ########.fr       */
+/*   Updated: 2022/04/20 21:11:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*philo_action(void *philo_info_ptr)
 	
 	philo_info = (t_philo *)philo_info_ptr;
 	printf("philo_info->number_of_philosophers : %d\n", philo_info->number_of_philosophers);
-	return (philo_info);
+	return (philo_info_ptr);
 }
 
 int	input_value_parsing(int argc, char *argv[], t_philo *philo_info)
@@ -45,6 +45,9 @@ int	input_value_parsing(int argc, char *argv[], t_philo *philo_info)
 										sizeof(pthread_mutex_t) * philo_cnt);
 	if (philo_info->forks == NULL)
 		return (FALSE);
+	philo_info->philo_back_number = (int *)malloc(sizeof(int) * philo_cnt);
+	if (philo_info->philo_back_number == NULL)
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -57,8 +60,7 @@ int	main(int argc, char *argv[])
 
 	if (argc < 5 || argc > 6)
 	{
-		printf("./philo number_of_philosophers time_to_die time_to_eat \
-				time_to_sleep number_of_times_each_philosopher_must_eat\n");
+		print_notice();
 		return (0);
 	}
 	if (input_value_parsing(argc, argv, &philo_info) == FALSE)
@@ -78,6 +80,7 @@ int	main(int argc, char *argv[])
 		// 그러면 옆에 포크가 쓰는중인지 모른다.
 		// 구조를 그리고서 다시 진행한다.
 		ret = NULL;
+		philo_info.philo_back_number[idx] = idx + 1;
 		if (pthread_create(&(philosphers[idx]), NULL, philo_action, (void *)&philo_info) \
 			!= SUCCESS)
 			return (0);
