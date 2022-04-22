@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:28:39 by jim               #+#    #+#             */
-/*   Updated: 2022/04/20 21:11:48 by marvin           ###   ########.fr       */
+/*   Updated: 2022/04/22 19:01:33 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*philo_action(void *philo_info_ptr)
 	- think()
 	*/
 	t_philo	*philo_info;
-	
+
 	philo_info = (t_philo *)philo_info_ptr;
 	printf("philo_info->number_of_philosophers : %d\n", philo_info->number_of_philosophers);
 	return (philo_info_ptr);
@@ -81,8 +81,8 @@ int	main(int argc, char *argv[])
 		// 구조를 그리고서 다시 진행한다.
 		ret = NULL;
 		philo_info.philo_back_number[idx] = idx + 1;
-		if (pthread_create(&(philosphers[idx]), NULL, philo_action, (void *)&philo_info) \
-			!= SUCCESS)
+		if (pthread_create(&(philosphers[idx]), NULL, philo_action, \
+			(void *)&philo_info) != SUCCESS)
 			return (0);
 		// ret의 역할, 구조체 멤버변수로 써야할 필요는 있는지 확인 필요!!
 		if (pthread_join(philosphers[idx], ret) != SUCCESS)
