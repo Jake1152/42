@@ -11,7 +11,7 @@ PHILO_SRCS = philo.c	\
 PHILO_OBJS = $(PHILO_SRCS:.c=.o)
 
 %.o : ./$(PHILO_DIR)/$(SRCS)/%.c
-	$(CC) $(CFLAGS) -I ./$(PHILO_DIR)/$(INCLUDE)/ -c $^ -o $@ 
+	$(CC) $(CFLAGS) -I ./$(PHILO_DIR)/$(INCLUDE)/ -c $^ -o $@
 
 $(PHILO_DIR)/$(NAME) : $(PHILO_OBJS)
 	$(CC) $(CFLAGS) $^ -o $@ -lpthread

@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:28:39 by jim               #+#    #+#             */
-/*   Updated: 2022/04/22 19:01:33 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/04/26 16:09:43 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ void	*philo_action(void *philo_info_ptr)
 	t_philo	*philo_info;
 
 	philo_info = (t_philo *)philo_info_ptr;
-	printf("philo_info->number_of_philosophers : %d\n", philo_info->number_of_philosophers);
 	return (philo_info_ptr);
 }
 
-int	input_value_parsing(int argc, char *argv[], t_philo *philo_info)
+int	input_value_parsing(int argc, char *argv[], t_status *philo_info)
 {
 	int	philo_cnt;
 
@@ -45,15 +44,15 @@ int	input_value_parsing(int argc, char *argv[], t_philo *philo_info)
 										sizeof(pthread_mutex_t) * philo_cnt);
 	if (philo_info->forks == NULL)
 		return (FALSE);
-	philo_info->philo_back_number = (int *)malloc(sizeof(int) * philo_cnt);
-	if (philo_info->philo_back_number == NULL)
+	philo_info->philo = (t_philo *)malloc(sizeof(t_philo) * philo_cnt);
+	if (philo_info->philo == NULL)
 		return (FALSE);
 	return (TRUE);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_philo		philo_info;
+	t_status	status;
 	pthread_t	*philosphers;
 	int			idx;
 	void		*ret;
@@ -63,11 +62,9 @@ int	main(int argc, char *argv[])
 		print_notice();
 		return (0);
 	}
-	if (input_value_parsing(argc, argv, &philo_info) == FALSE)
+	if (input_value_parsing(argc, argv, &status) == FALSE)
 		return (0);
-	philosphers = (pthread_t *)malloc(sizeof(pthread_t) * \
-										philo_info.number_of_philosophers);
-	if (philosphers == NULL)
+	if (philo_info.philo->philosphers  == NULL)
 		return (0);
 	idx = 0;
 	// 함수 1개로 뺸다음 FASLE여부 체크
@@ -80,7 +77,7 @@ int	main(int argc, char *argv[])
 		// 그러면 옆에 포크가 쓰는중인지 모른다.
 		// 구조를 그리고서 다시 진행한다.
 		ret = NULL;
-		philo_info.philo_back_number[idx] = idx + 1;
+		philo_info.philo[idx].back_number = idx + 1;
 		if (pthread_create(&(philosphers[idx]), NULL, philo_action, \
 			(void *)&philo_info) != SUCCESS)
 			return (0);
