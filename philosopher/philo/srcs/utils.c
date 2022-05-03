@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+int	ft_atoi_nonnegative(const char *str)
 {
 	int			sign;
 	long long	result;
@@ -32,5 +32,10 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
+	result = result * sign;
+	if (*str || result > 2147483647)
+		return (-1);
 	return ((int)result * sign);
 }
+
+
