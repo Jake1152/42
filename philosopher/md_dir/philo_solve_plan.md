@@ -22,3 +22,10 @@
 	- 포크 수
 		- malloc
 	-
+
+## 과정
+- 0. 식사순서 정할것
+	starvation, deadlock, mutual exclusion 만족 및 효율적인 구조
+- 1. parsing, error handling, init
+- 2. implementation
+- 3. execute
