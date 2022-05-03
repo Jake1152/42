@@ -12,10 +12,8 @@
 
 int	ft_atoi_nonnegative(const char *str)
 {
-	int			sign;
 	long long	result;
 
-	sign = 1;
 	while (*str == '\t' || *str == '\n' || \
 	*str == '\v' || *str == '\f' || \
 	*str == '\r' || *str == ' ')
@@ -23,7 +21,7 @@ int	ft_atoi_nonnegative(const char *str)
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			sign = -1;
+			return (-1);
 		str++;
 	}
 	result = 0;
@@ -32,10 +30,9 @@ int	ft_atoi_nonnegative(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	result = result * sign;
 	if (*str || result > 2147483647)
 		return (-1);
-	return ((int)result * sign);
+	return ((int)result);
 }
 
 

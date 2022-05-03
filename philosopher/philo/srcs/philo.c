@@ -33,13 +33,13 @@ int	input_value_parsing(int argc, char *argv[], t_status *philo_info)
 {
 	int	philo_cnt;
 
-	philo_cnt = ft_atoi(argv[1]);
+	philo_cnt = ft_atoi_nonnegative(argv[1]);
 	philo_info->number_of_philosophers = philo_cnt;
-	philo_info->time_to_die = ft_atoi(argv[2]);
-	philo_info->time_to_eat = ft_atoi(argv[3]);
-	philo_info->time_to_sleep = ft_atoi(argv[4]);
+	philo_info->time_to_die = ft_atoi_nonnegative(argv[2]);
+	philo_info->time_to_eat = ft_atoi_nonnegative(argv[3]);
+	philo_info->time_to_sleep = ft_atoi_nonnegative(argv[4]);
 	if (argc == 6)
-		philo_info->must_eat_cnt = ft_atoi(argv[5]);
+		philo_info->must_eat_cnt = ft_atoi_nonnegative(argv[5]);
 	philo_info->forks = (pthread_mutex_t *)malloc(\
 										sizeof(pthread_mutex_t) * philo_cnt);
 	if (philo_info->forks == NULL)

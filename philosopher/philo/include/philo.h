@@ -29,6 +29,6 @@
 # define PHILO_H
 
 void	print_notice(void);
-int		ft_atoi(const char *str);
+int		ft_atoi_nonnegative(const char *str)
 
 #endif
