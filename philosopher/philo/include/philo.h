@@ -31,4 +31,6 @@
 void	print_notice(void);
 int		ft_atoi_nonnegative(const char *str)
 
+int		current_time_returner(struct timeval cur_time_val);
+
 #endif

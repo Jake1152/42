@@ -35,6 +35,7 @@ typedef struct s_status
 
 typedef enum e_pthread_flag
 {
+	ERROR = -1,
 	SUCCESS,
 }			t_pthread_flag;
 
