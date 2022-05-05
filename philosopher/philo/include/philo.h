@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/04/21 16:43:52 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/05 14:27:30 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@
 # define PHILO_H
 
 void	print_notice(void);
-int		ft_atoi_nonnegative(const char *str)
-
+int		ft_atoi_nonnegative(const char *str);
 int		current_time_returner(struct timeval cur_time_val);
 
 #endif

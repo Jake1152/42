@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:28:39 by jim               #+#    #+#             */
-/*   Updated: 2022/04/26 16:09:43 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/05 16:53:53 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+void	eat(t_status status_info)
+{
+
+}
 
 void	*philo_action(void *philo_info_ptr)
 {
@@ -25,35 +30,41 @@ void	*philo_action(void *philo_info_ptr)
 	*/
 	t_philo	*philo_info;
 
-	philo_info = (t_philo *)philo_info_ptr;
-	return (philo_info_ptr);
+	status_info = (t_status *)philo_info_ptr;
+	return (NULL);
 }
 
-int	input_value_parsing(int argc, char *argv[], t_status *philo_info)
+int	input_value_parsing(int argc, char *argv[], t_status *status_info)
 {
 	int	philo_cnt;
 
-	philo_cnt = ft_atoi_nonnegative(argv[1]);
-	philo_info->number_of_philosophers = philo_cnt;
-	philo_info->time_to_die = ft_atoi_nonnegative(argv[2]);
-	philo_info->time_to_eat = ft_atoi_nonnegative(argv[3]);
-	philo_info->time_to_sleep = ft_atoi_nonnegative(argv[4]);
+	philo_cnt = ft_atoi(argv[1]);
+	status_info->philosopher_cnt = philo_cnt;
+	status_info->time_to_die = ft_atoi(argv[2]);
+	status_info->time_to_eat = ft_atoi(argv[3]);
+	status_info->time_to_sleep = ft_atoi(argv[4]);
+	status_info->must_eat_flag = FALSE;
+	status_info->progress_flag = TRUE;
 	if (argc == 6)
-		philo_info->must_eat_cnt = ft_atoi_nonnegative(argv[5]);
-	philo_info->forks = (pthread_mutex_t *)malloc(\
+	{
+		status_info->must_eat_cnt = ft_atoi(argv[5]);
+		status_info->must_eat_flag = TRUE;
+	}
+	status_info->forks = (pthread_mutex_t *)malloc(\
 										sizeof(pthread_mutex_t) * philo_cnt);
-	if (philo_info->forks == NULL)
+	if (status_info->forks == NULL)
 		return (FALSE);
-	philo_info->philo = (t_philo *)malloc(sizeof(t_philo) * philo_cnt);
-	if (philo_info->philo == NULL)
+	status_info->philo = (t_philo *)malloc(sizeof(t_philo) * philo_cnt);
+	if (status_info->philo == NULL)
+		return (FALSE);
+	if (gettimeofday(&status_info->init_time, NULL) != SUCCESS)
 		return (FALSE);
 	return (TRUE);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_status	status;
-	pthread_t	*philosphers;
+	t_status	status_info;
 	int			idx;
 	void		*ret;
 
@@ -62,27 +73,22 @@ int	main(int argc, char *argv[])
 		print_notice();
 		return (0);
 	}
-	if (input_value_parsing(argc, argv, &status) == FALSE)
-		return (0);
-	if (philo_info.philo->philosphers  == NULL)
+	if (input_value_parsing(argc, argv, &status_info) == FALSE)
 		return (0);
 	idx = 0;
-	// 함수 1개로 뺸다음 FASLE여부 체크
-	// pthread 1개씩 만들고서 join해도 되는지?
-	// 아니면 일괄적으로 create하고서 join해야하는가?
-	while (idx < philo_info.number_of_philosophers)
+	while (idx < status_info.philosopher_cnt)
 	{
-		// 내가 몇번인지 알아야하지만 다른 사람은 나의 존재를 몰라야한다. 그렇다면 구조체를 어떻게 넘기는게 나은가?
-		// philo_info구조체도 철학자별로 나눠야하는가?
-		// 그러면 옆에 포크가 쓰는중인지 모른다.
-		// 구조를 그리고서 다시 진행한다.
-		ret = NULL;
-		philo_info.philo[idx].back_number = idx + 1;
-		if (pthread_create(&(philosphers[idx]), NULL, philo_action, \
-			(void *)&philo_info) != SUCCESS)
+		status_info.philo[idx].back_number = idx + 1;
+		if (pthread_create(&(status_info.philo[idx].philosphers), NULL, \
+			philo_action, (void *)&status_info) != SUCCESS)
 			return (0);
-		// ret의 역할, 구조체 멤버변수로 써야할 필요는 있는지 확인 필요!!
-		if (pthread_join(philosphers[idx], ret) != SUCCESS)
+		idx++;
+	}
+	idx = 0;
+	ret = NULL;
+	while (idx < status_info.philosopher_cnt)
+	{
+		if (pthread_join(status_info.philo[idx].philosphers, &ret) != SUCCESS)
 			return (0);
 		idx++;
 	}

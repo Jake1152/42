@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/04/26 16:04:52 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/05 15:21:12 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILO_STRUCT_H
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 typedef struct s_philo
 {
@@ -24,13 +25,17 @@ typedef struct s_philo
 
 typedef struct s_status
 {
-	int				number_of_philosophers;
+	int				philosopher_cnt;
 	t_philo			*philo;
-	double			time_to_die;
-	double			time_to_eat;
-	double			time_to_sleep;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				must_eat_cnt;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	progress_lock;
+	bool			progress_flag;
+	bool			must_eat_flag;
+	struct timeval	init_time;
 }				t_status;
 
 typedef enum e_pthread_flag
