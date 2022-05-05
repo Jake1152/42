@@ -6,6 +6,7 @@ PHILO_DIR = philo
 SRCS = srcs
 INCLUDE = include
 PHILO_SRCS = philo.c	\
+			init.c	\
 			utils.c	\
 			print.c
 PHILO_OBJS = $(PHILO_SRCS:.c=.o)

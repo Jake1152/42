@@ -49,8 +49,8 @@ int	main()
 
 	t_function((void *)pM);
 
-	pthread_join(p_thread[0], &status);
-	pthread_join(p_thread[1], &status);
+	// pthread_join(p_thread[0], &status);
+	// pthread_join(p_thread[1], &status);
 
 	printf("when will be end?\n");
 	return (0);

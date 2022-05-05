@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/05/05 15:21:12 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/05 19:58:57 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_philo
 	int				back_number;
 	pthread_t		philosphers;
 	struct timeval	last_time;
+	int				eat_cnt;
+	t_status		*status;
 }				t_philo;
 
 typedef struct s_status
@@ -32,8 +34,7 @@ typedef struct s_status
 	int				time_to_sleep;
 	int				must_eat_cnt;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	progress_lock;
-	bool			progress_flag;
+	pthread_mutex_t	print_lock;
 	bool			must_eat_flag;
 	struct timeval	init_time;
 }				t_status;

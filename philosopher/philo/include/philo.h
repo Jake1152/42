@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/05/05 14:27:30 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/05 20:34:45 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+// init
+int		init_status(int argc, char *argv[], t_status *status_info);
+int		init_mutex(t_status *status_info);
+int		init_allocation(t_status *status_info, int philo_cnt);
+int		init_philosopher(t_status *status_info, t_philo *philo_info, \
+					int philo_number);
 void	print_notice(void);
 int		ft_atoi_nonnegative(const char *str);
-int		current_time_returner(struct timeval cur_time_val);
 
 #endif
