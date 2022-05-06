@@ -16,6 +16,14 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
+typedef enum e_philo_status
+{
+	HUNGRY,
+	EATING,
+	SLEEPING,
+	THINKG,
+}			t_philo_status;
+
 typedef struct s_philo
 {
 	int				back_number;
@@ -23,6 +31,7 @@ typedef struct s_philo
 	struct timeval	last_time;
 	int				eat_cnt;
 	t_status		*status;
+	t_philo_status	philo_status;
 }				t_philo;
 
 typedef struct s_status

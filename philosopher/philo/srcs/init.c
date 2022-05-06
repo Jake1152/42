@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "philo_struct.h"
+#inlcude <pthread.h>
 
 int	init_mutex(t_status *status_info)
 {
-	;
+	;//will be removed
 }
 
 int	init_philosopher(t_status *status_info, t_philo *philo_info, \
@@ -30,6 +31,8 @@ int	init_philosopher(t_status *status_info, t_philo *philo_info, \
 	philo_info->last_time = status_info->init_time;
 	philo_info->eat_cnt = 0;
 	philo_info->status = status_info;
+	pthread_mutex_init(status_info->forks[philo_number]);
+	
 }
 
 int	init_allocation(t_status *status_info, int philo_cnt)
@@ -70,6 +73,8 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 	if (init_allocation(status_info, philo_cnt) == FALSE)
 		return (FALSE);
 	if (gettimeofday(&status_info->init_time, NULL) != SUCCESS)
+		return (FALSE);
+	if (pthread_mutex_init(status_info->print_lock) != SUCCESS)
 		return (FALSE);
 	return (TRUE);
 }
