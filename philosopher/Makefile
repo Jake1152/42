@@ -1,6 +1,6 @@
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 PHILO_DIR = philo
 SRCS = srcs
@@ -17,14 +17,16 @@ PHILO_OBJS = $(PHILO_SRCS:.c=.o)
 $(PHILO_DIR)/$(NAME) : $(PHILO_OBJS)
 	$(CC) $(CFLAGS) $^ -o $@ -lpthread
 
-all : $(NAME)
+all : $(PHILO_DIR)/$(NAME)
 
 clean :
 	$(RM) $(PHILO_OBJS)
 
 fclean:  clean
-	$(RM) $(NAME)
+	$(RM) $(PHILO_DIR)/$(NAME)
 
-re : fclean all
+re :
+	make fclean
+	make all
 
 .PHONY : all clean fclean re

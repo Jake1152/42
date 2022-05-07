@@ -36,22 +36,17 @@ int	main()
 	// 1번 thread 생성
 	// t_function의 매개변수 p1으로 넘김
 	thr_id = pthread_create(&p_thread[0], NULL, t_function, (void *)p1);
-
 	// pthread_create()으로 성공적으로 thread가 생성되면 0을 return
 	if (thr_id < 0)
 	{
 		perror("thread create error : \n");
 		exit(EXIT_SUCCESS);
 	}
-
 	// 2번 thread 생성
 	thr_id = pthread_create(&p_thread[1], NULL, t_function, (void *)p2);
-
 	t_function((void *)pM);
-
-	// pthread_join(p_thread[0], &status);
-	// pthread_join(p_thread[1], &status);
-
+	pthread_join(p_thread[0], &status);
+	pthread_join(p_thread[1], &status);
 	printf("when will be end?\n");
 	return (0);
 }
