@@ -52,7 +52,7 @@ int	memory_release(t_status *status_info, int philo_idx)
 	return (TRUE);
 }
 
-int	init_philosopher(t_status *status_info, t_philo *philo_info, \
+int	init_philosopher(t_status *status_info, t_philo *philo_info, 
 					int philo_number)
 {
 	/*
@@ -66,7 +66,7 @@ int	init_philosopher(t_status *status_info, t_philo *philo_info, \
 	philo_info->eat_cnt = 0;
 	philo_info->status = status_info;
 	philo_info->philo_status = HUNGRY;
-	if (pthread_mutex_init(&(status_info->forks[philo_number]), NULL) \
+	if (pthread_mutex_init(&(status_info->forks[philo_number]), NULL)
 		!= SUCCESS)
 	{
 		all_free(status_info);
@@ -79,7 +79,7 @@ int	init_allocation(t_status *status_info, int philo_cnt)
 {
 	int	idx;
 
-	status_info->forks = (pthread_mutex_t *)malloc(\
+	status_info->forks = (pthread_mutex_t *)malloc(
 										sizeof(pthread_mutex_t) * philo_cnt);
 	if (status_info->forks == NULL)
 		return (FALSE);
@@ -111,12 +111,12 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 		status_info->must_eat_cnt = ft_atoi_nonnegative(argv[5]);
 		status_info->must_eat_flag = TRUE;
 	}
-	if (status_info->philosopher_cnt < 0 || status_info->time_to_die < 0 || \
-		status_info->time_to_eat < 0 || status_info->time_to_sleep < 0 || \
+	if (status_info->philosopher_cnt < 0 || status_info->time_to_die < 0 ||
+		status_info->time_to_eat < 0 || status_info->time_to_sleep < 0 ||
 		status_info->must_eat_cnt < 0)
 		return (FALSE);
-	if (pthread_mutex_init(&(status_info->print_lock), NULL) != SUCCESS || \
-		gettimeofday(&status_info->init_time, NULL) != SUCCESS || \
+	if (pthread_mutex_init(&(status_info->print_lock), NULL) != SUCCESS ||
+		gettimeofday(&status_info->init_time, NULL) != SUCCESS ||
 		init_allocation(status_info, philo_cnt) == FALSE)
 		return (FALSE);
 	return (TRUE);
