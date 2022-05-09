@@ -43,6 +43,8 @@ typedef struct s_philo
 {
 	int				back_number;
 	pthread_t		philosphers;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	struct timeval	last_time;
 	int				eat_cnt;
 	t_status		*status;

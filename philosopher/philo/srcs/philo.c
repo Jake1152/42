@@ -19,6 +19,7 @@
 
 void	eat(t_philo *philo_info)
 {
+	if (philo_info->left_fork ==)
 	printf("%d eating\n", philo_info->back_number);
 }
 
@@ -30,6 +31,17 @@ void	philo_sleep(t_philo *philo_info)
 void	think(t_philo *philo_info)
 {
 	printf("%d think\n", philo_info->back_number);
+}
+
+void	pickup(t_philo *philo_info)
+{
+	pthread_mutex_lock(philo_info->left_fork);
+	if ()
+}
+
+void	putdown(t_philo *philo_info)
+{
+
 }
 
 void	*philo_action(void *philo_info_ptr)
@@ -44,7 +56,9 @@ void	*philo_action(void *philo_info_ptr)
 	philo_info = (t_philo *)philo_info_ptr;
 	while (philo_info->status->progress_flag == TRUE)
 	{
+		pickup(philo_info);
 		eat(philo_info);
+		putdown(philo_info);
 		philo_sleep(philo_info);
 		think(philo_info);
 	}
