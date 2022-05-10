@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:05:17 by jim               #+#    #+#             */
-/*   Updated: 2022/05/07 20:34:21 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/10 17:57:55 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
+typedef struct timeval	t_timeval;
 typedef enum e_philo_status
 {
 	HUNGRY,
@@ -35,20 +36,20 @@ typedef struct s_status
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_lock;
 	bool			must_eat_flag;
-	bool			progress_flag;
-	struct timeval	init_time;
+	t_timeval		init_time;
 }				t_status;
 
 typedef struct s_philo
 {
 	int				back_number;
 	pthread_t		philosphers;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	struct timeval	last_time;
+	t_timeval		*init_time;
+	t_timeval		last_time;
 	int				eat_cnt;
 	t_status		*status;
 	t_philo_status	philo_status;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 }				t_philo;
 
 typedef enum e_pthread_flag

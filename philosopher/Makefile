@@ -7,6 +7,9 @@ SRCS = srcs
 INCLUDE = include
 PHILO_SRCS = philo.c	\
 			init.c	\
+			philo_action.c	\
+			time.c	\
+			free.c	\
 			utils.c	\
 			print.c
 PHILO_OBJS = $(PHILO_SRCS:.c=.o)
