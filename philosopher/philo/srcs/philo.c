@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:28:39 by jim               #+#    #+#             */
-/*   Updated: 2022/05/10 17:18:17 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/11 13:52:09 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,8 @@ int	main(int argc, char *argv[])
 	}
 	//각각의 경우에 대해서 error 발생시 free 처리 필요
 	if (init(argc, argv, &status_info) == FALSE)
-	{
-		printf("%s %d\n", __func__, __LINE__);
 		return (0);
-	}
 	if (join(&status_info) == FALSE)
-	{
-		printf("%s %d\n", __func__, __LINE__);
 		return (0);
-	}
 	return (0);
 }

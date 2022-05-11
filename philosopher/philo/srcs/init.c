@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 20:11:46 by jim               #+#    #+#             */
-/*   Updated: 2022/05/10 17:50:24 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/11 13:47:51 by jim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,10 @@ int	init_philosopher(t_status *status_info, t_philo *philo_info,
 
 int	init_allocation(t_status *status_info, int philo_cnt)
 {
-	int	idx;
-
 	status_info->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) \
 													* philo_cnt);
 	if (status_info->forks == NULL)
 		return (FALSE);
-	idx = 0;
 	status_info->philo = (t_philo *)malloc(sizeof(t_philo) * philo_cnt);
 	if (status_info->philo == NULL)
 	{
