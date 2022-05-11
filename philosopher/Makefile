@@ -5,20 +5,23 @@ RM = rm -rf
 PHILO_DIR = philo
 SRCS = srcs
 INCLUDE = include
-PHILO_SRCS = philo.c	\
-			init.c	\
-			philo_action.c	\
-			time.c	\
-			free.c	\
-			utils.c	\
-			print.c
+PHILO_SRCS = $(addprefix $(PHILO_DIR)/$(SRCS)/, \
+	philo.c	\
+	init.c	\
+	philo_action.c	\
+	time.c	\
+	free.c	\
+	utils.c	\
+	print.c \
+)
+
 PHILO_OBJS = $(PHILO_SRCS:.c=.o)
 
-%.o : ./$(PHILO_DIR)/$(SRCS)/%.c
+%.o : %.c
 	$(CC) $(CFLAGS) -I ./$(PHILO_DIR)/$(INCLUDE)/ -c $^ -o $@
 
 $(PHILO_DIR)/$(NAME) : $(PHILO_OBJS)
-	$(CC) $(CFLAGS) $^ -o $@ -lpthread
+	$(CC) $(CFLAGS) $^ -o $@
 
 all : $(PHILO_DIR)/$(NAME)
 
