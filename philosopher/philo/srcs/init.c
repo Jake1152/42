@@ -33,7 +33,7 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 		status_info->must_eat_cnt = ft_atoi_nonnegative(argv[5]);
 		status_info->must_eat_flag = TRUE;
 	}
-	if (status_info->philosopher_cnt < 0 || status_info->time_to_die < 0
+	if (status_info->philosopher_cnt <= 0 || status_info->time_to_die < 0
 		|| status_info->time_to_eat < 0 || status_info->time_to_sleep < 0
 		|| status_info->must_eat_cnt < 0)
 		return (FALSE);

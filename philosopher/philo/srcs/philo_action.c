@@ -44,10 +44,11 @@ int	think(t_philo *philo_info)
 int	pickup(t_philo *philo_info)
 {
 	// printf("philo number : %d\n", philo_info->back_number);
-	if (pthread_mutex_lock(philo_info->left_fork) != SUCCESS
-		|| pthread_mutex_lock(philo_info->right_fork) != SUCCESS)
+	if (pthread_mutex_lock(philo_info->left_fork) != SUCCESS)
+		return (FALSE);
+	if (pthread_mutex_lock(philo_info->right_fork) != SUCCESS)
 	{
-		printf("%d %s %d\n", philo_info->back_number, __func__, __LINE__);
+		pthread_mutex_unlock(philo_info->left_fork);
 		return (FALSE);
 	}
 	printf("%llums %d is taken a fork\n",  get_current_ms(*(philo_info->init_time)), \

@@ -10,16 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_struct.h"
 #include "philo.h"
 
-unsigned long long	get_diff_ms(t_timeval start_tv, t_timeval end_tv)
+unsigned long long	get_us_time(t_timeval tv)
 {
-	unsigned long long	ms;
+	unsigned long long	us;
 
-	ms = (end_tv.tv_sec - start_tv.tv_sec) * 1000 \
-			+ (end_tv.tv_usec - start_tv.tv_usec) / 1000;
-	return (ms);
+	us = tv.tv_sec * (1000 * 1000);
+	us += tv.tv_usec;
+	return (us);
 }
 
 unsigned long long	get_current_ms(t_timeval tv)
