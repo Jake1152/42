@@ -9,10 +9,12 @@ PHILO_SRCS = $(addprefix $(PHILO_DIR)/$(SRCS)/, \
 	philo.c	\
 	init.c	\
 	philo_action.c	\
+	monitor.c	\
 	time.c	\
 	free.c	\
 	utils.c	\
-	print.c \
+	print.c	\
+	error_handler.c \
 )
 
 PHILO_OBJS = $(PHILO_SRCS:.c=.o)

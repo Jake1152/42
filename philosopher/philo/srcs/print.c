@@ -1,27 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 16:44:06 by jim               #+#    #+#             */
-/*   Updated: 2022/04/21 16:44:06 by jim              ###   ########seoul.kr  */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <stdio.h>
 
-void    print_notice(void)
-{
-    printf("please input appropriate value as argument,\n\
-It will be only taked 4~5 argumentes.\n\
-e.g)\n\
-./philo number_of_philosophers time_to_die time_to_eat \
-time_to_sleep number_of_times_each_philosopher_must_eat\n");
-}
+/*
+- print statement로 관리
+- mutex 변수를 포인터를 이용해서 넘겨받는다.
+- print lock을 쓴다.
 
-void	print_error(char *msg)
-{
-	printf("%s\n", msg);
-}
+
+*/

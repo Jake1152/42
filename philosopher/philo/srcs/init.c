@@ -48,7 +48,7 @@ int	init_mutex(t_status *status_info)
 	int	philo_idx;
 	int	ret_mutex_init;
 
-	ret_mutex_init = pthread_mutex_init(&(status_info->print_lock), NULL);
+	ret_mutex_init = pthread_mutex_init(&(status_info->print), NULL);
 	// printf("ret_mutex_init : %d\n", ret_mutex_init);
 	if (ret_mutex_init != SUCCESS)
 		return (FALSE);
@@ -56,6 +56,13 @@ int	init_mutex(t_status *status_info)
 	while (philo_idx < status_info->philosopher_cnt)
 	{
 		ret_mutex_init = pthread_mutex_init(&(status_info->forks[philo_idx]), NULL);
+		// printf("ret_mutex_init : %d, philo_idx : %d\n", ret_mutex_init, philo_idx);
+		if (ret_mutex_init != SUCCESS)
+		{
+			free_and_destory(status_info, philo_idx);
+			return (FALSE);
+		}
+		ret_mutex_init = pthread_mutex_init(&(status_info->philo[philo_idx].eat_time), NULL);
 		// printf("ret_mutex_init : %d, philo_idx : %d\n", ret_mutex_init, philo_idx);
 		if (ret_mutex_init != SUCCESS)
 		{
@@ -97,7 +104,7 @@ int	init_allocation(t_status *status_info, int philo_cnt)
 	status_info->philo = (t_philo *)malloc(sizeof(t_philo) * philo_cnt);
 	if (status_info->philo == NULL)
 	{
-		all_free(status_info);
+		free_all(status_info);
 		return (FALSE);
 	}
 	return (TRUE);

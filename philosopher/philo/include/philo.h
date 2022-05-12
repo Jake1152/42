@@ -42,8 +42,8 @@ int					init_allocation(t_status *status_info, int philo_cnt);
 int					init_philosopher(t_status *status_info, \
 										t_philo *philo_info, int philo_number);
 // free
-void				all_free(t_status *status_info);
-void				free_and_destory(t_status *status_info, int philo_idx);
+void				free_all(t_status *status_info);
+int					free_and_destory(t_status *status_info, int philo_idx);
 
 // etc
 unsigned long long	get_current_ms(t_timeval tv);

@@ -35,7 +35,7 @@ typedef struct s_status
 	int				time_to_sleep;
 	int				must_eat_cnt;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_lock;
+	pthread_mutex_t	print;
 	bool			must_eat_flag;
 	t_timeval		init_time;
 }				t_status;
@@ -49,6 +49,7 @@ typedef struct s_philo
 	int				eat_cnt;
 	t_status		*status;
 	t_philo_status	philo_status;
+	pthread_mutex_t	eat_time;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 }				t_philo;
