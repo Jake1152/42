@@ -118,6 +118,18 @@
 
 - 상태처리
 
+12MAY22
+- create()
+	- pthread동작
+	- odd, even group 쪼개기
+		- routine 함수에서 처리
+- monitor()
+	- lock
+	- 죽는것 확인
+	- 다먹었는지 확인
+- race condition check
+- printf()
+
 
 # 검증
 

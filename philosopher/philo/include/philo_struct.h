@@ -17,6 +17,7 @@
 # include <stdbool.h>
 
 typedef struct timeval	t_timeval;
+// check to delete
 typedef enum e_philo_status
 {
 	HUNGRY,

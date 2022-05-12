@@ -51,7 +51,8 @@ int	pickup(t_philo *philo_info)
 		pthread_mutex_unlock(philo_info->left_fork);
 		return (FALSE);
 	}
-	printf("%llums %d is taken a fork\n",  get_current_ms(*(philo_info->init_time)), \
+	printf("%llums %d is taken a fork\n", \
+									get_current_ms(*(philo_info->init_time)), \
 									philo_info->back_number);
 	return (TRUE);
 }

@@ -22,6 +22,8 @@ void	*routine(void *philo_info_ptr)
 	t_philo	*philo_info;
 
 	philo_info = (t_philo *)philo_info_ptr;
+	if (philo_info->back_number % 2 == 0)
+		usleep(10 * philo_info->status->philosopher_cnt);
 	while (TRUE)
 	{
 		if (pickup(philo_info) == FALSE)
@@ -61,17 +63,10 @@ int	init(int argc, char **argv, t_status *status_info)
 		// printf("before init_philosopher\n");
 		if (init_philosopher(status_info, &status_info->philo[idx], idx + 1) \
 			!= SUCCESS)
-			{
-				printf("%s %d\n", __func__, __LINE__);
-				return (FALSE);
-			}
-		// printf("before pthread_create\n");
-		if (pthread_create(&status_info->philo[idx].philosphers, NULL, \
-			routine, (void *)&status_info->philo[idx]) != SUCCESS)
-			{
-				printf("%s %d\n", __func__, __LINE__);
-				return (FALSE);
-			}
+		{
+			printf("%s %d\n", __func__, __LINE__);
+			return (FALSE);
+		}
 		idx++;
 	}
 	return (TRUE);
@@ -79,13 +74,33 @@ int	init(int argc, char **argv, t_status *status_info)
 
 int	join(t_status *status_info)
 {
-	int idx = 0;
-	void *ret = NULL;
+	int		idx;
+	void	*ret;
 
+	idx = 0;
+	ret = NULL;
 	while (idx < status_info->philosopher_cnt)
 	{
 		if (pthread_join(status_info->philo[idx].philosphers, &ret) != SUCCESS)
 			return (FALSE);
+		idx++;
+	}
+	return (TRUE);
+}
+
+int	create(t_status *status_info)
+{
+	int	idx;
+
+	idx = 0;
+	while (idx < status_info->philosopher_cnt)
+	{
+		if (pthread_create(&status_info->philo[idx].philosphers, NULL, \
+			routine, (void *)&status_info->philo[idx]) != SUCCESS)
+		{
+			printf("%s %d\n", __func__, __LINE__);
+			return (FALSE);
+		}
 		idx++;
 	}
 	return (TRUE);
@@ -103,7 +118,12 @@ int	main(int argc, char *argv[])
 	//각각의 경우에 대해서 error 발생시 free 처리 필요
 	if (init(argc, argv, &status_info) == FALSE)
 		return (0);
+	if (create(&status_info) == FALSE)
+		return (0);
+	while (TRUE)
+		monitoring(&status_info);
 	if (join(&status_info) == FALSE)
 		return (0);
+	free_and_destory(&status_info, status_info.philosopher_cnt);
 	return (0);
 }
