@@ -48,7 +48,6 @@ typedef struct s_philo
 	t_timeval		last_time;
 	int				eat_cnt;
 	t_status		*status;
-	t_philo_status	philo_status;
 	pthread_mutex_t	eat_time;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;

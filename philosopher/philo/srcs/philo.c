@@ -23,7 +23,9 @@ void	*routine(void *philo_info_ptr)
 
 	philo_info = (t_philo *)philo_info_ptr;
 	if (philo_info->back_number % 2 == 0)
-		usleep(10 * philo_info->status->philosopher_cnt);
+		usleep(5000 * philo_info->status->philosopher_cnt);
+
+		// usleep(50 * philo_info->status->philosopher_cnt);
 	while (TRUE)
 	{
 		if (pickup(philo_info) == FALSE)
@@ -34,8 +36,8 @@ void	*routine(void *philo_info_ptr)
 			return (NULL);
 		if (philo_sleep(philo_info) == FALSE)
 			return (NULL);
-		if (think(philo_info) == FALSE)
-			return (NULL);
+		// if (think(philo_info) == FALSE)
+		// 	return (NULL);
 	}
 }
 
@@ -120,8 +122,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (create(&status_info) == FALSE)
 		return (0);
-	while (TRUE)
-		monitoring(&status_info);
+	// while (TRUE)
+	// 	monitoring(&status_info);
 	if (join(&status_info) == FALSE)
 		return (0);
 	free_and_destory(&status_info, status_info.philosopher_cnt);

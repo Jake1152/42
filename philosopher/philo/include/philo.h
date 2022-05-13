@@ -41,15 +41,18 @@ int					init_mutex(t_status *status_info);
 int					init_allocation(t_status *status_info, int philo_cnt);
 int					init_philosopher(t_status *status_info, \
 										t_philo *philo_info, int philo_number);
+int					monitoring(t_status *status_info);
+
 // free
 void				free_all(t_status *status_info);
 int					free_and_destory(t_status *status_info, int philo_idx);
+int					error_handler(char *error_statement);
 
 // etc
 unsigned long long	get_current_ms(t_timeval tv);
 unsigned long long	get_diff_ms(t_timeval start_tv, t_timeval end_tv);
 int					ft_atoi_nonnegative(const char *str);
 void				print_notice(void);
-void				print_error(char *msg);
+int					print_error(char *error_statement);
 
 #endif

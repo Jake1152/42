@@ -87,7 +87,6 @@ int	init_philosopher(t_status *status_info, t_philo *philo_info,
 	philo_info->last_time = status_info->init_time;
 	philo_info->eat_cnt = 0;
 	philo_info->status = status_info;
-	philo_info->philo_status = HUNGRY;
 	philo_info->init_time = &status_info->init_time;
 	philo_info->left_fork = &status_info->forks[philo_idx % philo_cnt];
 	philo_info->right_fork = \

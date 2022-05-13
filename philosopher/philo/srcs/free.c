@@ -46,4 +46,5 @@ int	free_and_destory(t_status *status_info, int philo_cnt)
 		pthread_mutex_destroy(&status_info->forks[idx]);
 		idx++;
 	}
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:38:00 by jim               #+#    #+#             */
-/*   Updated: 2022/05/12 20:54:02 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/13 18:22:59 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	monitoring(t_status *status_info)
 		- 밥 다 먹었는지?
 		-
 	*/
-	if (status_info->)
+	(void)status_info;
+	// if (status_info->)
 	return (TRUE);
 }
