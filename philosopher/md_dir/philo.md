@@ -146,6 +146,24 @@
 		- 죽었을때 다른 thread들이 더 이상 동작하지 못하게 한다.
 	- full check
 
+14MAY22 pm3:20
+- print function 분리 √
+	- print lock 시점 고려
+		- 어떻게해야 죽은 다음에 출력이 안되게 할 것인가?
+		- 어떻게해야 mutex가 여러개인것으로 인해 실행이 지체되는 것을 줄이는 방식으로 구조화 할 수 있을것인가?
+- monitor -ing
+	- routine function lock 재구조화
+	- dead check
+		- 죽었을때 다른 thread들이 더 이상 동작하지 못하게 한다.
+	- full check
+- time function 정밀화
+	- usleep을 쪼갠다.
+		- 대기큐에서 대기하며 context switching이 소요되기 때문
+- error handling
+	- 각 동작 실패했을때 free 및 destory
+	-
+
+
 # 검증
 
 

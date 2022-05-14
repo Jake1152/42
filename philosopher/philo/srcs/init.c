@@ -27,6 +27,7 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 	status_info->time_to_eat = ft_atoi_nonnegative(argv[3]);
 	status_info->time_to_sleep = ft_atoi_nonnegative(argv[4]);
 	status_info->must_eat_flag = FALSE;
+	status_info->progress_flag = TRUE;
 	status_info->must_eat_cnt = 0;
 	if (argc == 6)
 	{
@@ -62,7 +63,7 @@ int	init_mutex(t_status *status_info)
 			free_and_destory(status_info, philo_idx);
 			return (FALSE);
 		}
-		ret_mutex_init = pthread_mutex_init(&(status_info->philo[philo_idx].eat_time), NULL);
+		ret_mutex_init = pthread_mutex_init(&(status_info->philo[philo_idx].thread), NULL);
 		// printf("ret_mutex_init : %d, philo_idx : %d\n", ret_mutex_init, philo_idx);
 		if (ret_mutex_init != SUCCESS)
 		{
@@ -84,7 +85,7 @@ int	init_philosopher(t_status *status_info, t_philo *philo_info,
 	philo_idx = philo_number - 1;
 	philo_info->back_number = philo_number;
 	philo_info->init_time = &status_info->init_time;
-	philo_info->last_time = status_info->init_time;
+	philo_info->last_eat_time = status_info->init_time;
 	philo_info->eat_cnt = 0;
 	philo_info->status = status_info;
 	philo_info->init_time = &status_info->init_time;

@@ -23,7 +23,7 @@ typedef enum e_philo_status
 	HUNGRY,
 	EATING,
 	SLEEPING,
-	THINKG,
+	THINKING,
 }			t_philo_status;
 
 typedef struct s_status
@@ -36,6 +36,8 @@ typedef struct s_status
 	int				must_eat_cnt;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
+	bool			progress_flag;
+	pthread_mutex_t	print;
 	bool			must_eat_flag;
 	t_timeval		init_time;
 }				t_status;
@@ -43,12 +45,12 @@ typedef struct s_status
 typedef struct s_philo
 {
 	int				back_number;
-	pthread_t		philosphers;
+	pthread_t		philospher;
 	t_timeval		*init_time;
-	t_timeval		last_time;
+	t_timeval		last_eat_time;
 	int				eat_cnt;
 	t_status		*status;
-	pthread_mutex_t	eat_time;
+	pthread_mutex_t	thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 }				t_philo;
