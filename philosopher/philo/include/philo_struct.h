@@ -17,13 +17,14 @@
 # include <stdbool.h>
 
 typedef struct timeval	t_timeval;
-// check to delete
+
 typedef enum e_philo_status
 {
 	HUNGRY,
 	EATING,
 	SLEEPING,
 	THINKING,
+	DEAD,
 }			t_philo_status;
 
 typedef struct s_status
@@ -35,9 +36,9 @@ typedef struct s_status
 	int				time_to_sleep;
 	int				must_eat_cnt;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	print;
+	// pthread_mutex_t	print;
 	bool			progress_flag;
-	pthread_mutex_t	print;
+	pthread_mutex_t	progress;
 	bool			must_eat_flag;
 	t_timeval		init_time;
 }				t_status;
@@ -47,10 +48,11 @@ typedef struct s_philo
 	int				back_number;
 	pthread_t		philospher;
 	t_timeval		*init_time;
-	t_timeval		last_eat_time;
+	t_timeval		last_mealtime;
 	int				eat_cnt;
 	t_status		*status;
-	pthread_mutex_t	thread;
+	pthread_mutex_t	mealtime;
+	pthread_mutex_t	full;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 }				t_philo;

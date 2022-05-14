@@ -17,36 +17,21 @@
 
 int	pickup(t_philo *philo_info)
 {
-	pthread_mutex_lock(&philo_info->thread);
+	pthread_mutex_lock(&philo_info->status->progress);
 	if (philo_info->status->progress_flag == FALSE)
 	{
-		pthread_mutex_lock(&philo_info->thread);
+		pthread_mutex_unlock(&philo_info->status->progress);
 		return (FALSE);
 	}
-	if (pthread_mutex_lock(philo_info->left_fork) != SUCCESS)
-		return (FALSE);
+	pthread_mutex_unlock(&philo_info->status->progress);
+	pthread_mutex_lock(philo_info->left_fork);
 	print_status(philo_info, HUNGRY);
-	if (pthread_mutex_lock(philo_info->right_fork) != SUCCESS)
-	{
-		pthread_mutex_unlock(philo_info->left_fork);
-		return (FALSE);
-	}
-	pthread_mutex_unlock(&philo_info->thread);
+	pthread_mutex_lock(philo_info->right_fork);
 	return (TRUE);
 }
 
 int	eat(t_philo *philo_info)
 {
-	pthread_mutex_lock(&philo_info->thread);
-	if (philo_info->status->progress_flag == FALSE)
-	{
-		pthread_mutex_lock(&philo_info->thread);
-		return (FALSE);
-	}
-	print_status(philo_info, EATING);
-	gettimeofday(&philo_info->last_eat_time, NULL);
-	usleep(philo_info->status->time_to_eat * 1000);
-	pthread_mutex_unlock(&philo_info->thread);
 	/*
 		eat_time이 맞는가?
 		생각해보면 죽었는지, 식사 다해서 종료해야하는지 확인할때 필요하다.
@@ -96,23 +81,40 @@ int	eat(t_philo *philo_info)
 		- 임계영역이 커지면
 	*/
 	// time 함수 만들어서 usleep을 쪼개서 발생시킬것!
-
+	pthread_mutex_lock(&philo_info->status->progress);
+	if (philo_info->status->progress_flag == FALSE)
+	{
+		pthread_mutex_unlock(&philo_info->status->progress);
+		putdown(philo_info);
+		return (FALSE);
+	}
+	pthread_mutex_unlock(&philo_info->status->progress);
+	pthread_mutex_lock(&philo_info->mealtime);
+	print_status(philo_info, EATING);
+	gettimeofday(&philo_info->last_mealtime, NULL);
+	pthread_mutex_unlock(&philo_info->mealtime);
+	pthread_mutex_lock(&philo_info->full);
+	philo_info->eat_cnt++;
+	pthread_mutex_unlock(&philo_info->full);
+	usleep(philo_info->status->time_to_eat * 1000);
 	return (TRUE);
 }
 
-int	putdown(t_philo *philo_info)
+void	putdown(t_philo *philo_info)
 {
-	if (pthread_mutex_unlock(philo_info->left_fork) != SUCCESS
-		|| pthread_mutex_unlock(philo_info->right_fork) != SUCCESS)
-	{
-		printf("%s %d\n", __func__, __LINE__);
-		return (FALSE);
-	}
-	return (TRUE);
+	pthread_mutex_unlock(philo_info->left_fork);
+	pthread_mutex_unlock(philo_info->right_fork);
 }
 
 int	philo_sleep(t_philo *philo_info)
 {
+	pthread_mutex_lock(&philo_info->status->progress);
+	if (philo_info->status->progress_flag == FALSE)
+	{
+		pthread_mutex_unlock(&philo_info->status->progress);
+		return (FALSE);
+	}
+	pthread_mutex_unlock(&philo_info->status->progress);
 	print_status(philo_info, SLEEPING);
 	usleep(philo_info->status->time_to_sleep * 1000);
 	return (TRUE);
@@ -120,6 +122,13 @@ int	philo_sleep(t_philo *philo_info)
 
 int	think(t_philo *philo_info)
 {
-	print_status(philo_info, THINKG);
+	pthread_mutex_lock(&philo_info->status->progress);
+	if (philo_info->status->progress_flag == FALSE)
+	{
+		pthread_mutex_unlock(&philo_info->status->progress);
+		return (FALSE);
+	}
+	pthread_mutex_unlock(&philo_info->status->progress);
+	print_status(philo_info, THINKING);
 	return (TRUE);
 }

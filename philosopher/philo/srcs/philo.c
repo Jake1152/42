@@ -22,16 +22,16 @@ void	*routine(void *philo_info_ptr)
 	t_philo	*philo_info;
 
 	philo_info = (t_philo *)philo_info_ptr;
+	// 철학자 수의 증감에 따른 적정한 usleep 시간의 변화가 필요하다. 
 	if (philo_info->back_number % 2 == 0)
-		usleep(5000 * philo_info->status->philosopher_cnt);
+		usleep(50 * philo_info->status->philosopher_cnt);
 	while (TRUE)
 	{
 		if (pickup(philo_info) == FALSE)
 			return (NULL);
 		if (eat(philo_info) == FALSE)
 			return (NULL);
-		if (putdown(philo_info) == FALSE)
-			return (NULL);
+		putdown(philo_info);
 		if (philo_sleep(philo_info) == FALSE)
 			return (NULL);
 		if (think(philo_info) == FALSE)
@@ -119,10 +119,10 @@ int	main(int argc, char *argv[])
 	if (init(argc, argv, &status_info) == FALSE)
 		return (0);
 	if (create(&status_info) == FALSE)
-		return (0);e
+		return (0);
 	monitoring(&status_info);
 	if (join(&status_info) == FALSE)
 		return (0);
-	free_and_destory(&status_info, status_info.philosopher_cnt);
+	// free_and_destory(&status_info, status_info.philosopher_cnt);
 	return (0);
 }

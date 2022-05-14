@@ -38,12 +38,14 @@ int	free_and_destory(t_status *status_info, int philo_cnt)
 	free_all(status_info);
 	// status_info->print_state가 mutex_init 되어있다는 것이 확인 되어야함
 	// logic상 그런게 아니라 logic이 바뀌어도 확인 가능한 조건 필요.
-	if (philo_cnt > 0)
-		pthread_mutex_destroy(&status_info->print);
+	// if (philo_cnt > 0)
+	pthread_mutex_destroy(&status_info->progress);
 	idx = 0;
 	while (idx < philo_cnt)
 	{
 		pthread_mutex_destroy(&status_info->forks[idx]);
+		pthread_mutex_destroy(&status_info->philo[idx].full);
+		pthread_mutex_destroy(&status_info->philo[idx].mealtime);
 		idx++;
 	}
 	return (TRUE);

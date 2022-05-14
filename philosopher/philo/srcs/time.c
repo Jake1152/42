@@ -12,25 +12,31 @@
 
 #include "philo.h"
 
-unsigned long long	get_us_time(t_timeval tv)
+
+int	get_diff_ms_time(t_timeval late_tv, t_timeval early_tv)
 {
-	unsigned long long	us;
+	int	ms;
+
+	ms = (late_tv.tv_sec - early_tv.tv_sec) * 1000 \
+			+ (late_tv.tv_usec - early_tv.tv_usec) / 1000;
+	return (ms);
+}
+
+int	get_us_time(t_timeval tv)
+{
+	int us;
 
 	us = tv.tv_sec * (1000 * 1000);
 	us += tv.tv_usec;
 	return (us);
 }
 
-unsigned long long	get_current_ms(t_timeval tv)
+int	get_current_ms_time(t_timeval tv)
 {
-	unsigned long long	ms;
-	t_timeval			current_tv;
+	int				ms;
+	t_timeval		current_tv;
 
-	if (gettimeofday(&current_tv, NULL) != SUCCESS)
-	{
-		print_error("gettimeofday fail.");
-		return (0);
-	}
+	gettimeofday(&current_tv, NULL);
 	ms = (current_tv.tv_sec - tv.tv_sec) * 1000 \
 			+ (current_tv.tv_usec - tv.tv_usec) / 1000;
 	return (ms);
