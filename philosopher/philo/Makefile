@@ -3,10 +3,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
-PHILO_DIR = philo
 SRCS = srcs
 INCLUDE = include
-PHILO_SRCS = $(addprefix $(PHILO_DIR)/$(SRCS)/, \
+PHILO_SRCS =$(addprefix $(SRCS)/, \
 	philo.c	\
 	init.c	\
 	philo_action.c	\
@@ -21,18 +20,18 @@ PHILO_SRCS = $(addprefix $(PHILO_DIR)/$(SRCS)/, \
 PHILO_OBJS = $(PHILO_SRCS:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -I ./$(PHILO_DIR)/$(INCLUDE)/ -c $^ -o $@
+	$(CC) $(CFLAGS) -I ./$(INCLUDE)/ -c $^ -o $@
 
-$(PHILO_DIR)/$(NAME) : $(PHILO_OBJS)
+$(NAME) : $(PHILO_OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
-all : $(PHILO_DIR)/$(NAME)
+all : $(NAME)
 
 clean :
 	$(RM) $(PHILO_OBJS)
 
 fclean:  clean
-	$(RM) $(PHILO_DIR)/$(NAME)
+	$(RM) $(NAME)
 
 re :
 	make fclean

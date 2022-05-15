@@ -17,12 +17,33 @@
 #include <unistd.h>
 #include <stdio.h>
 
+
+static void	do_for_one_philo(t_philo *philo_info)
+{
+	pthread_mutex_lock(&philo_info->status->progress);
+	if (philo_info->status->progress_flag == FALSE)
+	{
+		pthread_mutex_unlock(&philo_info->status->progress);
+		return ;
+	}
+	pthread_mutex_unlock(&philo_info->status->progress);
+	pthread_mutex_lock(philo_info->left_fork);
+	print_status(philo_info, HUNGRY);
+	pthread_mutex_unlock(philo_info->left_fork);
+	usleep(philo_info->status->time_to_die * 1000);
+}
+
 void	*routine(void *philo_info_ptr)
 {
 	t_philo	*philo_info;
 
 	philo_info = (t_philo *)philo_info_ptr;
 	// 철학자 수의 증감에 따른 적정한 usleep 시간의 변화가 필요하다. 
+	if (philo_info->status->philosopher_cnt == 1)
+	{
+		do_for_one_philo(philo_info);
+		return (NULL);
+	}
 	if (philo_info->back_number % 2 == 0)
 		usleep(50 * philo_info->status->philosopher_cnt);
 	while (TRUE)
