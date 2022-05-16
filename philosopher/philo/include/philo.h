@@ -14,32 +14,34 @@
 # define PHILO_H
 # include "philo_struct.h"
 // philo_action
-int		pickup(t_philo *philo_info);
-void	putdown(t_philo *philo_info);
-int		eat(t_philo *philo_info);
-int		philo_sleep(t_philo *philo_info);
-int		think(t_philo *philo_info);
+int						pickup(t_philo *philo_info);
+void					putdown(t_philo *philo_info);
+int						eat(t_philo *philo_info);
+int						philo_sleep(t_philo *philo_info);
+int						think(t_philo *philo_info);
 
 // init
-int		init_status(int argc, char *argv[], t_status *status_info);
-int		init_mutex(t_status *status_info);
-int		init_allocation(t_status *status_info, int philo_cnt);
-int		init_philosopher(t_status *status_info, \
+int						init_status(int argc, char *argv[], \
+									t_status *status_info);
+int						init_mutex(t_status *status_info);
+int						init_allocation(t_status *status_info, int philo_cnt);
+int						init_philosopher(t_status *status_info, \
 										t_philo *philo_info, int philo_number);
-int		monitoring(t_status *status_info);
+int						monitoring(t_status *status_info);
 
 // free
-void	free_all(t_status *status_info);
-int		free_and_destory(t_status *status_info, int philo_idx);
-int		error_handler(char *error_statement);
+void					free_all(t_status *status_info);
+int						free_and_destory(t_status *status_info, int philo_idx);
+int						error_handler(char *error_statement);
 
 // etc
-int		get_current_ms_time(t_timeval tv);
-int		get_diff_ms_time(t_timeval late_tv, t_timeval early_tv);
-int		ft_atoi_nonnegative(const char *str);
-void	print_notice(void);
-int		print_error(char *error_statement);
-void	print_status(t_philo *philo_info, \
-					t_philo_status philo_status);
+void					preciser_sleep(unsigned long long wait_ms);
+unsigned long long		get_diff_ms_time(t_timeval late_tv, t_timeval early_tv);
+unsigned long long		get_current_ms_time(void);
+unsigned long long		ft_atoi_nonnegative(const char *str);
+void					print_notice(void);
+int						print_error(char *error_statement);
+void					print_status(t_philo *philo_info, \
+						t_philo_status philo_status);
 
 #endif

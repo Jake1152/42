@@ -161,8 +161,39 @@
 		- 대기큐에서 대기하며 context switching이 소요되기 때문
 - error handling
 	- 각 동작 실패했을때 free 및 destory
-	-
 
+
+16MAY22 pm2:41
+
+- time function 정확도 올리기  √
+	- context switching 때문에 usleep을 적당히 쪼개서 하는게 기아방지를 할 수 있다.
+		- usleep으로 자고 있을때
+	-  usleep 함수를 시간 쪼개서 호출
+- free and destory
+	- mutex destory 이전에 어디까지 할당되었는지에 따라 변경됨
+- 모니터 분리할지 고민
+	- 분리안하는 경우
+		- check full과 check die를 한개의 while문에서 처리한다.
+			- 안그러면 check full, die를 나눠서 하기 때문에 스레드가 늘어날수록 부정확할 수 있다.
+				- e.g)
+					- check full 이후에 check die하는 경우
+						철학자가 홀수이며 3번만 먹으면 죽게하는 경우
+						마지막 철학자가 3번먹으면 끝나야하는데
+						check ful하고서 check die를 하므로 그 사이에 철학자들이 식사를 진행해서 끝이 안날수도 있다.
+						- 좀더 정확한 확인은 다먹은 철학자의 넘버를 찍을 수도 있다.
+- 출력 색상입히기
+- 에러테스트
+	- 홀수 짝수
+	- 시간인자값들 계속 변경하면서 테스트, 오래동안 살아남는지도 확인
+	- 200명
+	- leak 확인
+	- data race 확인
+		- mealtime mutex 제거하고서 해볼 것
+	- 식사 다하고 죽는지
+	- input값 일부러 음수나 경계값 넣기
+	- 테스트용 코드 제거
+	- 안쓰는 헤더 제거
+	- 노미 맞추기
 
 # 검증
 
@@ -173,7 +204,3 @@
 
 
 # 회고
-
-
-
-˚

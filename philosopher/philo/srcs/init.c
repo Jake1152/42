@@ -44,42 +44,43 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 	return (TRUE);
 }
 
-int	init_mutex(t_status *status_info)
+int	init_philosopher_mutex(t_status *status_info, t_philo *philo_info,
+					int philo_number)
 {
-	int	philo_idx;
-	int	ret_mutex_init;
-
-	// mutex destory 고민 할 것!
-	philo_idx = 0;
-	// if (pthread_mutex_init(&(status_info->print), NULL) != SUCCESS)
-	// 	free_and_destory(status_info, philo_idx);
-	if (pthread_mutex_init(&(status_info->progress), NULL) != SUCCESS)
-		free_and_destory(status_info, philo_idx);
 	while (philo_idx < status_info->philosopher_cnt)
 	{
-		ret_mutex_init = pthread_mutex_init(&(status_info->forks[philo_idx]), NULL);
-		// printf("forks_mutex_init : %d, philo_idx : %d\n", ret_mutex_init, philo_idx);
-		if (ret_mutex_init != SUCCESS)
+		if (pthread_mutex_init(&(status_info->forks[philo_idx]), NULL) \
+			!= SUCCESS)
 		{
-			free_and_destory(status_info, philo_idx);
+			free_and_destory(status_info, \
+								philo_idx - 1, philo_idx - 1, philo - 1);
 			return (FALSE);
 		}
-		ret_mutex_init = pthread_mutex_init(&(status_info->philo[philo_idx].mealtime), NULL);
-		// printf("mealtime_mutex_init : %d, philo_idx : %d\n", ret_mutex_init, philo_idx);
-		if (ret_mutex_init != SUCCESS)
+		if (pthread_mutex_init(&(status_info->philo[philo_idx].mealtime), NULL) \
+			!= SUCCESS)
 		{
-			free_and_destory(status_info, philo_idx);
+			free_and_destory(status_info, \
+								philo_idx, philo_idx - 1, philo - 1);
 			return (FALSE);
 		}
-		ret_mutex_init = pthread_mutex_init(&(status_info->philo[philo_idx].full), NULL);
-		// printf("full_mutex_init : %d, philo_idx : %d\n", ret_mutex_init, philo_idx);
-		if (ret_mutex_init != SUCCESS)
+		if (pthread_mutex_init(&(status_info->philo[philo_idx].full), NULL) \
+			!= SUCCESS)
 		{
-			free_and_destory(status_info, philo_idx);
+			free_and_destory(status_info, \
+								philo_idx, philo_idx, philo - 1);
 			return (FALSE);
 		}
 		philo_idx++;
 	}
+}
+
+int	init_mutex(t_status *status_info)
+{
+	int	philo_idx;
+
+	philo_idx = 0;
+	if (pthread_mutex_init(&(status_info->progress), NULL) != SUCCESS)
+		free_and_destory(status_info, philo_idx);
 	return (TRUE);
 }
 

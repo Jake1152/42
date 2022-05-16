@@ -25,6 +25,7 @@ typedef enum e_philo_status
 	SLEEPING,
 	THINKING,
 	DEAD,
+	FULL,
 }			t_philo_status;
 
 typedef struct s_status
@@ -36,7 +37,6 @@ typedef struct s_status
 	int				time_to_sleep;
 	int				must_eat_cnt;
 	pthread_mutex_t	*forks;
-	// pthread_mutex_t	print;
 	bool			progress_flag;
 	pthread_mutex_t	progress;
 	bool			must_eat_flag;
