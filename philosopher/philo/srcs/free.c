@@ -41,13 +41,13 @@ int	free_and_destory(t_status *status_info, int fork_idx, int full_idx, \
 		idx++;
 	}
 	idx = 0;
-	while (idx <= mealtime_idx)
+	while (idx <= full_idx)
 	{
-		pthread_mutex_destroy(&status_info->philo[idx].mealtime);
+		pthread_mutex_destroy(&status_info->philo[idx].full);
 		idx++;
 	}
 	idx = 0;
-	while (idx <= full_idx)
+	while (idx <= mealtime_idx)
 	{
 		pthread_mutex_destroy(&status_info->philo[idx].mealtime);
 		idx++;

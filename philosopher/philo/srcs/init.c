@@ -19,10 +19,7 @@
 
 int	init_status(int argc, char *argv[], t_status *status_info)
 {
-	int	philo_cnt;
-
-	philo_cnt = ft_atoi_nonnegative(argv[1]);
-	status_info->philosopher_cnt = philo_cnt;
+	status_info->philosopher_cnt = ft_atoi_nonnegative(argv[1]);
 	status_info->time_to_die = ft_atoi_nonnegative(argv[2]);
 	status_info->time_to_eat = ft_atoi_nonnegative(argv[3]);
 	status_info->time_to_sleep = ft_atoi_nonnegative(argv[4]);
@@ -39,7 +36,7 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 		|| status_info->time_to_eat < 0 || status_info->time_to_sleep < 0
 		|| status_info->must_eat_cnt < 0)
 		return (FALSE);
-	if (init_allocation(status_info, philo_cnt) == FALSE)
+	if (init_allocation(status_info, ft_atoi_nonnegative(argv[1])) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
