@@ -19,16 +19,6 @@ void	print_status(t_philo *philo_info, t_philo_status philo_status)
 	const char	*state_message[] = {"is taken a fork", "is eating", \
 									"is sleeping", "is thinking", "died"};
 
-
-	/* &philo_info->status->progress를 꼭해야하는가?
-		정확하게 할려면 동작하는 모든 코드가 임계영역이므로 다 막아야하지만
-		그렇게하면 시간이 오래걸리므로 일정부분만 확인한다.
-		가급적
-	*/
-	/*
-		이렇게 막아 놓아도 출력할때까지 막아놓아야 정확하다.
-		하지만 시간이 지연되어서 데드락과 기아발생가능성이 늘어난다.
-	*/
 	pthread_mutex_lock(&philo_info->status->progress);
 	if (philo_info->status->progress_flag == FALSE)
 	{

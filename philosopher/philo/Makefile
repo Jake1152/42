@@ -6,6 +6,7 @@ RM = rm -rf
 SRCS = srcs
 INCLUDE = include
 PHILO_SRCS =$(addprefix $(SRCS)/, \
+	main.c	\
 	philo.c	\
 	init.c	\
 	philo_action.c	\
@@ -14,7 +15,6 @@ PHILO_SRCS =$(addprefix $(SRCS)/, \
 	free.c	\
 	utils.c	\
 	print.c	\
-	error_handler.c \
 )
 
 PHILO_OBJS = $(PHILO_SRCS:.c=.o)

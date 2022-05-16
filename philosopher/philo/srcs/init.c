@@ -44,8 +44,7 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 	return (TRUE);
 }
 
-int	init_philosopher_mutex(t_status *status_info, t_philo *philo_info,
-					int philo_number)
+int	init_philosopher_mutex(t_status *status_info, int philo_idx)
 {
 	while (philo_idx < status_info->philosopher_cnt)
 	{
@@ -53,25 +52,25 @@ int	init_philosopher_mutex(t_status *status_info, t_philo *philo_info,
 			!= SUCCESS)
 		{
 			free_and_destory(status_info, \
-								philo_idx - 1, philo_idx - 1, philo - 1);
+								philo_idx - 1, philo_idx - 1, philo_idx - 1);
 			return (FALSE);
 		}
 		if (pthread_mutex_init(&(status_info->philo[philo_idx].mealtime), NULL) \
 			!= SUCCESS)
 		{
 			free_and_destory(status_info, \
-								philo_idx, philo_idx - 1, philo - 1);
+							philo_idx, philo_idx - 1, philo_idx - 1);
 			return (FALSE);
 		}
 		if (pthread_mutex_init(&(status_info->philo[philo_idx].full), NULL) \
 			!= SUCCESS)
 		{
-			free_and_destory(status_info, \
-								philo_idx, philo_idx, philo - 1);
+			free_and_destory(status_info, philo_idx, philo_idx, philo_idx - 1);
 			return (FALSE);
 		}
 		philo_idx++;
 	}
+	return (TRUE);
 }
 
 int	init_mutex(t_status *status_info)
@@ -79,8 +78,12 @@ int	init_mutex(t_status *status_info)
 	int	philo_idx;
 
 	philo_idx = 0;
+	if (init_philosopher_mutex(status_info, philo_idx) == FALSE)
+		return (FALSE);
 	if (pthread_mutex_init(&(status_info->progress), NULL) != SUCCESS)
-		free_and_destory(status_info, philo_idx);
+		free_and_destory(status_info, status_info->philosopher_cnt - 1, \
+							status_info->philosopher_cnt - 1, \
+							status_info->philosopher_cnt - 1);
 	return (TRUE);
 }
 

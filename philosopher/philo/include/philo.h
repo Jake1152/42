@@ -13,6 +13,11 @@
 #ifndef PHILO_H
 # define PHILO_H
 # include "philo_struct.h"
+
+int						create(t_status *status_info);
+int						join(t_status *status_info);
+int						init(int argc, char **argv, t_status *status_info);
+void					*routine(void *philo_info_ptr);
 // philo_action
 int						pickup(t_philo *philo_info);
 void					putdown(t_philo *philo_info);
@@ -31,8 +36,9 @@ int						monitoring(t_status *status_info);
 
 // free
 void					free_all(t_status *status_info);
-int						free_and_destory(t_status *status_info, int philo_idx);
-int						error_handler(char *error_statement);
+int						free_and_destory(t_status *status_info, \
+											int fork_idx, int full_idx, \
+											int mealtime_idx);
 
 // etc
 void					preciser_sleep(unsigned long long wait_ms);

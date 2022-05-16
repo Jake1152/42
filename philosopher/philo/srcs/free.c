@@ -33,12 +33,6 @@ int	free_and_destory(t_status *status_info, int fork_idx, int full_idx, \
 {
 	int		idx;
 
-	printf("in free_and_destory\n");
-	// memory_release(t_status *status_info, int philo_cnt)
-	// int philo_cnt 정확한 표현의 변수명 필요.
-	// status_info->print_state가 mutex_init 되어있다는 것이 확인 되어야함
-	// logic상 그런게 아니라 logic이 바뀌어도 확인 가능한 조건 필요.
-	// if (philo_cnt > 0)
 	pthread_mutex_destroy(&status_info->progress);
 	idx = 0;
 	while (idx <= fork_idx)
@@ -49,13 +43,13 @@ int	free_and_destory(t_status *status_info, int fork_idx, int full_idx, \
 	idx = 0;
 	while (idx <= mealtime_idx)
 	{
-		pthread_mutex_destroy(&status_info->forks[idx]);
+		pthread_mutex_destroy(&status_info->philo[idx].mealtime);
 		idx++;
 	}
 	idx = 0;
 	while (idx <= full_idx)
 	{
-		pthread_mutex_destroy(&status_info->forks[idx]);
+		pthread_mutex_destroy(&status_info->philo[idx].mealtime);
 		idx++;
 	}
 	free_all(status_info);

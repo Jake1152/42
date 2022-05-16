@@ -34,5 +34,3 @@ int	ft_atoi_nonnegative(const char *str)
 		return (-1);
 	return ((int)result);
 }
-
-
