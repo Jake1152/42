@@ -12,7 +12,6 @@
 
 #include "philo_struct.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 void	free_all(t_status *status_info)
 {

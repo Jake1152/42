@@ -10,12 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_struct.h"
 #include "philo.h"
 #include <stdlib.h>
 #include <pthread.h>
-// debug
-#include <stdio.h>
 
 int	init_status(int argc, char *argv[], t_status *status_info)
 {

@@ -16,7 +16,7 @@
 void	print_status(t_philo *philo_info, t_philo_status philo_status)
 {
 	t_timeval	current_tv;
-	const char	*state_message[] = {"is taken a fork", "is eating", \
+	const char	*state_message[] = {"has taken a fork", "is eating", \
 									"is sleeping", "is thinking", "died"};
 
 	pthread_mutex_lock(&philo_info->status->progress);
@@ -30,12 +30,6 @@ void	print_status(t_philo *philo_info, t_philo_status philo_status)
 			*(philo_info->init_time)), \
 			philo_info->back_number, state_message[philo_status]);
 	pthread_mutex_unlock(&philo_info->status->progress);
-}
-
-int	print_error(char *error_statement)
-{
-	printf("%s\n", error_statement);
-	return (TRUE);
 }
 
 void	print_notice(void)

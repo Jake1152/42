@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "philo_struct.h"
-#include <stdio.h>
 #include <unistd.h>
 
 int	pickup(t_philo *philo_info)
@@ -41,8 +39,8 @@ int	eat(t_philo *philo_info)
 	}
 	pthread_mutex_unlock(&philo_info->status->progress);
 	pthread_mutex_lock(&philo_info->mealtime);
-	print_status(philo_info, EATING);
 	gettimeofday(&philo_info->last_mealtime, NULL);
+	print_status(philo_info, EATING);
 	pthread_mutex_unlock(&philo_info->mealtime);
 	pthread_mutex_lock(&philo_info->full);
 	philo_info->eat_cnt++;

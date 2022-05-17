@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:38:00 by jim               #+#    #+#             */
-/*   Updated: 2022/05/16 22:26:45 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/17 18:46:10 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static bool	check_full(t_status *status_info)
 	while (idx < status_info->philosopher_cnt)
 	{
 		pthread_mutex_lock(&status_info->philo[idx].full);
-		if (status_info->philo[idx].eat_cnt == status_info->must_eat_cnt)
+		if (status_info->philo[idx].eat_cnt >= status_info->must_eat_cnt)
 			satisfied_philosopher_cnt++;
 		pthread_mutex_unlock(&status_info->philo[idx].full);
 		idx++;
 	}
-	if (satisfied_philosopher_cnt == status_info->philosopher_cnt)
+	if (satisfied_philosopher_cnt >= status_info->philosopher_cnt)
 	{
 		pthread_mutex_lock(&status_info->progress);
 		status_info->progress_flag = FALSE;
@@ -51,6 +51,18 @@ static bool	check_full(t_status *status_info)
 		return (TRUE);
 	}
 	return (FALSE);
+}
+
+static void	print_dead(t_status *status_info)
+{
+	t_timeval	current_tv;
+
+	pthread_mutex_lock(&status_info->progress);
+	gettimeofday(&current_tv, NULL);
+	printf("%llums %d %s\n", get_diff_ms_time(current_tv, \
+			*(status_info->philo->init_time)), \
+			status_info->philo->back_number, "died");
+	status_info->progress_flag = FALSE;
 }
 
 static bool	check_dead(t_status *status_info)
@@ -69,12 +81,7 @@ static bool	check_dead(t_status *status_info)
 			>= (unsigned long long)status_info->time_to_die)
 		{
 			pthread_mutex_unlock(&status_info->philo[idx].mealtime);
-			pthread_mutex_lock(&status_info->progress);
-			gettimeofday(&current_tv, NULL);
-			printf("%llums %d %s\n", get_diff_ms_time(current_tv, \
-					*(status_info->philo->init_time)), \
-					status_info->philo->back_number, "died");
-			status_info->progress_flag = FALSE;
+			print_dead(status_info);
 			return (TRUE);
 		}
 		pthread_mutex_unlock(&status_info->philo[idx].mealtime);

@@ -22,12 +22,12 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	if (init(argc, argv, &status_info) == FALSE)
-		return (0);
+		return (1);
 	if (create(&status_info) == FALSE)
-		return (0);
+		return (1);
 	monitoring(&status_info);
 	if (join(&status_info) == FALSE)
-		return (0);
+		return (1);
 	free_and_destory(&status_info, status_info.philosopher_cnt - 1, \
 									status_info.philosopher_cnt - 1, \
 									status_info.philosopher_cnt - 1);
