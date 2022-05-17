@@ -24,6 +24,8 @@ int	ft_atoi_nonnegative(const char *str)
 			return (-1);
 		str++;
 	}
+	if (!*str)
+		return (-1);
 	result = 0;
 	while (*str >= '0' && *str <= '9')
 	{

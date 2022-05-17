@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 	if (argc < 5 || argc > 6)
 	{
 		print_notice();
-		return (0);
+		return (1);
 	}
 	if (init(argc, argv, &status_info) == FALSE)
 		return (1);

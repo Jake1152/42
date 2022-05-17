@@ -24,8 +24,6 @@ typedef enum e_philo_status
 	EATING,
 	SLEEPING,
 	THINKING,
-	DEAD,
-	FULL,
 }			t_philo_status;
 
 typedef struct s_status

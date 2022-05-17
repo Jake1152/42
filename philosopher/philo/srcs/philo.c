@@ -39,7 +39,7 @@ void	*routine(void *philo_info_ptr)
 		return (NULL);
 	}
 	if (philo_info->back_number % 2 == 0)
-		usleep(50 * philo_info->status->philosopher_cnt);
+		usleep(philo_info->status->time_to_eat / 2);
 	while (TRUE)
 	{
 		if (pickup(philo_info) == FALSE)
