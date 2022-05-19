@@ -22,7 +22,7 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 	status_info->time_to_sleep = ft_atoi_nonnegative(argv[4]);
 	status_info->must_eat_flag = FALSE;
 	status_info->progress_flag = TRUE;
-	status_info->must_eat_cnt = 0;
+	status_info->must_eat_cnt = 1;
 	gettimeofday(&status_info->init_time, NULL);
 	if (argc == 6)
 	{
@@ -31,7 +31,7 @@ int	init_status(int argc, char *argv[], t_status *status_info)
 	}
 	if (status_info->philosopher_cnt <= 0 || status_info->time_to_die < 0
 		|| status_info->time_to_eat < 0 || status_info->time_to_sleep < 0
-		|| status_info->must_eat_cnt < 0)
+		|| status_info->must_eat_cnt <= 0)
 		return (FALSE);
 	if (init_allocation(status_info, ft_atoi_nonnegative(argv[1])) == FALSE)
 		return (FALSE);

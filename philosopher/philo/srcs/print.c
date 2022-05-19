@@ -12,6 +12,7 @@
 
 #include "philo.h"
 #include <stdio.h>
+#include <pthread.h>
 
 void	print_status(t_philo *philo_info, t_philo_status philo_status)
 {

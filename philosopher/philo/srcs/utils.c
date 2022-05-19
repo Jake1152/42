@@ -14,11 +14,15 @@ int	ft_atoi_nonnegative(const char *str)
 {
 	long long	result;
 
+	if (*str == '\0')
+		return (-1);
 	while (*str == '\t' || *str == '\n' || \
 	*str == '\v' || *str == '\f' || \
 	*str == '\r' || *str == ' ')
 		str++;
 	if (*str == '-' || *str == '+')
+		return (-1);
+	if (*str == '\0')
 		return (-1);
 	result = 0;
 	while (*str >= '0' && *str <= '9')

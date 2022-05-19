@@ -6,15 +6,16 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:38:00 by jim               #+#    #+#             */
-/*   Updated: 2022/05/17 22:26:20 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/19 17:15:15 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <pthread.h>
 
-static bool	progress_lock(t_status *status_info)
+static bool	check_progress(t_status *status_info)
 {
 	pthread_mutex_lock(&status_info->progress);
 	if (status_info->progress_flag == FALSE)
@@ -31,7 +32,7 @@ static bool	check_full(t_status *status_info)
 	int	idx;
 	int	satisfied_philosopher_cnt;
 
-	if (progress_lock(status_info))
+	if (check_progress(status_info))
 		return (TRUE);
 	idx = 0;
 	satisfied_philosopher_cnt = 0;
@@ -70,7 +71,7 @@ static bool	check_dead(t_status *status_info)
 	int			idx;
 	t_timeval	current_tv;
 
-	if (progress_lock(status_info))
+	if (check_progress(status_info))
 		return (TRUE);
 	idx = 0;
 	while (idx < status_info->philosopher_cnt)

@@ -12,6 +12,7 @@
 
 #include "philo.h"
 #include <unistd.h>
+#include <pthread.h>
 
 int	pickup(t_philo *philo_info)
 {
