@@ -6,45 +6,76 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 20:35:43 by jim               #+#    #+#             */
-/*   Updated: 2022/05/22 21:07:29 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/05/23 17:20:04 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
-#include <stdlib.h>
+#include <termios.h>
 
-void	handler(int signum)
+// gcc testsignal.c -lreadline -L/Users/sham/.brew/opt/readline/lib -I/Users/sham/.brew/opt/readline/include
+
+void sig_handler(int signal)
 {
-	if (signum != SIGINT)
-		return ;
-	printf("ctrl + c\n");
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	rl_redisplay();
+	if (signal == SIGINT)
+	{
+		//printf("\033[K"); 지워버리는 것을 원하지는 않았음.
+		printf("nanoshell$ \n");
+	}
+
+	if (rl_on_new_line() == -1) // readline으로 설정한 문자열을 한 번 출력한다?
+		exit(1);
+	rl_replace_line("", 1); // 프롬프트에 이미 친 문자열을 싹 날려준다.
+	rl_redisplay();         // 프롬프트 커서가 움직이지 않게 해준다.
 }
 
-int	main(void)
+void setting_signal()
 {
-	// int		ret;
-	char	*line;
+	signal(SIGINT, sig_handler); // CTRL + C
+	signal(SIGQUIT, SIG_IGN);    // CTRL + /
+								 // signal(SIGTERM, sig_handler);
+}
 
-	signal(SIGINT, handler);
+int main(int argc, char **argv, char **envp)
+{
+	char *str;
+	struct termios term;
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	setting_signal();
+	(void)argc;
+	(void)argv;
+	(void)envp;
 	while (1)
 	{
-		line = readline("input> ");
-		if (line)
+		str = readline("nanoshell$ ");
+		if (!str)
 		{
-			if (line)
-				printf("output > %s\n", line);
-			add_history(line);
-			free(line);
-			line = NULL;
+			printf("\033[1A");
+			printf("\033[10C");
+			printf(" exit\n");
+			exit(-1);
+		}
+		else if (*str == '\0')
+		{
+			free(str);
+			str = NULL;
 		}
 		else
-			printf("ctrl + d\n");
+		{
+			add_history(str);
+			printf("%s\n", str);
+			free(str);
+			str = NULL;
+		}
 	}
+	/* 함수종료 */
+	return (0);
 }
