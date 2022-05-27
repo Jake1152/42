@@ -13,10 +13,12 @@ SRCS =$(SRCS_DIR)/readline_test.c
 OBJS = $(SRCS:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -I $(READLINE_INC) -c $^ -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@
+	#$(CC) $(CFLAGS) -I $(READLINE_INC) -c $^ -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(READLINE) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
+	#$(CC) $(CFLAGS) $(READLINE) $^ -o $@
 
 all : $(NAME)
 
