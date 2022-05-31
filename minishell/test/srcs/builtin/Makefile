@@ -4,10 +4,12 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm
 
-OBJS = ./main.c	\
+SRCS = ./main.c	\
 		./change_directory.c \
 		./print_current_working_directory.c \
 		./exit.c
+
+OBJS = $(SRCS:.c=.o)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
@@ -20,7 +22,7 @@ all : $(NAME)
 clean :
 	$(RM) $(OBJS)
 
-fclean : clean
+fclean:  clean
 	$(RM) $(NAME)
 
 re :

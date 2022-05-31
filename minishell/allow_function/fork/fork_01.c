@@ -7,8 +7,13 @@ int main()
 	// make two process which run same
 	// program after this instruction
 	fork();
+	printf("=== First fork === %d\n", getpid());
 	fork();
+	printf("=== Second fork === %d\n", getpid());
 	fork();
-	printf("hola!\n");
+	printf("=== Third fork === %d\n", getpid());
+	printf("hola!, pid : %d\n", getpid());
+
+	sleep(1);
 	return (0);
 }
