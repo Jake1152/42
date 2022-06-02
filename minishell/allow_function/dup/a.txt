@@ -1,0 +1,4 @@
+Start of file
+a
+42
+End of file
