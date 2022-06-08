@@ -1,4 +1,4 @@
 Start of file
-b
+a
 42
 End of file
