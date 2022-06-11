@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 14:10:59 by jim               #+#    #+#             */
-/*   Updated: 2022/06/06 19:36:14 by jim              ###   ########seoul.kr  */
+/*   Created: 2021/06/25 17:37:51 by jim               #+#    #+#             */
+/*   Updated: 2022/06/05 22:25:42 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stddef.h>
 #include "utils.h"
+#include <stdlib.h>
 
-void	ft_putstr(char *s)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	str_len;
+	char	*str;
+	size_t	s_len;
+	int		diff;
 
-	str_len = ft_strlen(s);
-	write(1, s, str_len);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	idx;
-
-	idx = 0;
-	while (s[idx])
-		idx++;
-	return (idx);
+	s_len = ft_strlen(s);
+	diff = s_len - start;
+	if (diff <= 0)
+		return (ft_strdup(""));
+	else if (diff > 0 && (size_t)diff < len)
+		len = (size_t)diff;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	ft_strlcpy(str, (s + start), len + 1);
+	return (str);
 }

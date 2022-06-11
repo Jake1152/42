@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 17:37:48 by jim               #+#    #+#             */
-/*   Updated: 2021/09/13 17:03:47 by jim              ###   ########seoul.kr  */
+/*   Created: 2021/06/29 20:48:23 by jim               #+#    #+#             */
+/*   Updated: 2022/06/05 22:24:51 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include <stdlib.h>
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strdup(const char *s1)
 {
-	size_t			n_idx;
-	size_t			needle_len;
+	char	*dest;
+	size_t	idx;
+	size_t	s1_size;
 
-	n_idx = 0;
-	needle_len = ft_strlen(needle);
-	if (needle_len == 0)
-		return ((char *)haystack);
-	while (*haystack && len >= needle_len)
+	if (s1 == NULL)
+		return (NULL);
+	s1_size = ft_strlen(s1);
+	dest = (char *)malloc(sizeof(char) * (s1_size + 1));
+	if (dest == NULL)
+		return (NULL);
+	idx = 0;
+	while (s1[idx])
 	{
-		if (!(ft_strncmp(haystack, needle, needle_len)))
-			return ((char *)haystack);
-		haystack++;
-		len--;
+		dest[idx] = s1[idx];
+		idx++;
 	}
-	return (0);
+	dest[idx] = 0;
+	return (dest);
 }
