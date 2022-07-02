@@ -172,6 +172,7 @@ int	main(int argc, char **argv, char **envp)
 		execute_cmd_return_val = execute_cmd(envp, argv[2]);
 		exit(127);
 	}
+	close(fd[1]);
 	// while (42);
 	
 	// pipe fork
@@ -204,51 +205,9 @@ int	main(int argc, char **argv, char **envp)
 		exit(127);
 		// printf("second execute_cmd_return_val : %d", execute_cmd_return_val);
 	}
-	/**/
-	close(fd[0]);
 	close(fd[1]);
+	/**/
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
-	// while (42);
-	// memory issue by checking valgrind
-	/*
-		jake@DESKTOP-39VE82R:/mnt/d/42/Minishell/pipe$ valgrind --leak-check=yes ./pipex
-		==3668== Memcheck, a memory error detector
-		==3668== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-		==3668== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-		==3668== Command: ./pipex
-		==3668==
-		==3669== Syscall param openat(filename) points to unaddressable byte(s)
-		==3669==    at 0x4962D1B: open (open64.c:48)
-		==3669==    by 0x1096C1: main (in /mnt/d/42/Minishell/pipe/pipex)
-		==3669==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-		==3669==
-		==3670== Conditional jump or move depends on uninitialised value(s)
-		==3670==    at 0x109F42: ft_strlen (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==    by 0x109355: ft_strjoin (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==    by 0x109575: execute_cmd (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==    by 0x1098E3: main (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==
-		==3670== Syscall param execve(filename) points to uninitialised byte(s)
-		==3670==    at 0x493816B: execve (syscall-template.S:78)
-		==3670==    by 0x10959D: execute_cmd (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==    by 0x1098E3: main (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==  Address 0x4a47a99 is 25 bytes inside a block of size 208 alloc'd
-		==3670==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-		==3670==    by 0x109384: ft_strjoin (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==    by 0x109575: execute_cmd (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==    by 0x1098E3: main (in /mnt/d/42/Minishell/pipe/pipex)
-		==3670==
-		(null) : Bad address
-		==3669==
-		==3669== HEAP SUMMARY:
-		==3669==     in use at exit: 0 bytes in 0 blocks
-		==3669==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
-		==3669==
-		==3669== All heap blocks were freed -- no leaks are possible
-		==3669==
-		==3669== For lists of detected and suppressed errors, rerun with: -s
-		==3669== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-	*/
 	return (0);
 }
