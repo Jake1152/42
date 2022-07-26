@@ -1,4 +1,0 @@
-Start of file
-c
-42
-End of file

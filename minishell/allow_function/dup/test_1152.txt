@@ -1,5 +1,0 @@
-start of token
-test sentence
-1152
-42
-end of token
