@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:09:31 by jim               #+#    #+#             */
-/*   Updated: 2022/04/01 16:47:31 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/07/03 13:46:02 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@
 #include "get_next_line.h"
 #include "error_handle.h"
 
-static void	handle_result(t_DoublyList *a_stack, t_DoublyList *b_stack)
+static void	handle_result(t_doubly_list *a_stack, t_doubly_list *b_stack)
 {
-	if (b_stack->currentElementCount == 0 && check_sort_ASC(a_stack) == TRUE)
+	if (b_stack->current_element_count == 0 && check_sort_asc(a_stack) == TRUE)
 		ft_putstr("OK\n");
-	else if (b_stack->currentElementCount != 0 || check_sort_ASC(a_stack) == FALSE)
+	else if (b_stack->current_element_count != 0 \
+			|| check_sort_asc(a_stack) == FALSE)
 		ft_putstr("KO\n");
 }
 
-static void	handle_command(t_DoublyList *a_stack, t_DoublyList *b_stack,
+static void	handle_command(t_doubly_list *a_stack, t_doubly_list *b_stack,
 							char *command)
 {
 	if (ft_strncmp("pa\n", command, 3) == 0)
@@ -55,7 +56,7 @@ static void	handle_command(t_DoublyList *a_stack, t_DoublyList *b_stack,
 		delete_both_stack(a_stack, b_stack);
 }
 
-static int	push_swap_checker(t_DoublyList *a_stack, t_DoublyList *b_stack)
+static int	push_swap_checker(t_doubly_list *a_stack, t_doubly_list *b_stack)
 {
 	char	*gnl_str;
 
@@ -80,12 +81,12 @@ int	main(int argc, char *argv[])
 {
 	int					idx;
 	char				**part_of_input_list;
-	t_DoublyList		*a_stack;
-	t_DoublyList		*b_stack;
+	t_doubly_list		*a_stack;
+	t_doubly_list		*b_stack;
 
 	if (argc == 1)
 		return (0);
-	a_stack = createDoublyList();
+	a_stack = create_doubly_list();
 	if (a_stack == NULL)
 		print_error();
 	idx = 1;
@@ -99,7 +100,7 @@ int	main(int argc, char *argv[])
 	}
 	if (check_duplicate_value(a_stack) == FALSE)
 		delete_and_print_error(a_stack);
-	b_stack = createDoublyList();
+	b_stack = create_doubly_list();
 	if (b_stack == NULL)
 		delete_and_print_error(a_stack);
 	return (push_swap_checker(a_stack, b_stack));

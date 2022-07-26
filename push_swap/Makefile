@@ -6,16 +6,18 @@
 #    By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 16:38:36 by jim               #+#    #+#              #
-#    Updated: 2022/04/01 16:48:34 by jim              ###   ########seoul.kr   #
+#    Updated: 2022/07/03 15:46:56 by jim              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 PUSH_SWAP = push_swap
 CHECKER = checker
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
-PUSH_SWAP_SRCS = ./push_swap_main.c \
+SRCS = srcs
+PUSH_SWAP_SRCS = $(addprefix $(SRCS)/, \
+					./push_swap_main.c \
 					./push_swap.c \
 					./doublylist_definition.c \
 					./doublylist_manipulation.c \
@@ -35,9 +37,11 @@ PUSH_SWAP_SRCS = ./push_swap_main.c \
 					./ft_strncmp.c \
 					./ft_substr.c \
 					./ft_strlcpy.c \
-					./ft_strdup.c
+					./ft_strdup.c \
+)
 
-CHECKER_SRCS = ./checker.c \
+CHECKER_SRCS = $(addprefix $(SRCS)/, \
+				./checker.c \
 				./get_next_line.c \
 				./get_next_line_utils.c \
 				./push_swap.c \
@@ -59,12 +63,13 @@ CHECKER_SRCS = ./checker.c \
 				./ft_strncmp.c \
 				./ft_substr.c \
 				./ft_strlcpy.c \
-				./ft_strdup.c
+				./ft_strdup.c \
+)
 
 PUSH_SWAP_OBJS = $(PUSH_SWAP_SRCS:.c=.o)
 CHEKCER_OBJS = $(CHECKER_SRCS:.c=.o)
 
-%.o : ./srcs/%.c
+%.o : %.c
 	$(CC) $(CFLAGS) -I ./include/ -c $^ -o $@
 
 $(PUSH_SWAP) : $(PUSH_SWAP_OBJS)

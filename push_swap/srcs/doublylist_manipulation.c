@@ -6,96 +6,97 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 10:50:03 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/07/03 13:44:11 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "doublylist.h"
 
-t_DoublyListNode	*getDLElement(t_DoublyList *pList, int position)
+t_doubly_list_node	*get_dl_element(t_doubly_list *pList, int position)
 {
-	t_DoublyListNode	*curDoublyListNode;
+	t_doubly_list_node	*cur_doubly_list_node;
 
-	if (pList == NULL || position > pList->currentElementCount)
+	if (pList == NULL || position > pList->current_element_count)
 		return (NULL);
 	if (position < 0)
-		position = pList->currentElementCount \
-		+ (position % pList->currentElementCount);
-	curDoublyListNode = pList->headerNode;
-	if (position < pList->currentElementCount / 2)
+		position = pList->current_element_count \
+		+ (position % pList->current_element_count);
+	cur_doubly_list_node = pList->header_node;
+	if (position < pList->current_element_count / 2)
 	{
 		while (position > 0)
 		{
-			curDoublyListNode = curDoublyListNode->pRLink;
+			cur_doubly_list_node = cur_doubly_list_node->p_r_link;
 			position--;
 		}
 	}
 	else
 	{
-		while (pList->currentElementCount - position > 0)
+		while (pList->current_element_count - position > 0)
 		{
-			curDoublyListNode = curDoublyListNode->pLLink;
+			cur_doubly_list_node = cur_doubly_list_node->p_l_link;
 			position++;
 		}
 	}
-	return (curDoublyListNode);
+	return (cur_doubly_list_node);
 }
 
-int	addDLElement(t_DoublyList *pList, int position, t_DoublyListNode *newNode)
+int	add_dl_element(t_doubly_list *pList, int position, \
+					t_doubly_list_node *new_node)
 {
-	t_DoublyListNode	*prevNode;
+	t_doubly_list_node	*prev_node;
 
-	if (pList == NULL || position < 0 || position > pList->currentElementCount \
-		|| newNode == NULL)
+	if (pList == NULL || position < 0
+		|| position > pList->current_element_count || new_node == NULL)
 		return (FALSE);
-	if (pList->currentElementCount == 0)
+	if (pList->current_element_count == 0)
 	{
-		newNode->pLLink = newNode;
-		newNode->pRLink = newNode;
-		pList->headerNode = newNode;
-		pList->tailerNode = newNode;
-		return (pList->currentElementCount++);
+		new_node->p_l_link = new_node;
+		new_node->p_r_link = new_node;
+		pList->header_node = new_node;
+		pList->tailer_node = new_node;
+		return (pList->current_element_count++);
 	}
-	prevNode = getDLElement(pList, position - 1);
-	if (prevNode == NULL)
+	prev_node = get_dl_element(pList, position - 1);
+	if (prev_node == NULL)
 		return (FALSE);
 	if (position == 0)
-		pList->headerNode = newNode;
-	if (position == pList->currentElementCount)
-		pList->tailerNode = newNode;
-	newNode->pLLink = prevNode;
-	newNode->pRLink = prevNode->pRLink;
-	prevNode->pRLink->pLLink = newNode;
-	prevNode->pRLink = newNode;
-	return (pList->currentElementCount++);
+		pList->header_node = new_node;
+	if (position == pList->current_element_count)
+		pList->tailer_node = new_node;
+	new_node->p_l_link = prev_node;
+	new_node->p_r_link = prev_node->p_r_link;
+	prev_node->p_r_link->p_l_link = new_node;
+	prev_node->p_r_link = new_node;
+	return (pList->current_element_count++);
 }
 
-int	removeDLElement(t_DoublyList *pList, int position)
+int	remove_dl_element(t_doubly_list *pList, int position)
 {
-	t_DoublyListNode	*prevDoublyListNode;
-	t_DoublyListNode	*curDoublyListNode;
+	t_doubly_list_node	*prev_doubly_list_node;
+	t_doubly_list_node	*cur_doubly_list_node;
 
 	if (pList == NULL)
 		return (FALSE);
-	if (position < 0 || pList->currentElementCount <= position)
+	if (position < 0 || pList->current_element_count <= position)
 		return (FALSE);
-	curDoublyListNode = getDLElement(pList, position);
-	if (curDoublyListNode == NULL)
+	cur_doubly_list_node = get_dl_element(pList, position);
+	if (cur_doubly_list_node == NULL)
 		return (FALSE);
-	prevDoublyListNode = curDoublyListNode->pLLink;
+	prev_doubly_list_node = cur_doubly_list_node->p_l_link;
 	if (position == 0)
-		pList->headerNode = curDoublyListNode->pRLink;
-	if (pList->currentElementCount - 1 == position)
-		pList->tailerNode = prevDoublyListNode;
-	if (pList->currentElementCount == 1)
+		pList->header_node = cur_doubly_list_node->p_r_link;
+	if (pList->current_element_count - 1 == position)
+		pList->tailer_node = prev_doubly_list_node;
+	if (pList->current_element_count == 1)
 	{
-		pList->headerNode = NULL;
-		pList->tailerNode = NULL;
+		pList->header_node = NULL;
+		pList->tailer_node = NULL;
 	}
-	prevDoublyListNode->pRLink = curDoublyListNode->pRLink;
-	curDoublyListNode->pRLink->pLLink = curDoublyListNode->pLLink;
-	free(curDoublyListNode);
-	curDoublyListNode = NULL;
-	return (pList->currentElementCount--);
+	prev_doubly_list_node->p_r_link = cur_doubly_list_node->p_r_link;
+	cur_doubly_list_node->p_r_link->p_l_link = cur_doubly_list_node->p_l_link;
+	free(cur_doubly_list_node);
+	cur_doubly_list_node = NULL;
+	return (pList->current_element_count--);
 }

@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:32:53 by jim               #+#    #+#             */
-/*   Updated: 2022/04/01 15:31:46 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/07/03 13:44:37 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 #include "doublylist.h"
 #include "error_handle.h"
 
-int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
+int	push_swap(t_doubly_list *a_stack, t_doubly_list *b_stack)
 {
 	t_pivot_info	pivot_info;
 
 	if (a_stack == NULL || b_stack == NULL)
 		delete_both_stack(a_stack, b_stack);
-	if (check_sort_ASC(a_stack) == TRUE)
+	if (check_sort_asc(a_stack) == TRUE)
 		return (0);
-	if (a_stack->currentElementCount <= 5)
+	if (a_stack->current_element_count <= 5)
 		sort_brute_force(a_stack, b_stack);
 	else
 	{
@@ -37,9 +37,9 @@ int	push_swap(t_DoublyList *a_stack, t_DoublyList *b_stack)
 	return (0);
 }
 
-int	parse_str_to_doublylist(t_DoublyList *pList, char **part_of_input_list)
+int	parse_str_to_doublylist(t_doubly_list *pList, char **part_of_input_list)
 {
-	t_DoublyListNode	*addDLElementNode;
+	t_doubly_list_node	*add_dl_element_node;
 	int					result_num;
 	int					add_flag;
 	int					word_cnt;
@@ -53,11 +53,11 @@ int	parse_str_to_doublylist(t_DoublyList *pList, char **part_of_input_list)
 		result_num = ft_atoi(part_of_input_list[word_cnt], &atoi_flag);
 		if (atoi_flag == FALSE)
 			delete_and_print_error(pList);
-		addDLElementNode = createDoublyListNode(result_num);
-		if (addDLElementNode == NULL)
+		add_dl_element_node = create_doubly_list_node(result_num);
+		if (add_dl_element_node == NULL)
 			delete_and_print_error(pList);
-		add_flag = addDLElement(pList, pList->currentElementCount, \
-								addDLElementNode);
+		add_flag = add_dl_element(pList, pList->current_element_count, \
+								add_dl_element_node);
 		if (add_flag == FALSE)
 			delete_and_print_error(pList);
 		word_cnt++;

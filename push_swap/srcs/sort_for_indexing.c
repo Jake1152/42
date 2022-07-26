@@ -6,7 +6,7 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:13:40 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 11:02:13 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/07/03 13:47:12 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #include "push_swap.h"
 #include "utils.h"
 
-static void	data_copy(t_DoublyList *DoublyList, int *arr)
+static void	data_copy(t_doubly_list *DoublyList, int *arr)
 {
-	t_DoublyListNode	*cur_node;
+	t_doubly_list_node	*cur_node;
 	int					k;
 
 	if (DoublyList == NULL || arr == NULL)
 		return ;
-	cur_node = DoublyList->headerNode;
+	cur_node = DoublyList->header_node;
 	k = 0;
-	while (k < DoublyList->currentElementCount)
+	while (k < DoublyList->current_element_count)
 	{
 		arr[k] = cur_node->data;
-		cur_node = cur_node->pRLink;
+		cur_node = cur_node->p_r_link;
 		k++;
 	}
 }
@@ -81,41 +81,42 @@ static int	bin_search_for_idx(int *arr, int target, int elementCount)
 	return (FALSE);
 }
 
-static void	save_sorted_index(t_DoublyList *stack, int *arr_for_indexing)
+static void	save_sorted_index(t_doubly_list *stack, int *arr_for_indexing)
 {
-	t_DoublyListNode	*cur_node;
+	t_doubly_list_node	*cur_node;
 	int					element_count;
 
 	if (stack == NULL || arr_for_indexing == NULL)
 		return ;
-	cur_node = stack->headerNode;
-	element_count = stack->currentElementCount;
+	cur_node = stack->header_node;
+	element_count = stack->current_element_count;
 	while (element_count)
 	{
 		cur_node->sorted_idx = \
 						bin_search_for_idx(arr_for_indexing, cur_node->data, \
-											stack->currentElementCount);
+											stack->current_element_count);
 		if (cur_node->sorted_idx == FALSE)
 			ft_putstr("cur_node->sorted_idx == -1\n.");
-		cur_node = cur_node->pRLink;
+		cur_node = cur_node->p_r_link;
 		element_count--;
 	}
 }
 
-int	indexing(t_DoublyList *stack)
+int	indexing(t_doubly_list *stack)
 {
 	int					*arr_for_indexing;
 
 	if (stack == NULL)
 		return (FALSE);
-	arr_for_indexing = (int *)malloc(sizeof(int) * stack->currentElementCount);
+	arr_for_indexing = \
+					(int *)malloc(sizeof(int) * stack->current_element_count);
 	if (arr_for_indexing == NULL)
 	{
 		ft_putstr("malloc error\n");
 		return (FALSE);
 	}
 	data_copy(stack, arr_for_indexing);
-	bubble_sort(arr_for_indexing, stack->currentElementCount);
+	bubble_sort(arr_for_indexing, stack->current_element_count);
 	save_sorted_index(stack, arr_for_indexing);
 	free(arr_for_indexing);
 	arr_for_indexing = NULL;

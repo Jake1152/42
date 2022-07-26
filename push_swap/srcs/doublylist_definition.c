@@ -6,53 +6,54 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:33:00 by jim               #+#    #+#             */
-/*   Updated: 2022/03/31 09:44:51 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/07/03 13:42:00 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "doublylist.h"
 
-t_DoublyList	*createDoublyList(void)
+t_doubly_list	*create_doubly_list(void)
 {
-	t_DoublyList		*newDoublyList;
+	t_doubly_list	*new_doubly_list;
 
-	newDoublyList = (t_DoublyList *)malloc(sizeof(t_DoublyList));
-	if (newDoublyList == NULL)
+	new_doubly_list = (t_doubly_list *)malloc(sizeof(t_doubly_list));
+	if (new_doubly_list == NULL)
 		return (NULL);
-	newDoublyList->headerNode = (t_DoublyListNode *) NULL;
-	newDoublyList->tailerNode = (t_DoublyListNode *) NULL;
-	newDoublyList->currentElementCount = 0;
-	return (newDoublyList);
+	new_doubly_list->header_node = (t_doubly_list_node *) NULL;
+	new_doubly_list->tailer_node = (t_doubly_list_node *) NULL;
+	new_doubly_list->current_element_count = 0;
+	return (new_doubly_list);
 }
 
-t_DoublyListNode	*createDoublyListNode(int data)
+t_doubly_list_node	*create_doubly_list_node(int data)
 {
-	t_DoublyListNode	*newDoublyListNode;
+	t_doubly_list_node	*new_doubly_list_node;
 
-	newDoublyListNode = (t_DoublyListNode *)malloc(sizeof(t_DoublyListNode));
-	if (newDoublyListNode == NULL)
+	new_doubly_list_node = \
+					(t_doubly_list_node *)malloc(sizeof(t_doubly_list_node));
+	if (new_doubly_list_node == NULL)
 		return (NULL);
-	newDoublyListNode->pRLink = (t_DoublyListNode *) NULL;
-	newDoublyListNode->pLLink = (t_DoublyListNode *) NULL;
-	newDoublyListNode->data = data;
-	return (newDoublyListNode);
+	new_doubly_list_node->p_r_link = (t_doubly_list_node *) NULL;
+	new_doubly_list_node->p_l_link = (t_doubly_list_node *) NULL;
+	new_doubly_list_node->data = data;
+	return (new_doubly_list_node);
 }
 
-int	clearDoublyList(t_DoublyList *pList)
+int	clear_doubly_list(t_doubly_list *pList)
 {
 	if (pList == NULL)
 		return (FALSE);
-	while (pList->currentElementCount > 0)
-		removeDLElement(pList, 0);
+	while (pList->current_element_count > 0)
+		remove_dl_element(pList, 0);
 	return (TRUE);
 }
 
-void	deleteDoublyList(t_DoublyList **pList)
+void	delete_doubly_list(t_doubly_list **pList)
 {
 	if (pList == NULL)
 		return ;
-	if (clearDoublyList(*pList) == FALSE)
+	if (clear_doubly_list(*pList) == FALSE)
 		return ;
 	free(*pList);
 	*pList = NULL;

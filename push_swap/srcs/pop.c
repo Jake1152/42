@@ -6,34 +6,34 @@
 /*   By: jim <jim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:11:45 by jim               #+#    #+#             */
-/*   Updated: 2022/03/30 12:18:00 by jim              ###   ########seoul.kr  */
+/*   Updated: 2022/07/03 13:42:24 by jim              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "doublylist.h"
 
-t_DoublyListNode	*pop(t_DoublyList *pStack)
+t_doubly_list_node	*pop(t_doubly_list *pStack)
 {
-	t_DoublyListNode	*pop_node;
-	t_DoublyListNode	*prev_node;
-	t_DoublyListNode	*next_node;
+	t_doubly_list_node	*pop_node;
+	t_doubly_list_node	*prev_node;
+	t_doubly_list_node	*next_node;
 
-	if (pStack == NULL || pStack->currentElementCount == 0)
+	if (pStack == NULL || pStack->current_element_count == 0)
 		return (NULL);
-	pop_node = getDLElement(pStack, 0);
-	prev_node = pop_node->pLLink;
-	next_node = pop_node->pRLink;
-	pStack->headerNode = next_node;
-	if (pStack->currentElementCount == 1)
+	pop_node = get_dl_element(pStack, 0);
+	prev_node = pop_node->p_l_link;
+	next_node = pop_node->p_r_link;
+	pStack->header_node = next_node;
+	if (pStack->current_element_count == 1)
 	{
-		pStack->headerNode = NULL;
-		pStack->tailerNode = NULL;
+		pStack->header_node = NULL;
+		pStack->tailer_node = NULL;
 	}
-	prev_node->pRLink = next_node;
-	next_node->pLLink = prev_node;
-	pop_node->pLLink = NULL;
-	pop_node->pRLink = NULL;
-	pStack->currentElementCount--;
+	prev_node->p_r_link = next_node;
+	next_node->p_l_link = prev_node;
+	pop_node->p_l_link = NULL;
+	pop_node->p_r_link = NULL;
+	pStack->current_element_count--;
 	return (pop_node);
 }
